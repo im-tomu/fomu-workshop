@@ -9,4 +9,6 @@
 .vscode/
 build/
 __pycache__/
+*.pyc
+test/
 .env
