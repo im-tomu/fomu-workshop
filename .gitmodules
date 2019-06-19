@@ -1,24 +1,24 @@
-[submodule "deps/migen"]
-	path = deps/migen
+[submodule "litex/deps/migen"]
+	path = litex/deps/migen
 	url = https://github.com/m-labs/migen.git
-[submodule "deps/litex"]
-	path = deps/litex
+[submodule "litex/deps/litex"]
+	path = litex/deps/litex
 	url = https://github.com/enjoy-digital/litex.git
-[submodule "deps/litex_boards"]
-	path = deps/litex_boards
+[submodule "litex/deps/litex_boards"]
+	path = litex/deps/litex_boards
 	url = https://github.com/litex-hub/litex-boards.git
-[submodule "deps/litescope"]
-	path = deps/litescope
+[submodule "litex/deps/litescope"]
+	path = litex/deps/litescope
 	url = https://github.com/enjoy-digital/litescope.git
-[submodule "deps/pyserial"]
-	path = deps/pyserial
+[submodule "litex/deps/pyserial"]
+	path = litex/deps/pyserial
 	url = https://github.com/pyserial/pyserial.git
-[submodule "deps/lxsocsupport"]
-	path = deps/lxsocsupport
+[submodule "litex/deps/lxsocsupport"]
+	path = litex/deps/lxsocsupport
 	url = https://github.com/xobs/lxsocsupport.git
-[submodule "deps/valentyusb"]
-	path = deps/valentyusb
+[submodule "litex/deps/valentyusb"]
+	path = litex/deps/valentyusb
 	url = https://github.com/im-tomu/valentyusb.git
-[submodule "deps/litedram"]
-	path = deps/litedram
+[submodule "litex/deps/litedram"]
+	path = litex/deps/litedram
 	url = https://github.com/enjoy-digital/litedram.git
