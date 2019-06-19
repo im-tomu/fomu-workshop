@@ -25,13 +25,21 @@ from migen.fhdl.specials import TSTriple
 from migen.fhdl.bitcontainer import bits_for
 from migen.fhdl.structure import ClockSignal, ResetSignal, Replicate, Cat
 
-from litex_boards.partner.platforms.fomu_evt import Platform
+from litex_boards.partner.platforms.fomu_pvt import Platform
+
 from litex.soc.integration import SoCCore
 from litex.soc.integration.builder import Builder
 from litex.soc.integration.soc_core import csr_map_update
 from litex.soc.interconnect import wishbone
 from litex.soc.interconnect.csr import AutoCSR, CSRStatus, CSRStorage
+
 from lxsocsupport import up5kspram
+
+from valentyusb import usbcore
+from valentyusb.usbcore import io as usbio
+from valentyusb.usbcore.cpu import dummyusb
+
+import argparse
 
 class _CRG(Module):
     def __init__(self, platform, use_pll):
@@ -150,7 +158,7 @@ class PicoRVSpi(Module, AutoCSR):
         self.cfg1 = CSRStorage(size=8)
         self.cfg2 = CSRStorage(size=8)
         self.cfg3 = CSRStorage(size=8)
-        self.cfg4 = CSRStorage(size=8)
+        self.cfg4 = CSRStorage(size=8, reset=0x80)
 
         self.stat1 = CSRStatus(size=8)
         self.stat2 = CSRStatus(size=8)
@@ -273,11 +281,12 @@ class BaseSoC(SoCCore):
     }
     mem_map.update(SoCCore.mem_map)
 
-    def __init__(self, platform, output_dir="build", use_pll=True, **kwargs):
+    def __init__(self, platform, output_dir="build",  placer=None, pnr_seed=0, use_pll=True, **kwargs):
         clk_freq = int(12e6)
         self.output_dir = output_dir
         self.submodules.crg = _CRG(platform, use_pll=use_pll)
         SoCCore.__init__(self, platform, clk_freq,
+                cpu_type=None, cpu_variant=None,
                 integrated_sram_size=0, with_uart=False,
                 **kwargs)
 
@@ -293,20 +302,37 @@ class BaseSoC(SoCCore):
         self.register_mem("spiflash", self.mem_map["spiflash"],
             self.picorvspi.bus, size=self.picorvspi.size)
 
-        bios_size = 0x8000
-        kwargs['cpu_reset_address']=self.mem_map["spiflash"]+platform.gateware_size
-        self.add_memory_region("rom", kwargs['cpu_reset_address'], bios_size)
-        self.add_constant("ROM_DISABLE", 1)
-        self.flash_boot_address = self.mem_map["spiflash"]+platform.gateware_size+bios_size
-        self.add_memory_region("user_flash",
-            self.flash_boot_address,
-            # Leave a grace area- possible one-by-off bug in add_memory_region?
-            # Possible fix: addr < origin + length - 1
-            platform.spiflash_total_size - (self.flash_boot_address - self.mem_map["spiflash"]) - 0x100)
+        usb_pads = platform.request("usb")
+        usb_iobuf = usbio.IoBuf(usb_pads.d_p, usb_pads.d_n, usb_pads.pullup)
+        self.submodules.usb = dummyusb.DummyUsb(usb_iobuf, debug=True)
+        self.add_wb_master(self.usb.debug_bridge.wishbone)
 
         if hasattr(self, "cpu"):
             self.cpu.use_external_variant("rtl/2-stage-1024-cache.v")
             self.copy_memory_file("2-stage-1024-cache.v_toplevel_RegFilePlugin_regFile.bin")
+            bios_size = 0x8000
+            kwargs['cpu_reset_address']=self.mem_map["spiflash"]+platform.gateware_size
+            self.add_memory_region("rom", kwargs['cpu_reset_address'], bios_size)
+            self.add_constant("ROM_DISABLE", 1)
+            self.flash_boot_address = self.mem_map["spiflash"]+platform.gateware_size+bios_size
+            self.add_memory_region("user_flash",
+                self.flash_boot_address,
+                # Leave a grace area- possible one-by-off bug in add_memory_region?
+                # Possible fix: addr < origin + length - 1
+                platform.spiflash_total_size - (self.flash_boot_address - self.mem_map["spiflash"]) - 0x100)
+
+        # Add "-relut -dffe_min_ce_use 4" to the synth_ice40 command.
+        # The "-reult" adds an additional LUT pass to pack more stuff in,
+        # and the "-dffe_min_ce_use 4" flag prevents Yosys from generating a
+        # Clock Enable signal for a LUT that has fewer than 4 flip-flops.
+        # This increases density, and lets us use the FPGA more efficiently.
+        platform.toolchain.nextpnr_yosys_template[2] += " -relut -dffe_min_ce_use 5"
+
+        # Allow us to set the nextpnr seed
+        platform.toolchain.nextpnr_build_template[1] += " --seed " + str(pnr_seed)
+
+        if placer is not None:
+            platform.toolchain.nextpnr_build_template[1] += " --placer {}".format(placer)
 
     def copy_memory_file(self, src):
         import os
@@ -318,8 +344,18 @@ class BaseSoC(SoCCore):
         copyfile(os.path.join("rtl", src), os.path.join(self.output_dir, "gateware", src))
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Build Fomu Main Gateware")
+    parser.add_argument(
+        "--seed", default=0, help="seed to use in nextpnr"
+    )
+    parser.add_argument(
+        "--placer", choices=["sa", "heap"], help="which placer to use in nextpnr"
+    )
+    args = parser.parse_args()
+
     platform = Platform()
-    soc = BaseSoC(platform)
+    soc = BaseSoC(platform, pnr_seed=args.seed, placer=args.placer)
     builder = Builder(soc,
                       output_dir="build", csr_csv="test/csr.csv",
                       compile_software=False)
