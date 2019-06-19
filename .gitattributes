@@ -1,0 +1,22 @@
+*.py text eol=lf
+*.sh text eol=lf
+LICENSE text eol=lf
+README.* text eol=lf
+*.interface text eol=lf
+*.jig text eol=lf
+*.logger text eol=lf
+*.scenario text eol=lf
+*.test text eol=lf
+*.trigger text eol=lf
+*.c text eol=lf
+*.S text eol=lf
+*.h text eol=lf
+*.ld text eol=lf
+hw/bin/* text eol=lf
+Makefile text eol=lf
+*.service text eol=lf
+*.png binary
+*.jpg binary
+*.bin binary
+*.elf binary
+*.bin binary
