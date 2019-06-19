@@ -2,18 +2,6 @@
 #include <rgb.h>
 #include <generated/csr.h>
 
-enum led_registers {
-    LEDDCR0 = 8,
-    LEDDBR = 9,
-    LEDDONR = 10,
-    LEDDOFR = 11,
-    LEDDBCRR = 5,
-    LEDDBCFR = 6,
-    LEDDPWRR = 1,
-    LEDDPWRG = 2,
-    LEDDPWRB = 3,
-};
-
 #define BREATHE_ENABLE (1 << 7)
 #define BREATHE_EDGE_ON (0 << 6)
 #define BREATHE_EDGE_BOTH (1 << 6)
@@ -34,7 +22,7 @@ enum led_registers {
 #define PWM_MODE_LFSR (1 << 2)
 #define PWM_MODE_LINEAR (0 << 2)
 
-static void rgb_write(uint8_t value, uint8_t addr) {
+void rgb_write(uint8_t value, uint8_t addr) {
     rgb_addr_write(addr);
     rgb_dat_write(value);
 }

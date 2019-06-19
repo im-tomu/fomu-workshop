@@ -12,4 +12,18 @@ void rgb_off_time(uint8_t ms);
 void rgb_in_time(uint8_t ms);
 void rgb_out_time(uint8_t ms);
 
+enum led_registers {
+    LEDDCR0 = 8,
+    LEDDBR = 9,
+    LEDDONR = 10,
+    LEDDOFR = 11,
+    LEDDBCRR = 5,
+    LEDDBCFR = 6,
+    LEDDPWRR = 1,
+    LEDDPWRG = 2,
+    LEDDPWRB = 3,
+};
+
+void rgb_write(uint8_t value, uint8_t addr);
+
 #endif /* _RGB_H_ */

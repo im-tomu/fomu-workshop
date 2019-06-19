@@ -35,7 +35,7 @@ void isr(void) {
 }
 
 
-void main(void) {
+int main(void) {
     rgb_init();
     irq_setie(0);
     int i = 0;
