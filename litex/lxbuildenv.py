@@ -36,12 +36,15 @@ OPTIONAL_DEPS = {
 script_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
 # Look through the specified file for known variables to get the dependency list
-def get_required_dependencies(filename):
+def read_configuration(filename):
     import ast
 
     # Always check the Python version
     dependencies = {
         'python': 1
+    }
+    configuration = {
+        'skip-git': False
     }
     main_src = ""
 
@@ -50,7 +53,8 @@ def get_required_dependencies(filename):
             main_src = f.read()
         main_ast = ast.parse(main_src, filename=filename)
     except:
-        return list(dependencies.keys())
+        configuration['dependencies'] = list(dependencies.keys())
+        return configuration
 
     # Iterate through the top-level nodes looking for variables named
     # LX_DEPENDENCIES or LX_DEPENDENCY and get the values that are
@@ -67,11 +71,21 @@ def get_required_dependencies(filename):
                                     dependencies[elt.s] = 1
                         elif isinstance(value, ast.Str):
                             dependencies[value.s] = 1
+                    elif target.id == "LX_CONFIGURATION" or target.id == "LX_CONFIG":
+                        if isinstance(value, (ast.List, ast.Tuple)):
+                            for elt in value.elts:
+                                if isinstance(elt, ast.Str):
+                                    configuration[elt.s] = True
+                        elif isinstance(value, ast.Str):
+                            configuration[value.s] = True
 
     # Set up sub-dependencies
     if 'riscv' in dependencies:
         dependencies['make'] = 1
-    return list(dependencies.keys())
+    if not configuration['skip-git']:
+        dependencies['git'] = 1
+    configuration['dependencies'] = list(dependencies.keys())
+    return configuration
 
 def get_python_path(script_path, args):
     # Python has no concept of a local dependency path, such as the C `-I``
@@ -191,6 +205,9 @@ def check_yosys(args):
 def check_arachne(args):
     return check_cmd(args, "arachne-pnr")
 
+def check_git(args):
+    return check_cmd(args, "git")
+
 def check_icestorm(args):
     return check_cmd(args, "icepack") and check_cmd(args, "nextpnr-ice40")
 
@@ -198,6 +215,7 @@ dependency_checkers = {
     'python': check_python_version,
     'vivado': check_vivado,
     'make': check_make,
+    'git': check_git,
     'riscv': check_riscv,
     'yosys': check_yosys,
     'arachne-pnr': check_arachne,
@@ -313,10 +331,11 @@ def lx_main(args):
 
     elif args.lx_run is not None:
         script_name=args.lx_run[0]
-        get_required_dependencies(script_name)
+        config = read_configuration(script_name)
 
         fixup_env(script_path, args)
-        check_submodules(script_path, args)
+        if not config['skip-git']:
+            check_submodules(script_path, args)
 
         try:
             sys.exit(subprocess.Popen(
@@ -532,11 +551,13 @@ elif "LXBUILDENV_REEXEC" not in os.environ:
         lx_print_deps()
         sys.exit(0)
 
-    deps = get_required_dependencies(sys.argv[0])
+    config = read_configuration(sys.argv[0])
+    deps = config['dependencies']
 
     fixup_env(script_path, args)
     check_dependencies(args, deps)
-    check_submodules(script_path, args)
+    if not config['skip-git']:
+        check_submodules(script_path, args)
 
     try:
         sys.exit(subprocess.Popen(
