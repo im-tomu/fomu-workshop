@@ -3,9 +3,12 @@
 # relies on.  lxbuildenv reads this variable in order to ensure
 # the build will finish without exiting due to missing third-party
 # programs.
-LX_DEPENDENCIES = ["riscv", "icestorm"]
+LX_DEPENDENCIES = ["icestorm"]
+LX_CONFIG = "skip-git"
 
 # Import lxbuildenv to integrate the deps/ directory
+import os,sys
+sys.path.insert(0, os.path.dirname(__file__))
 import lxbuildenv
 
 # Disable pylint's E1101, which breaks completely on migen
@@ -91,7 +94,7 @@ def main():
         "--seed", default=0, help="seed to use in nextpnr"
     )
     parser.add_argument(
-        "--placer", choices=["sa", "heap"], help="which placer to use in nextpnr"
+        "--placer", default="heap", choices=["sa", "heap"], help="which placer to use in nextpnr"
     )
     parser.add_argument(
         "--no-pll", help="disable pll -- this is easier to route, but may not work", action="store_true"
