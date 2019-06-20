@@ -22,8 +22,10 @@ from lxsocsupport import up5kspram
 from valentyusb.usbcore import io as usbio
 from valentyusb.usbcore.cpu import dummyusb
 
-import argparse
+from migen import *
+from litex.soc.interconnect.csr import AutoCSR, CSRStatus, CSRStorage
 
+import argparse
 
 class BaseSoC(SoCCore):
     SoCCore.csr_map = {
