@@ -1,6 +1,6 @@
 # Fomu Workshop
 
-![Hi, I'm Fomu!](img/logo.png "Fomu logo")
+![Hi, I'm Fomu!](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/logo.png "Fomu logo")
 
 Hi, I'm Fomu!  This workshop covers the basics of Fomu in a top-down approach.  We'll start out by learning what Fomu is, how to load software into Fomu, and finally how to write software for Fomu.
 
@@ -31,7 +31,7 @@ Field Programmable Gate Arrays (FPGAs) are arrays of gates that are programmable
 
 These lookup tables (called LUTs) are so important to the design of an FPGA that they usually form part of the name of the part.  For example, Fomu uses a UP5K, which has about 5000 LUTs.  NeTV used an LX9, which had about 9000 LUTs, and NeTV2 uses a XC7A35T that has about 35000 LUTs.
 
-![ICE40 LUT](img/ice40-lut.png "The ICE40 LUT4 is a basic 4-input 1-output LUT")
+![ICE40 LUT](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/ice40-lut.png "The ICE40 LUT4 is a basic 4-input 1-output LUT")
 
 This is the `SB_LUT4`, which is the basic building block of Fomu.  It has four inputs and one output.  To program Fomu, we must define what each possible input pattern will create on the output.
 
@@ -68,7 +68,7 @@ endmodule
 
 We can run this Verilog module through a synthesizer to turn it into `SB_LUT4` blocks, or we can turn it into a more familiar logic diagram:
 
-![Verilog Synthesis](img/verilog-synthesis.png "A syntheis of the above logic into some gates")
+![Verilog Synthesis](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/verilog-synthesis.png "A syntheis of the above logic into some gates")
 
 If we do decide to synthesize to `SB_LUT4` blocks, we will end up with a pile of LUTs that need to be strung together somehow.  This is done by a Place-and-Route tool.  This performs the job of assigning physical LUTs to each LUT that gets defined by the synthesizer, and then figuring out how to wire it all up.
 
@@ -98,7 +98,7 @@ As always, this workshop wouldn't be nearly as easy without the open toolchain t
 
 Fomu is an ICE40UP5K that fits in your USB port.  It contains two megabytes of SPI flash memory, four edge buttons, and a three-color LED.  Unlike most other ICE40 projects, Fomu implements its USB in a softcore.  That means that the bitstream that runs on the FPGA must also provide the ability to communicate over USB.  This uses up a lot of storage on this small FPGA, but it also enables us to have such a tiny form factor, and lets us do some really cool things with it.
 
-![Fomu Block Diagram](img/fomu-block-diagram.png "Block diagram of Fomu")
+![Fomu Block Diagram](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/fomu-block-diagram.png "Block diagram of Fomu")
 
 The ICE40UP5K at the heart of Fomu really controls everything, and this workshop is all about trying to unlock the power of this chip.
 
@@ -278,7 +278,7 @@ The `CSR_VERSION_MODEL_ADDR` contains a single character that indicates what ver
 
 The blinking LED is actually a hardware block from Lattice.  It has control registers, and we can modify these registers by writing to memory in Fomu.  Some of these registers control things such as the timing of the fade in and fade out pulses, and some control the level of each of the three colors.
 
-![ICE40 LEDD](img/ice40-ledd.png "Registers of the ICE40 RGB driver")
+![ICE40 LEDD](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/ice40-ledd.png "Registers of the ICE40 RGB driver")
 
 There is a wrapper in Python that simplifies the process of writing to these registers.  The first argument is the register number, and the second argument is the value to write.
 
@@ -299,7 +299,7 @@ The MicroPython interface is simply a RISC-V program.  It interacts with the RIS
 
 The CPU in Fomu is built on LiteX, which places every device on a Wishbone bus.  This is a 32-bit internal bus that maps peripherals into memory.
 
-![Litex Design](img/litex-design.png "Fomu peripherals on the Wishbone bus")
+![Litex Design](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/litex-design.png "Fomu peripherals on the Wishbone bus")
 
 If you look at the diagram above, you can see that everything in the system is on the Wishbone bus.  The CPU is a bus master, and can initiate reads and writes.  The system's RAM is on the wishbone bus, and is currently located at address `0x10000000`.  The boot ROM is also on the bus, and is located at `0x00000000`.  There is also SPI flash which is memory-mapped, so when you load your program onto SPI it shows up on the Wishbone bus at offset `0x20040000`.
 
@@ -307,7 +307,7 @@ The Configuration and Status Registers (CSRs) all show up at offset `0xe0000000`
 
 You'll notice a "Bridge" in the diagram above.  This is an optional feature that we ship by default on Fomu.  It bridges the Wishbone bus to another device.  In our case, it makes Wishbone available over USB.
 
-![Litex Design](img/wishbone-usb-debug-bridge.png "Fomu peripherals on the Wishbone bus")
+![Litex Design](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/wishbone-usb-debug-bridge.png "Fomu peripherals on the Wishbone bus")
 
 This is a special USB packet we can generate to access the Wishbone bus from a host PC.  It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone.  These two primitives give us complete control over Fomu.
 
@@ -472,7 +472,7 @@ csr_writel (addr=3758106660, value=1) at ./include/hw/common.h:41
 
 If we run `bt` we can get a backtrace, and chances are that we landed in an `msleep` function:
 
-```gdb
+```
 (gdb) bt
 #0  0x2004014c in csr_readl (addr=3758106664) at ./include/hw/common.h:46
 #1  timer0_value_read () at ./include/generated/csr.h:242
@@ -626,7 +626,7 @@ $
 
 Aside from that, there's not much we can _do_ with this design.  But there's a lot of infrastructure there.  So let's add something.
 
-![SB_RGBA_DRV](img/ice40-rgb.jpg "RGB block")
+![SB_RGBA_DRV](https://raw.githubusercontent.com/im-tomu/fomu-workshop/master/img/ice40-rgb.jpg "RGB block")
 
 This is the RGB block from the datasheet.  It has five inputs: `CURREN`, `RGBLEDEN`, `RGB0PWM`, `RGB1PWM`, and `RGB2PWM`.  It has three outputs: `RGB0`, `RGB1`, and `RGB2`.  It also has four parameters: `CURRENT_MODE`, `RGB0_CURRENT`, `RGB1_CURRENT`, and `RGB2_CURRENT`.
 
