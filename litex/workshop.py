@@ -14,7 +14,7 @@ import lxbuildenv
 # Disable pylint's E1101, which breaks completely on migen
 #pylint:disable=E1101
 
-from litex_boards.partner.platforms.fomu_evt import Platform
+from litex_boards.partner.platforms.fomu_hacker import Platform
 from litex_boards.partner.targets.fomu import _CRG
 
 from litex.soc.integration import SoCCore
