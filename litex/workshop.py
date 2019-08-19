@@ -3,8 +3,8 @@
 # relies on.  lxbuildenv reads this variable in order to ensure
 # the build will finish without exiting due to missing third-party
 # programs.
-LX_DEPENDENCIES = ["icestorm"]
-#LX_CONFIG = "skip-git"
+LX_DEPENDENCIES = ["icestorm", "yosys", "nextpnr-ice40"]
+LX_CONFIG = "skip-git"
 
 # Import lxbuildenv to integrate the deps/ directory
 import os,sys
