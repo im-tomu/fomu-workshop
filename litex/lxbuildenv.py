@@ -83,7 +83,7 @@ def read_configuration(filename, args):
     # Set up sub-dependencies
     if 'riscv' in dependencies:
         dependencies['make'] = 1
-    if args.lx_force_git or (not configuration['skip-git'] and not args.lx_ignore_git):
+    if args.lx_check_git or (not configuration['skip-git'] and not args.lx_ignore_git):
         dependencies['git'] = 1
     configuration['dependencies'] = list(dependencies.keys())
     return configuration
