@@ -3,6 +3,7 @@
 # This script enables easy, cross-platform building without the need
 # to install third-party Python modules.
 
+LXBUILDENV_VERSION = '2019.8.19.1'
 import sys
 import os
 import subprocess
@@ -36,7 +37,7 @@ OPTIONAL_DEPS = {
 script_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
 
 # Look through the specified file for known variables to get the dependency list
-def read_configuration(filename):
+def read_configuration(filename, args):
     import ast
 
     # Always check the Python version
@@ -82,7 +83,7 @@ def read_configuration(filename):
     # Set up sub-dependencies
     if 'riscv' in dependencies:
         dependencies['make'] = 1
-    if not configuration['skip-git']:
+    if args.lx_force_git or (not configuration['skip-git'] and not args.lx_ignore_git):
         dependencies['git'] = 1
     configuration['dependencies'] = list(dependencies.keys())
     return configuration
@@ -144,7 +145,6 @@ def get_command(cmd):
         path_ext = [""]
     for ext in path_ext:
         for path in os.environ["PATH"].split(os.pathsep):
-
             if os.path.exists(path + os.path.sep + cmd + ext):
                 return path + os.path.sep + cmd + ext
     return None
@@ -209,7 +209,10 @@ def check_git(args):
     return check_cmd(args, "git")
 
 def check_icestorm(args):
-    return check_cmd(args, "icepack") and check_cmd(args, "nextpnr-ice40")
+    return check_cmd(args, "icepack")
+
+def check_nextpnr_ice40(args):
+    return check_cmd(args, "nextpnr-ice40")
 
 dependency_checkers = {
     'python': check_python_version,
@@ -220,31 +223,34 @@ dependency_checkers = {
     'yosys': check_yosys,
     'arachne-pnr': check_arachne,
     'icestorm': check_icestorm,
+    'nextpnr-ice40': check_nextpnr_ice40,
 }
 
 # Validate that the required dependencies (Vivado, compilers, etc.)
 # have been installed.
 def check_dependencies(args, dependency_list):
-
     dependency_errors = 0
     for dependency_name in dependency_list:
         if not dependency_name in dependency_checkers:
-            print('WARNING: Unrecognized dependency "{}"'.format(dependency_name))
+            print('lxbuildenv: WARNING: Unrecognized dependency "{}"'.format(dependency_name))
             continue
         result = dependency_checkers[dependency_name](args)
         if result[0] == False:
             if len(result) > 2:
-                print('{}: {} -- {}'.format(dependency_name, result[1], result[2]))
+                print('lxbuildenv: {}: {} -- {}'.format(dependency_name, result[1], result[2]))
             else:
-                print('{}: {}'.format(dependency_name, result[1]))
+                print('lxbuildenv: {}: {}'.format(dependency_name, result[1]))
             dependency_errors = dependency_errors + 1
 
         elif args.lx_check_deps or args.lx_verbose:
-            print('dependency: {}: {}'.format(dependency_name, result[1]))
+            print('lxbuildenv: dependency: {}: {}'.format(dependency_name, result[1]))
     if dependency_errors > 0:
         if args.lx_ignore_deps:
-            print('{} missing dependencies were found but continuing anyway'.format(dependency_errors))
+            if not args.lx_quiet:
+                print('lxbuildenv: {} missing dependencies were found but continuing anyway'.format(dependency_errors))
         else:
+            if not args.lx_quiet:
+                print('lxbuildenv: To ignore dependencies, re-run with "--lx-ignore-deps"')
             raise SystemExit(str(dependency_errors) +
                              " missing dependencies were found")
 
@@ -298,11 +304,14 @@ def check_module_recursive(root_path, depth, verbose=False, breadcrumbs=[]):
 # Determine whether we need to invoke "git submodules init --recurse"
 def check_submodules(script_path, args):
     if check_module_recursive(script_path, 0, verbose=args.lx_verbose):
-        print("Missing submodules -- updating")
+        if not args.lx_quiet:
+            print("lxbuildenv: Missing git submodules -- updating")
+            print("lxbuildenv: To ignore git issues, re-run with --lx-ignore-git")
         subprocess.Popen(["git", "submodule", "update",
                           "--init", "--recursive"], cwd=script_path).wait()
     elif args.lx_verbose:
-        print("Submodule check: Submodules found")
+        if not args.lx_quiet:
+            print("lxbuildenv: Submodule check: Submodules found")
 
 
 def lx_git(cmd, *args):
@@ -314,12 +323,12 @@ def lx_git(cmd, *args):
     subprocess.call(git_cmd)
 
 def lx_print_deps():
-    print('Known dependencies:')
+    print('lxbuildenv: Supported dependencies:')
     for dep in dependency_checkers.keys():
-        print('    {}'.format(dep))
-    print('To define a dependency, add a variable inside {} at the top level called LX_DEPENDENCIES and assign it a list or tuple.'.format(sys.argv[0]))
-    print('For example:')
-    print('LX_DEPENDENCIES = ("riscv", "vivado")')
+        print('lxbuildenv:     {}'.format(dep))
+    print('lxbuildenv: To define a dependency, add a variable inside {} at the top level called LX_DEPENDENCIES and assign it a list or tuple.'.format(sys.argv[0]))
+    print('lxbuildenv: For example:')
+    print('lxbuildenv: LX_DEPENDENCIES = ("riscv", "vivado")')
 
 
 def lx_main(args):
@@ -331,7 +340,7 @@ def lx_main(args):
 
     elif args.lx_run is not None:
         script_name=args.lx_run[0]
-        config = read_configuration(script_name)
+        config = read_configuration(script_name, args)
 
         fixup_env(script_path, args)
         if not config['skip-git']:
@@ -345,7 +354,7 @@ def lx_main(args):
     elif args.init:
         if args.main is None:
             main_name = os.getcwd().split(os.path.sep)[-1] + '.py'
-            new_main_name = input('What would you like your main program to be called? [' + main_name + '] ')
+            new_main_name = input('lxbuildenv: What would you like your main program to be called? [' + main_name + '] ')
             if new_main_name is not None and new_main_name != "":
                 main_name = new_main_name
         else:
@@ -354,16 +363,16 @@ def lx_main(args):
             main_name = main_name + '.py'
 
         if args.no_git:
-            print("skipping git initialization")
+            print("lxbuildenv: skipping git initialization")
         else:
             if not os.path.exists(DEPS_DIR):
                 os.mkdir(DEPS_DIR)
 
             if not os.path.exists(".git"):
-                print("initializing git repository")
+                print("lxbuildenv: initializing git repository")
                 lx_git('init')
             else:
-                print("using existing git repository")
+                print("lxbuildenv: using existing git repository")
             lx_git('add', str(__file__))
 
             for dep_name, dep_url in DEFAULT_DEPS.items():
@@ -375,9 +384,9 @@ def lx_main(args):
             lx_git('submodule', 'update', '--init', '--recursive')
 
         if args.no_bin:
-            print("skipping bin/ initialization")
+            print("lxbuildenv: skipping bin/ initialization")
         elif os.path.exists("bin"):
-            print("bin/ directory exists -- remove bin/ directory to re-initialize")
+            print("lxbuildenv: bin/ directory exists -- remove bin/ directory to re-initialize")
         else:
             bin_tools = {
                 'mkmscimg':           'litex.soc.software.mkmscimg',
@@ -400,7 +409,7 @@ sys.path.insert(0, script_path)
 import lxbuildenv
 
 """
-            print("Creating binaries")
+            print("lxbuildenv: Creating binaries")
             os.mkdir("bin")
             for bin_name, python_module in bin_tools.items():
                 with open('bin' + os.path.sep + bin_name, 'w', newline='\n') as new_bin:
@@ -413,9 +422,9 @@ import lxbuildenv
                     lx_git('add', '--chmod=+x', 'bin' + os.path.sep + bin_name)
 
         if os.path.exists(main_name):
-            print("skipping creation of {}: file exists".format(main_name))
+            print("lxbuildenv: skipping creation of {}: file exists".format(main_name))
         else:
-            print("creating main program {}".format(main_name))
+            print("lxbuildenv: creating main program {}".format(main_name))
             with open(main_name, 'w') as m:
                 program_template = """#!/usr/bin/env python3
 # This variable defines all the external programs that this module
@@ -531,6 +540,9 @@ elif "LXBUILDENV_REEXEC" not in os.environ:
         "--lx-verbose", help="increase verboseness of some processes", action="store_true"
     )
     parser.add_argument(
+        "--lx-quiet", help="decrease verboseness of some processes", action="store_true"
+    )
+    parser.add_argument(
         "--lx-print-env", help="print environment variable listing for pycharm, vscode, or bash", action="store_true"
     )
     parser.add_argument(
@@ -545,18 +557,36 @@ elif "LXBUILDENV_REEXEC" not in os.environ:
     parser.add_argument(
         "--lx-ignore-deps", help="try building even if dependencies are missing", action="store_true"
     )
+    parser.add_argument(
+        "--lx-ignore-git", help="don't do a check of the git repo", action="store_true"
+    )
+    parser.add_argument(
+        "--lx-check-git", help="force a git check even if it's otherwise disabled", action="store_true"
+    )
     (args, rest) = parser.parse_known_args()
+
+    if not args.lx_quiet:
+        print("lxbuildenv: v{} (run {} --lx-help for help)".format(LXBUILDENV_VERSION, sys.argv[0]))
 
     if args.lx_print_deps:
         lx_print_deps()
         sys.exit(0)
 
-    config = read_configuration(sys.argv[0])
+    config = read_configuration(sys.argv[0], args)
     deps = config['dependencies']
 
     fixup_env(script_path, args)
     check_dependencies(args, deps)
-    if not config['skip-git']:
+    if args.lx_check_git:
+        check_submodules(script_path, args)
+    elif config['skip-git']:
+        if not args.lx_quiet:
+            print('lxbuildenv: Skipping git configuration because "skip-git" was found in LX_CONFIGURATION')
+            print('lxbuildenv: To fetch from git, run {} --lx-check-git'.format(" ".join(sys.argv)))
+    elif args.lx_ignore_git:
+        if not args.lx_quiet:
+            print('lxbuildenv: Skipping git configuration because "--lx-ignore-git" Was specified')
+    else:
         check_submodules(script_path, args)
 
     try:
