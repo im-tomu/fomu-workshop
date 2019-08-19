@@ -6,8 +6,8 @@
 
 _start:
   j crt_init
-  .word 0xb469075a
-  .word 0x00000020
+  .word 0xb469075a // Magic value for config flags
+  .word 0x00000020 // USB_NO_RESET flag so we can attach the debugger
 
 .section .text
 .global  trap_entry
