@@ -14,7 +14,6 @@ import lxbuildenv
 # Disable pylint's E1101, which breaks completely on migen
 #pylint:disable=E1101
 
-from litex_boards.partner.platforms.fomu_hacker import Platform
 from litex_boards.partner.targets.fomu import _CRG
 
 from litex.soc.integration import SoCCore
@@ -99,8 +98,18 @@ def main():
     parser.add_argument(
         "--no-pll", help="disable pll -- this is easier to route, but may not work", action="store_true"
     )
+    parser.add_argument(
+        "--board", choices=["evt", "pvt", "hacker"], required=True,
+        help="build for a particular hardware board"
+    )
     args = parser.parse_args()
 
+    if args.board == "pvt":
+        from litex_boards.partner.platforms.fomu_pvt import Platform
+    elif args.board == "hacker":
+        from litex_boards.partner.platforms.fomu_hacker import Platform
+    elif args.board == "evt":
+        from litex_boards.partner.platforms.fomu_evt import Platform
     platform = Platform()
     soc = BaseSoC(platform, pnr_seed=args.seed, placer=args.placer, use_pll=not args.no_pll)
     builder = Builder(soc,
