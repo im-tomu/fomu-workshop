@@ -553,7 +553,7 @@ We can use `DummyUsb` to respond to USB requests and bridge USB to Wishbone, and
 Go to the `litex` directory and build the design and load it onto Fomu:
 
 ```sh
-$ python3 workshop.py --placer heap
+$ python3 workshop.py --board hacker
 lxbuildenv: v2019.8.19.1 (run .\workshop.py --lx-help for help)
 lxbuildenv: Skipping git configuration because "skip-git" was found in LX_CONFIGURATION
 lxbuildenv: To fetch from git, run .\workshop.py --placer heap --lx-check-git
