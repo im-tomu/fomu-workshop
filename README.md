@@ -23,7 +23,7 @@ Fomu requires specialized software.  Namely, you must have the following softwar
 
 This software is provided on a USB drive for Linux x86/64, macOS, and Windows.  Debian packages are also available for Raspberry Pi.  For other platforms, please see the people running the workshop.
 
-This software is also available from the [Fomu Toolchain repository](github.com/im-tomu/fomu-toolchain/releases/latest).
+This software is also available from the [Fomu Toolchain repository](https://github.com/im-tomu/fomu-toolchain/releases/latest).
 
 ## About FPGAs
 
