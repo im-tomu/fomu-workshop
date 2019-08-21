@@ -241,7 +241,7 @@ $
 If you're on a macOS machine, use the following command to connect to the device:
 
 ```sh
-$ screen /dev/cu.usbserial*
+$ screen /dev/cu.usb*
 ```
 
 If you're on Linux, it will be called `ttyACM?`:
