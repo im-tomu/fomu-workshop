@@ -16,8 +16,8 @@ Fomu requires specialized software.  Namely, you must have the following softwar
 | **[nextpnr-ice40](https://github.com/YosysHQ/nextpnr)** | FPGA place-and-route |
 | **[icestorm](https://github.com/cliffordwolf/icestorm)** | FPGA bitstream packing |
 | **[riscv toolchain](https://www.sifive.com/boards/)** | Compile code for a RISC-V softcore |
-| **dfu-util** | Load a bitstream or code onto Fomu |
-| **python3** | Convert Migen/Litex code to Verilog |
+| **[dfu-util](https://dfu-util.sourceforge.net/)** | Load a bitstream or code onto Fomu |
+| **[python](https://python.org/)** | Convert Migen/Litex code to Verilog |
 | **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
 | **serial console** | Interact with Python over a virtual console |
 
