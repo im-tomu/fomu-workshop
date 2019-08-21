@@ -143,6 +143,30 @@ $
 
 If you get the above message, it means your computer has successfully detected Fomu.  If you get a "permission denied" error in Linux, try running `sudo dfu-util -l`, or add a `udev` rule to give your user permission to the usb device.
 
+### Setting udev permissions
+
+```
+sudo groupadd plugdev
+sudo usermod -a -G plugdev $USER
+```
+
+You will need to log out and log in again in order to be a member of the plugdev group.
+You can check with ```id $USER``` if your user really is in the plugdev group.
+
+Create a file named ```/etc/udev/rules.d/99-fomu.rules``` and add the
+following:
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="5bf0", MODE="0664", GROUP="plugdev"
+```
+
+You can reload the udev-rules using the following:
+```
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+## Loading Binaries
+
 To load a binary image onto Fomu, we use the `-D` option:
 
 ```sh
