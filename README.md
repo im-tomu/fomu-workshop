@@ -21,9 +21,26 @@ Fomu requires specialized software.  Namely, you must have the following softwar
 | **wishbone-tool** | Interact with Fomu over USB |
 | **serial console** | Interact with Python over a virtual console |
 
-This software is provided on a USB drive for Linux x86/64, macOS, and Windows.  Debian packages are also available for Raspberry Pi.  For other platforms, please see the people running the workshop.
+This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain] (github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk. Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
 
-This software is also available from the [Fomu Toolchain repository](https://github.com/im-tomu/fomu-toolchain/releases/latest).
+To install the software, extract it somewhere on your computer, then open up a terminal window and add that directory to your PATH:
+
+* MacOS: `export PATH=[path-to-bin]:$PATH`
+* Linux: `export PATH=[path-to-bin]:$PATH`
+* Windows Powershell: `$ENV:PATH = "[path-to-bin];" + $ENV:PATH`
+* Windows cmd.exe: `PATH=[path-to-bin];%PATH`
+
+To confirm installation, run a command such as `nextpnr-ice40` or `yosys`.
+
+## Required Hardware
+
+For this workshop, you will need a Fomu board. This workshop may be competed with any model of Fomu, though there are some parts that require you to identify which model you have:
+
+1. **Fomu EVT3**: This model of Fomu is about the size of a credit card. It should have the text "Fomu EVT3" written across it in white silkscreen. If you have a different EVT board such as EVT2 or EVT1, they should work also.
+1. **Fomu PVT1**: If you ordered a Fomu from Crowd Supply, this is the model you'll receive. It is small, and fits in a USB port. There is no silkscreen on it. This model of Fomu has a large silver crystal oscillator that is the tallest component on the board.
+1. **Fomu Hacker**: These are the original design and are easiest to manufacture. If you received one directly from Tim, you probably have one of these. Hacker boards have white silkscreen on the back.
+
+Aside from that, you need a computer with a USB port that can run the toolchain software. You should need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
 
 ## About FPGAs
 
