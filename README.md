@@ -66,6 +66,8 @@ To do this, we turn to a truth table:
 
 For example, to create a LUT that acted as an AND gate, we would define O to be 0 for everything except the last column.  To create a NAND gate, we would define O to be 1 for everything from the last column.
 
+FPGA LUTs are almost always _n_-inputs to 1-output. The ICE family of FPGAs from Lattice have 4-input LUTs. Xilinx parts tend to have 5- or 6-input LUTs which generally means they can do more logic in fewer LUTs. Comparing LUT count between FPGAs is a bit like comparing clock speed between different CPUs - not entirely accurate, but certainly a helpful rule of thumb.
+
 It is from this simple primitive that we build up the building blocks of FPGA design.
 
 ### Turning code into gates
