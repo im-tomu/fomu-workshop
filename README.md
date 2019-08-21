@@ -12,13 +12,13 @@ Fomu requires specialized software.  Namely, you must have the following softwar
 
 | Tool | Purpose |
 | ---- |------------------ |
-| **yosys** | Verilog synthesis |
-| **nextpnr-ice40** | FPGA place-and-route |
-| **icestorm** | FPGA bitstream packing |
-| **riscv toolchain** | Compile code for a RISC-V softcore |
+| **[yosys](https://github.com/YosysHQ/yosys)** | Verilog synthesis |
+| **[nextpnr-ice40](https://github.com/YosysHQ/nextpnr)** | FPGA place-and-route |
+| **[icestorm](https://github.com/cliffordwolf/icestorm)** | FPGA bitstream packing |
+| **[riscv toolchain](https://www.sifive.com/boards/)** | Compile code for a RISC-V softcore |
 | **dfu-util** | Load a bitstream or code onto Fomu |
 | **python3** | Convert Migen/Litex code to Verilog |
-| **wishbone-tool** | Interact with Fomu over USB |
+| **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
 | **serial console** | Interact with Python over a virtual console |
 
 This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain] (github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk. Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
