@@ -40,6 +40,8 @@ For this workshop, you will need a Fomu board. This workshop may be competed wit
 1. **Fomu PVT1**: If you ordered a Fomu from Crowd Supply, this is the model you'll receive. It is small, and fits in a USB port. There is no silkscreen on it. This model of Fomu has a large silver crystal oscillator that is the tallest component on the board.
 1. **Fomu Hacker**: These are the original design and are easiest to manufacture. If you received one directly from Tim, you probably have one of these. Hacker boards have white silkscreen on the back.
 
+Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing "dfu-util -l" and noting the version number.
+
 Aside from that, you need a computer with a USB port that can run the toolchain software. You should need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
 
 ## About FPGAs
