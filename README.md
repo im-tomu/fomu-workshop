@@ -21,7 +21,7 @@ Fomu requires specialized software.  Namely, you must have the following softwar
 | **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
 | **serial console** | Interact with Python over a virtual console |
 
-This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain] (github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk. Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
+This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk. Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
 
 To install the software, extract it somewhere on your computer, then open up a terminal window and add that directory to your PATH:
 
