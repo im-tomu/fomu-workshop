@@ -141,7 +141,7 @@ Found DFU: [1209:5bf0] ver=0101, devnum=21, cfg=1, intf=0, alt=0, name="Fomu Hac
 $
 ```
 
-If you get the above message, it means your computer has successfully detected Fomu.  If you get a "permission denied" error in Linux, try running `sudo dfu-util -l`, or add a `udev` rule to give your user permission to the usb device.
+If you get the above message, it means your computer has successfully detected Fomu.  If you get a "permission denied" or "Cannot open DFU device 1209:5bf0" error in Linux, try running `sudo dfu-util -l`, or add a `udev` rule to give your user permission to the usb device.
 
 ### Setting udev permissions
 
