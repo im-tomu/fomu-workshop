@@ -143,7 +143,7 @@ $
 
 If you get the above message, it means your computer has successfully detected Fomu.  If you get a "permission denied" or "Cannot open DFU device 1209:5bf0" error in Linux, try running `sudo dfu-util -l`, or add a `udev` rule to give your user permission to the usb device.
 
-### Setting udev permissions
+### (Linux Only) Setting udev permissions
 
 ```
 sudo groupadd plugdev
