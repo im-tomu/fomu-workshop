@@ -311,11 +311,19 @@ These are special areas of memory that don't really exist.  Instead, they corres
 >>>
 ```
 
-The `CSR_VERSION_MODEL_ADDR` contains a single character that indicates what version of the hardware you have.  We can convert this to a character and print it out.  For a Production PVT Fomu, you might see this:
+The `CSR_VERSION_MODEL_ADDR` contains a single character that indicates what version of the hardware you have.  We can convert this to a character and print it out.
 
+If you have a production board you will get `P` as shown below;
 ```python
 >>> chr(machine.mem32[0xe0007028])
 'P'
+>>>
+```
+
+If you have a hacker board you will get `H` as shown below;
+```python
+>>> chr(machine.mem32[0xe0007028])
+'H'
 >>>
 ```
 
