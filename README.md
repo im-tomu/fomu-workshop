@@ -338,9 +338,12 @@ There is a wrapper in Python that simplifies the process of writing to these reg
 Try changing the color of the three LEDs:
 
 ```python
->>> rgb.write_raw(0b0001, 255)
->>> rgb.write_raw(0b1010, 14)
->>> rgb.write_raw(0b1011, 1)
+>>> LED_PULSE_WIDTH_RED   = 0b0001 # LEDDPWRR
+>>> LED_PULSE_WIDTH_GREEN = 0b0010 # LEDDPWRG
+>>> LED_PULSE_WIDTH_BLUE  = 0b0011 # LEDDPWRG
+>>> rgb.write_raw(LED_PULSE_WIDTH_RED, 255)
+>>> rgb.write_raw(LED_PULSE_WIDTH_GREEN, 14)
+>>> rgb.write_raw(LED_PULSE_WIDTH_BLUE, 1)
 >>>
 ```
 
