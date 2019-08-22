@@ -145,7 +145,7 @@ If you get the above message, it means your computer has successfully detected F
 
 Under Windows 7: If you get "Cannot open DFU device 1209:5bf0": Download https://zadig.akeo.ie/ to install another driver onto your usb-port. Open Zadeg. Under Options, tick "List All Devices". In the dropdown, select your FOMU and in the field right of the green arrow choose the "USB Serial (CDC)" driver and hit Upgrade Driver.
 
-[Zadeg Setup](img/Zadeg-Setup.PNG "Setup of ZADEG for Updating USBport driver on WIN7")
+![Zadeg Setup](img/Zadeg-Setup.PNG "Setup of ZADEG for Updating USBport driver on WIN7")
 
 ### (Linux Only) Setting udev permissions
 
