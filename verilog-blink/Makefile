@@ -64,6 +64,13 @@ $(ALL): $(TARGET)
 run: $(TARGET)
 	fomu-flash -f $(TARGET)
 
+run-dfu: $(PACKAGE).dfu
+	dfu-util -D $(PACKAGE).dfu
+
+$(PACKAGE).dfu: $(TARGET)
+	cp $(PACKAGE).bin $@
+	$(QUIET) dfu-suffix -v 1209 -p 70b1 -a $@
+
 $(BUILD_DIR)/$(PACKAGE).json: $(VSOURCES) | $(BUILD_DIR)
 	$(QUIET) echo " SYNTH    $@"
 	$(QUIET) $(YOSYS) $(YOSYSFLAGS) -p 'synth_ice40 -top $(TOP) -json $@' $(PACKAGE).v
@@ -86,7 +93,7 @@ clean:
 	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.json))
 	$(QUIET) echo "  RM      $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.asc))"
 	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.asc))
-	$(QUIET) echo "  RM      $(TARGET) $(PACKAGE).bin"
+	$(QUIET) echo "  RM      $(TARGET) $(PACKAGE).bin $(PACKAGE).dfu"
 	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),abc.history)
 	$(QUIET) echo "  RM      $(TARGET) abc.history"
-	-$(QUIET) $(RM) $(TARGET) $(PACKAGE).bin
+	-$(QUIET) $(RM) $(TARGET) $(PACKAGE).bin $(PACKAGE).dfu
