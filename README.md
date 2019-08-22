@@ -42,7 +42,7 @@ For this workshop, you will need a Fomu board. This workshop may be competed wit
 
 Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing "dfu-util -l" and noting the version number.
 
-Aside from that, you need a computer with a USB port that can run the toolchain software. You should need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
+Aside from that, you need a computer with a USB port that can run the toolchain software. You should not need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
 
 ## About FPGAs
 
