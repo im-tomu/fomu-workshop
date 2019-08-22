@@ -335,17 +335,20 @@ The blinking LED is actually a hardware block from Lattice.  It has control regi
 
 There is a wrapper in Python that simplifies the process of writing to these registers.  The first argument is the register number, and the second argument is the value to write.
 
+For the `LEDDPWR` registers, the second argument determines the brightness, value ranges from 0 to 255.
+
 Try changing the color of the three LEDs:
 
 ```python
->>> LED_PULSE_WIDTH_RED   = 0b0001 # LEDDPWRR
->>> LED_PULSE_WIDTH_GREEN = 0b0010 # LEDDPWRG
->>> LED_PULSE_WIDTH_BLUE  = 0b0011 # LEDDPWRG
->>> rgb.write_raw(LED_PULSE_WIDTH_RED, 255)
->>> rgb.write_raw(LED_PULSE_WIDTH_GREEN, 14)
->>> rgb.write_raw(LED_PULSE_WIDTH_BLUE, 1)
+>>> ADDR_RED_LED_PULSE_WIDTH   = 0b0001 # LEDDPWRR
+>>> ADDR_GREEN_LED_PULSE_WIDTH = 0b0010 # LEDDPWRG
+>>> ADDR_BLUE_LED_PULSE_WIDTH  = 0b0011 # LEDDPWRB
+>>> rgb.write_raw(ADDR_RED_LED_PULSE_WIDTH, 255)  # Red LED fully on
+>>> rgb.write_raw(ADDR_GREEN_LED_PULSE_WIDTH, 14) # Green LED mostly off
+>>> rgb.write_raw(ADDR_BLUE_LED_PULSE_WIDTH, 1)   # Blue LED off
 >>>
 ```
+
 
 The color should change immediately.  More information on these registers can be found in the [iCE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
 
