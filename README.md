@@ -143,6 +143,10 @@ $
 
 If you get the above message, it means your computer has successfully detected Fomu.  If you get a "permission denied" or "Cannot open DFU device 1209:5bf0" error in Linux, try running `sudo dfu-util -l`, or add a `udev` rule to give your user permission to the usb device.
 
+Under Windows 7: If you get "Cannot open DFU device 1209:5bf0": Download https://zadig.akeo.ie/ to install another driver onto your usb-port. Open Zadeg. Under Options, tick "List All Devices". In the dropdown, select your FOMU and in the field right of the green arrow choose the "USB Serial (CDC)" driver and hit Upgrade Driver.
+
+[Zadeg Setup](img/Zadeg-Setup.PNG "Setup of ZADEG for Updating USBport driver on WIN7")
+
 ### (Linux Only) Setting udev permissions
 
 ```
@@ -250,7 +254,8 @@ If you're on Linux, it will be called `ttyACM?`:
 $ screen /dev/ttyACM*
 ```
 
-On Windows, you can use a program such as teraterm, which is included in the Fomu Toolchain:
+On Windows, you can use a program such as teraterm (which you can download: https://tera-term.en.lo4d.com/download):
+(In Teraterm hit New Connection and select the "Serial Port"-Radio Button. If it is greyed out you might have to change your USB-Port driver for the FOBU. See  Working with Fomu, above.)
 
 ```powershell
 PS> ttermpro.exe
