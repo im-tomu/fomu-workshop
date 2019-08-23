@@ -679,7 +679,7 @@ Migen is an HDL embedded in Python, and LiteX provides us with a Wishbone abstra
 
 We can use `DummyUsb` to respond to USB requests and bridge USB to Wishbone, and rely on LiteX to generate registers and wire them to hardware signals.  We can still use `wishbone-tool` to read and write memory, and with a wishbone bridge we can actually have code running on our local system that can read and write memory on Fomu.
 
-Go to the `litex` directory and build the design and load it onto Fomu:
+Go to the `litex` directory and build the design;
 
 ```sh
 $ python3 workshop.py --board hacker
@@ -714,16 +714,17 @@ Info: [ 67539,  71542) |*************+
 Info: [ 71542,  75545) |********************+
 Info: [ 75545,  79548) |************************************************************
 5 warnings, 0 errors
-$ dfu-util -D build/gateware/top.bin
+```
+
+Load it onto Fomu:
+```sh
+$ dfu-util -D build/gateware/top.dfu
 dfu-util 0.8
 Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
 Copyright 2010-2014 Tormod Volden and Stefan Schmidt
 This program is Free Software and has ABSOLUTELY NO WARRANTY
 Please report bugs to dfu-util@lists.gnumonks.org
 
-Invalid DFU suffix signature
-A valid DFU suffix will be required in a future dfu-util release!!!
-Cannot open DFU device 0b05:180a
 Opening DFU capable USB device...
 ID 1209:5bf0
 Run-time device DFU version 0101
