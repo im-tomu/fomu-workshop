@@ -607,7 +607,9 @@ There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` dire
 
 The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
 
-### Verilog "Hello world!"
+### Verilog
+
+#### "Hello world!" - Blink an LED
 
 The canonical "Hello, world!" of hardware is to blink an LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
 
@@ -667,7 +669,13 @@ You can load `blink.bin` onto Fomu by using the same `dfu-util -D` command we've
 
 ### Migen and LiteX
 
-Recall that Migen is an HDL embedded in Python, and LiteX provides us with a Wishbone abstraction layer.  There really is no reason we need to include a CPU with our design, but we can still reuse the USB Wishbone bridge in order to write HDL code.
+#### "Hello world!" - Blink an LED
+
+FIXME: Add the Migen and LiteX equivalent for the Verilog above.
+
+#### Wishbone Bus
+
+Migen is an HDL embedded in Python, and LiteX provides us with a Wishbone abstraction layer.  There really is no reason we need to include a CPU with our design, but we can still reuse the USB Wishbone bridge in order to write HDL code.
 
 We can use `DummyUsb` to respond to USB requests and bridge USB to Wishbone, and rely on LiteX to generate registers and wire them to hardware signals.  We can still use `wishbone-tool` to read and write memory, and with a wishbone bridge we can actually have code running on our local system that can read and write memory on Fomu.
 
