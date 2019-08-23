@@ -36,9 +36,9 @@ load: blink.dfu
 
 # Cleanup the generated files.
 clean:
-	-rm blink.json 	# Generate netlist
-	-rm blink.asc 	# FPGA configuration
-	-rm blink.bit 	# FPGA bitstream
-	-rm blink.dfu 	# DFU image loadable onto the Fomu
+	-rm -f blink.json 	# Generate netlist
+	-rm -f blink.asc 	# FPGA configuration
+	-rm -f blink.bit 	# FPGA bitstream
+	-rm -f blink.dfu 	# DFU image loadable onto the Fomu
 
 .PHONY: load
