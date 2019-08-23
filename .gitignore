@@ -32,3 +32,6 @@ abc.history
 Gemfile
 Gemfile.lock
 _*
+
+# Fomu Toolchain
+fomu-toolchain*
