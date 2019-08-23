@@ -6,9 +6,29 @@ Hi, I'm Fomu!  This workshop covers the basics of Fomu in a top-down approach.  
 
 FPGAs are complex, weird things, so we'll take a gentle approach and start out by treating it like a Python interpreter first, and gradually peel away layers until we're writing our own hardware registers.  You can take a break at any time and explore!  Stop when you feel the concepts are too unfamiliar, or plough on and dig deep into the world of hardware.
 
+# Requirements
+
 ## Required Software
 
-Fomu requires specialized software.  Namely, you must have the following software on your system:
+Fomu requires specialized software. This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk.
+
+To install the software, extract it somewhere on your computer, then open up a terminal window and add that directory to your PATH:
+
+* MacOS: `export PATH=[path-to-bin]:$PATH`
+* Linux: `export PATH=[path-to-bin]:$PATH`
+* Windows Powershell: `$ENV:PATH = "[path-to-bin];" + $ENV:PATH`
+* Windows cmd.exe: `PATH=[path-to-bin];%PATH`
+
+To confirm installation, run the `yosys` command and confirm you get the following output;
+```
+FIXME: Put output here!
+```
+
+<span class="extra">
+
+Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
+
+The [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest) consists of the following tools;
 
 | Tool | Purpose |
 | ---- |------------------ |
@@ -21,16 +41,8 @@ Fomu requires specialized software.  Namely, you must have the following softwar
 | **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
 | **serial console** | Interact with Python over a virtual console |
 
-This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk. Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
+</span>
 
-To install the software, extract it somewhere on your computer, then open up a terminal window and add that directory to your PATH:
-
-* MacOS: `export PATH=[path-to-bin]:$PATH`
-* Linux: `export PATH=[path-to-bin]:$PATH`
-* Windows Powershell: `$ENV:PATH = "[path-to-bin];" + $ENV:PATH`
-* Windows cmd.exe: `PATH=[path-to-bin];%PATH`
-
-To confirm installation, run a command such as `nextpnr-ice40` or `yosys`.
 
 ## Required Hardware
 
@@ -43,6 +55,8 @@ For this workshop, you will need a Fomu board. This workshop may be competed wit
 Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing "dfu-util -l" and noting the version number.
 
 Aside from that, you need a computer with a USB port that can run the toolchain software. You should not need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
+
+# Background
 
 ## About FPGAs
 
@@ -95,9 +109,9 @@ If we do decide to synthesize to `SB_LUT4` blocks, we will end up with a pile of
 
 Once the place-and-route tool is done, it generates an abstract file that needs to be translated into a format that the hardware can recognize.  This is done by a bitstream packing tool.  Finally, this bitstream needs to be loaded onto the device somehow, either off of a SPI flash or by manually programming it by toggling wires.
 
-### About the ICE40UP5K
+## About the ICE40UP5K
 
-we will use an ICE40UP5K for this workshop.  This chip has a number of very nice features:
+We will use an ICE40UP5K for this workshop.  This chip has a number of very nice features:
 
 
 1. 5280 4-input LUTs (LC)
@@ -115,13 +129,15 @@ Additionally, the ICE40 family of devices generally supports "warmboot" capabili
 
 As always, this workshop wouldn't be nearly as easy without the open toolchain that enables us to port it to a lot of different platforms.
 
-### About Fomu
+## About Fomu
 
 Fomu is an ICE40UP5K that fits in your USB port.  It contains two megabytes of SPI flash memory, four edge buttons, and a three-color LED.  Unlike most other ICE40 projects, Fomu implements its USB in a softcore.  That means that the bitstream that runs on the FPGA must also provide the ability to communicate over USB.  This uses up a lot of storage on this small FPGA, but it also enables us to have such a tiny form factor, and lets us do some really cool things with it.
 
 ![Fomu Block Diagram](img/fomu-block-diagram.png "Block diagram of Fomu")
 
 The ICE40UP5K at the heart of Fomu really controls everything, and this workshop is all about trying to unlock the power of this chip.
+
+# Getting set up
 
 ### Working with Fomu
 
@@ -227,7 +243,7 @@ Device returned transfer size 1024
 $
 ```
 
-## Python on Fomu
+# Python on Fomu
 
 You can load Python onto Fomu as an ordinary RISC-V binary.  It is located in the root of the Fomu workshop files.  Use `dfu-util` to load it:
 
@@ -277,7 +293,7 @@ MicroPython v1.10-299-g8603316 on 2019-08-19; fomu with vexriscv
 
 This is a fully-functioning MicroPython shell.  Try running some simple commands such as `print()` and `hex(9876+1234)`.
 
-### Fomu with Python
+## Fomu Python Extensions
 
 Fomu has a few extended modules that you can use to interact with some of the hardware.  For example, the RGB LED has some predefined modes you can access.  These are all located under the `fomu` module.
 
@@ -299,7 +315,7 @@ We can also look at some information from the SPI flash, such as the SPI ID.  Th
 >>> 
 ```
 
-### Memory-mapped Registers
+## Memory-mapped Registers
 
 If we look at the generated Fomu header files, we can see many, many memory-mapped registers.  For example, the major, minor, and revision numbers all have registers:
 
@@ -339,7 +355,7 @@ If you have a hacker board you will get `H` as shown below;
 >>>
 ```
 
-### Memory-mapped RGB driver
+## Memory-mapped RGB driver
 
 The blinking LED is actually a hardware block from Lattice.  It has control registers, and we can modify these registers by writing to memory in Fomu.  Some of these registers control things such as the timing of the fade in and fade out pulses, and some control the level of each of the three colors.
 
@@ -364,7 +380,7 @@ Try changing the color of the three LEDs:
 
 The color should change immediately.  More information on these registers can be found in the [iCE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
 
-## Fomu as a CPU
+# Fomu as a CPU
 
 The MicroPython interface is simply a RISC-V program.  It interacts with the RISC-V softcore by reading and writing memory directly.
 
@@ -554,13 +570,15 @@ If we run `bt` we can get a backtrace, and chances are that we landed in an `msl
 
 We can insert breakpoints, step, continue execution, and generally debug the entire system.  We can even reset the program by running `mon reset`.
 
-### Further RISC-V experiments
+## Further RISC-V experiments
 
 There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` directory contains a simple USB serial device that simply echoes back any characters that you type, incremented by 1.  This is a good way to get started with an interactive terminal program, or logging data via USB serial.
 
-## Hardware Description Languages
+# Hardware Description Languages
 
 The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
+
+## Verilog "Hello world!"
 
 The canonical "Hello, world!" of hardware is to blink an LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
 
@@ -618,7 +636,7 @@ Max frequency for clock 'clkraw': 228.05 MHz (PASS at 48.00 MHz)
 
 This output example above shows we could run `clk12` at up to 24.63 MHz and it would still be stable, even though we only requested 12.00 MHz.  Note that there is some variation between designs depending on how the placer and router decided to lay things out, so your exact frequency numbers might be different.
 
-### Migen and LiteX
+## Migen and LiteX
 
 Recall that Migen is an HDL embedded in Python, and LiteX provides us with a Wishbone abstraction layer.  There really is no reason we need to include a CPU with our design, but we can still reuse the USB Wishbone bridge in order to write HDL code.
 
