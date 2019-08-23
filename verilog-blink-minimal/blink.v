@@ -21,7 +21,7 @@
 `endif
 `endif
 
-module blink (
+module top (
     // 48MHz Clock input
     // --------
     input clki,
@@ -57,7 +57,7 @@ module blink (
         .GLOBAL_BUFFER_OUTPUT(clkosc)
     );
 
-    assign clk = clkosc;
+    wire clk = clkosc;
 
     // Configure user pins so that we can detect the user connecting
     // 1-2 or 3-4 with conductive material.
@@ -127,6 +127,19 @@ module blink (
         outcnt <= counter >> LOG2DELAY;
     end
 
+    // Instantiate iCE40 LED driver hard logic, connecting up
+    // latched button state, counter state, and LEDs.
+    SB_RGBA_DRV RGBA_DRIVER (
+        .CURREN(1'b1),
+        .RGBLEDEN(1'b1),
+        .`BLUEPWM(enable_blue),     // Blue
+        .`REDPWM(enable_red),       // Red
+        .`GREENPWM(counter[23]),    // Green (blinking)
+        .RGB0(rgb0),
+        .RGB1(rgb1),
+        .RGB2(rgb2)
+    );
+
     // Parameters from iCE40 UltraPlus LED Driver Usage Guide, pages 19-20
     //
     // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/ICE40LEDDriverUsageGuide.ashx?document_id=50668
@@ -141,24 +154,11 @@ module blink (
     localparam RGBA_CURRENT_20MA_10MA = "0b011111";
     localparam RGBA_CURRENT_24MA_12MA = "0b111111";
 
-    // Instantiate iCE40 LED driver hard logic, connecting up
-    // latched button state, counter state, and LEDs.
-    SB_RGBA_DRV RGBA_DRIVER (
-        .CURREN(1'b1),
-        .RGBLEDEN(1'b1),
-        .`BLUEPWM(enable_blue),     // Blue
-        .`REDPWM(enable_red),       // Red
-        .`GREENPWM(counter[23]),    // Green (blinking)
-        .RGB0(rgb0),
-        .RGB1(rgb1),
-        .RGB2(rgb2)
-    );
-
     // Set parameters of RGBA_DRIVER (output current)
     //
     // Mapping of RGBn to LED colours determined experimentally
     defparam RGBA_DRIVER.CURRENT_MODE = RGBA_CURRENT_MODE_HALF;
-    defparam RGBA_DRIVER.RGB0_CURRENT = RGBA_CURRENT_16MA_06MA;  // Blue - Needs more current.
+    defparam RGBA_DRIVER.RGB0_CURRENT = RGBA_CURRENT_16MA_08MA;  // Blue - Needs more current.
     defparam RGBA_DRIVER.RGB1_CURRENT = RGBA_CURRENT_08MA_04MA;  // Red
     defparam RGBA_DRIVER.RGB2_CURRENT = RGBA_CURRENT_08MA_04MA;  // Green
 
