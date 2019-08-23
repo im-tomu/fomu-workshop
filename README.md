@@ -1,3 +1,22 @@
+<style>
+.inner {
+  max-width: 90%;
+}
+
+blockquote {
+  border: 1px solid black;
+  margin: 1em;
+  padding: 1em;
+  background: #ffdc8d;
+}
+blockquote:before {
+  font-size: larger;
+  font-weight: bolder;
+  font-variant: small-caps;
+  content: "Extra Information";
+}
+</style>
+
 # Fomu Workshop
 
 ![Hi, I'm Fomu!](img/logo.png "Fomu logo")
@@ -10,7 +29,11 @@ FPGAs are complex, weird things, so we'll take a gentle approach and start out b
 
 ## Required Software
 
-Fomu requires specialized software. This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest). If you're taking this workshop as a class, the toolchain are provided on the USB disk.
+Fomu requires specialized software. This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest).
+
+Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages).
+
+If you're taking this workshop as a class, the toolchain are provided on the USB disk.
 
 To install the software, extract it somewhere on your computer, then open up a terminal window and add that directory to your PATH:
 
@@ -24,24 +47,18 @@ To confirm installation, run the `yosys` command and confirm you get the followi
 FIXME: Put output here!
 ```
 
-<span class="extra">
-
-Debian packages are also [available for Raspberry Pi](https://github.com/im-tomu/fomu-raspbian-packages). For other platforms, please see the people running the workshop.
-
-The [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest) consists of the following tools;
-
-| Tool | Purpose |
-| ---- |------------------ |
-| **[yosys](https://github.com/YosysHQ/yosys)** | Verilog synthesis |
-| **[nextpnr-ice40](https://github.com/YosysHQ/nextpnr)** | FPGA place-and-route |
-| **[icestorm](https://github.com/cliffordwolf/icestorm)** | FPGA bitstream packing |
-| **[riscv toolchain](https://www.sifive.com/boards/)** | Compile code for a RISC-V softcore |
-| **[dfu-util](https://dfu-util.sourceforge.net/)** | Load a bitstream or code onto Fomu |
-| **[python](https://python.org/)** | Convert Migen/Litex code to Verilog |
-| **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
-| **serial console** | Interact with Python over a virtual console |
-
-</span>
+> The [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest) consists of the following tools;
+>
+> | Tool | Purpose |
+> | ---- |------------------ |
+> | **[yosys](https://github.com/YosysHQ/yosys)** | Verilog synthesis |
+> | **[nextpnr-ice40](https://github.com/YosysHQ/nextpnr)** | FPGA place-and-route |
+> | **[icestorm](https://github.com/cliffordwolf/icestorm)** | FPGA bitstream packing |
+> | **[riscv toolchain](https://www.sifive.com/boards/)** | Compile code for a RISC-V softcore |
+> | **[dfu-util](https://dfu-util.sourceforge.net/)** | Load a bitstream or code onto Fomu |
+> | **[python](https://python.org/)** | Convert Migen/Litex code to Verilog |
+> | **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
+> | **serial console** | Interact with Python over a virtual console |
 
 
 ## Required Hardware
@@ -183,7 +200,7 @@ You can check with ```id $USER``` if your user really is in the plugdev group.
 
 Create a file named ```/etc/udev/rules.d/99-fomu.rules``` and add the
 following:
-```
+```udev
 SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="5bf0", MODE="0664", GROUP="plugdev"
 ```
 
@@ -623,18 +640,18 @@ $
 
 You can load `blink.bin` onto Fomu by using the same `dfu-util -D` command we've been using.  The LED should begin blinking on and off regularly, indicating your bitstream was successfully loaded.
 
-When writing HDL, a tool called `yosys` is used to convert the human readable verilog into a netlist representation, this is called synthesis. Once we have the netlist representation a tool called `nextpnr` performs an operation called "place and route" which makes it something that will actually run on the FPGA. This is all done for you using the `Makefile` in the `verilog-blink` directory.
-
-A big feature of `nextpnr` over its predecessor, is the fact that it is timing-driven. This means that a design will be generated with a given clock domain guaranteed to perform fast enough.
-
-When the `make` command runs `nextpnr-ice40` you will see the following included in the output;
-```
-Max frequency for clock 'clk12':   24.63 MHz (PASS at 12.00 MHz)
-Max frequency for clock 'clk48_1': 60.66 MHz (PASS at 48.00 MHz)
-Max frequency for clock 'clkraw': 228.05 MHz (PASS at 48.00 MHz)
-```
-
-This output example above shows we could run `clk12` at up to 24.63 MHz and it would still be stable, even though we only requested 12.00 MHz.  Note that there is some variation between designs depending on how the placer and router decided to lay things out, so your exact frequency numbers might be different.
+> When writing HDL, a tool called `yosys` is used to convert the human readable verilog into a netlist representation, this is called synthesis. Once we have the netlist representation a tool called `nextpnr` performs an operation called "place and route" which makes it something that will actually run on the FPGA. This is all done for you using the `Makefile` in the `verilog-blink` directory.
+>
+> A big feature of `nextpnr` over its predecessor, is the fact that it is timing-driven. This means that a design will be generated with a given clock domain guaranteed to perform fast enough.
+>
+> When the `make` command runs `nextpnr-ice40` you will see the following included in the output;
+> ```
+> Max frequency for clock 'clk12':   24.63 MHz (PASS at 12.00 MHz)
+> Max frequency for clock 'clk48_1': 60.66 MHz (PASS at 48.00 MHz)
+> Max frequency for clock 'clkraw': 228.05 MHz (PASS at 48.00 MHz)
+> ```
+>
+> This output example above shows we could run `clk12` at up to 24.63 MHz and it would still be stable, even though we only requested 12.00 MHz.  Note that there is some variation between designs depending on how the placer and router decided to lay things out, so your exact frequency numbers might be different.
 
 ## Migen and LiteX
 
@@ -764,3 +781,5 @@ csr_register,rgb_output,0xe0006800,1,rw
 ```
 
 We can use `wishbone-tool` to write values to `0xe0006800` and see them take effect immediately.
+
+
