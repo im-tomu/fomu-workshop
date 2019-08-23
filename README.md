@@ -742,6 +742,12 @@ Done!
 $
 ```
 
+If you get an error message about missing modules, check you have all submodules cloned and setup with;
+```sh
+$ git submodule update --recursive --init
+$
+```
+
 Take a look at `test/csr.csv`.  This describes the various regions present in our design.  You can see `memory_region,sram,0x10000000,131072`, which indicates the RAM is 128 kilobytes long and is located at `0x10000000`, just as when we had a CPU.  You can also see the timer, which is a feature that comes as part of LiteX.  Let's try reading and writing RAM:
 
 ```sh
