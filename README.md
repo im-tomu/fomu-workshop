@@ -1,3 +1,7 @@
+---
+permalink: index.html
+---
+
 <style>
 .inner {
   max-width: 90%;
@@ -15,6 +19,9 @@ blockquote:before {
   font-variant: small-caps;
   content: "Extra Information";
 }
+h2 {
+  margin-top: 4em;
+}
 </style>
 
 # Fomu Workshop
@@ -25,9 +32,14 @@ Hi, I'm Fomu!  This workshop covers the basics of Fomu in a top-down approach.  
 
 FPGAs are complex, weird things, so we'll take a gentle approach and start out by treating it like a Python interpreter first, and gradually peel away layers until we're writing our own hardware registers.  You can take a break at any time and explore!  Stop when you feel the concepts are too unfamiliar, or plough on and dig deep into the world of hardware.
 
-# Requirements
+## Table of Contents
+* TOC
+{:toc}
 
-## Required Software
+
+## Requirements
+
+### Required Software
 
 Fomu requires specialized software. This software is provided for Linux x86/64, macOS, and Windows, via [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest).
 
@@ -61,7 +73,7 @@ FIXME: Put output here!
 > | **serial console** | Interact with Python over a virtual console |
 
 
-## Required Hardware
+### Required Hardware
 
 For this workshop, you will need a Fomu board. This workshop may be competed with any model of Fomu, though there are some parts that require you to identify which model you have:
 
@@ -73,9 +85,9 @@ Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you
 
 Aside from that, you need a computer with a USB port that can run the toolchain software. You should not need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
 
-# Background
+## Background
 
-## About FPGAs
+### About FPGAs
 
 Field Programmable Gate Arrays (FPGAs) are arrays of gates that are programmable in the field.  Unlike most chips you will encounter, which have transistor gates arranged in a fixed order, FPGAs can change their configuration by simply loading new code.  Fundamentally, this code programs lookup tables which form the basic building blocks of logic.
 
@@ -101,7 +113,7 @@ FPGA LUTs are almost always _n_-inputs to 1-output. The ICE family of FPGAs from
 
 It is from this simple primitive that we build up the building blocks of FPGA design.
 
-### Turning code into gates
+#### Turning code into gates
 
 Writing lookup tables is hard, so people have come up with abstract Hardware Description Languages (HDLs) we can use to describe them.  The two most common languages are Verilog and VHDL.  In the open source world, Verilog is more common.  However, a modern trend is to embed an HDL inside an existing programming language, such as how Migen is embedded in Python, or SpinalHDL is embedded in Scala.
 
@@ -126,7 +138,7 @@ If we do decide to synthesize to `SB_LUT4` blocks, we will end up with a pile of
 
 Once the place-and-route tool is done, it generates an abstract file that needs to be translated into a format that the hardware can recognize.  This is done by a bitstream packing tool.  Finally, this bitstream needs to be loaded onto the device somehow, either off of a SPI flash or by manually programming it by toggling wires.
 
-## About the ICE40UP5K
+### About the ICE40UP5K
 
 We will use an ICE40UP5K for this workshop.  This chip has a number of very nice features:
 
@@ -146,7 +158,7 @@ Additionally, the ICE40 family of devices generally supports "warmboot" capabili
 
 As always, this workshop wouldn't be nearly as easy without the open toolchain that enables us to port it to a lot of different platforms.
 
-## About Fomu
+### About Fomu
 
 Fomu is an ICE40UP5K that fits in your USB port.  It contains two megabytes of SPI flash memory, four edge buttons, and a three-color LED.  Unlike most other ICE40 projects, Fomu implements its USB in a softcore.  That means that the bitstream that runs on the FPGA must also provide the ability to communicate over USB.  This uses up a lot of storage on this small FPGA, but it also enables us to have such a tiny form factor, and lets us do some really cool things with it.
 
@@ -154,7 +166,7 @@ Fomu is an ICE40UP5K that fits in your USB port.  It contains two megabytes of S
 
 The ICE40UP5K at the heart of Fomu really controls everything, and this workshop is all about trying to unlock the power of this chip.
 
-# Getting set up
+## Getting set up
 
 ### Working with Fomu
 
@@ -210,7 +222,7 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-## Loading Binaries
+### Loading Binaries
 
 To load a binary image onto Fomu, we use the `-D` option:
 
@@ -260,7 +272,7 @@ Device returned transfer size 1024
 $
 ```
 
-# Python on Fomu
+## Python on Fomu
 
 You can load Python onto Fomu as an ordinary RISC-V binary.  It is located in the root of the Fomu workshop files.  Use `dfu-util` to load it:
 
@@ -310,7 +322,7 @@ MicroPython v1.10-299-g8603316 on 2019-08-19; fomu with vexriscv
 
 This is a fully-functioning MicroPython shell.  Try running some simple commands such as `print()` and `hex(9876+1234)`.
 
-## Fomu Python Extensions
+### Fomu Python Extensions
 
 Fomu has a few extended modules that you can use to interact with some of the hardware.  For example, the RGB LED has some predefined modes you can access.  These are all located under the `fomu` module.
 
@@ -332,7 +344,7 @@ We can also look at some information from the SPI flash, such as the SPI ID.  Th
 >>> 
 ```
 
-## Memory-mapped Registers
+### Memory-mapped Registers
 
 If we look at the generated Fomu header files, we can see many, many memory-mapped registers.  For example, the major, minor, and revision numbers all have registers:
 
@@ -372,7 +384,7 @@ If you have a hacker board you will get `H` as shown below;
 >>>
 ```
 
-## Memory-mapped RGB driver
+### Memory-mapped RGB driver
 
 The blinking LED is actually a hardware block from Lattice.  It has control registers, and we can modify these registers by writing to memory in Fomu.  Some of these registers control things such as the timing of the fade in and fade out pulses, and some control the level of each of the three colors.
 
@@ -397,7 +409,7 @@ Try changing the color of the three LEDs:
 
 The color should change immediately.  More information on these registers can be found in the [iCE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
 
-# Fomu as a CPU
+## Fomu as a CPU
 
 The MicroPython interface is simply a RISC-V program.  It interacts with the RISC-V softcore by reading and writing memory directly.
 
@@ -450,7 +462,7 @@ Value at 10000000: 0x12345678
 
 We can see that the value got stored in memory, just like we thought it would.  The bridge is working, and we have access to Fomu over USB.
 
-## Interacting with the LED Directly
+### Interacting with the LED Directly
 
 Recall the LED block from Python.  We used `rgb.write_raw()` to write values to the LED block.  Because of how the LED block is implemented, we need to actually make two writes to the Wishbone bus in order to write one value to the LED block.  The first write sets the address, and the second write sends the actual data.
 
@@ -482,7 +494,7 @@ $
 
 We can see that `wishbone-tool` has crashed with an error of `USBError(Pipe)`, because the USB device went away as we were talking to it.  This is expected behavior.  Fomu should be back to its normal color and blink rate now.
 
-## Compiling RISC-V Code
+### Compiling RISC-V Code
 
 Of course, Fomu's softcore is a full CPU, so we can write C code for it.  Go to the `riscv-blink/` directory and run `make`.  This will generate `riscv-blink.bin`, which we can load onto Fomu.
 
@@ -536,7 +548,7 @@ Let's modify the program by increasing the fade rate so much that it appears sol
 
 What this does is increase the LED blink rate from 250 Hz to a much higher value.  Compile this and load it again with `dfu-util -D riscv-blink.bin`.  The blink rate should appear solid, because it's blinking too quickly to see.
 
-## Debugging RISC-V Code
+### Debugging RISC-V Code
 
 Because we have `peek` and `poke`, and because the USB bridge is a bus master, we can actually halt (and reset!) the CPU over the USB bridge.  We can go even further and attach a full debugger to it!
 
@@ -587,15 +599,15 @@ If we run `bt` we can get a backtrace, and chances are that we landed in an `msl
 
 We can insert breakpoints, step, continue execution, and generally debug the entire system.  We can even reset the program by running `mon reset`.
 
-## Further RISC-V experiments
+### Further RISC-V experiments
 
 There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` directory contains a simple USB serial device that simply echoes back any characters that you type, incremented by 1.  This is a good way to get started with an interactive terminal program, or logging data via USB serial.
 
-# Hardware Description Languages
+## Hardware Description Languages
 
 The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
 
-## Verilog "Hello world!"
+### Verilog "Hello world!"
 
 The canonical "Hello, world!" of hardware is to blink an LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
 
@@ -653,7 +665,7 @@ You can load `blink.bin` onto Fomu by using the same `dfu-util -D` command we've
 >
 > This output example above shows we could run `clk12` at up to 24.63 MHz and it would still be stable, even though we only requested 12.00 MHz.  Note that there is some variation between designs depending on how the placer and router decided to lay things out, so your exact frequency numbers might be different.
 
-## Migen and LiteX
+### Migen and LiteX
 
 Recall that Migen is an HDL embedded in Python, and LiteX provides us with a Wishbone abstraction layer.  There really is no reason we need to include a CPU with our design, but we can still reuse the USB Wishbone bridge in order to write HDL code.
 
