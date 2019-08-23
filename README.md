@@ -560,19 +560,11 @@ There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` dire
 
 ## Hardware Description Languages
 
-The two most important programs for us when writing HDL are `yosys` and `nextpnr`.  A big feature of `nextpnr`, and a huge advantage over its predecessor, is the fact that it's timing-driven:
+The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
 
-```
-Max frequency for clock 'clk12':   24.63 MHz (PASS at 12.00 MHz)
-Max frequency for clock 'clk48_1': 60.66 MHz (PASS at 48.00 MHz)
-Max frequency for clock 'clkraw': 228.05 MHz (PASS at 48.00 MHz)
-```
+The canonical "Hello, world!" of hardware is to blink an LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
 
-You'll see output like this when you run `nextpnr-ice40`, and it means that a given clock domain is guaranteed to be accurate at a given speed.  In the above example, we could run `clk12` at up to 24.63 MHz and it would still be stable, even though we only requested 12.00 MHz.  Note that there is some variation between designs depending on how the placer and router decided to lay things out.
-
-The canonical "Hello, world!" of hardware is to blink an LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by quite a lot so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
-
-Build the blink demo by using `make`:
+Enter the `verilog-blink` directory and build the `verilog-blink` demo by using `make`:
 
 ```sh
 $ make FOMU_REV=hacker
@@ -613,7 +605,18 @@ $
 
 You can load `blink.bin` onto Fomu by using the same `dfu-util -D` command we've been using.  The LED should begin blinking on and off regularly, indicating your bitstream was successfully loaded.
 
-The USB core is written in Verilog, so you won't have access to Fomu when writing raw Verilog code.
+When writing HDL, a tool called `yosys` is used to convert the human readable verilog into a netlist representation, this is called synthesis. Once we have the netlist representation a tool called `nextpnr` performs an operation called "place and route" which makes it something that will actually run on the FPGA. This is all done for you using the `Makefile` in the `verilog-blink` directory.
+
+A big feature of `nextpnr` over its predecessor, is the fact that it is timing-driven. This means that a design will be generated with a given clock domain guaranteed to perform fast enough.
+
+When the `make` command runs `nextpnr-ice40` you will see the following included in the output;
+```
+Max frequency for clock 'clk12':   24.63 MHz (PASS at 12.00 MHz)
+Max frequency for clock 'clk48_1': 60.66 MHz (PASS at 48.00 MHz)
+Max frequency for clock 'clkraw': 228.05 MHz (PASS at 48.00 MHz)
+```
+
+This output example above shows we could run `clk12` at up to 24.63 MHz and it would still be stable, even though we only requested 12.00 MHz.  Note that there is some variation between designs depending on how the placer and router decided to lay things out, so your exact frequency numbers might be different.
 
 ### Migen and LiteX
 
