@@ -26,3 +26,9 @@ test/
 
 # Output from yosys
 abc.history
+
+# Jekyll files
+.bundle
+Gemfile
+Gemfile.lock
+_*
