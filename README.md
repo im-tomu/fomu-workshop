@@ -141,13 +141,21 @@ Found DFU: [1209:5bf0] ver=0101, devnum=21, cfg=1, intf=0, alt=0, name="Fomu Hac
 $
 ```
 
-If you get the above message, it means your computer has successfully detected Fomu.  If you get a "permission denied" or "Cannot open DFU device 1209:5bf0" error in Linux, try running `sudo dfu-util -l`, or add a `udev` rule to give your user permission to the usb device.
+If you get the above message, it means your computer has successfully detected Fomu!
 
-If you're running a version of Windows earlier than Windows 10, you may need to install additional drivers. If you get "Cannot open DFU device 1209:5bf0", download [Zadig](https://zadig.akeo.ie/). Open Zadig. Under Options, select "List All Devices". In the dropdown, select your Fomu and in the field right of the green arrow choose the `WinUSB` driver and hit Upgrade Driver.
+If you get a `permission denied` or `Cannot open DFU device 1209:5bf0` error then see the next two sections.
+
+#### (Windows earlier than 10 Only) Setting udev permissions
+
+If you're running a version of Windows earlier than Windows 10, you may need to install additional drivers.
+
+Download [Zadig](https://zadig.akeo.ie/). Open Zadig. Under Options, select "List All Devices". In the dropdown, select your Fomu and in the field right of the green arrow choose the `WinUSB` driver and hit Upgrade Driver.
 
 ![Zadeg Setup](img/Zadeg-Setup.PNG "Setup of ZADEG for Updating USBport driver on WIN7")
 
-### (Linux Only) Setting udev permissions
+#### (Linux Only) Setting udev permissions
+
+In Linux, try running `sudo dfu-util -l` if that no longer get the error message you should add a `udev` rule as to give your user permission to the usb device.
 
 ```
 sudo groupadd plugdev
