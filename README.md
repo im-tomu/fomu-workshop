@@ -679,6 +679,11 @@ Migen is an HDL embedded in Python, and LiteX provides us with a Wishbone abstra
 
 We can use `DummyUsb` to respond to USB requests and bridge USB to Wishbone, and rely on LiteX to generate registers and wire them to hardware signals.  We can still use `wishbone-tool` to read and write memory, and with a wishbone bridge we can actually have code running on our local system that can read and write memory on Fomu.
 
+```diff
+- If you cloned this directory via git without the '--recursive' flag, you might have to
+- execute 'git submodule update --init', for python to find the dependencies (eg. 'litex_boards').
+```
+
 Go to the `litex` directory and build the design and load it onto Fomu:
 
 ```sh
