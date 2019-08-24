@@ -39,10 +39,12 @@
 `define GREENPWM RGB0PWM
 `define REDPWM   RGB1PWM
 `define BLUEPWM  RGB2PWM
-`else
+`elsif HACKER
 `define BLUEPWM  RGB0PWM
 `define GREENPWM RGB1PWM
 `define REDPWM   RGB2PWM
+`else
+`error_board_not_supported
 `endif
 `endif
 
