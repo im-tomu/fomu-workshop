@@ -26,6 +26,9 @@ void usb_setup(const struct usb_setup_request *setup)
         break;
 
     case 0x0500: // SET_ADDRESS
+        usb_set_address(((uint8_t *)setup)[2]);
+        break;
+
     case 0x0b01: // SET_INTERFACE
         break;
 
