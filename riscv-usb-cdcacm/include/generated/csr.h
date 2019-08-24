@@ -653,6 +653,15 @@ static inline unsigned char version_major_read(void) {
 	unsigned char r = csr_readl(0xe0007000L);
 	return r;
 }
+#define CSR_USB_ADDRESS_ADDR 0xe00048a4L
+#define CSR_USB_ADDRESS_SIZE 1
+static inline unsigned char usb_address_read(void) {
+	unsigned char r = csr_readl(0xe00048a4L);
+	return r;
+}
+static inline void usb_address_write(unsigned char value) {
+	csr_writel(value, 0xe00048a4L);
+}
 #define CSR_VERSION_MINOR_ADDR 0xe0007004L
 #define CSR_VERSION_MINOR_SIZE 1
 static inline unsigned char version_minor_read(void) {
