@@ -38,6 +38,7 @@ void isr(void) {
 int main(void) {
     rgb_init();
     irq_setie(0);
+    rgb_write(100000 / 64000 - 1, LEDDBR);
     int i = 0;
     while (1) {
         color_wheel(i++);
