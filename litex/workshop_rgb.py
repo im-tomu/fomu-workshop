@@ -7,7 +7,7 @@ LX_DEPENDENCIES = ["icestorm", "yosys", "nextpnr-ice40"]
 LX_CONFIG = "skip-git"
 
 # Import lxbuildenv to integrate the deps/ directory
-import os,sys
+import os,os.path,shutil,sys,subprocess
 sys.path.insert(0, os.path.dirname(__file__))
 import lxbuildenv
 
@@ -108,6 +108,12 @@ class BaseSoC(SoCCore):
         if placer is not None:
             platform.toolchain.nextpnr_build_template[1] += " --placer {}".format(placer)
 
+def add_dfu_suffix(fn):
+    fn_base, ext = os.path.splitext(fn)
+    fn_dfu = fn_base + '.dfu'
+    shutil.copyfile(fn, fn_dfu)
+    subprocess.check_call(['dfu-suffix', '--pid', '1209', '--vid', '5bf0', '--add', fn_dfu])
+
 def main():
     parser = argparse.ArgumentParser(
         description="Build Fomu Main Gateware")
@@ -139,6 +145,7 @@ def main():
                       compile_software=False)
     vns = builder.build()
     soc.do_exit(vns)
+    add_dfu_suffix(os.path.join('build', 'gateware', 'top.bin'))
 
 if __name__ == "__main__":
     main()
