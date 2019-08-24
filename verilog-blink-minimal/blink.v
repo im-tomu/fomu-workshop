@@ -4,22 +4,6 @@
 // Blue LED turned on when Button 5 is pressed.
 // Red LED turned on when Button 6 is pressed.
 //
-//
-`ifdef EVT
-`define BLUEPWM  RGB0PWM
-`define REDPWM   RGB1PWM
-`define GREENPWM RGB2PWM
-`else
-`ifdef PVT
-`define GREENPWM RGB0PWM
-`define REDPWM   RGB1PWM
-`define BLUEPWM  RGB2PWM
-`else
-`define BLUEPWM  RGB0PWM
-`define GREENPWM RGB1PWM
-`define REDPWM   RGB2PWM
-`endif
-`endif
 
 module top (
     // 48MHz Clock input
