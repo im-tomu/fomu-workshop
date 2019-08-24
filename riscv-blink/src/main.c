@@ -40,7 +40,6 @@ int main(void) {
     irq_setie(0);
     int i = 0;
     while (1) {
-        i++;
         color_wheel(i++);
         msleep(80);
     }
