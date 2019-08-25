@@ -277,7 +277,7 @@ $
 You can load Python onto Fomu as an ordinary RISC-V binary.  It is located in the root of the Fomu workshop files.  Use `dfu-util` to load it:
 
 ```sh
-$ dfu-util.exe -D micropython-fomu.dfu
+$ dfu-util -D micropython-fomu.dfu
 Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
 Copyright 2010-2014 Tormod Volden and Stefan Schmidt
 This program is Free Software and has ABSOLUTELY NO WARRANTY
