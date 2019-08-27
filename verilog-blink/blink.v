@@ -86,7 +86,7 @@ module blink (
     //
     // Note that it's possible to drive the LEDs directly,
     // however that is not current-limited and results in
-    // overvolting the blue LED.
+    // overvolting the red LED.
     SB_RGBA_DRV #(
         .CURRENT_MODE("0b1"),       // half current
         .RGB0_CURRENT("0b000011"),  // 4 mA
