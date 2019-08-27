@@ -58,7 +58,7 @@ ALL        = all
 TARGET     = $(PACKAGE).bin
 CLEAN      = clean
 
-$(ALL): $(TARGET)
+$(ALL): $(TARGET) $(PACKAGE).dfu
 	$(QUIET) echo "Built '$(PACKAGE)' for Fomu $(FOMU_REV)"
 
 run: $(TARGET)
@@ -82,6 +82,11 @@ $(BUILD_DIR)/$(PACKAGE).asc: $(BUILD_DIR)/$(PACKAGE).json $(PCF)
 $(TARGET): $(BUILD_DIR)/$(PACKAGE).asc
 	$(QUIET) echo " PACK     $@"
 	$(QUIET) $(ICEPACK) $(BUILD_DIR)/$(PACKAGE).asc $@
+
+$(PACKAGE).dfu: $(TARGET)
+	$(QUIET) echo "  DFU      $@"
+	$(QUIET) $(COPY) $(PACKAGE).bin $@
+	$(QUIET) dfu-suffix -v 1209 -p 70b1 -a $@
 
 $(BUILD_DIR):
 	$(QUIET) mkdir $(BUILD_DIR)
