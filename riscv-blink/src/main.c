@@ -1,7 +1,8 @@
-#include <irq.h>
-#include <time.h>
-#include <rgb.h>
 #include <generated/csr.h>
+#include <irq.h>
+#include <rgb.h>
+#include <time.h>
+#include <usb.h>
 
 // Input a value 0 to 255 to get a color value.
 // The colours are a transition r - g - b - back to r.
@@ -30,15 +31,23 @@ static void color_wheel(uint8_t WheelPos) {
 }
 
 void isr(void) {
-    irq_setie(0);
-    return;
+    unsigned int irqs;
+
+    irqs = irq_pending() & irq_getmask();
+
+    if (irqs & (1 << USB_INTERRUPT))
+        usb_isr();
 }
 
 
 int main(void) {
+    irq_setmask(0);
+    irq_setie(1);
+    usb_init();
     rgb_init();
-    irq_setie(0);
     rgb_write(100000 / 64000 - 1, LEDDBR);
+
+    usb_connect();
     int i = 0;
     while (1) {
         color_wheel(i++);
