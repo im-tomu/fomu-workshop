@@ -64,7 +64,7 @@ ALL        := all
 TARGET     := $(PACKAGE).elf
 CLEAN      := clean
 
-$(ALL): $(TARGET) $(PACKAGE).bin $(PACKAGE).ihex
+$(ALL): $(TARGET) $(PACKAGE).bin $(PACKAGE).ihex $(PACKAGE).dfu
 
 $(OBJECTS): | $(OBJ_DIR)
 
