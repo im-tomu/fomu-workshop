@@ -52,7 +52,7 @@ To install the software, extract it somewhere on your computer, then open up a t
 * MacOS: `export PATH=[path-to-bin]:$PATH`
 * Linux: `export PATH=[path-to-bin]:$PATH`
 * Windows Powershell: `$ENV:PATH = "[path-to-bin];" + $ENV:PATH`
-* Windows cmd.exe: `PATH=[path-to-bin];%PATH`
+* Windows cmd.exe: `PATH=[path-to-bin];%PATH%`
 
 To confirm installation, run the `yosys` command and confirm you get the following output;
 ```
