@@ -15,6 +15,7 @@ void usb_connect(void);
 void usb_idle(void);
 void usb_disconnect(void);
 void usb_setup(const struct usb_setup_request *setup, uint32_t size);
+void usb_set_address(uint8_t address);
 
 void usb_ack_in(void);
 void usb_ack_out(void);

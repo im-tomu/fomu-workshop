@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
+#include <string.h>
 #include <usb.h>
 
 struct usb_setup_request {
@@ -28,19 +29,18 @@ static const uint8_t usb_config_descriptor[] = {
 };
         
 static const uint8_t usb_string0_descriptor[] = {
-    0x04, 0x03, 0x09, 0x04,
+    0x04, 0x03, 0x09, 0x04
 };
 
 static const uint8_t usb_string1_descriptor[] = {
-    0x0e, 0x03, 0x46, 0x00, 0x6f, 0x00, 0x6f, 0x00,
-    0x73, 0x00, 0x6e, 0x00, 0x00, 0x00,
+    0x0c, 0x03, 0x46, 0x00, 0x6f, 0x00, 0x6f, 0x00,
+    0x73, 0x00, 0x6e, 0x00
 };
 
 static const uint8_t usb_string2_descriptor[] = {
-    0x1a, 0x03, 0x46, 0x00, 0x6f, 0x00, 0x6d, 0x00,
-    0x75, 0x00, 0x20, 0x00, 0x55, 0x00, 0x70, 0x00,
-    0x64, 0x00, 0x61, 0x00, 0x74, 0x00, 0x65, 0x00,
-    0x72, 0x00,
+    0x16, 0x03, 0x46, 0x00, 0x6f, 0x00, 0x6d, 0x00,
+    0x75, 0x00, 0x20, 0x00, 0x42, 0x00, 0x6c, 0x00,
+    0x69, 0x00, 0x6e, 0x00, 0x6b, 0x00
 };
 
 static const uint8_t usb_bos_descriptor[] = {
@@ -67,7 +67,9 @@ static const uint8_t usb_string_microsoft[18] = {
 
 static uint8_t reply_buffer[8];
 static uint8_t usb_configuration = 0;
+static uint8_t data_buffer[64];
 
+__attribute__((section(".ramtext")))
 void usb_setup(const struct usb_setup_request *setup, uint32_t size)
 {
     const uint8_t *data = NULL;
@@ -77,6 +79,9 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
     switch (setup->wRequestAndType)
     {
     case 0x0500: // SET_ADDRESS
+        usb_set_address(setup->wValue);
+        break;
+
     case 0x0b01: // SET_INTERFACE
         break;
 
@@ -178,7 +183,10 @@ send:
     if (data && datalen) {
         if (datalen > setup->wLength)
             datalen = setup->wLength;
-        usb_send(data, datalen);
+        if (datalen > sizeof(data_buffer))
+            datalen = sizeof(data_buffer);
+        memcpy(data_buffer, data, datalen);
+        usb_send(data_buffer, datalen);
     }
     else
         usb_ack_in();
