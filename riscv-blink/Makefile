@@ -76,7 +76,7 @@ $(PACKAGE).bin: $(TARGET)
 	$(QUIET) echo "  OBJCOPY  $@"
 	$(QUIET) $(OBJCOPY) -O binary $(TARGET) $@
 
-$(PACKAGE).dfu: $(TARGET)
+$(PACKAGE).dfu: $(PACKAGE).bin
 	$(QUIET) echo "  DFU      $@"
 	$(QUIET) $(COPY) $(PACKAGE).bin $@
 	$(QUIET) dfu-suffix -v 1209 -p 70b1 -a $@
