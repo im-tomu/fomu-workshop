@@ -41,7 +41,11 @@ FPGAs are complex, weird things, so we'll take a gentle approach and start out b
 
 ### Required Files
 
-You will need the Workshop files.  They are located in the [fomu-workshop](https://github.com/im-tomu/fomu-workshop) Github repository.  You can download [master.zip](https://github.com/im-tomu/fomu-workshop/archive/master.zip) or you can run `git clone https://github.com/im-tomu/fomu-workshop.git`.
+You will need the Workshop files.  They are located in the [fomu-workshop](https://github.com/im-tomu/fomu-workshop) Github repository.  You can download [master.zip](https://github.com/im-tomu/fomu-workshop/archive/master.zip) or clone it from git:
+
+```
+git clone --recurse-submodules https://github.com/im-tomu/fomu-workshop.git
+```
 
 If you're attending a workshop that provides USB drives, these files may be available on the USB drive under the `Workshop` directory.
 
@@ -82,7 +86,7 @@ $ yosys
  |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
  |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
  |                                                                            |
- \\----------------------------------------------------------------------------/
+ \----------------------------------------------------------------------------/
 
  Yosys 78b30bbb1102047585d1a2eac89b1c7f5ca7344e (Fomu build) (git sha1 41d9173, gcc 5.5.0-12ubuntu1~14.04 -fPIC -Os)
 
@@ -90,7 +94,7 @@ $ yosys
 yosys>
 ```
 
-Ensure it says **Fomu build**.  Type `exit` to quit `yosys`.
+Ensure it says **(Fomu build)**.  Type `exit` to quit `yosys`.
 
 > The [Fomu Toolchain](https://github.com/im-tomu/fomu-toolchain/releases/latest) consists of the following tools;
 >
