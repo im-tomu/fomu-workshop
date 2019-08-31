@@ -117,11 +117,11 @@ For this workshop, you will need a Fomu board. This workshop may be competed wit
 1. **Fomu EVT3**: This model of Fomu is about the size of a credit card. It should have the text "Fomu EVT3" written across it in white silkscreen. If you have a different EVT board such as EVT2 or EVT1, they should work also.
 1. **Fomu PVT1**: If you ordered a Fomu from Crowd Supply, this is the model you'll receive. It is small, and fits in a USB port. There is no silkscreen on it. This model of Fomu has a large silver crystal oscillator that is the tallest component on the board.
 1. **Fomu Hacker**: These are the original design and are easiest to manufacture. If you received one directly from Tim, you probably have one of these. Hacker boards have white silkscreen on the back.
-   ![Hacker Hardware Front with case](img/hw-hacker-front-case.jpg "Photo of the front of a Fomu Hacker with case")
-   ![Hacker Hardware Back with case](img/hw-hacker-back-case.jpg "Photo of the back of a Fomu Hacker with case")
-   ![Hacker Hardware Back without case](img/hw-hacker-back-bare.jpg "Photo of the back of a Fomu Hacker without case")
+   ![Hacker Hardware Front with case](img/hw-hacker-front-case-small.jpg "Photo of the front of a Fomu Hacker with case")
+   ![Hacker Hardware Back with case](img/hw-hacker-back-case-small.jpg "Photo of the back of a Fomu Hacker with case")
+   ![Hacker Hardware Back without case](img/hw-hacker-back-bare-small.jpg "Photo of the back of a Fomu Hacker without case")
 
-Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing "dfu-util -l" and noting the version number.
+Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing `dfu-util -l` and noting the version number.
 
 Aside from that, you need a computer with a USB port that can run the toolchain software. You should not need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
 
