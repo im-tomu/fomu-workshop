@@ -13,9 +13,6 @@
 [submodule "litex/deps/pyserial"]
 	path = litex/deps/pyserial
 	url = https://github.com/pyserial/pyserial.git
-[submodule "litex/deps/lxsocsupport"]
-	path = litex/deps/lxsocsupport
-	url = https://github.com/xobs/lxsocsupport.git
 [submodule "litex/deps/valentyusb"]
 	path = litex/deps/valentyusb
 	url = https://github.com/im-tomu/valentyusb.git
