@@ -789,7 +789,7 @@ $ git submodule update --recursive --init
 $
 ```
 
-Take a look at `test/csr.csv`.  This describes the various regions present in our design.  You can see `memory_region,sram,0x10000000,131072`, which indicates the RAM is 128 kilobytes long and is located at `0x10000000`, just as when we had a CPU.  You can also see the timer, which is a feature that comes as part of LiteX.  Let's try reading and writing RAM:
+Take a look at `build/csr.csv`.  This describes the various regions present in our design.  You can see `memory_region,sram,0x10000000,131072`, which indicates the RAM is 128 kilobytes long and is located at `0x10000000`, just as when we had a CPU.  You can also see the timer, which is a feature that comes as part of LiteX.  Let's try reading and writing RAM:
 
 ```sh
 $ wishbone-tool 0x10000000
@@ -828,20 +828,25 @@ class FomuRGB(Module, AutoCSR):
         )
 ```
 
-This will instantiate this Verilog block and connect it up.  It also creates a `CSRStorage` object that is three bits wide, and assigns it to `output`.  Finally, it wires the pads up to the outputs of the block.
+This will instantiate this Verilog block and connect it up.  It also creates a `CSRStorage` object that is three bits wide, and assigns it to `output`.  By having this derive from `AutoCSR`, the CSRStorage will have CSR bus accessor methods added to it automatically.  Finally, it wires the pads up to the outputs of the block.
 
 We can instantiate this block by simply creating a new object and adding it to `self.specials` in our design:
 
 ```python
 ...
-        # Add the LED driver block
-        led_pads = platform.request("rgb_led")
-        self.submodules.rgb = FomuRGB(led_pads)
+    # Add the LED driver block
+    led_pads = soc.platform.request("rgb_led")
+    soc.submodules.fomu_rgb = FomuRGB(led_pads)
 ```
 
-Finally, we need to add it to the `csr_map`.
+Finally, we need to add it to the `csr_map`:
 
-Now, when we rebuild this design and check `test/csr.csv` we can see our new register:
+```python
+...
+    soc.add_csr("fomu_rgb")
+```
+
+Now, when we rebuild this design and check `build/csr.csv` we can see our new register:
 
 ```csv
 csr_register,rgb_output,0xe0006800,1,rw
@@ -849,4 +854,4 @@ csr_register,rgb_output,0xe0006800,1,rw
 
 We can use `wishbone-tool` to write values to `0xe0006800` and see them take effect immediately.
 
-
+You can see that it takes very little code to take a Signal from HDL and expose it on the Wishbone bus.
