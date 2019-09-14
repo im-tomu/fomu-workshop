@@ -2,14 +2,14 @@ GIT_VERSION := $(shell git describe --tags)
 
 # Earlier versions of the Raspberry Pi image only had riscv32-gcc
 ifneq (,$(wildcard /usr/bin/riscv32-unknown-elf-gcc))
-TRGT       ?= riscv32-unknown-elf-
+CROSS_COMPILE       ?= riscv32-unknown-elf-
 else
-TRGT       ?= riscv64-unknown-elf-
+CROSS_COMPILE       ?= riscv64-unknown-elf-
 endif
 
-CC         := $(TRGT)gcc
-CXX        := $(TRGT)g++
-OBJCOPY    := $(TRGT)objcopy
+CC         := $(CROSS_COMPILE)gcc
+CXX        := $(CROSS_COMPILE)g++
+OBJCOPY    := $(CROSS_COMPILE)objcopy
 
 RM         := rm -rf
 COPY       := cp -a
