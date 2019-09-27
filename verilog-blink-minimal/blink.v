@@ -5,9 +5,6 @@
 // Red LED turned on when Button 6 is pressed.
 //
 
-`define BLUEPWM  RGB0PWM
-`define GREENPWM RGB1PWM
-`define REDPWM   RGB2PWM
 
 module top (
     // 48MHz Clock input
