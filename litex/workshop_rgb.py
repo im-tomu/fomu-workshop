@@ -4,7 +4,7 @@
 # the build will finish without exiting due to missing third-party
 # programs.
 LX_DEPENDENCIES = ["icestorm", "yosys", "nextpnr-ice40"]
-LX_CONFIG = "skip-git"
+#LX_CONFIG = "skip-git" # This can be useful for workshops
 
 # Import lxbuildenv to integrate the deps/ directory
 import os,os.path,shutil,sys,subprocess
