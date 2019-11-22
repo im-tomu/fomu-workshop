@@ -576,14 +576,14 @@ Let's modify the program by increasing the fade rate so much that it appears sol
 ```patch
 --- a/riscv-blink/src/main.c
 +++ b/riscv-blink/src/main.c
-@@ -38,6 +38,7 @@ void isr(void) {
- void main(void) {
+@@ -46,6 +46,7 @@ int main(void) {
+     usb_init();
      rgb_init();
-     irq_setie(0);
+     usb_connect();
 +    rgb_write((100000/64000)-1, LEDDBR);
      int i = 0;
      while (1) {
-         i++;
+         color_wheel(i++);
 ```
 
 What this does is increase the LED blink rate from 250 Hz to a much higher value.  Compile this and load it again with `dfu-util -D riscv-blink.bin`.  The blink rate should appear solid, because it's blinking too quickly to see.
