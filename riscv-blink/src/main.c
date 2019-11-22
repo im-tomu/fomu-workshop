@@ -45,8 +45,6 @@ int main(void) {
     irq_setie(1);
     usb_init();
     rgb_init();
-    rgb_write(100000 / 64000 - 1, LEDDBR);
-
     usb_connect();
     int i = 0;
     while (1) {
