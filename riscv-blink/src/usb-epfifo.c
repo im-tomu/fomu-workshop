@@ -13,7 +13,7 @@ static uint8_t usb_ep0out_buffer[EP0OUT_BUFFERS][128];
 static uint8_t usb_ep0out_last_tok[EP0OUT_BUFFERS];
 static uint8_t usb_ep0out_wr_ptr;
 static uint8_t usb_ep0out_rd_ptr;
-static const int max_byte_length = 64;
+static const int MAX_BYTE_LENGTH = 64;
 
 static const uint8_t * current_data;
 static int current_length;
@@ -52,7 +52,7 @@ static void usb_set_address_wrapper(uint8_t address) {
     usb_address_write(address);
 }
 
-void usb_idle(void) {
+void epfifo_usb_idle(void) {
     usb_ep_0_out_ev_enable_write(0);
     usb_ep_0_in_ev_enable_write(0);
 
@@ -65,7 +65,7 @@ void usb_idle(void) {
     irq_setmask(irq_getmask() & ~(1 << USB_INTERRUPT));
 }
 
-void usb_disconnect(void) {
+void epfifo_usb_disconnect(void) {
     usb_ep_0_out_ev_enable_write(0);
     usb_ep_0_in_ev_enable_write(0);
     irq_setmask(irq_getmask() & ~(1 << USB_INTERRUPT));
@@ -73,7 +73,7 @@ void usb_disconnect(void) {
     usb_set_address_wrapper(0);
 }
 
-void usb_connect(void) {
+void epfifo_usb_connect(void) {
 
     usb_ep_0_out_ev_pending_write(usb_ep_0_out_ev_enable_read());
     usb_ep_0_in_ev_pending_write(usb_ep_0_in_ev_pending_read());
@@ -81,7 +81,7 @@ void usb_connect(void) {
     usb_ep_0_in_ev_enable_write(USB_EV_PACKET | USB_EV_ERROR);
 
     // Accept incoming data by default.
-    usb_ep_0_out_respond_write(EPF_ACK);
+    //usb_ep_0_out_respond_write(EPF_ACK);
 
     // Reject outgoing data, since we have none to give yet.
     usb_ep_0_in_respond_write(EPF_NAK);
@@ -91,7 +91,7 @@ void usb_connect(void) {
     irq_setmask(irq_getmask() | (1 << USB_INTERRUPT));
 }
 
-void usb_init(void) {
+void epfifo_usb_init(void) {
     usb_disconnect();
     usb_ep0out_wr_ptr = 0;
     usb_ep0out_rd_ptr = 0;
@@ -119,11 +119,11 @@ static void process_tx(void) {
     data_to_send = current_length - data_offset;
 
     // Clamp the data to the maximum packet length
-    if (data_to_send > max_byte_length) {
-        data_to_send = max_byte_length;
+    if (data_to_send > MAX_BYTE_LENGTH) {
+        data_to_send = MAX_BYTE_LENGTH;
         next_packet_is_empty = 0;
     }
-    else if (data_to_send == max_byte_length) {
+    else if (data_to_send == MAX_BYTE_LENGTH) {
         next_packet_is_empty = 1;
     }
     else if (next_packet_is_empty) {
@@ -147,7 +147,7 @@ static void process_tx(void) {
     return;
 }
 
-void usb_send(const void *data, int total_count) {
+void epfifo_usb_send(const void *data, int total_count) {
 
     while ((current_length || current_data) && usb_ep_0_in_respond_read() != EPF_NAK)
         process_tx();
@@ -158,25 +158,33 @@ void usb_send(const void *data, int total_count) {
     process_tx();
 }
 
-void usb_wait_for_send_done(void) {
+void epfifo_usb_wait_for_send_done(void) {
     while (current_data && current_length)
         process_tx();
     while ((usb_ep_0_in_dtb_read() & 1) == 1)
         ;
 }
 
-void usb_isr(void) {
+void epfifo_usb_isr(void) {
     uint8_t ep0o_pending = usb_ep_0_out_ev_pending_read();
-    usb_ep_0_out_ev_pending_write(ep0o_pending);
     uint8_t ep0i_pending = usb_ep_0_in_ev_pending_read();
-    usb_ep_0_in_ev_pending_write(ep0i_pending);
 
+    // We just got an "IN" token.  Send data if we have it.
+    if (ep0i_pending) {
+        usb_ep_0_in_respond_write(EPF_NAK);
+        if (have_new_address) {
+            have_new_address = 0;
+            usb_set_address_wrapper(new_address);
+        }
+        usb_ep_0_in_ev_pending_write(ep0i_pending);
+    }
+    
     // We got an OUT or a SETUP packet.  Copy it to usb_ep0out_buffer
     // and clear the "pending" bit.
     if (ep0o_pending) {
         uint8_t last_tok = usb_ep_0_out_last_tok_read();
         uint32_t obuf_len = 0;
-        static uint8_t obuf[128];
+        uint8_t obuf[67];
         if (!usb_ep_0_out_obuf_empty_read()) {
             while (!usb_ep_0_out_obuf_empty_read()) {
                 obuf[obuf_len++] = usb_ep_0_out_obuf_head_read();
@@ -195,36 +203,35 @@ void usb_isr(void) {
             usb_setup((const void *)obuf, obuf_len);
         }
 
-        usb_ep_0_out_respond_write(EPF_ACK);
+        //usb_ep_0_out_respond_write(EPF_ACK);
+        usb_ep_0_out_ev_pending_write(ep0o_pending);
     }
 
-    // We just got an "IN" token.  Send data if we have it.
-    if (ep0i_pending) {
-        usb_ep_0_in_respond_write(EPF_NAK);
-        if (have_new_address) {
-            have_new_address = 0;
-            usb_set_address_wrapper(new_address);
-        }
-    }
-    
     process_tx();
     return;
 }
 
-void usb_ack_in(void) {
+void epfifo_usb_ack_in(uint8_t epno) {
+    (void)epno;
     usb_ep_0_in_respond_write(EPF_ACK);
 }
 
-void usb_ack_out(void) {
+void epfifo_usb_ack_out(uint8_t epno) {
+    (void)epno;
     usb_ep_0_out_respond_write(EPF_ACK);
 }
 
-void usb_err(void) {
-    usb_ep_0_out_respond_write(EPF_STALL);
+void epfifo_usb_err_in(uint8_t epno) {
+    (void)epno;
     usb_ep_0_in_respond_write(EPF_STALL);
 }
 
-int usb_recv(void *buffer, unsigned int buffer_len) {
+void epfifo_usb_err_out(uint8_t epno) {
+    (void)epno;
+    usb_ep_0_out_respond_write(EPF_STALL);
+}
+
+int epfifo_usb_recv(void *buffer, unsigned int buffer_len) {
 
     // Set the OUT response to ACK, since we are in a position to receive data now.
     usb_ep_0_out_respond_write(EPF_ACK);
@@ -248,7 +255,7 @@ int usb_recv(void *buffer, unsigned int buffer_len) {
     return 0;
 }
 
-void usb_set_address(uint8_t _new_address) {
+void epfifo_usb_set_address(uint8_t _new_address) {
     new_address = _new_address;
     have_new_address = 1;
 }

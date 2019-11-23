@@ -74,6 +74,8 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
 {
     const uint8_t *data = NULL;
     uint32_t datalen = 0;
+    uint8_t ep_dir_is_in = setup->bmRequestType >> 7;
+
     (void)size;
 
     switch (setup->wRequestAndType)
@@ -105,7 +107,7 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
     case 0x0082: // GET_STATUS (endpoint)
         if (setup->wIndex > 0)
         {
-            usb_err();
+            usb_err_in(0);
             return;
         }
         reply_buffer[0] = 0;
@@ -117,8 +119,7 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
     case 0x0102: // CLEAR_FEATURE (endpoint)
         if (setup->wIndex > 0 || setup->wValue != 0)
         {
-            // TODO: do we need to handle IN vs OUT here?
-            usb_err();
+            usb_err_out(0);
             return;
         }
         break;
@@ -126,8 +127,7 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
     case 0x0302: // SET_FEATURE (endpoint)
         if (setup->wIndex > 0 || setup->wValue != 0)
         {
-            // TODO: do we need to handle IN vs OUT here?
-            usb_err();
+            usb_err_out(0);
             return;
         }
         break;
@@ -143,7 +143,7 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
             CASE_VALUE(0x0302, usb_string2_descriptor);
             CASE_VALUE(0x03ee, usb_string_microsoft);
             CASE_VALUE(0x0f00, usb_bos_descriptor);
-            default: usb_err(); return;
+            default: usb_err_in(0); return;
         }
         #undef CASE_VALUE
         goto send;
@@ -157,7 +157,7 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
             datalen = sizeof(usb_ms_compat_id_descriptor);
             break;
         }
-        usb_err();
+        usb_err_in(0);
         return;
 
 #ifdef LANDING_PAGE_URL
@@ -170,12 +170,12 @@ void usb_setup(const struct usb_setup_request *setup, uint32_t size)
                 break;
             }
         }
-        usb_err();
+        usb_err_in(0);
         return;
 #endif
 
     default:
-        usb_err();
+        usb_err_in(0);
         return;
     }
 
@@ -187,8 +187,14 @@ send:
             datalen = sizeof(data_buffer);
         memcpy(data_buffer, data, datalen);
         usb_send(data_buffer, datalen);
+        usb_ack_out(0);
     }
-    else
-        usb_ack_in();
+    else {
+        // Ack the opposite endpoint type
+        if (ep_dir_is_in)
+            usb_ack_out(0);
+        else
+            usb_ack_in(0);
+    }
     return;
 }

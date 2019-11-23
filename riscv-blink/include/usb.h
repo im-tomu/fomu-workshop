@@ -17,9 +17,11 @@ void usb_disconnect(void);
 void usb_setup(const struct usb_setup_request *setup, uint32_t size);
 void usb_set_address(uint8_t address);
 
-void usb_ack_in(void);
-void usb_ack_out(void);
-void usb_err(void);
+void usb_ack_in(uint8_t epno);
+void usb_ack_out(uint8_t epno);
+void usb_err_in(uint8_t epno);
+void usb_err_out(uint8_t epno);
+
 void usb_send(const void *data, int total_count);
 
 #ifdef __cplusplus
