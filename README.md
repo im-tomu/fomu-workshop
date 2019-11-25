@@ -536,7 +536,7 @@ We can see that `wishbone-tool` has crashed with an error of `USBError(Pipe)`, b
 
 ### Compiling RISC-V Code
 
-Of course, Fomu's softcore is a full CPU, so we can write C code for it.  Go to the `riscv-blink/` directory and run `make`.  This will generate `riscv-blink.bin`, which we can load onto Fomu.
+Of course, Fomu's softcore is a full CPU, so we can write C code for it.  Go to the `riscv-blink/` directory and run `make`.  This will generate `riscv-blink.dfu`, which we can load onto Fomu.
 
 ```sh
 $ make
@@ -547,7 +547,8 @@ $ make
   LD       riscv-blink.elf
   OBJCOPY  riscv-blink.bin
   IHEX     riscv-blink.ihex
-$ dfu-util -D riscv-blink.bin
+  DFU      riscv-blink.dfu
+$ dfu-util -D riscv-blink.dfu
 Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
 Copyright 2010-2014 Tormod Volden and Stefan Schmidt
 This program is Free Software and has ABSOLUTELY NO WARRANTY
