@@ -228,7 +228,7 @@ $
 
 If you get the above message, it means your computer has successfully detected Fomu!
 
-If you get a `permission denied` or `Cannot open DFU device 1209:5bf0` error then see the next two sections.
+If you get a `permission denied` or `Cannot open DFU device 1209:5bf0` error then see the next two sections.  You may see additional lines in the output, depending on your harware configuration.  For example, some Thinkpad laptops might give you an additional message such as `Cannot open DFU device 0a5c:21f3`.  These messages can safely be ignored -- the only device we're interested in is `1209:5bf0`.
 
 #### (Windows earlier than 10 Only) Setting udev permissions
 
