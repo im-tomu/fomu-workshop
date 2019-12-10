@@ -644,6 +644,22 @@ We can insert breakpoints, step, continue execution, and generally debug the ent
 
 There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` directory contains a simple USB serial device that simply echoes back any characters that you type, incremented by 1.  This is a good way to get started with an interactive terminal program, or logging data via USB serial.
 
+## Working on Fomu with Renode
+
+One of the ways to interact with Fomu and other LiteX-based platforms is to use [Renode](www.renode.io).
+
+Renode is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
+
+You will find Renode documentation along with some tutorials on [ReadTheDocs](renode.readthedocs.io).
+You can also take a look at a new [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
+
+### Wishbone bridge
+
+Just like we can talk to Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
+
+Renode has a predefined scenario you can try to run and inspect different capabilities of running in a simulated environment.
+
+
 ## Hardware Description Languages
 
 The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
