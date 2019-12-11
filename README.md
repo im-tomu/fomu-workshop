@@ -653,6 +653,18 @@ Renode is an open source simulation framework that lets you run unmodified softw
 You will find Renode documentation along with some tutorials on [ReadTheDocs](renode.readthedocs.io).
 You can also take a look at a new [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
 
+This part of the workshop is based on a [Renode, Fomu and Etherbone bridge example](https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html) from the Renode documentation.
+
+### Getting Renode
+
+Renode is available for Linux, macOS and Windows.
+You can either install it from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
+
+In either case, on Linux and macOS, you need to have [Mono](https://www.mono-project.com) installed on your computer.
+You should follow the [Mono installation instructions](https://www.mono-project.com/download/stable/) and install the `mono-complete` package.
+
+On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) installed.
+
 ### Wishbone bridge
 
 Just like we can talk to Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
