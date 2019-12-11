@@ -372,7 +372,7 @@ Import the `fomu` module and access the `rgb` block to change the mode to the pr
 >>> import fomu
 >>> rgb = fomu.rgb()
 >>> rgb.mode("error")
->>> 
+>>>
 ```
 
 We can also look at some information from the SPI flash, such as the SPI ID.  This ID varies between Fomu models, so it can be a good indication of what kind of Fomu your code is running on:
@@ -381,7 +381,7 @@ We can also look at some information from the SPI flash, such as the SPI ID.  Th
 >>> spi = fomu.spi()
 >>> hex(spi.id())
 '0xc2152815'
->>> 
+>>>
 ```
 
 ### Memory-mapped Registers
@@ -814,7 +814,7 @@ Value at 10000000: 0baf801e
 $ wishbone-tool 0x10000000 0x98765432
 $ wishbone-tool 0x10000000
 Value at 10000000: 98765432
-$ 
+$
 ```
 
 Aside from that, there's not much we can _do_ with this design.  But there's a lot of infrastructure there.  So let's add something.
