@@ -644,33 +644,6 @@ We can insert breakpoints, step, continue execution, and generally debug the ent
 
 There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` directory contains a simple USB serial device that simply echoes back any characters that you type, incremented by 1.  This is a good way to get started with an interactive terminal program, or logging data via USB serial.
 
-## Working on Fomu with Renode
-
-One of the ways to interact with Fomu and other LiteX-based platforms is to use [Renode](www.renode.io).
-
-Renode is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
-
-You will find Renode documentation along with some tutorials on [ReadTheDocs](renode.readthedocs.io).
-You can also take a look at a new [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
-
-This part of the workshop is based on a [Renode, Fomu and Etherbone bridge example](https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html) from the Renode documentation.
-
-### Getting Renode
-
-Renode is available for Linux, macOS and Windows.
-You can either install it from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
-
-In either case, on Linux and macOS, you need to have [Mono](https://www.mono-project.com) installed on your computer.
-You should follow the [Mono installation instructions](https://www.mono-project.com/download/stable/) and install the `mono-complete` package.
-
-On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) installed.
-
-### Wishbone bridge
-
-Just like we can talk to Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
-
-Renode has a predefined scenario you can try to run and inspect different capabilities of running in a simulated environment.
-
 
 ## Hardware Description Languages
 
@@ -884,3 +857,69 @@ csr_register,rgb_output,0xe0006800,1,rw
 We can use `wishbone-tool` to write values to `0xe0006800` and see them take effect immediately.
 
 You can see that it takes very little code to take a Signal from HDL and expose it on the Wishbone bus.
+
+## Working on Fomu with Renode
+
+One of the ways to interact with Fomu and other LiteX-based platforms is to use [Renode](www.renode.io).
+
+Renode is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
+It's a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate.
+
+Apart from RISC-V and LiteX platforms, Renode supports a broad range of other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html).
+
+You will find Renode documentation along with some tutorials on [ReadTheDocs](renode.readthedocs.io).
+You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
+
+### Getting Renode
+
+Renode is available for Linux, macOS and Windows.
+You can either install it from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
+
+In either case, on Linux and macOS, you need to have [Mono](https://www.mono-project.com) installed on your computer.
+You should follow the [Mono installation instructions](https://www.mono-project.com/download/stable/) and install the `mono-complete` package.
+
+On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) installed.
+
+### Running Zephyron LiteX/VexRiscv in Renode
+
+#### Building Zephyr application
+
+To install all the dependencies and prepare the environment for building Zephyr application follow the official [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/getting_started/index.html) up to point 5.
+
+To build the `shell` demo application for LiteX/VexRiscv board run the following commands:
+
+```bash
+cd ~/zephyrproject/zephyr
+source zephyr-env.sh
+west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
+```
+
+Resulting ELF file will be `build/zephyr/zephyr.elf`.
+
+#### Run the app in Renode
+
+Start the `renode` command (or `./renode` if you built from sources).
+
+You will see a terminal window pop up, called the Monitor.
+
+In the Monitor type:
+
+```
+$zephyr=@~/zephyrproject/zephyr/build/zephyr/zephyr.elf
+include @scripts/single-node/litex_vexriscv_zephyr.resc
+start
+```
+
+You should see a new window pop up for the serial port.
+You should also see a Zephyr shell running.
+
+### Wishbone bridge
+
+This part of the workshop is based on a [Renode, Fomu and Etherbone bridge example](https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html) from the Renode documentation.
+
+Just like we can talk to Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
+
+Renode has a predefined scenario you can try to inspect different capabilities of running in a simulated environment.
+
+Ensure your Fomu is plugged in and start Renode.
+
