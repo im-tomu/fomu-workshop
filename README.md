@@ -192,7 +192,7 @@ We will use an ICE40UP5K for this workshop.  This chip has a number of very nice
 1. **Warmboot capability**
 1. **Open toolchain**
 
-Many FPGAs have what's called block RAM, or BRAM.  This is frequently used to store data such as buffers, CPU register files, and large arrays of data.  This type of memory is frequently reused as RAM on many FPGAs.  The ICE40UP5K is unusual in that it also as 128 kilobytes of Single Ported RAM that can be used as memory for a softcore (a term used for a CPU core running inside an FPGA, to differentiate it from a 'hard' - i.e. fixed chip - implementation).  That means that, unlike other FPGAs, valuable block ram isn't taken up by system memory.
+Many FPGAs have what's called block RAM, or BRAM.  This is frequently used to store data such as buffers, CPU register files, and large arrays of data.  This type of memory is frequently reused as RAM on many FPGAs.  The ICE40UP5K is unusual in that it also as 128 kilobytes of Single Ported RAM that can be used as memory for a softcore (a term used for a CPU core running inside an FPGA, to differentiate it from a 'hard' - i.e. fixed chip - implementation).  That means that, unlike other FPGAs, valuable block RAM isn't taken up by system memory.
 
 Additionally, the ICE40 family of devices generally supports "warmboot" capability.  This enables us to have multiple designs live on the same FPGA and tell the FPGA to swap between them.
 
