@@ -447,7 +447,7 @@ Try changing the color of the three LEDs:
 ```
 
 
-The color should change immediately.  More information on these registers can be found in the [iCE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
+The color should change immediately.  More information on these registers can be found in the [ICE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
 
 ## Fomu as a CPU
 
