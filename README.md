@@ -870,6 +870,8 @@ Apart from RISC-V and LiteX platforms, Renode supports a broad range of other ar
 You will find Renode documentation along with some tutorials on [ReadTheDocs](renode.readthedocs.io).
 You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
 
+Keep in mind that all platforms and scenarios in Renode are describe as text files - feel free to inspect them for details!
+
 ### Getting Renode
 
 Renode is available for Linux, macOS and Windows.
@@ -905,9 +907,9 @@ You will see a terminal window pop up, called the Monitor.
 In the Monitor type:
 
 ```
-$zephyr=@~/zephyrproject/zephyr/build/zephyr/zephyr.elf
-include @scripts/single-node/litex_vexriscv_zephyr.resc
-start
+(monitor) $zephyr=@~/zephyrproject/zephyr/build/zephyr/zephyr.elf
+(monitor) include @scripts/single-node/litex_vexriscv_zephyr.resc
+(machine-0) start
 ```
 
 You should see a new window pop up for the serial port.
@@ -917,7 +919,7 @@ You should also see a Zephyr shell running.
 
 This part of the workshop is based on a [Renode, Fomu and Etherbone bridge example](https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html) from the Renode documentation.
 
-Just like we can talk to Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
+Just like we can access Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
 
 Renode has a predefined scenario you can try to inspect different capabilities of running in a simulated environment.
 
@@ -954,8 +956,8 @@ Now you can start Renode and setup the platform.
 Run `renode` and in the Monitor type:
 
 ```
-include @scripts/complex/fomu/renode_etherbone_fomu.resc
-start
+(monitor) include @scripts/complex/fomu/renode_etherbone_fomu.resc
+(machine-0) start
 ```
 
 The `litex_server.py` should print:
@@ -1093,8 +1095,8 @@ In the Renode tree you will find an example with all the elements already prepar
 To run it, start Renode and type:
 
 ```
-include @scripts/single-node/riscv_verilated_uartlite.resc
-start
+(monitor) include @scripts/single-node/riscv_verilated_uartlite.resc
+(UARTLite) start
 ```
 
 This script loads a RISC-V-based system with a verilated UARTLite.
@@ -1105,7 +1107,17 @@ You can verify it by calling:
 Antmicro.Renode.Peripherals.Verilated.VerilatedUART
 ```
 
-Please note that this UART also has a terminal window opened. This is because Renode adds a special support for UART-type peripherals, allowing you not only to connect bus lines, but also the TX and RX UART lines.
+To inspect the communication with the UART, run:
+
+```
+(UARTLite) sysbus LogPeripheralAccess uart
+```
+
+You will see every read and write to the peripheral displayed in the Renode log.
+
+
+Please note that this UART also has a terminal window opened, despite not being a Renode-native model.
+This is because Renode adds a special support for UART-type peripherals, allowing you not only to connect bus lines, but also the TX and RX UART lines, to the Renode infrastructure.
 
 The HDL and integration layer for this UART peripheral is available on [Antmicro's GitHub](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
 
@@ -1114,4 +1126,50 @@ You also need to provide a full path to the `src/Plugins/VerilatorPlugin/Verilat
 
 With this set up, simply run `make`.
 
+#### Integration with verilated code
+
+Renode supports integration with Verilator via AXILite bus, but can be easily expanded to support other standards as well.
+
+We'll briefly take a look on the integration layer implemented in [sim-main.cpp](https://github.com/antmicro/renode-verilator-integration/blob/master/samples/uartlite/sim_main.cpp).
+
+First, the user has to decide on the bus type and peripheral type.
+These are provided by the integration library:
+
+```c
+#include "src/peripherals/uart.h"
+#include "src/buses/axilite.h"
+```
+
+A bus is a type declaring all the signals and how should they be handled on each transaction.
+These signals have to be connected to the signals in the HDL design:
+
+```
+void Init() {
+    AxiLite* bus = new AxiLite();
+
+    //=================================================
+    // Init bus signals
+    //=================================================
+    bus->clk = &top->clk;
+    bus->rst = &top->rst;
+    bus->awaddr = (unsigned long *)&top->awaddr;
+    bus->awvalid = &top->awvalid;
+    bus->awready = &top->awready;
+    bus->wdata = (unsigned long *)&top->wdata;
+    bus->wstrb = &top->wstrb;
+    bus->wvalid = &top->wvalid;
+    bus->wready = &top->wready;
+    bus->bresp = &top->bresp;
+    bus->bvalid = &top->bvalid;
+    bus->bready = &top->bready;
+    [...]
+```
+
+To handle the "external" communication, the user can either use the base `RenodeAgent` class of one of its derivatives: for example the `UART` type allows you to connect RX and TX signals:
+
+```
+    // Init peripheral
+    //=================================================
+    uart = new UART(bus, &top->txd, &top->rxd, prescaler);
+```
 
