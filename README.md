@@ -347,7 +347,7 @@ If you're on Linux, it will be called `ttyACM?`:
 $ screen /dev/ttyACM*
 ```
 
-If you're running a version of Windows earlier than Windows 10, you will need to install a driver for the serial port.  Open Zadag again and select `Fomu` from the dropdown list.  Install the driver for `USB Serial (CDC)`.   You can then use a program such as [Tera Term](https://tera-term.en.lo4d.com/download):  In Teraterm hit New Connection and select the "Serial Port"-Radio Button. If it is greyed out you might have to change your USB Port driver for the Fomu. See  Working with Fomu, above.
+If you're running a version of Windows earlier than Windows 10, you will need to install a driver for the serial port.  Open Zadag again and select `Fomu` from the dropdown list.  Install the driver for `USB Serial (CDC)`.  You can then use a program such as [Tera Term](https://tera-term.en.lo4d.com/download):  In Teraterm hit `New Connection` and select the `Serial Port` Radio Button.  If it is greyed out you might have to change your USB Port driver for the Fomu.  See [Working with Fomu](#working-with-fomu), above.
 
 ```powershell
 PS> ttermpro.exe
