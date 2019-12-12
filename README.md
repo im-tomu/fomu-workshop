@@ -604,9 +604,9 @@ INFO [wishbone_tool::server] accepting connections on 0.0.0.0:1234
 In a second window, run gdb on `riscv-blink.elf`:
 
 ```sh
- $ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:1234'
- GNU gdb (GDB) 8.2.90.20190228-git
- Copyright (C) 2019 Free Software Foundation, Inc.
+$ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:1234'
+GNU gdb (GDB) 8.2.90.20190228-git
+Copyright (C) 2019 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
