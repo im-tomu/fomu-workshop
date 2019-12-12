@@ -916,7 +916,7 @@ west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
 And on Windows:
 
 ```
-cd zephyrproject\zephyr
+cd %HOMEPATH%\zephyrproject\zephyr
 zephyr-env.cmd
 west build -p auto -b litex_vexriscv samples\subsys\shell\shell_module\
 ```
