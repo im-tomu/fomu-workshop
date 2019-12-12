@@ -1072,3 +1072,46 @@ You can either use full or relative address (via the `sysbus` or `led` objects, 
 (machine-0) sysbus WriteDoubleWord 0xE0006804 0x1234 # writes 0x1234 to the given address
 (machine-0) led WriteDoubleWord 0x4 0x4321 # writes 0x4321 to 0xE0006800 + 0x4
 ```
+
+### Co-simulation using Verilator
+
+> This part of the tutorial needs to be executed on a Linux host, with Renode compiled from sources.
+
+While connecting Renode to a real FPGA gives you virtually endless possibilities in testing and debugging your software, sometimes it makes sense not to use hardware and rely on HDL simulator instead.
+
+Renode provides an integration layer for Verilator.
+It consists of several components:
+
+* verilated HDL code,
+* integration library, [provided by Renode](https://github.com/renode/renode/tree/master/src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary/src),
+* shim layer in C++ joining the two parts together.
+
+Currently Renode supports peripherals with AXILite interface.
+Keep in mind that due to abstract nature of bus operations in Renode, it doesn't matter what kind of bus is used on the hardware you want to simulate.
+
+In the Renode tree you will find an example with all the elements already prepared.
+To run it, start Renode and type:
+
+```
+include @scripts/single-node/riscv_verilated_uartlite.resc
+start
+```
+
+This script loads a RISC-V-based system with a verilated UARTLite.
+You can verify it by calling:
+
+```
+(UARTLite) sysbus WhatPeripheralIsAt 0x70000000
+Antmicro.Renode.Peripherals.Verilated.VerilatedUART
+```
+
+Please note that this UART also has a terminal window opened. This is because Renode adds a special support for UART-type peripherals, allowing you not only to connect bus lines, but also the TX and RX UART lines.
+
+The HDL and integration layer for this UART peripheral is available on [Antmicro's GitHub](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
+
+To compile it manually, you need to have `ZeroMQ` (`libzmq3-dev` on Debian-like systems) and `Verilator` installed in your system.
+You also need to provide a full path to the `src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary` directory as the `INTEGRATION_DIR` environment variable.
+
+With this set up, simply run `make`.
+
+
