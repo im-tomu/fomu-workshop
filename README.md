@@ -1173,3 +1173,4 @@ To handle the "external" communication, the user can either use the base `Renode
     uart = new UART(bus, &top->txd, &top->rxd, prescaler);
 ```
 
+For more details, see the [verilated uartlite repository](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
