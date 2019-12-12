@@ -964,7 +964,7 @@ The `litex_server.py` should print:
 Connected with 127.0.0.1:<port>
 ```
 
-You will also see a new window with a shell application, that provides additional commands allowing you to control LEDs on Fomu.
+You will also see a new window with a [shell application](https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a), that provides additional commands allowing you to control LEDs on Fomu.
 
 ```bash
 uart:~$ led_toggle
