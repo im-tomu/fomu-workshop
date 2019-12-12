@@ -240,7 +240,7 @@ Download [Zadig](https://zadig.akeo.ie/). Open Zadig. Under Options, select "Lis
 
 #### (Linux Only) Setting udev permissions
 
-In Linux, try running `sudo dfu-util -l` if that no longer get the error message you should add a `udev` rule as to give your user permission to the usb device.
+In Linux, try running `sudo dfu-util -l`, and if you get an error message, you should add a `udev` rule as to give your user permission to the usb device.
 
 ```
 sudo groupadd plugdev
