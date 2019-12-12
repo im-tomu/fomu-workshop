@@ -1074,6 +1074,8 @@ You can either use a full or relative address (via the `sysbus` or `led` objects
 (machine-0) led WriteDoubleWord 0x4 0x4321 # writes 0x4321 to 0xE0006800 + 0x4
 ```
 
+Note: the above values are just an example and won't change the LED status in any visible way. If you want to enable "breathe" effect directly from the Monitor, see the necessary sequence in [the application source code](https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a).
+
 ### Co-simulation using Verilator
 
 > This part of the tutorial needs to be executed on a Linux host.
