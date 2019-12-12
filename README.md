@@ -971,8 +971,8 @@ uart:~$ led_toggle
 uart:~$ led_breathe
 ```
 
-The `led_toggle` command controls the green LED by turning it on and off.
-`led_breathe` enables the breathe effect of the blue LED.
+The `led_toggle` command controls the LED by turning it on and off.
+`led_breathe` enables the breathe effect of the LED.
 
 The script you loaded configures Renode to log all communication with Fomu. After issuing some commands in Zephyr's shell you'll see:
 
