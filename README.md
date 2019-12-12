@@ -858,30 +858,34 @@ We can use `wishbone-tool` to write values to `0xe0006800` and see them take eff
 
 You can see that it takes very little code to take a Signal from HDL and expose it on the Wishbone bus.
 
-## Working on Fomu with Renode
+## Working with LiteX and co-simulation with Renode
 
-One of the ways to interact with Fomu and other LiteX-based platforms is to use [Renode](www.renode.io).
+LiteX used as the soft SoC on Fomu is a very robust and scalable soft SoC platform, capable of running both bare metal binaries, Zephyr and even Linux.
 
-Renode is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
-It's a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate.
+It is also supported in [Renode](https://renode.io), which is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
+Renode is a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate.
 
-Apart from RISC-V and LiteX platforms, Renode supports a broad range of other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html), which also includes a user manual and a few tutorials.
+We will now se how a full-blown Zephyr RTOS can be run on LiteX in Renode, and then how this simulation can be interfaced with a Fomu for a useful HW/SW co-development workflow.
 
-You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
+> Note: Apart from RISC-V and LiteX platforms, Renode supports many other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html), which also includes a user manual and a few tutorials.
+> You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
 
-Keep in mind that all platforms and scenarios in Renode are described as text files - feel free to inspect them for details!
+Keep in mind that all platforms and configurations in Renode used in this tutorial are contained in text/config files - you can also explore Renode's usage patterns by just inspecting those files for details.
 
 ### Getting Renode
 
 Renode is available for Linux, macOS and Windows.
-You can either install it from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
 
-In either case, on Linux and macOS, you need to have [Mono](https://www.mono-project.com) installed on your computer.
+On Linux and macOS, you need to have [Mono](https://www.mono-project.com) installed on your computer.
 You should follow the [Mono installation instructions](https://www.mono-project.com/download/stable/) and install the `mono-complete` package.
 
 On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) installed.
 
+Then you can either install Renode from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
+
 ### Running Zephyr on LiteX/VexRiscv in Renode
+
+Zephyr is a very capable RTOS governed by a Linux Foundation subproject. It is very well supported on the RISC-V architecture, as well as in LiteX.
 
 #### Building a Zephyr application
 
@@ -927,7 +931,7 @@ The resulting ELF file will be in `build/zephyr/zephyr.elf`.
 
 Start Renode using the `renode` command (or `./renode` if you built from sources).
 
-You will see a terminal window pop up, called the Monitor.
+You will see a terminal window pop up, which is the Renode CLI, called the Monitor.
 
 In the Monitor type:
 
@@ -940,13 +944,17 @@ In the Monitor type:
 You should see a new window pop up for the serial port.
 You should also see a Zephyr shell running.
 
-### Wishbone bridge
+#### Debugging the app in Renode
+
+In general, debugging in Renode is done with GDB just like with a physical board - you connect to a debug port and execute GDB commands as usual. For details, see the [Renode debugging documentation](https://renode.readthedocs.io/en/latest/debugging/gdb.html).
+
+### Wishbone bridge between Renode and Fomu
 
 This part of the workshop is based on a [Renode, Fomu and Etherbone bridge example](https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html) from the Renode documentation.
 
-Just like we can access Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping part of the memory space as accessible via the Etherbone protocol.
+Just like we can access Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping a part of the memory space to be accessible via the Etherbone protocol.
 
-Renode has a predefined scenario you can try to inspect different capabilities of running in a simulated environment.
+This is a very useful capability as it enables us to potentially simulate an advanced LiteX SoC system which would not normally fit in the FPGA (or e.g. take a long time to synthesize), and interface it with the remaining part of the physical system for I/O.
 
 #### Setting up the server
 
@@ -1111,9 +1119,7 @@ You can either use a full or relative address (via the `sysbus` or `led` objects
 
 Note: the above values are just an example and won't change the LED status in any visible way. If you want to enable "breathe" effect directly from the Monitor, see the necessary sequence in [the application source code](https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a).
 
-### Co-simulation using Verilator
-
-> This part of the tutorial needs to be executed on a Linux host.
+### Co-simulation using Verilator (Linux only)
 
 While connecting Renode to a real FPGA gives you some interesting possibilities in testing and debugging your gateware together with your software, there is another usage scenario which is completely hardware independent - connecting functional simulation of the base system in Renode with HDL simulation of a part of the system that is under development.
 
