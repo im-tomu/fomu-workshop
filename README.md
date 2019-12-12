@@ -372,7 +372,7 @@ Import the `fomu` module and access the `rgb` block to change the mode to the pr
 >>> import fomu
 >>> rgb = fomu.rgb()
 >>> rgb.mode("error")
->>> 
+>>>
 ```
 
 We can also look at some information from the SPI flash, such as the SPI ID.  This ID varies between Fomu models, so it can be a good indication of what kind of Fomu your code is running on:
@@ -381,7 +381,7 @@ We can also look at some information from the SPI flash, such as the SPI ID.  Th
 >>> spi = fomu.spi()
 >>> hex(spi.id())
 '0xc2152815'
->>> 
+>>>
 ```
 
 ### Memory-mapped Registers
@@ -644,6 +644,7 @@ We can insert breakpoints, step, continue execution, and generally debug the ent
 
 There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` directory contains a simple USB serial device that simply echoes back any characters that you type, incremented by 1.  This is a good way to get started with an interactive terminal program, or logging data via USB serial.
 
+
 ## Hardware Description Languages
 
 The two most common **H**ardware **D**escription **L**anguages are Verilog and VHDL (the toolchain we are using only supports Verilog).
@@ -798,7 +799,7 @@ Value at 10000000: 0baf801e
 $ wishbone-tool 0x10000000 0x98765432
 $ wishbone-tool 0x10000000
 Value at 10000000: 98765432
-$ 
+$
 ```
 
 Aside from that, there's not much we can _do_ with this design.  But there's a lot of infrastructure there.  So let's add something.
@@ -856,3 +857,363 @@ csr_register,rgb_output,0xe0006800,1,rw
 We can use `wishbone-tool` to write values to `0xe0006800` and see them take effect immediately.
 
 You can see that it takes very little code to take a Signal from HDL and expose it on the Wishbone bus.
+
+## Working with LiteX and co-simulation with Renode
+
+LiteX used as the soft SoC on Fomu is a very robust and scalable soft SoC platform, capable of running both bare metal binaries, Zephyr and even Linux.
+
+It is also supported in [Renode](https://renode.io), which is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
+Renode is a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate.
+
+We will now se how a full-blown Zephyr RTOS can be run on LiteX in Renode, and then how this simulation can be interfaced with a Fomu for a useful HW/SW co-development workflow.
+
+> Note: Apart from RISC-V and LiteX platforms, Renode supports many other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html), which also includes a user manual and a few tutorials.
+> You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
+
+Keep in mind that all platforms and configurations in Renode used in this tutorial are contained in text/config files - you can also explore Renode's usage patterns by just inspecting those files for details.
+
+### Getting Renode
+
+Renode is available for Linux, macOS and Windows.
+
+On Linux and macOS, you need to have [Mono](https://www.mono-project.com) installed on your computer.
+You should follow the [Mono installation instructions](https://www.mono-project.com/download/stable/) and install the `mono-complete` package.
+
+On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) installed.
+
+Then you can either install Renode from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
+
+### Running Zephyr on LiteX/VexRiscv in Renode
+
+Zephyr is a very capable RTOS governed by a Linux Foundation subproject. It is very well supported on the RISC-V architecture, as well as in LiteX.
+
+#### Building a Zephyr application
+
+To install all the dependencies and prepare the environment for building the Zephyr application follow the official [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/getting_started/index.html) up to point 4.
+On Linux you can follow the instructions from the point 5 on installing the Software Development Toolchain.
+For other operating systems, if you followed the instructions from the `Required Software` section of this tutorial, you should have a toolchain in `PATH`.
+
+On macOS and Windows you also need to set some additional variables.
+
+For macOS:
+
+```bash
+export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+export CROSS_COMPILE=riscv64-unknown-elf-
+```
+
+For Windows:
+
+```
+set ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+set CROSS_COMPILE=riscv64-unknown-elf-
+```
+
+To build the `shell` demo application for the LiteX/VexRiscv board run the following commands on Linux and macOS:
+
+```bash
+cd ~/zephyrproject/zephyr
+source zephyr-env.sh
+west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
+```
+
+And on Windows:
+
+```
+cd %HOMEPATH%\zephyrproject\zephyr
+zephyr-env.cmd
+west build -p auto -b litex_vexriscv samples\subsys\shell\shell_module\
+```
+
+The resulting ELF file will be in `build/zephyr/zephyr.elf`.
+
+#### Run the app in Renode
+
+Start Renode using the `renode` command (or `./renode` if you built from sources).
+
+You will see a terminal window pop up, which is the Renode CLI, called the Monitor.
+
+In the Monitor type:
+
+```
+(monitor) $zephyr=@~/zephyrproject/zephyr/build/zephyr/zephyr.elf
+(monitor) include @scripts/single-node/litex_vexriscv_zephyr.resc
+(machine-0) start
+```
+
+You should see a new window pop up for the serial port.
+You should also see a Zephyr shell running.
+
+#### Debugging the app in Renode
+
+In general, debugging in Renode is done with GDB just like with a physical board - you connect to a debug port and execute GDB commands as usual. For details, see the [Renode debugging documentation](https://renode.readthedocs.io/en/latest/debugging/gdb.html).
+
+### Wishbone bridge between Renode and Fomu
+
+This part of the workshop is based on a [Renode, Fomu and Etherbone bridge example](https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html) from the Renode documentation.
+
+Just like we can access Fomu peripherals using `wishbone-tool`, we can also connect to a physical board from Renode, mapping a part of the memory space to be accessible via the Etherbone protocol.
+
+This is a very useful capability as it enables us to potentially simulate an advanced LiteX SoC system which would not normally fit in the FPGA (or e.g. take a long time to synthesize), and interface it with the remaining part of the physical system for I/O.
+
+#### Setting up the server
+
+Ensure your Fomu is plugged in and setup the Etherbone server.
+
+In the workshop directory execute the following commands (on Linux and macOS):
+
+```bash
+cd litex/deps/litex
+git checkout master && git pull # this will fetch newer LiteX, required to handle communication properly
+./litex_setup.py init  # this will clone dependencies
+export PYTHONPATH=`pwd`:`pwd`/litex:`pwd`/migen
+```
+
+When on Windows, run:
+
+```
+cd litex\deps\litex
+git checkout master && git pull
+litex_setup.py init
+set PYTHONPATH=%cd%;%cd%\litex;%cd%\migen
+```
+
+After this preparation, we are ready to start the server:
+
+```bash
+python3 litex/tools/litex_server.py --usb --usb-vid 0x1209 --usb-pid 0x5bf0
+```
+
+You should see the following output, confirming that the server is connected to Fomu:
+
+```
+LiteX remote server
+[CommUSB] vid: 0x1209 / pid: 0x5bf0 / tcp port: 1234
+```
+
+Now you can start Renode and setup the platform.
+
+#### Connecting from Renode
+
+Run `renode` and in the Monitor type:
+
+```
+(monitor) include @scripts/complex/fomu/renode_etherbone_fomu.resc
+(machine-0) start
+```
+
+The `litex_server.py` should print:
+
+```
+Connected with 127.0.0.1:<port>
+```
+
+You will also see a new window with a [shell application](https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a), that provides additional commands allowing you to control LEDs on Fomu.
+
+```bash
+uart:~$ led_toggle
+uart:~$ led_breathe
+```
+
+The `led_toggle` command controls the LED by turning it on and off.
+`led_breathe` makes the LED fade slowly in and out, creating a "breathe" effect.
+
+The script you loaded configures Renode to log all communication with Fomu. After issuing some commands in Zephyr's shell you'll see:
+
+```
+01:00:31.8276 [DEBUG] led: [cpu: 0x40000988] WriteUInt32 to 0x8 (unknown), value 0x7.
+01:00:31.8279 [DEBUG] led: [cpu: 0x40000990] WriteUInt32 to 0x4 (unknown), value 0x8.
+01:00:31.8290 [DEBUG] led: [cpu: 0x40000998] WriteUInt32 to 0x0 (unknown), value 0xC8.
+01:00:31.8298 [DEBUG] led: [cpu: 0x400009A0] WriteUInt32 to 0x4 (unknown), value 0x9.
+01:00:31.8301 [DEBUG] led: [cpu: 0x400009A8] WriteUInt32 to 0x0 (unknown), value 0xBA.
+01:00:31.8305 [DEBUG] led: [cpu: 0x400009B0] WriteUInt32 to 0x8 (unknown), value 0x6.
+01:00:31.8308 [DEBUG] led: [cpu: 0x400009B4] WriteUInt32 to 0x8 (unknown), value 0x7.
+01:00:31.8311 [DEBUG] led: [cpu: 0x400009BC] WriteUInt32 to 0x4 (unknown), value 0x5.
+01:00:31.8314 [DEBUG] led: [cpu: 0x400009C0] WriteUInt32 to 0x0 (unknown), value 0x0.
+01:00:31.8317 [DEBUG] led: [cpu: 0x400009C4] WriteUInt32 to 0x4 (unknown), value 0x6.
+01:00:31.8321 [DEBUG] led: [cpu: 0x400009C8] WriteUInt32 to 0x0 (unknown), value 0x0.
+01:00:31.8324 [DEBUG] led: [cpu: 0x400009D0] WriteUInt32 to 0x4 (unknown), value 0x2.
+01:00:31.8327 [DEBUG] led: [cpu: 0x400009D4] WriteUInt32 to 0x0 (unknown), value 0x0.
+01:00:31.8331 [DEBUG] led: [cpu: 0x400009DC] WriteUInt32 to 0x4 (unknown), value 0x3.
+01:00:31.8334 [DEBUG] led: [cpu: 0x400009E0] WriteUInt32 to 0x0 (unknown), value 0x0.
+01:00:31.8337 [DEBUG] led: [cpu: 0x400009E8] WriteUInt32 to 0x4 (unknown), value 0x1.
+01:00:31.8341 [DEBUG] led: [cpu: 0x400009F4] WriteUInt32 to 0x0 (unknown), value 0xFF.
+01:00:31.8344 [DEBUG] led: [cpu: 0x40000A08] WriteUInt32 to 0x4 (unknown), value 0xA.
+01:00:31.8347 [DEBUG] led: [cpu: 0x40000A0C] WriteUInt32 to 0x0 (unknown), value 0x0.
+01:00:31.8350 [DEBUG] led: [cpu: 0x40000A14] WriteUInt32 to 0x4 (unknown), value 0xB.
+01:00:31.8353 [DEBUG] led: [cpu: 0x40000A18] WriteUInt32 to 0x0 (unknown), value 0xFF.
+```
+
+You can interact with Fomu manually, via the Monitor.
+To do that, you first need to find the name of the peripheral that serves the connection to Fomu.
+
+Type in `peripherals` to see a list of all the elements of the emulated SoC.
+Look for `EtherBoneBridge` entry:
+
+```
+(machine-0) peripherals
+Available peripherals:
+  sysbus (SystemBus)
+  │
+  ├── cpu (VexRiscv)
+  │     Slot: 0
+  │
+  ├── ddr (MappedMemory)
+  │     <0x40000000, 0x4FFFFFFF>
+  │     <0xC0000000, 0xCFFFFFFF>
+  │
+  ├── eth (LiteX_Ethernet)
+  │   │ <0x60007800, 0x600078FF>
+  │   │ <0xE0007800, 0xE00078FF>
+  │   │ <0x30000000, 0x30001FFF>
+  │   │ <0xB0000000, 0xB0001FFF>
+  │   │ <0x60007000, 0x600077FF>
+  │   │ <0xE0007000, 0xE00077FF>
+  │   │
+  │   └── phy (EthernetPhysicalLayer)
+  │         Address: 0
+  │
+  ├── flash_mem (MappedMemory)
+  │     <0x20000000, 0x21FFFFFF>
+  │     <0xA0000000, 0xA1FFFFFF>
+  │
+  ├── led (EtherBoneBridge)
+  │     <0xE0006800, 0xE00068FF>
+  │
+  ├── mem (MappedMemory)
+  │     <0x00000000, 0x0003FFFF>
+  │     <0x80000000, 0x8003FFFF>
+  │
+  ├── spi (LiteX_SPI_Flash)
+  │   │ <0x60005000, 0x6000500F>
+  │   │ <0xE0005000, 0xE000500F>
+  │   │
+  │   └── flash (Micron_MT25Q)
+  │
+  ├── sram (MappedMemory)
+  │     <0x10000000, 0x1003FFFF>
+  │     <0x90000000, 0x9003FFFF>
+  │
+  ├── timer0 (LiteX_Timer)
+  │     <0x60002800, 0x60002843>
+  │     <0xE0002800, 0xE0002843>
+  │
+  └── uart (LiteX_UART)
+        <0x60001800, 0x600018FF>
+        <0xE0001800, 0xE00018FF>
+```
+
+The device that acts as a connector to Fomu is called `led` and is registered at `0xE0006800`:
+
+```
+  ├── led (EtherBoneBridge)
+  │     <0xE0006800, 0xE00068FF>
+```
+
+You can either use a full or relative address (via the `sysbus` or `led` objects, respectively) to communicate with the physical LED controller:
+
+```
+(machine-0) sysbus WriteDoubleWord 0xE0006804 0x1234 # writes 0x1234 to the given address
+(machine-0) led WriteDoubleWord 0x4 0x4321 # writes 0x4321 to 0xE0006800 + 0x4
+```
+
+Note: the above values are just an example and won't change the LED status in any visible way. If you want to enable "breathe" effect directly from the Monitor, see the necessary sequence in [the application source code](https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a).
+
+### Co-simulation using Verilator (Linux only)
+
+While connecting Renode to a real FPGA gives you some interesting possibilities in testing and debugging your gateware together with your software, there is another usage scenario which is completely hardware independent - connecting functional simulation of the base system in Renode with HDL simulation of a part of the system that is under development.
+
+To this end, Renode provides an integration layer for Verilator.
+A typical setup with Renode + Verilator consists of several components:
+
+* the 'verilated' HDL code itself (e.g. a UART peripheral),
+* Verilator integration library, [provided as a plugin to Renode](https://github.com/renode/renode/tree/master/src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary/src),
+* shim layer in C++ connecting the above.
+
+Currently Renode supports peripherals with the AXILite interface.
+Keep in mind that due to the abstract nature of bus operations in Renode, it doesn't matter what kind of bus is used on the hardware you want to simulate.
+
+In the Renode tree you will find an example with all the elements already prepared.
+To run it, start Renode and type:
+
+```
+(monitor) include @scripts/single-node/riscv_verilated_uartlite.resc
+(UARTLite) start
+```
+
+This script loads a RISC-V-based system with a verilated UARTLite.
+You can verify it by calling:
+
+```
+(UARTLite) sysbus WhatPeripheralIsAt 0x70000000
+Antmicro.Renode.Peripherals.Verilated.VerilatedUART
+```
+
+To inspect the communication with the UART, run:
+
+```
+(UARTLite) sysbus LogPeripheralAccess uart
+```
+
+You will see every read and write to the peripheral displayed in the Renode log.
+
+Please note that, despite not being a Renode-native model, the UART is also capable of displaying an analyzer window.
+This is because Renode adds a special support for UART-type peripherals, allowing you not only to connect bus lines, but also the TX and RX UART lines, to the Renode infrastructure.
+
+The HDL and integration layer for this UART peripheral is available on [Antmicro's GitHub](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
+
+To compile it manually, you need to have `ZeroMQ` (`libzmq3-dev` on Debian-like systems) and `Verilator` installed in your system.
+You also need to provide a full path to the `src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary` directory as the `INTEGRATION_DIR` environment variable.
+This means that you need to have a copy of Renode sources to build a verilated peripheral.
+
+With this set up, simply run `make`.
+
+#### Integration with verilated code
+
+Renode supports integration with Verilator via AXILite bus, but can be easily expanded to support other standards as well.
+
+We'll briefly take a look on the integration layer implemented in [sim-main.cpp](https://github.com/antmicro/renode-verilator-integration/blob/master/samples/uartlite/sim_main.cpp).
+
+First, the user has to decide on the bus type and peripheral type.
+These are provided by the integration library:
+
+```c
+#include "src/peripherals/uart.h"
+#include "src/buses/axilite.h"
+```
+
+A bus is a type declaring all the signals and how should they be handled on each transaction.
+These signals have to be connected to the signals in the HDL design:
+
+```
+void Init() {
+    AxiLite* bus = new AxiLite();
+
+    //=================================================
+    // Init bus signals
+    //=================================================
+    bus->clk = &top->clk;
+    bus->rst = &top->rst;
+    bus->awaddr = (unsigned long *)&top->awaddr;
+    bus->awvalid = &top->awvalid;
+    bus->awready = &top->awready;
+    bus->wdata = (unsigned long *)&top->wdata;
+    bus->wstrb = &top->wstrb;
+    bus->wvalid = &top->wvalid;
+    bus->wready = &top->wready;
+    bus->bresp = &top->bresp;
+    bus->bvalid = &top->bvalid;
+    bus->bready = &top->bready;
+    [...]
+```
+
+To handle the "external" communication, the user can either use the base `RenodeAgent` class of one of its derivatives: for example the `UART` type allows you to connect RX and TX signals:
+
+```
+    // Init peripheral
+    //=================================================
+    uart = new UART(bus, &top->txd, &top->rxd, prescaler);
+```
+
+For more details, see the [verilated uartlite repository](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
+
