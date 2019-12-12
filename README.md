@@ -457,7 +457,7 @@ The CPU in Fomu is built on LiteX, which places every device on a Wishbone bus. 
 
 ![Litex Design](img/litex-design.png "Fomu peripherals on the Wishbone bus")
 
-If you look at the diagram above, you can see that everything in the system is on the Wishbone bus.  The CPU is a bus master, and can initiate reads and writes.  The system's RAM is on the wishbone bus, and is currently located at address `0x10000000`.  The boot ROM is also on the bus, and is located at `0x00000000`.  There is also SPI flash which is memory-mapped, so when you load your program onto SPI it shows up on the Wishbone bus at offset `0x20040000`.
+If you look at the diagram above, you can see that everything in the system is on the Wishbone bus.  The CPU is a bus master, and can initiate reads and writes.  The system's RAM is on the wishbone bus, and is currently located at address `0x10000000`.  The boot ROM is also on the bus, and is located at `0x00000000`.  There is also SPI flash which is memory-mapped, so when you load your program onto the SPI flash it shows up on the Wishbone bus at offset `0x20040000`.
 
 The Configuration and Status Registers (CSRs) all show up at offset `0xe0000000`.  These are the registers we were accessing from Python.  Just like before, these special memory addresses correspond to control values.
 
