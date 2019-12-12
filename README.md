@@ -210,7 +210,7 @@ The ICE40UP5K at the heart of Fomu really controls everything, and this workshop
 
 ### Working with Fomu
 
-There is a default bootloader that runs when you plug in Fomu.  It is called `foboot`, and it presents itself as a DFU image.  Future versions of Fomu will include a bootloader that shows up as an external drive, however for now we're still using DFU.
+There is a default bootloader that runs when you plug in Fomu.  It is called `foboot`, and it presents itself as a DFU (Device Firmware Update) image.  Future versions of Fomu will include a bootloader that shows up as an external drive, however for now we're still using DFU.
 
 Verify the drivers were installed.  Plug in your Fomu now and see if you can see it using `dfu-util -l`:
 
