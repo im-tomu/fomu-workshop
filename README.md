@@ -1076,7 +1076,7 @@ You can either use a full or relative address (via the `sysbus` or `led` objects
 
 ### Co-simulation using Verilator
 
-> This part of the tutorial needs to be executed on a Linux host, with Renode compiled from sources.
+> This part of the tutorial needs to be executed on a Linux host.
 
 While connecting Renode to a real FPGA gives you some interesting possibilities in testing and debugging your gateware together with your software, there is another usage scenario which is completely hardware independent - connecting functional simulation of the base system in Renode with HDL simulation of a part of the system that is under development.
 
@@ -1121,6 +1121,7 @@ The HDL and integration layer for this UART peripheral is available on [Antmicro
 
 To compile it manually, you need to have `ZeroMQ` (`libzmq3-dev` on Debian-like systems) and `Verilator` installed in your system.
 You also need to provide a full path to the `src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary` directory as the `INTEGRATION_DIR` environment variable.
+This means that you need to have a copy of Renode sources to build a verilated peripheral.
 
 With this set up, simply run `make`.
 
@@ -1172,3 +1173,4 @@ To handle the "external" communication, the user can either use the base `Renode
 ```
 
 For more details, see the [verilated uartlite repository](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
+
