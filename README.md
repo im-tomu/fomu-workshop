@@ -451,7 +451,7 @@ The color should change immediately.  More information on these registers can be
 
 ## Fomu as a CPU
 
-The MicroPython interface is simply a RISC-V program.  It interacts with the RISC-V softcore by reading and writing memory directly.
+The MicroPython interface is simply a RISC-V program.  It interacts with the RISC-V softcore inside Fomu by reading and writing memory directly.
 
 The CPU in Fomu is built on LiteX, which places every device on a Wishbone bus.  This is a 32-bit internal bus that maps peripherals into memory.
 
