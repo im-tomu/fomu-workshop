@@ -646,7 +646,7 @@ There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` dire
 
 ## Hardware Description Languages
 
-The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
+The two most common **H**ardware **D**escription **L**anguages are Verilog and VHDL (the toolchain we are using only supports Verilog).
 
 ### Verilog
 
