@@ -364,7 +364,7 @@ This is a fully-functioning MicroPython shell.  Try running some simple commands
 
 ### Fomu Python Extensions
 
-Fomu has a few extended modules that you can use to interact with some of the hardware.  For example, the RGB LED has some predefined modes you can access.  These are all located under the `fomu` module.
+Fomu's MicroPython binary contains a few extended Python modules that you can use to interact with some of the hardware.  For example, the RGB LED has some predefined modes you can access.  These are all located under the `fomu` module.
 
 Import the `fomu` module and access the `rgb` block to change the mode to the predefined `error` mode:
 
@@ -430,7 +430,7 @@ The blinking LED is actually a hardware block from Lattice.  It has control regi
 
 ![ICE40 LEDD](img/ice40-ledd.png "Registers of the ICE40 RGB driver")
 
-There is a wrapper in Python that simplifies the process of writing to these registers.  The first argument is the register number, and the second argument is the value to write.
+There is a wrapper in Fomu's MicroPython that simplifies the process of writing to these registers.  The first argument is the register number, and the second argument is the value to write.
 
 For the `LEDDPWR` registers, the second argument determines the brightness, value ranges from 0 to 255.
 
