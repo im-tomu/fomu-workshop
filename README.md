@@ -885,14 +885,40 @@ On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.m
 
 #### Building a Zephyr application
 
-To install all the dependencies and prepare the environment for building the Zephyr application follow the official [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/getting_started/index.html) up to point 5.
+To install all the dependencies and prepare the environment for building the Zephyr application follow the official [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/getting_started/index.html) up to point 4.
+On Linux you can follow the instructions from the point 5 on installing the Software Development Toolchain.
+For other operating systems, if you followed the instructions from the `Required Software` section of this tutorial, you should have a toolchain in `PATH`.
 
-To build the `shell` demo application for the LiteX/VexRiscv board run the following commands:
+On macOS and Windows you also need to set some additional variables.
+
+For macOS:
+
+```bash
+export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+export CROSS_COMPILE=riscv64-unknown-elf-
+```
+
+For Windows:
+
+```
+set ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+set CROSS_COMPILE=riscv64-unknown-elf-
+```
+
+To build the `shell` demo application for the LiteX/VexRiscv board run the following commands on Linux and macOS:
 
 ```bash
 cd ~/zephyrproject/zephyr
 source zephyr-env.sh
 west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
+```
+
+And on Windows:
+
+```
+cd zephyrproject\zephyr
+zephyr-env.cmd
+west build -p auto -b litex_vexriscv samples\subsys\shell\shell_module\
 ```
 
 The resulting ELF file will be in `build/zephyr/zephyr.elf`.
@@ -926,13 +952,22 @@ Renode has a predefined scenario you can try to inspect different capabilities o
 
 Ensure your Fomu is plugged in and setup the Etherbone server.
 
-In the workshop directory execute the following commands:
+In the workshop directory execute the following commands (on Linux and macOS):
 
 ```bash
 cd litex/deps/litex
 git checkout master && git pull # this will fetch newer LiteX, required to handle communication properly
 ./litex_setup.py init  # this will clone dependencies
 export PYTHONPATH=`pwd`:`pwd`/litex:`pwd`/migen
+```
+
+When on Windows, run:
+
+```
+cd litex\deps\litex
+git checkout master && git pull
+litex_setup.py init
+set PYTHONPATH=%cd%;%cd%\litex;%cd%\migen
 ```
 
 After this preparation, we are ready to start the server:
