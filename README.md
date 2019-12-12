@@ -858,14 +858,14 @@ We can use `wishbone-tool` to write values to `0xe0006800` and see them take eff
 
 You can see that it takes very little code to take a Signal from HDL and expose it on the Wishbone bus.
 
-## Working with LiteX and co-simulation with Renode
+## Working with LiteX and (co-)simulation with Renode
 
 LiteX used as the soft SoC on Fomu is a very robust and scalable soft SoC platform, capable of running both bare metal binaries, Zephyr and even Linux.
 
 It is also supported in [Renode](https://renode.io), which is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
 Renode is a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate.
 
-We will now se how a full-blown Zephyr RTOS can be run on LiteX in Renode, and then how this simulation can be interfaced with a Fomu for a useful HW/SW co-development workflow.
+We will now see how a full-blown Zephyr RTOS can be run on LiteX in Renode, and then how this simulation can be interfaced with a Fomu for a useful HW/SW co-development workflow.
 
 > Note: Apart from RISC-V and LiteX platforms, Renode supports many other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html), which also includes a user manual and a few tutorials.
 > You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
@@ -883,7 +883,31 @@ On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.m
 
 Then you can either install Renode from [prebuilt packages](https://github.com/renode/renode#installation), or [compile it yourself](https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html).
 
-### Running Zephyr on LiteX/VexRiscv in Renode
+### Try out Renode quickly with precompiled LiteX demos
+
+Renode comes with several precompiled demos, which can be used to verify everything works for you before starting to compile and use your own software binaries.
+
+There are three demo scripts available:
+
+* `litex_vexriscv_micropython.resc`
+* `litex_vexriscv_zephyr.resc`
+* `litex_vexriscv_linux.resc`
+
+To run them, start Renode using the `renode` command (or `./renode` if you built from sources).
+
+You will see a terminal window pop up, which is the Renode CLI, called the Monitor.
+
+In the Monitor type:
+
+```
+(monitor) start @scripts/single-node/<script_name>
+```
+
+(where <script_name> is one of the above).
+
+Voila! A UART analyzer window should appear and you should see LiteX booting the respective binary.
+
+### Running your own Zephyr binary on LiteX/VexRiscv in Renode
 
 Zephyr is a very capable RTOS governed by a Linux Foundation subproject. It is very well supported on the RISC-V architecture, as well as in LiteX.
 
@@ -929,20 +953,19 @@ The resulting ELF file will be in `build/zephyr/zephyr.elf`.
 
 #### Run the app in Renode
 
-Start Renode using the `renode` command (or `./renode` if you built from sources).
+To run the app you just compiled, you basically need to replace the precomipled demo binary with the one you want, by setting the `zephyr` variable - see below.
 
-You will see a terminal window pop up, which is the Renode CLI, called the Monitor.
+Just like before, start Renode using the `renode` command (or `./renode` if you built from sources).
 
-In the Monitor type:
+You will see the Monitor, where you should type:
 
 ```
 (monitor) $zephyr=@~/zephyrproject/zephyr/build/zephyr/zephyr.elf
-(monitor) include @scripts/single-node/litex_vexriscv_zephyr.resc
-(machine-0) start
+(monitor) start @scripts/single-node/litex_vexriscv_zephyr.resc
 ```
 
 You should see a new window pop up for the serial port.
-You should also see a Zephyr shell running.
+In it, you should see the Zephyr interactive shell.
 
 #### Debugging the app in Renode
 
