@@ -465,7 +465,7 @@ You'll notice a "Bridge" in the diagram above.  This is an optional feature that
 
 ![Litex Design](img/wishbone-usb-debug-bridge.png "Wishbone USB debug bridge interface")
 
-This is a special USB packet we can generate to access the Wishbone bus from a host PC.  It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone.  These two primitives give us complete control over Fomu.
+The above image shows the structure of a special USB packet we can generate to access the Wishbone bus from a host PC.  It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone.  These two primitives give us complete control over Fomu.
 
 Recall these definitions from earlier:
 
