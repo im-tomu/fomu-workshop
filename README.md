@@ -880,7 +880,7 @@ You should follow the [Mono installation instructions](https://www.mono-project.
 
 On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) installed.
 
-### Running Zephyron LiteX/VexRiscv in Renode
+### Running Zephyr on LiteX/VexRiscv in Renode
 
 #### Building Zephyr application
 
