@@ -865,12 +865,11 @@ One of the ways to interact with Fomu and other LiteX-based platforms is to use 
 Renode is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment.
 It's a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate.
 
-Apart from RISC-V and LiteX platforms, Renode supports a broad range of other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html).
+Apart from RISC-V and LiteX platforms, Renode supports a broad range of other architectures and platforms, as described in the [documentation](https://renode.readthedocs.io/en/latest/introduction/supported-boards.html), which also includes a user manual and a few tutorials.
 
-You will find Renode documentation along with some tutorials on [ReadTheDocs](renode.readthedocs.io).
 You can also take a look at a [Video Tutorials section on Renode's website](https://renode.io/tutorials/).
 
-Keep in mind that all platforms and scenarios in Renode are describe as text files - feel free to inspect them for details!
+Keep in mind that all platforms and scenarios in Renode are described as text files - feel free to inspect them for details!
 
 ### Getting Renode
 
@@ -884,11 +883,11 @@ On Windows it's enough to have a fairly recent [.NET Framework](https://dotnet.m
 
 ### Running Zephyr on LiteX/VexRiscv in Renode
 
-#### Building Zephyr application
+#### Building a Zephyr application
 
-To install all the dependencies and prepare the environment for building Zephyr application follow the official [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/getting_started/index.html) up to point 5.
+To install all the dependencies and prepare the environment for building the Zephyr application follow the official [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/getting_started/index.html) up to point 5.
 
-To build the `shell` demo application for LiteX/VexRiscv board run the following commands:
+To build the `shell` demo application for the LiteX/VexRiscv board run the following commands:
 
 ```bash
 cd ~/zephyrproject/zephyr
@@ -896,11 +895,11 @@ source zephyr-env.sh
 west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
 ```
 
-Resulting ELF file will be `build/zephyr/zephyr.elf`.
+The resulting ELF file will be in `build/zephyr/zephyr.elf`.
 
 #### Run the app in Renode
 
-Start the `renode` command (or `./renode` if you built from sources).
+Start Renode using the `renode` command (or `./renode` if you built from sources).
 
 You will see a terminal window pop up, called the Monitor.
 
@@ -942,7 +941,7 @@ After this preparation, we are ready to start the server:
 python3 litex/tools/litex_server.py --usb --usb-vid 0x1209 --usb-pid 0x5bf0
 ```
 
-You should see the following output confirming that the server is connected to Fomu:
+You should see the following output, confirming that the server is connected to Fomu:
 
 ```
 LiteX remote server
@@ -974,7 +973,7 @@ uart:~$ led_breathe
 ```
 
 The `led_toggle` command controls the LED by turning it on and off.
-`led_breathe` enables the breathe effect of the LED.
+`led_breathe` makes the LED fade slowly in and out, creating a "breathe" effect.
 
 The script you loaded configures Renode to log all communication with Fomu. After issuing some commands in Zephyr's shell you'll see:
 
@@ -1068,7 +1067,7 @@ The device that acts as a connector to Fomu is called `led` and is registered at
   │     <0xE0006800, 0xE00068FF>
 ```
 
-You can either use full or relative address (via the `sysbus` or `led` objects, respectively) to communicate with the physical LED controller:
+You can either use a full or relative address (via the `sysbus` or `led` objects, respectively) to communicate with the physical LED controller:
 
 ```
 (machine-0) sysbus WriteDoubleWord 0xE0006804 0x1234 # writes 0x1234 to the given address
@@ -1079,17 +1078,17 @@ You can either use full or relative address (via the `sysbus` or `led` objects, 
 
 > This part of the tutorial needs to be executed on a Linux host, with Renode compiled from sources.
 
-While connecting Renode to a real FPGA gives you virtually endless possibilities in testing and debugging your software, sometimes it makes sense not to use hardware and rely on HDL simulator instead.
+While connecting Renode to a real FPGA gives you some interesting possibilities in testing and debugging your gateware together with your software, there is another usage scenario which is completely hardware independent - connecting functional simulation of the base system in Renode with HDL simulation of a part of the system that is under development.
 
-Renode provides an integration layer for Verilator.
-It consists of several components:
+To this end, Renode provides an integration layer for Verilator.
+A typical setup with Renode + Verilator consists of several components:
 
-* verilated HDL code,
-* integration library, [provided by Renode](https://github.com/renode/renode/tree/master/src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary/src),
-* shim layer in C++ joining the two parts together.
+* the 'verilated' HDL code itself (e.g. a UART peripheral),
+* Verilator integration library, [provided as a plugin to Renode](https://github.com/renode/renode/tree/master/src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary/src),
+* shim layer in C++ connecting the above.
 
-Currently Renode supports peripherals with AXILite interface.
-Keep in mind that due to abstract nature of bus operations in Renode, it doesn't matter what kind of bus is used on the hardware you want to simulate.
+Currently Renode supports peripherals with the AXILite interface.
+Keep in mind that due to the abstract nature of bus operations in Renode, it doesn't matter what kind of bus is used on the hardware you want to simulate.
 
 In the Renode tree you will find an example with all the elements already prepared.
 To run it, start Renode and type:
@@ -1115,8 +1114,7 @@ To inspect the communication with the UART, run:
 
 You will see every read and write to the peripheral displayed in the Renode log.
 
-
-Please note that this UART also has a terminal window opened, despite not being a Renode-native model.
+Please note that, despite not being a Renode-native model, the UART is also capable of displaying an analyzer window.
 This is because Renode adds a special support for UART-type peripherals, allowing you not only to connect bus lines, but also the TX and RX UART lines, to the Renode infrastructure.
 
 The HDL and integration layer for this UART peripheral is available on [Antmicro's GitHub](https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite).
