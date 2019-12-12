@@ -463,7 +463,7 @@ The Configuration and Status Registers (CSRs) all show up at offset `0xe0000000`
 
 You'll notice a "Bridge" in the diagram above.  This is an optional feature that we ship by default on Fomu.  It bridges the Wishbone bus to another device.  In our case, it makes Wishbone available over USB.
 
-![Litex Design](img/wishbone-usb-debug-bridge.png "Fomu peripherals on the Wishbone bus")
+![Litex Design](img/wishbone-usb-debug-bridge.png "Wishbone USB debug bridge interface")
 
 This is a special USB packet we can generate to access the Wishbone bus from a host PC.  It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone.  These two primitives give us complete control over Fomu.
 
