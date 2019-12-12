@@ -192,7 +192,7 @@ We will use an ICE40UP5K for this workshop.  This chip has a number of very nice
 1. **Warmboot capability**
 1. **Open toolchain**
 
-Many FPGAs have what's called block RAM, or BRAM.  This is frequently used to store data such as buffers, CPU register files, and large arrays of data.  This type of memory is frequently reused as RAM on many FPGAs.  The ICE40UP5K is unusual in that it also as 128 kilobytes of Single Ported RAM that can be used as memory for a softcore.  That means that, unlike other FPGAs, valuable block ram isn't taken up by system memory.
+Many FPGAs have what's called block RAM, or BRAM.  This is frequently used to store data such as buffers, CPU register files, and large arrays of data.  This type of memory is frequently reused as RAM on many FPGAs.  The ICE40UP5K is unusual in that it also as 128 kilobytes of Single Ported RAM that can be used as memory for a softcore (a term used for a CPU core running inside an FPGA, to differentiate it from a 'hard' - i.e. fixed chip - implementation).  That means that, unlike other FPGAs, valuable block RAM isn't taken up by system memory.
 
 Additionally, the ICE40 family of devices generally supports "warmboot" capability.  This enables us to have multiple designs live on the same FPGA and tell the FPGA to swap between them.
 
@@ -210,7 +210,7 @@ The ICE40UP5K at the heart of Fomu really controls everything, and this workshop
 
 ### Working with Fomu
 
-There is a default bootloader that runs when you plug in Fomu.  It is called `foboot`, and it presents itself as a DFU image.  Future versions of Fomu will include a bootloader that shows up as an external drive, however for now we're still using DFU.
+There is a default bootloader that runs when you plug in Fomu.  It is called `foboot`, and it presents itself as a DFU (Device Firmware Update) image.  Future versions of Fomu will include a bootloader that shows up as an external drive, however for now we're still using DFU.
 
 Verify the drivers were installed.  Plug in your Fomu now and see if you can see it using `dfu-util -l`:
 
@@ -240,7 +240,7 @@ Download [Zadig](https://zadig.akeo.ie/). Open Zadig. Under Options, select "Lis
 
 #### (Linux Only) Setting udev permissions
 
-In Linux, try running `sudo dfu-util -l` if that no longer get the error message you should add a `udev` rule as to give your user permission to the usb device.
+In Linux, try running `sudo dfu-util -l`, and if you get an error message, you should add a `udev` rule as to give your user permission to the usb device.
 
 ```
 sudo groupadd plugdev
@@ -314,7 +314,7 @@ $
 
 ## Python on Fomu
 
-You can load Python onto Fomu as an ordinary RISC-V binary.  It is located in the root of the Fomu workshop files.  Use `dfu-util` to load it:
+You can load [MicroPython](https://micropython.org/), a small Python implementation, onto Fomu as an ordinary RISC-V binary.  A precompiled binary is located in the root of the Fomu workshop files.  Use `dfu-util` to load it:
 
 ```sh
 $ dfu-util -D micropython-fomu.dfu
@@ -347,7 +347,7 @@ If you're on Linux, it will be called `ttyACM?`:
 $ screen /dev/ttyACM*
 ```
 
-If you're running a version of Windows earlier than Windows 10, you will need to install a driver for the serial port.  Open Zadag again and select `Fomu` from the dropdown list.  Install the driver for `USB Serial (CDC)`.   You can then use a program such as [Tera Term](https://tera-term.en.lo4d.com/download):  In Teraterm hit New Connection and select the "Serial Port"-Radio Button. If it is greyed out you might have to change your USB Port driver for the Fomu. See  Working with Fomu, above.
+If you're running a version of Windows earlier than Windows 10, you will need to install a driver for the serial port.  Open Zadag again and select `Fomu` from the dropdown list.  Install the driver for `USB Serial (CDC)`.  You can then use a program such as [Tera Term](https://tera-term.en.lo4d.com/download):  In Teraterm hit `New Connection` and select the `Serial Port` Radio Button.  If it is greyed out you might have to change your USB Port driver for the Fomu.  See [Working with Fomu](#working-with-fomu), above.
 
 ```powershell
 PS> ttermpro.exe
@@ -364,7 +364,7 @@ This is a fully-functioning MicroPython shell.  Try running some simple commands
 
 ### Fomu Python Extensions
 
-Fomu has a few extended modules that you can use to interact with some of the hardware.  For example, the RGB LED has some predefined modes you can access.  These are all located under the `fomu` module.
+Fomu's MicroPython binary contains a few extended Python modules that you can use to interact with some of the hardware.  For example, the RGB LED has some predefined modes you can access.  These are all located under the `fomu` module.
 
 Import the `fomu` module and access the `rgb` block to change the mode to the predefined `error` mode:
 
@@ -430,7 +430,7 @@ The blinking LED is actually a hardware block from Lattice.  It has control regi
 
 ![ICE40 LEDD](img/ice40-ledd.png "Registers of the ICE40 RGB driver")
 
-There is a wrapper in Python that simplifies the process of writing to these registers.  The first argument is the register number, and the second argument is the value to write.
+There is a wrapper in Fomu's MicroPython that simplifies the process of writing to these registers.  The first argument is the register number, and the second argument is the value to write.
 
 For the `LEDDPWR` registers, the second argument determines the brightness, value ranges from 0 to 255.
 
@@ -447,25 +447,25 @@ Try changing the color of the three LEDs:
 ```
 
 
-The color should change immediately.  More information on these registers can be found in the [iCE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
+The color should change immediately.  More information on these registers can be found in the [ICE40 LED Driver Usage Guide](reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf).
 
 ## Fomu as a CPU
 
-The MicroPython interface is simply a RISC-V program.  It interacts with the RISC-V softcore by reading and writing memory directly.
+The MicroPython interface is simply a RISC-V program.  It interacts with the RISC-V softcore inside Fomu by reading and writing memory directly.
 
 The CPU in Fomu is built on LiteX, which places every device on a Wishbone bus.  This is a 32-bit internal bus that maps peripherals into memory.
 
 ![Litex Design](img/litex-design.png "Fomu peripherals on the Wishbone bus")
 
-If you look at the diagram above, you can see that everything in the system is on the Wishbone bus.  The CPU is a bus master, and can initiate reads and writes.  The system's RAM is on the wishbone bus, and is currently located at address `0x10000000`.  The boot ROM is also on the bus, and is located at `0x00000000`.  There is also SPI flash which is memory-mapped, so when you load your program onto SPI it shows up on the Wishbone bus at offset `0x20040000`.
+If you look at the diagram above, you can see that everything in the system is on the Wishbone bus.  The CPU is a bus master, and can initiate reads and writes.  The system's RAM is on the wishbone bus, and is currently located at address `0x10000000`.  The boot ROM is also on the bus, and is located at `0x00000000`.  There is also SPI flash which is memory-mapped, so when you load your program onto the SPI flash it shows up on the Wishbone bus at offset `0x20040000`.
 
 The Configuration and Status Registers (CSRs) all show up at offset `0xe0000000`.  These are the registers we were accessing from Python.  Just like before, these special memory addresses correspond to control values.
 
 You'll notice a "Bridge" in the diagram above.  This is an optional feature that we ship by default on Fomu.  It bridges the Wishbone bus to another device.  In our case, it makes Wishbone available over USB.
 
-![Litex Design](img/wishbone-usb-debug-bridge.png "Fomu peripherals on the Wishbone bus")
+![Litex Design](img/wishbone-usb-debug-bridge.png "Wishbone USB debug bridge interface")
 
-This is a special USB packet we can generate to access the Wishbone bus from a host PC.  It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone.  These two primitives give us complete control over Fomu.
+The above image shows the structure of a special USB packet we can generate to access the Wishbone bus from a host PC.  It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone.  These two primitives give us complete control over Fomu.
 
 Recall these definitions from earlier:
 
@@ -604,9 +604,9 @@ INFO [wishbone_tool::server] accepting connections on 0.0.0.0:1234
 In a second window, run gdb on `riscv-blink.elf`:
 
 ```sh
- $ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:1234'
- GNU gdb (GDB) 8.2.90.20190228-git
- Copyright (C) 2019 Free Software Foundation, Inc.
+$ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:1234'
+GNU gdb (GDB) 8.2.90.20190228-git
+Copyright (C) 2019 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -647,7 +647,7 @@ There is an additional RISC-V demo in the workshop.  The `riscv-usb-cdcacm` dire
 
 ## Hardware Description Languages
 
-The two most common **H**ardware **D**escription **Language** are Verilog and VHDL (the toolchain we are using only supports Verilog).
+The two most common **H**ardware **D**escription **L**anguages are Verilog and VHDL (the toolchain we are using only supports Verilog).
 
 ### Verilog
 
