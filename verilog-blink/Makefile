@@ -16,9 +16,17 @@ RM         = rm -rf
 COPY       = cp -a
 PATH_SEP   = /
 ifeq ($(OS),Windows_NT)
+# When SHELL=sh.exe and this actually exists, we're able to run
+# the `which` command.  Under these circumstances, the cmd.exe
+# equivalents "copy" and "del" don't work.  Additionally, the
+# path separator can mess things up.
+# Therefore, if we're running under Windows but have a valid `sh.exe`,
+# don't use the Windows equivalents.
+ifneq (, $(shell which $(SHELL)))
 COPY       = copy
 RM         = del
 PATH_SEP   = \\
+endif
 endif
 
 ifeq ($(FOMU_REV),evt3)
