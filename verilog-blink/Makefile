@@ -16,17 +16,17 @@ RM         = rm -rf
 COPY       = cp -a
 PATH_SEP   = /
 ifeq ($(OS),Windows_NT)
-# When SHELL=sh.exe and this actually exists, we're able to run
-# the `which` command.  Under these circumstances, the cmd.exe
-# equivalents "copy" and "del" don't work.  Additionally, the
-# path separator can mess things up.
-# Therefore, if we're running under Windows but have a valid `sh.exe`,
-# don't use the Windows equivalents.
-ifneq (, $(shell which $(SHELL)))
+# When SHELL=sh.exe and this actually exists, make will silently
+# switch to using that instead of cmd.exe.  Unfortunately, there's
+# no way to tell which environment we're running under without either
+# (1) printing out an error message, or (2) finding something that
+# works everywhere.
+# As a result, we force the shell to be cmd.exe, so it works both
+# under cygwin and normal Windows.
+SHELL      = cmd.exe
 COPY       = copy
 RM         = del
 PATH_SEP   = \\
-endif
 endif
 
 ifeq ($(FOMU_REV),evt3)
