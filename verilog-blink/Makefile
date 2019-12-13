@@ -67,10 +67,6 @@ run: $(TARGET)
 run-dfu: $(PACKAGE).dfu
 	dfu-util -D $(PACKAGE).dfu
 
-$(PACKAGE).dfu: $(TARGET)
-	cp $(PACKAGE).bin $@
-	$(QUIET) dfu-suffix -v 1209 -p 70b1 -a $@
-
 $(BUILD_DIR)/$(PACKAGE).json: $(VSOURCES) | $(BUILD_DIR)
 	$(QUIET) echo " SYNTH    $@"
 	$(QUIET) $(YOSYS) $(YOSYSFLAGS) -p 'synth_ice40 -top $(TOP) -json $@' $(PACKAGE).v
