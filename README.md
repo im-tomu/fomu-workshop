@@ -36,8 +36,35 @@ FPGAs are complex, weird things, so we'll take a gentle approach and start out b
 * TOC
 {:toc}
 
-
 ## Requirements
+
+### Required Hardware
+
+For this workshop, you will need a Fomu board.
+This workshop may be competed with any model of Fomu, though there are some parts that require you to identify which model you have:
+
+|                  | Hacker | Production |
+| ---------------- | ------ | ---------- |
+| **String**       | hacker | pvt        |
+| **Bash Command** | `export FOMU_REV=hacker` | `export FOMU_REV=pvt` |
+| **Front**        | ![Hacker Hardware Front with case  ](img/hw-hacker-front-bare-small.jpg "Photo of the front of a Fomu Hacker with case")   | ![Production Hardware Front without case](img/hw-pvt-front-bare-small.jpg "Photo of the front of a Fomu Production without case")    |
+| **Back**         | ![Hacker Hardware Back without case](img/hw-hacker-back-bare-small.jpg  "Photo of the back of a Fomu Hacker without case") | ![Production Hardware Back without case ](img/hw-pvt-back-bare-small.jpg  "Photo of the back of a Fomu Production without case")  |
+| **In Case**      | ![Hacker Hardware Back with case   ](img/hw-hacker-back-case-small.jpg  "Photo of the back of a Fomu Hacker with case")    | ![Production Hardware Back with case    ](img/hw-pvt-back-case-small.jpg  "Photo of the back of a Fomu Production with case")     |
+| **Color**        | <span style="background-color: #051b70;">dark blue</span> | <span style="background-color: #03b1c4;">cyan / light blue</span> |
+| **Bootloader**   | Fomu **Hacker** running DFU Bootloader vX.X.X | Fomu **PVT** running DFU Bootloader vX.X.X |
+| **Description**  | These are the original design and cut corners to make it easier to manufacture. If you received one directly from Tim before 36C3, you probably have one of these. Hacker boards have white silkscreen on the back. | If you ordered a Fomu from Crowd Supply, this is the model you'll receive. It is small, and fits in a USB port. There is no silkscreen on it. This model of Fomu has a large silver crystal oscillator that is the tallest component on the board. |
+| **Received at**  | From Tim at 35C3, CCCamp19, HackADay Supercon 2019 | At RISC-V Summit 2019, 36C3, Crowdsupply, Mouser |
+| **Buy more**     | End of Life | [CrowdSupply](https://j.mp/fomu-cs), [Mouser](https://www.mouser.com/ProductDetail/Crowd-Supply/cs-fomu-01?qs=sGAEpiMZZMve4%2FbfQkoj%252BLGf4NUSlZIPJeHn1wSuOWc%3D) |
+
+Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing `dfu-util -l` and noting the version number.
+
+Aside from that, you need a computer with a USB port that can run the toolchain software. You should not need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
+
+> There are also Fomu EVT boards which were shipped to early backers of the
+> Fomu crowd funding campaign. This model of Fomu is about the size of a credit
+> card. It should have the text "Fomu EVT3" written across it in white
+> silkscreen. If you have a different EVT board such as EVT2 or EVT1, they
+> should work also.
 
 ### Required Files
 
@@ -109,21 +136,6 @@ Ensure it says **(Fomu build)**.  Type `exit` to quit `yosys`.
 > | **[wishbone-tool](https://github.com/xobs/wishbone-utils/)** | Interact with Fomu over USB |
 > | **serial console** | Interact with Python over a virtual console |
 
-
-### Required Hardware
-
-For this workshop, you will need a Fomu board. This workshop may be competed with any model of Fomu, though there are some parts that require you to identify which model you have:
-
-1. **Fomu EVT3**: This model of Fomu is about the size of a credit card. It should have the text "Fomu EVT3" written across it in white silkscreen. If you have a different EVT board such as EVT2 or EVT1, they should work also.
-1. **Fomu PVT1**: If you ordered a Fomu from Crowd Supply, this is the model you'll receive. It is small, and fits in a USB port. There is no silkscreen on it. This model of Fomu has a large silver crystal oscillator that is the tallest component on the board.
-1. **Fomu Hacker**: These are the original design and are easiest to manufacture. If you received one directly from Tim, you probably have one of these. Hacker boards have white silkscreen on the back.
-   ![Hacker Hardware Front with case](img/hw-hacker-front-case-small.jpg "Photo of the front of a Fomu Hacker with case")
-   ![Hacker Hardware Back with case](img/hw-hacker-back-case-small.jpg "Photo of the back of a Fomu Hacker with case")
-   ![Hacker Hardware Back without case](img/hw-hacker-back-bare-small.jpg "Photo of the back of a Fomu Hacker without case")
-
-Your Fomu should be running Foboot v1.8.7 or newer. You can see what version you are running by typing `dfu-util -l` and noting the version number.
-
-Aside from that, you need a computer with a USB port that can run the toolchain software. You should not need any special drivers, though on Linux you may need sudo access, or special udev rules to grant permission to use the USB device from a non-privileged account.
 
 ## Background
 
@@ -657,8 +669,10 @@ The canonical "Hello, world!" of hardware is to blink an LED.  The directory `ve
 
 Enter the `verilog-blink` directory and build the `verilog-blink` demo by using `make`:
 
+**Make sure you set the `FOMU_REV` value to match your hardware! See the Required Hardware section.**
+
 ```sh
-$ make FOMU_REV=hacker
+$ make FOMU_REV=$FOMU_REV
 ...
 Info: Max frequency for clock 'clk': 79.76 MHz (PASS at 12.00 MHz)
 
@@ -690,7 +704,7 @@ Info: [ 78146,  78596) |
 Info: [ 78596,  79046) |*************************
 4 warnings, 0 errors
  PACK     blink.bin
-Built 'blink' for Fomu hacker
+Built 'blink' for Fomu XXXXX
 $
 ```
 
@@ -724,7 +738,7 @@ We can use `DummyUsb` to respond to USB requests and bridge USB to Wishbone, and
 Go to the `litex` directory and build the design;
 
 ```sh
-$ python3 workshop.py --board hacker
+$ python3 workshop.py --board $FOMU_REV
 lxbuildenv: v2019.8.19.1 (run .\workshop.py --lx-help for help)
 lxbuildenv: Skipping git configuration because "skip-git" was found in LX_CONFIGURATION
 lxbuildenv: To fetch from git, run .\workshop.py --placer heap --lx-check-git
