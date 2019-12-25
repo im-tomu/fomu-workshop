@@ -151,7 +151,7 @@ repository. You can download
 `master.zip <https://github.com/im-tomu/fomu-workshop/archive/master.zip>`__
 or clone it from git:
 
-.. prompt:: bash
+.. prompt:: bash $
 
    git clone --recurse-submodules https://github.com/im-tomu/fomu-workshop.git
 
@@ -178,23 +178,23 @@ open up a terminal window and add that directory to your PATH:
 
    .. group-tab:: MacOS X
 
-      .. prompt:: bash
+      .. prompt:: bash $
 
          export PATH=[path-to-toolchain]/bin:$PATH
 
    .. group-tab:: Linux
 
-      .. prompt:: bash
+      .. prompt:: bash $
 
          export PATH=[path-to-toolchain]/bin:$PATH
 
    .. group-tab:: Windows
 
-      .. prompt:: text
+      .. prompt:: text >
 
          $ENV:PATH = "[path-to-toolchain]\bin;" + $ENV:PATH
 
-      .. prompt:: text
+      .. prompt:: text >
 
          PATH=[path-to-toolchain]\bin;%PATH%
 
@@ -465,7 +465,7 @@ in is ``1209:5bf0``.
          message, you should add a ``udev`` rule as to give your user permission
          to the usb device.
 
-         .. prompt:: bash
+         .. prompt:: bash $
 
              sudo groupadd plugdev
              sudo usermod -a -G plugdev $USER
@@ -483,7 +483,7 @@ in is ``1209:5bf0``.
 
          You can reload the udev-rules using the following:
 
-         .. prompt:: bash
+         .. prompt:: bash $
 
             sudo udevadm control --reload-rules
             sudo udevadm trigger
@@ -632,7 +632,7 @@ Use ``dfu-util`` to load it:
 
 You should be greeted with a MicroPython banner and REPL:
 
-.. prompt:: python
+.. prompt:: python >>> auto
 
    MicroPython v1.10-299-g8603316 on 2019-08-19; fomu with vexriscv
    >>>
