@@ -26,6 +26,5 @@ Table of Contents
    background
    python
    riscv
-   verilog
-   migen
+   hdl
    renode
