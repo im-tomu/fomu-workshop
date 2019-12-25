@@ -1,5 +1,6 @@
-Fomu Workshop
-=============
+
+FPGA Tomu Workshop
+==================
 
 .. image:: ../img/logo.png
    :alt: Fomu logo
@@ -15,14 +16,6 @@ take a break at any time and explore! Stop when you feel the concepts
 are too unfamiliar, or plough on and dig deep into the world of
 hardware.
 
-Table of Contents
------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
 Requirements
 ------------
 
@@ -33,92 +26,44 @@ For this workshop, you will need a Fomu board. This workshop may be
 competed with any model of Fomu, though there are some parts that
 require you to identify which model you have:
 
-+-----------------------------------+------------+---------------------+
-|                                   | Hacker     | Production          |
-+===================================+============+=====================+
-| **String**                        | hacker     | pvt                 |
-+-----------------------------------+------------+---------------------+
-| **Bash Command**                  | ``export F | ``export FOMU_REV=p |
-|                                   | OMU_REV=ha | vt``                |
-|                                   | cker``     |                     |
-+-----------------------------------+------------+---------------------+
-| **Front**                         | |Hacker    | |Production         |
-|                                   | Hardware   | Hardware Front      |
-|                                   | Front with | without case|       |
-|                                   | case|      |                     |
-+-----------------------------------+------------+---------------------+
-| **Back**                          | |Hacker    | |Production         |
-|                                   | Hardware   | Hardware Back       |
-|                                   | Back       | without case|       |
-|                                   | without    |                     |
-|                                   | case|      |                     |
-+-----------------------------------+------------+---------------------+
-| **In Case**                       | |Hacker    | |Production         |
-|                                   | Hardware   | Hardware Back with  |
-|                                   | Back with  | case|               |
-|                                   | case|      |                     |
-+-----------------------------------+------------+---------------------+
-| **Partse**                        | |Hacker    | |Production         |
-|                                   | Hardware   | Hardware Annotated  |
-|                                   | Annotated  | Diagram|            |
-|                                   | Diagram|   |                     |
-+-----------------------------------+------------+---------------------+
-| **Color**                         | dark blue  | cyan / light blue   |
-+-----------------------------------+------------+---------------------+
-| **Bootloader**                    | Fomu       | Fomu **PVT**        |
-|                                   | **Hacker** | running DFU         |
-|                                   | running    | Bootloader vX.X.X   |
-|                                   | DFU        |                     |
-|                                   | Bootloader |                     |
-|                                   | vX.X.X     |                     |
-+-----------------------------------+------------+---------------------+
-| **Description**                   | These are  | If you ordered a    |
-|                                   | the        | Fomu from Crowd     |
-|                                   | original   | Supply, this is the |
-|                                   | design and | model you’ll        |
-|                                   | cut        | receive. It is      |
-|                                   | corners to | small, and fits in  |
-|                                   | make it    | a USB port. There   |
-|                                   | easier to  | is no silkscreen on |
-|                                   | manufactur | it. This model of   |
-|                                   | e.         | Fomu has a large    |
-|                                   | If you     | silver crystal      |
-|                                   | received   | oscillator that is  |
-|                                   | one        | the tallest         |
-|                                   | directly   | component on the    |
-|                                   | from Tim   | board.              |
-|                                   | before     |                     |
-|                                   | 36C3, you  |                     |
-|                                   | probably   |                     |
-|                                   | have one   |                     |
-|                                   | of these.  |                     |
-|                                   | Hacker     |                     |
-|                                   | boards     |                     |
-|                                   | have white |                     |
-|                                   | silkscreen |                     |
-|                                   | on the     |                     |
-|                                   | back.      |                     |
-+-----------------------------------+------------+---------------------+
-| **Received at**                   | From Tim   | At RISC-V Summit    |
-|                                   | at 35C3,   | 2019, 36C3,         |
-|                                   | CCCamp19,  | Crowdsupply, Mouser |
-|                                   | HackADay   |                     |
-|                                   | Supercon   |                     |
-|                                   | 2019       |                     |
-+-----------------------------------+------------+---------------------+
-| **Buy more**                      | End of     | `CrowdSupply <https |
-|                                   | Life       | ://j.mp/fomu-cs>`__ |
-|                                   |            | ,                   |
-|                                   |            | `Mouser <https://ww |
-|                                   |            | w.mouser.com/Produc |
-|                                   |            | tDetail/Crowd-Suppl |
-|                                   |            | y/cs-fomu-01?qs=sGA |
-|                                   |            | EpiMZZMve4%2FbfQkoj |
-|                                   |            | %252BLGf4NUSlZIPJeH |
-|                                   |            | n1wSuOWc%3D>`__     |
-+-----------------------------------+------------+---------------------+
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+|                   | Hacker                                                                  | Production                                                        |
++===================+=========================================================================+===================================================================+
+| **String**        | hacker                                                                  | pvt                                                               |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Bash Command**  | ``export FOMU_REV=hacker``                                              | ``export FOMU_REV=pvt``                                           |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Front**         | |Hacker Hardware Front without case|                                    | |Production Hardware Front without case|                          |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Back**          | |Hacker Hardware Back without case|                                     | |Production Hardware Back without case|                           |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **In Case**       | |Hacker Hardware Back with case|                                        | |Production Hardware Back with case|                              |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Parts**         | |Hacker Hardware Annotated Diagram|                                     | |Production Hardware Annotated Diagram|                           |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Color**         | |Dark Blue|                                                             | |Cyan Light Blue|                                                 |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Bootloader**    | Fomu **Hacker** running DFU Bootloader vX.X.X                           | Fomu **PVT** running DFU Bootloader vX.X.X                        |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Description**   | These are the original design and cut corners to make it easier to      | If you ordered a Fomu from Crowd Supply, this is the model you'll |
+|                   | manufacture. If you received one directly from Tim before 36C3, you     | receive. It is small, and fits in a USB port. There is no         |
+|                   | probably have one of these. Hacker boards have white silkscreen on      | silkscreen on it. This model of Fomu has a large silver crystal   |
+|                   | the back.                                                               | oscillator that is the tallest component on the board.            |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Received at**   | From Tim at 35C3, CCCamp19, HackADay Supercon 2019                      | At RISC-V Summit 2019, 36C3, Crowdsupply, Mouser                  |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
+| **Buy more**      | End of Life                                                             | `CrowdSupply <https://j.mp/fomu-cs>`__,                           |
++-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 
-.. |Hacker Hardware Front with case| image:: ../img/hw-hacker-front-bare-small.jpg
+.. |Dark Blue| raw:: html
+
+    <span style="background-color: #051b70; color: white;">dark blue</span>
+
+.. |Cyan Light Blue| raw:: html
+
+    <span style="background-color: #03b1c4;">cyan / light blue</span>
+
+.. |Hacker Hardware Front without case| image:: ../img/hw-hacker-front-bare-small.jpg
 .. |Production Hardware Front without case| image:: ../img/hw-pvt-front-bare-small.jpg
 .. |Hacker Hardware Back without case| image:: ../img/hw-hacker-back-bare-small.jpg
 .. |Production Hardware Back without case| image:: ../img/hw-pvt-back-bare-small.jpg
