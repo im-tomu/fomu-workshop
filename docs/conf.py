@@ -44,7 +44,6 @@ extensions = [
     'sphinxcontrib_verilog_diagrams',
     'sphinx_tabs.tabs',
     'sphinx-prompt',
-    'm2r',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -52,7 +51,7 @@ templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-source_suffix = ['.rst', '.md']
+source_suffix = ['.rst']
 
 # The master toctree document.
 master_doc = 'index'
@@ -146,7 +145,7 @@ html_theme_options = {
     # (Default: indigo)
     'primary_color': 'blue',
     # Values: Same as primary_color. (Default: pink)
-    'accent_color': 'cyan',
+    'accent_color': 'orange',
 
     # Customize layout.
     # For details see link.

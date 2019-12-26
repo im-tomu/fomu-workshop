@@ -63,6 +63,8 @@ toolchain software. You should not need any special drivers, though on
 Linux you may need sudo access, or special udev rules to grant
 permission to use the USB device from a non-privileged account.
 
+.. note::
+
    There are also Fomu EVT boards which were shipped to early backers of
    the Fomu crowd funding campaign. This model of Fomu is about the size
    of a credit card. It should have the text “Fomu EVT3” written across
@@ -160,35 +162,33 @@ the following output;
 
 Ensure it says **(Fomu build)**. Type ``exit`` to quit ``yosys``.
 
-   The `Fomu
-   Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`__
+.. note::
+
+   The `Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`__
    consists of the following tools;
 
-   +-----------------------------------+-----------------------------------+
-   | Tool                              | Purpose                           |
-   +===================================+===================================+
-   | `yosys <https://github.com/YosysH | Verilog synthesis                 |
-   | Q/yosys>`__                       |                                   |
-   +-----------------------------------+-----------------------------------+
-   | `nextpnr-ice40 <https://github.co | FPGA place-and-route              |
-   | m/YosysHQ/nextpnr>`__             |                                   |
-   +-----------------------------------+-----------------------------------+
-   | `icestorm <https://github.com/cli | FPGA bitstream packing            |
-   | ffordwolf/icestorm>`__            |                                   |
-   +-----------------------------------+-----------------------------------+
-   | `riscv                            | Compile code for a RISC-V         |
-   | toolchain <https://www.sifive.com | softcore                          |
-   | /boards/>`__                      |                                   |
-   +-----------------------------------+-----------------------------------+
-   | `dfu-util <https://dfu-util.sourc | Load a bitstream or code onto     |
-   | eforge.net/>`__                   | Fomu                              |
-   +-----------------------------------+-----------------------------------+
-   | `python <https://python.org/>`__  | Convert Migen/Litex code to       |
-   |                                   | Verilog                           |
-   +-----------------------------------+-----------------------------------+
-   | `wishbone-tool <https://github.co | Interact with Fomu over USB       |
-   | m/xobs/wishbone-utils/>`__        |                                   |
-   +-----------------------------------+-----------------------------------+
-   | **serial console**                | Interact with Python over a       |
-   |                                   | virtual console                   |
-   +-----------------------------------+-----------------------------------+
+   ============================================================= =============================================
+   Tool                                                          Purpose
+   ============================================================= =============================================
+   `yosys <https://github.com/YosysHQ/yosys>`__                  Verilog synthesis
+   `nextpnr-ice40 <https://github.com/YosysHQ/nextpnr>`__        FPGA place-and-route
+   `icestorm <https://github.com/cliffordwolf/icestorm>`__       FPGA bitstream packing
+   `riscv toolchain <https://www.sifive.com/boards/>`__          Compile code for a RISC-V softcore
+   `dfu-util <https://dfu-util.sourceforge.net/>`__              Load a bitstream or code onto Fomu
+   `python <https://python.org/>`__                              Convert Migen/Litex code to Verilog
+   `wishbone-tool <https://github.com/xobs/wishbone-utils/>`__   Interact with Fomu over USB
+   **serial console**                                            Interact with Python over a virtual console
+   ============================================================= =============================================
+
+============================================================= =============================================
+Tool                                                          Purpose
+============================================================= =============================================
+`yosys <https://github.com/YosysHQ/yosys>`__                  Verilog synthesis
+`nextpnr-ice40 <https://github.com/YosysHQ/nextpnr>`__        FPGA place-and-route
+`icestorm <https://github.com/cliffordwolf/icestorm>`__       FPGA bitstream packing
+`riscv toolchain <https://www.sifive.com/boards/>`__          Compile code for a RISC-V softcore
+`dfu-util <https://dfu-util.sourceforge.net/>`__              Load a bitstream or code onto Fomu
+`python <https://python.org/>`__                              Convert Migen/Litex code to Verilog
+`wishbone-tool <https://github.com/xobs/wishbone-utils/>`__   Interact with Fomu over USB
+**serial console**                                            Interact with Python over a virtual console
+============================================================= =============================================
