@@ -105,7 +105,7 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_materialdesign_theme'
+html_theme = 'sphinx_symbiflow_theme'
 
 # Html logo in drawer.
 # Fit in the drawer at the width of image is 240 px.
@@ -164,6 +164,7 @@ html_theme_options = {
     # Render footer.
     # Values: True, False (Default: True)
     'show_footer': True
+
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -178,12 +179,12 @@ html_static_path = ['_static']
 # defined by theme itself.  Builtin themes are using these templates by
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
-html_sidebars = {
-    '**': [
-        'relations.html',  # needs 'show_related': True theme option to display
-        'searchbox.html',
-    ]
-}
+#html_sidebars = {
+#    '**': [
+#        'relations.html',  # needs 'show_related': True theme option to display
+#        'searchbox.html',
+#    ]
+#}
 
 
 # -- Options for HTMLHelp output ---------------------------------------------

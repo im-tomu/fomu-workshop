@@ -179,16 +179,3 @@ Ensure it says **(Fomu build)**. Type ``exit`` to quit ``yosys``.
    `wishbone-tool <https://github.com/xobs/wishbone-utils/>`__   Interact with Fomu over USB
    **serial console**                                            Interact with Python over a virtual console
    ============================================================= =============================================
-
-============================================================= =============================================
-Tool                                                          Purpose
-============================================================= =============================================
-`yosys <https://github.com/YosysHQ/yosys>`__                  Verilog synthesis
-`nextpnr-ice40 <https://github.com/YosysHQ/nextpnr>`__        FPGA place-and-route
-`icestorm <https://github.com/cliffordwolf/icestorm>`__       FPGA bitstream packing
-`riscv toolchain <https://www.sifive.com/boards/>`__          Compile code for a RISC-V softcore
-`dfu-util <https://dfu-util.sourceforge.net/>`__              Load a bitstream or code onto Fomu
-`python <https://python.org/>`__                              Convert Migen/Litex code to Verilog
-`wishbone-tool <https://github.com/xobs/wishbone-utils/>`__   Interact with Fomu over USB
-**serial console**                                            Interact with Python over a virtual console
-============================================================= =============================================
