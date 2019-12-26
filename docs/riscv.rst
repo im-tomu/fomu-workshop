@@ -172,7 +172,7 @@ appears solid. First, reboot Fomu by running
 ``wishbone-tool 0xe0006000 0xac``. Next, apply the following patch to
 ``src/main.c``:
 
-.. code:: patch
+.. code:: diff
 
    --- a/riscv-blink/src/main.c
    +++ b/riscv-blink/src/main.c
