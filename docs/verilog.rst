@@ -16,7 +16,7 @@ demo by using ``make``:
 **Make sure you set the ``FOMU_REV`` value to match your hardware! See
 the Required Hardware section.**
 
-.. prompt:: bash $ auto
+.. session::
 
    $ make FOMU_REV=$FOMU_REV
    ...

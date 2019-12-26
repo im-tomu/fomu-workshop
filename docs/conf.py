@@ -37,13 +37,13 @@ author = 'Tomu Project Authors'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.intersphinx',
+#    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'symbolator_sphinx',
     'sphinxcontrib_verilog_diagrams',
     'sphinx_tabs.tabs',
-    'sphinx-prompt',
+    'sphinxcontrib_session',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

@@ -102,7 +102,7 @@ kilobytes long and is located at ``0x10000000``, just as when we had a
 CPU. You can also see the timer, which is a feature that comes as part
 of LiteX. Let’s try reading and writing RAM:
 
-.. prompt:: bash $ auto
+.. session::
 
    $ wishbone-tool 0x10000000
    Value at 10000000: 0baf801e

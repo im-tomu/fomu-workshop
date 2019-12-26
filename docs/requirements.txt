@@ -1,21 +1,28 @@
 docutils
-sphinx
+sphinx>=2.3.1
 sphinx-autobuild
 
 # Better looking Sphinx theme
 # sphinx_materialdesign_theme
 git+http://github.com/SymbiFlow/sphinx_materialdesign_theme.git@master#egg=sphinx_symbiflow_theme
 
-# Markdown support
-m2r
-
 # Support tabs for Linux / Mac / Windows
 sphinx_tabs
 
 # Support copying without prompts.
-sphinx-prompt
+git+https://github.com/mithro/sphinxcontrib-session.git#egg=sphinxcontrib-session
 
-# Symbols from Verilog
+# C API
+# --------------------------------------
+
+
+# HDL specific functionality
+# --------------------------------------
+
+# Wavedrom diagrams!
+sphinxcontrib-wavedrom
+
+# Model diagrams from Verilog code.
 symbolator
 
 # Verilog diagrams using Yosys + netlistsvg

@@ -80,9 +80,9 @@ repository. You can download
 `master.zip <https://github.com/im-tomu/fomu-workshop/archive/master.zip>`__
 or clone it from git:
 
-.. prompt:: bash $
+.. session::
 
-   git clone --recurse-submodules https://github.com/im-tomu/fomu-workshop.git
+   $ git clone --recurse-submodules https://github.com/im-tomu/fomu-workshop.git
 
 If you’re attending a workshop that provides USB drives, these files may
 be available on the USB drive under the ``Workshop`` directory.
@@ -107,23 +107,23 @@ open up a terminal window and add that directory to your PATH:
 
    .. group-tab:: MacOS X
 
-      .. prompt:: bash $
+      .. code:: console
 
-         export PATH=[path-to-toolchain]/bin:$PATH
+         $ export PATH=[path-to-toolchain]/bin:$PATH
 
    .. group-tab:: Linux
 
-      .. prompt:: bash $
+      .. session::
 
-         export PATH=[path-to-toolchain]/bin:$PATH
+         $ export PATH=[path-to-toolchain]/bin:$PATH
 
    .. group-tab:: Windows
 
-      .. prompt:: text >
+      .. session::
 
          $ENV:PATH = "[path-to-toolchain]\bin;" + $ENV:PATH
 
-      .. prompt:: text >
+      .. session::
 
          PATH=[path-to-toolchain]\bin;%PATH%
 
