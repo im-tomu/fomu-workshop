@@ -108,6 +108,10 @@ todo_include_todos = True
 #
 html_theme = 'sphinx_materialdesign_theme'
 
+# Html logo in drawer.
+# Fit in the drawer at the width of image is 240 px.
+html_logo = '_static/logo.png'
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
@@ -140,9 +144,9 @@ html_theme_options = {
     #         indigo, light_blue, light_green, lime, orange, pink, purple, red,
     #         teal, yellow
     # (Default: indigo)
-    'primary_color': 'deep_purple',
+    'primary_color': 'blue',
     # Values: Same as primary_color. (Default: pink)
-    'accent_color': 'purple',
+    'accent_color': 'cyan',
 
     # Customize layout.
     # For details see link.
