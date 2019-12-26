@@ -40,12 +40,9 @@ Wishbone. These two primitives give us complete control over Fomu.
 
 Recall these definitions from earlier:
 
-.. code:: cpp
-
-   #define CSR_VERSION_MAJOR_ADDR 0xe0007000
-   #define CSR_VERSION_MINOR_ADDR 0xe0007004
-   #define CSR_VERSION_REVISION_ADDR 0xe0007008
-   #define CSR_VERSION_MODEL_ADDR 0xe0007028
+.. literalinclude:: ../riscv-blink/include/generated/csr.h
+   :language: cpp
+   :lines: 668,674,680,712
 
 We can use the ``wishbone-tool`` program to read these values directly
 out of Fomu:
