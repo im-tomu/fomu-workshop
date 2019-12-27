@@ -163,14 +163,17 @@ open up a terminal window and add that directory to your PATH:
 
    .. group-tab:: Windows
 
-      .. session::
+      If you use PowerShell as your terminal;
 
-         $ENV:PATH = "[path-to-toolchain]\bin;" + $ENV:PATH
+      .. session:: ps1con
 
-      .. session::
+         PS> $ENV:PATH = "[path-to-toolchain]\bin;" + $ENV:PATH
 
-         PATH=[path-to-toolchain]\bin;%PATH%
+      If you use ``cmd.exe`` as your terminal;
 
+      .. session:: doscon
+
+         C:\> PATH=[path-to-toolchain]\bin;%PATH%
 
 To confirm installation, run the ``yosys`` command and confirm you get
 the following output;
