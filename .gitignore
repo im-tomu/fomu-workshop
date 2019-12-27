@@ -35,3 +35,6 @@ _*
 
 # Fomu Toolchain
 fomu-toolchain*
+
+# Conda Python Environments
+env
