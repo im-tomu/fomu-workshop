@@ -83,8 +83,10 @@ or clone it from git:
    Submodule path 'litex/deps/valentyusb': checked out 'b34852eb2e77bd9d04ebc3e6e8454cf6d93a02fb'
    $
 
-If you’re attending a workshop that provides USB drives, these files may
-be available on the USB drive under the ``Workshop`` directory.
+.. note::
+
+   If you’re attending a workshop that provides USB drives, these files may be
+   available on the USB drive under the ``Workshop`` directory.
 
 .. _required-software:
 
