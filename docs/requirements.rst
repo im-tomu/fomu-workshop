@@ -54,9 +54,22 @@ require you to identify which model you have:
 .. |Hacker Hardware Annotated Diagram| image:: ../img/hw-hacker-annotated.png
 .. |Production Hardware Annotated Diagram| image:: ../img/hw-pvt-annotated.png
 
-Your Fomu should be running Foboot v1.8.7 or newer. You can see what
+.. |Foboot Version| replace:: v2.0.3
+
+Your Fomu should be running Foboot |Foboot Version| or newer. You can see what
 version you are running by typing ``dfu-util -l`` and noting the version
 number.
+
+To update your Fomu, download the appropriate ``-updater`` dfu release from
+`foboot <https://github.com/im-tomu/foboot/releases/latest>`__.  If you have
+a PVT Fomu, download pvt-updater-|Foboot Version|.dfu.
+If you have a Hacker Fomu, download hacker-updater-|Foboot Version|.dfu.
+
+Update your Fomu by installing the appropriate updater like a normal
+program.  For PVT Fomus, run ``dfu-util -D pvt-updater-{version}.dfu``.
+Your Fomu will flash rainbow for about five seconds, then reboot and
+go back to blinking.  To verify it has updated, ``dfu-util -l`` and
+check the version output.
 
 Aside from that, you need a computer with a USB port that can run the
 toolchain software. You should not need any special drivers, though on
