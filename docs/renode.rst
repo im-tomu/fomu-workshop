@@ -15,7 +15,7 @@ We will now see how a full-blown Zephyr RTOS can be run on LiteX in
 Renode, and then how this simulation can be interfaced with a Fomu for a
 useful HW/SW co-development workflow.
 
-.. note::
+.. tip::
    Apart from RISC-V and LiteX platforms, Renode supports many
    other architectures and platforms, as described in the
    `documentation <https://renode.readthedocs.io/en/latest/introduction/supported-boards.html>`__,
