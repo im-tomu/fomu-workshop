@@ -24,7 +24,7 @@ our local system that can read and write memory on Fomu.
 
 Go to the ``litex`` directory and build the design;
 
-.. code:: sh
+.. session:: shell-session
 
    $ python3 workshop.py --board $FOMU_REV
    lxbuildenv: v2019.8.19.1 (run .\workshop.py --lx-help for help)
@@ -58,10 +58,11 @@ Go to the ``litex`` directory and build the design;
    Info: [ 71542,  75545) |********************+
    Info: [ 75545,  79548) |************************************************************
    5 warnings, 0 errors
+   $
 
 Load it onto Fomu:
 
-.. code:: sh
+.. session:: shell-session
 
    $ dfu-util -D build/gateware/top.dfu
    dfu-util 0.8
@@ -90,7 +91,7 @@ Load it onto Fomu:
 If you get an error message about missing modules, check you have all
 submodules cloned and setup with;
 
-.. code:: sh
+.. session:: shell-session
 
    $ git submodule update --recursive --init
    $
@@ -102,7 +103,7 @@ kilobytes long and is located at ``0x10000000``, just as when we had a
 CPU. You can also see the timer, which is a feature that comes as part
 of LiteX. Let’s try reading and writing RAM:
 
-.. session::
+.. session:: shell-session
 
    $ wishbone-tool 0x10000000
    Value at 10000000: 0baf801e

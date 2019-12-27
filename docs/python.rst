@@ -7,7 +7,7 @@ binary is located in the root of the Fomu workshop files.
 
 Use ``dfu-util`` to load it:
 
-.. session::
+.. session:: shell-session
 
    $ dfu-util -D micropython-fomu.dfu
    Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
@@ -70,7 +70,7 @@ Use ``dfu-util`` to load it:
 
 You should be greeted with a MicroPython banner and REPL:
 
-.. session::
+.. session:: pycon
 
    MicroPython v1.10-299-g8603316 on 2019-08-19; fomu with vexriscv
    >>>

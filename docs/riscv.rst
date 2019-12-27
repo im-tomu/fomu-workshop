@@ -47,7 +47,7 @@ Recall these definitions from earlier:
 We can use the ``wishbone-tool`` program to read these values directly
 out of Fomu:
 
-.. session::
+.. session:: shell-session
 
    $ wishbone-tool 0xe0007000
    Value at e0007000: 00000001
@@ -64,7 +64,7 @@ We can also read and write directly to memory. Recall that memory is
 mapped to address ``0x10000000``. Let’s write a test value there and try
 to read it back.
 
-.. session::
+.. session:: shell-session
 
    $ wishbone-tool 0x10000000
    Value at 10000000: 00000005
@@ -94,10 +94,11 @@ The registers for the LED block are defined as:
 Let’s change the red color to the maximum value. To do that, we’ll write
 a ``1`` to the address register, and ``0xff`` to the data register:
 
-.. session::
+.. session:: shell-session
 
    $ wishbone-tool 0xe0006804 1
    $ wishbone-tool 0xe0006800 0xff
+   $
 
 We can see that the LED immediately changed its behavior. Try playing
 around with various values to see what combinations you can come up
@@ -108,7 +109,7 @@ register at ``0xe0006000L``. All writes to this register must start with
 ``0xac``, to ensure random values aren’t written. We can reboot Fomu by
 simply writing this value:
 
-.. session::
+.. session:: shell-session
 
    $ wishbone-tool 0xe0006000 0xac
    INFO [wishbone_tool::usb_bridge] opened USB device device 007 on bus 001
@@ -128,7 +129,7 @@ Of course, Fomu’s softcore is a full CPU, so we can write C code for it.
 Go to the ``riscv-blink/`` directory and run ``make``. This will
 generate ``riscv-blink.dfu``, which we can load onto Fomu.
 
-.. session::
+.. session:: shell-session
 
    $ make
      CC       ./src/main.c        main.o
@@ -196,15 +197,16 @@ bridge. We can go even further and attach a full debugger to it!
 
 To start with, run ``wishbone-tool -s gdb``:
 
-.. session::
+.. session:: shell-session
 
    $ wishbone-tool -s gdb
    INFO [wishbone_tool::usb_bridge] opened USB device device 008 on bus 001
    INFO [wishbone_tool::server] accepting connections on 0.0.0.0:1234
+   $
 
 In a second window, run gdb on ``riscv-blink.elf``:
 
-.. session::
+.. session:: shell-session
 
    $ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:1234'
    GNU gdb (GDB) 8.2.90.20190228-git

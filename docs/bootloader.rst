@@ -28,7 +28,7 @@ To update your Fomu, download the appropriate ``-updater`` dfu release from
 
 This is an example session for updating a production board:
 
-.. session::
+.. session:: shell-session
 
     $ dfu-util -l
     dfu-util 0.9

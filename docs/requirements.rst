@@ -22,7 +22,7 @@ For this workshop you will need;
 
     You can see what version you are running by typing ``dfu-util -l`` like so;
 
-    .. session::
+    .. session:: shell-session
         :emphasize-lines: 9
 
         $ dfu-util -l
@@ -51,9 +51,10 @@ repository. You can download
 `master.zip <https://github.com/im-tomu/fomu-workshop/archive/master.zip>`__
 or clone it from git:
 
-.. session::
+.. session:: shell-session
 
    $ git clone --recurse-submodules https://github.com/im-tomu/fomu-workshop.git
+   $
 
 If you’re attending a workshop that provides USB drives, these files may
 be available on the USB drive under the ``Workshop`` directory.
@@ -80,13 +81,13 @@ open up a terminal window and add that directory to your PATH:
 
    .. group-tab:: MacOS X
 
-      .. code:: console
+      .. session:: shell-session
 
          $ export PATH=[path-to-toolchain]/bin:$PATH
 
    .. group-tab:: Linux
 
-      .. session::
+      .. session:: shell-session
 
          $ export PATH=[path-to-toolchain]/bin:$PATH
 
