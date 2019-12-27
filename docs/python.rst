@@ -89,7 +89,7 @@ under the ``fomu`` module.
 Import the ``fomu`` module and access the ``rgb`` block to change the
 mode to the predefined ``error`` mode:
 
-.. session::
+.. session:: pycon
 
    >>> import fomu
    >>> rgb = fomu.rgb()
@@ -100,7 +100,7 @@ We can also look at some information from the SPI flash, such as the SPI
 ID. This ID varies between Fomu models, so it can be a good indication
 of what kind of Fomu your code is running on:
 
-.. session::
+.. session:: pycon
 
    >>> spi = fomu.spi()
    >>> hex(spi.id())
@@ -126,7 +126,7 @@ correspond to hardware. We can read these values using the ``machine``
 class. Read out the major, minor, and revision codes from your Fomu.
 They may be different from what you see here:
 
-.. session::
+.. session:: pycon
 
    >>> import machine
    >>> machine.mem32[0xe0007000]
@@ -143,7 +143,7 @@ a character and print it out.
 
 If you have a production board you will get ``P`` as shown below;
 
-.. session::
+.. session:: pycon
 
    >>> chr(machine.mem32[0xe0007028])
    'P'
@@ -151,7 +151,7 @@ If you have a production board you will get ``P`` as shown below;
 
 If you have a hacker board you will get ``H`` as shown below;
 
-.. session::
+.. session:: pycon
 
    >>> chr(machine.mem32[0xe0007028])
    'H'
@@ -179,7 +179,7 @@ brightness, value ranges from 0 to 255.
 
 Try changing the color of the three LEDs:
 
-.. session::
+.. session:: pycon
 
    >>> ADDR_RED_LED_PULSE_WIDTH   = 0b0001 # LEDDPWRR
    >>> ADDR_GREEN_LED_PULSE_WIDTH = 0b0010 # LEDDPWRG
