@@ -28,3 +28,4 @@ Table of Contents
    riscv
    hdl
    renode
+   bootloader

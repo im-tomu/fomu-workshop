@@ -1,12 +1,60 @@
 Requirements
 ------------
 
+For this workshop you will need;
+
+#. A Fomu board - see :ref:`required-hardware` section.
+#. The Fomu workshop files - see :ref:`required-files` section.
+#. The Fomu toolchain - see :ref:`required-software` section.
+
+.. |Foboot Version| replace:: v2.0.3
+
+.. warning::
+
+    Your Fomu should be running Foboot |Foboot Version| or newer.
+
+    You can see what version you are running by typing ``dfu-util -l`` like so;
+
+    .. session::
+        :emphasize-lines: 9
+
+        $ dfu-util -l
+        dfu-util 0.9
+
+        Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+        Copyright 2010-2016 Tormod Volden and Stefan Schmidt
+        This program is Free Software and has ABSOLUTELY NO WARRANTY
+        Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+        Found DFU: [1209:5bf0] ver=0101, devnum=19, cfg=1, intf=0, path="1-2", alt=0, name="Fomu PVT running DFU Bootloader v2.0.3", serial="UNKNOWN"
+        $
+
+    If your Fomu is running an version older than |Foboot Version| follow the
+    :ref:`bootloader-update` section.
+
+
+.. _required-hardware:
+
 Required Hardware
 ~~~~~~~~~~~~~~~~~
 
-For this workshop, you will need a Fomu board. This workshop may be
-competed with any model of Fomu, though there are some parts that
-require you to identify which model you have:
+For this workshop, you will need a Fomu board.
+
+Aside from that, you need a computer with a USB port that can run the
+:ref:`required-software`.
+
+You should not need any special drivers, though on Linux you may need sudo
+access, or special udev rules to grant permission to use the USB device from a
+non-privileged account.
+
+This workshop may be competed with any model of Fomu, though there are some
+parts that require you to identify which model you have. See the
+:ref:`which-fomu` section.
+
+.. _which-fomu:
+
+Which Fomu do I have?
+~~~~~~~~~~~~~~~~~~~~~
 
 +-------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------+
 |                   | Hacker                                                                  | Production                                                        |
@@ -54,27 +102,6 @@ require you to identify which model you have:
 .. |Hacker Hardware Annotated Diagram| image:: ../img/hw-hacker-annotated.png
 .. |Production Hardware Annotated Diagram| image:: ../img/hw-pvt-annotated.png
 
-.. |Foboot Version| replace:: v2.0.3
-
-Your Fomu should be running Foboot |Foboot Version| or newer. You can see what
-version you are running by typing ``dfu-util -l`` and noting the version
-number.
-
-To update your Fomu, download the appropriate ``-updater`` dfu release from
-`foboot <https://github.com/im-tomu/foboot/releases/latest>`__.  If you have
-a PVT Fomu, download pvt-updater-|Foboot Version|.dfu.
-If you have a Hacker Fomu, download hacker-updater-|Foboot Version|.dfu.
-
-Update your Fomu by installing the appropriate updater like a normal
-program.  For PVT Fomus, run ``dfu-util -D pvt-updater-{version}.dfu``.
-Your Fomu will flash rainbow for about five seconds, then reboot and
-go back to blinking.  To verify it has updated, ``dfu-util -l`` and
-check the version output.
-
-Aside from that, you need a computer with a USB port that can run the
-toolchain software. You should not need any special drivers, though on
-Linux you may need sudo access, or special udev rules to grant
-permission to use the USB device from a non-privileged account.
 
 .. note::
 
@@ -83,6 +110,8 @@ permission to use the USB device from a non-privileged account.
    of a credit card. It should have the text “Fomu EVT3” written across
    it in white silkscreen. If you have a different EVT board such as
    EVT2 or EVT1, they should work also.
+
+.. _required-files:
 
 Required Files
 ~~~~~~~~~~~~~~
@@ -100,15 +129,17 @@ or clone it from git:
 If you’re attending a workshop that provides USB drives, these files may
 be available on the USB drive under the ``Workshop`` directory.
 
+.. _required-software:
+
 Required Software
 ~~~~~~~~~~~~~~~~~
 
 Fomu requires specialized software. This software is provided for Linux
-x86/64, macOS, and Windows, via `Fomu
-Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`__.
+x86/64, macOS, and Windows, via
+`Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`__.
 
-Debian packages are also `available for Raspberry
-Pi <https://github.com/im-tomu/fomu-raspbian-packages>`__.
+Debian packages are also
+`available for Raspberry Pi <https://github.com/im-tomu/fomu-raspbian-packages>`__.
 
 If you’re taking this workshop as a class, the toolchains are provided
 on the USB disk.
@@ -145,6 +176,7 @@ To confirm installation, run the ``yosys`` command and confirm you get
 the following output;
 
 .. code:: sh
+   :emphasize-lines: 22
 
    $ yosys
 
