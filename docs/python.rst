@@ -190,4 +190,4 @@ Try changing the color of the three LEDs:
    >>>
 
 The color should change immediately. More information on these registers
-can be found in the `ICE40 LED Driver Usage Guide <reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf>`__.
+can be found in the `ICE40 LED Driver Usage Guide <_static/reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf>`__.
