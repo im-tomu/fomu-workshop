@@ -112,15 +112,19 @@ simply writing this value:
 .. session:: shell-session
 
    $ wishbone-tool 0xe0006000 0xac
-   INFO [wishbone_tool::usb_bridge] opened USB device device 007 on bus 001
-   INFO [wishbone_tool::usb_bridge] waiting for target device
-   ERROR [wishbone_tool] server error: BridgeError(USBError(Pipe))
-   $
+   INFO [wishbone_tool::bridge::usb] opened USB device device 022 on bus 001
+   INFO [wishbone_tool::bridge::usb] waiting for target device
+   INFO [wishbone_tool::bridge::usb] opened USB device device 023 on bus 001
+   ERROR [wishbone_tool::bridge::usb] unexpected bridge poke response: Some(OpenedDevice)
+   INFO [wishbone_tool::bridge::usb] waiting for target device
+   INFO [wishbone_tool::bridge::usb] opened USB device device 024 on bus 001
+   ERROR [wishbone_tool::bridge::usb] unexpected bridge poke response: Some(OpenedDevice)
+   .. <repeats endlessly>
 
-We can see that ``wishbone-tool`` has crashed with an error of
-``USBError(Pipe)``, because the USB device went away as we were talking
-to it. This is expected behavior. Fomu should be back to its normal
-color and blink rate now.
+We can see that ``wishbone-tool`` goes into an endless loop with an error of
+``unexpected bridge poke response: Some(OpenedDevice)``, because the USB device
+went away as we retry repeatedly. This is expected behavior. Press ```Ctrl-C```
+and Fomu should be back to its normal color and blink rate now.
 
 Compiling RISC-V Code
 ~~~~~~~~~~~~~~~~~~~~~
