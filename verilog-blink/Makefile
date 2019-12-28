@@ -49,13 +49,13 @@ PCF       ?= $(PCF_PATH)/fomu-hacker.pcf
 PKG       ?= uwg30
 YOSYSFLAGS?= -D HACKER=1
 PNRFLAGS  ?= --up5k --package $(PKG)
-else ifeq ($(FOMU_REV),pvt1)
-PCF       ?= $(PCF_PATH)/fomu-pvt1.pcf
+else ifeq ($(FOMU_REV),pvt)
+PCF       ?= $(PCF_PATH)/fomu-pvt.pcf
 PKG       ?= uwg30
 YOSYSFLAGS?= -D PVT=1 -D PVT1=1
 PNRFLAGS  ?= --up5k --package $(PKG)
 else
-$(error Unrecognized FOMU_REV value. must be "evt1", "evt2", "evt3", "pvt1", or "hacker")
+$(error Unrecognized FOMU_REV value. must be "evt1", "evt2", "evt3", "pvt", or "hacker")
 endif
 
 BUILD_DIR  = build
