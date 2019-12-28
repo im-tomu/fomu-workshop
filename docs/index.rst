@@ -29,3 +29,4 @@ Table of Contents
    hdl
    renode
    bootloader
+   help
