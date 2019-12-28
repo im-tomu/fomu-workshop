@@ -324,14 +324,26 @@ Steps to set up udev rule
       $ sudo groupadd plugdev
       $ sudo usermod -a -G plugdev $USER
 
-#. You **will** need to log out and log in again in order to be a member of the ``plugdev`` group.
-
 #. Check you are in the ``plugdev`` group with ``id $USER``
 
    .. session:: shell-session
 
       $ id $USER
       uid=1000(tim) gid=1000(tim) groups=500(plugdev),997(admin)
+      $
+
+#. You **will** need to log out and log in again in order to be a member of the ``plugdev`` group.
+
+   .. warning::
+
+      You **must** log out and then log in again for the group addition to take affect.
+
+#. Check you are in the ``plugdev`` group with ``groups``
+
+   .. session:: shell-session
+
+      $ groups | grep plugdev
+      tim plugdev admin
       $
 
 #. Create a file named ``/etc/udev/rules.d/99-fomu.rules`` and add the following:
