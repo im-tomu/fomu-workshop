@@ -246,6 +246,98 @@ We can insert breakpoints, step, continue execution, and generally debug
 the entire system. We can even reset the program by running
 ``mon reset``.
 
+
+Using Rust
+~~~~~~~~~~
+
+As an alternative to C, the `Rust Language <https://www.rust-lang.org/>`_ can be used to write software for the Fomu softcore.
+To install Rust, follow the instructions on https://rustup.rs/. After installing Rust, we can install support for RISCV 
+targets using ``rustup``:
+
+.. session::
+
+     $ rustup target add riscv32i-unknown-none-elf
+     info: downloading component 'rust-std' for 'riscv32i-unknown-none-elf'
+     4.5 MiB /   4.5 MiB (100 %)   2.1 MiB/s in  2s ETA:  0s
+     info: installing component 'rust-std' for 'riscv32i-unknown-none-elf'
+
+A Rust version of the C program used above is located in the ``riscv-rust-blink`` directory. Change into that directory, 
+and build it using ``cargo``, the Rust package manager:
+
+.. session::
+     
+     $ cargo build --release
+     Compiling semver-parser v0.7.0
+     Compiling proc-macro2 v0.4.30
+     Compiling unicode-xid v0.1.0
+     Compiling rand_core v0.4.2
+     Compiling vexriscv v0.0.1
+     Compiling syn v0.15.44
+     Compiling bit_field v0.9.0
+     Compiling fomu-rt v0.0.3
+     Compiling r0 v0.2.2
+     Compiling vcell v0.1.2
+     Compiling panic-halt v0.2.0
+     Compiling rand_core v0.3.1
+     Compiling semver v0.9.0
+     Compiling rand v0.5.6
+     Compiling rustc_version v0.2.3
+     Compiling bare-metal v0.2.4
+     Compiling quote v0.6.13
+     Compiling fomu-pac v0.0.1
+     Compiling riscv-rt-macros v0.1.6
+     Compiling riscv-rust-blink v0.1.0 (/home/dominik/Coding/fomu-workshop/riscv-rust-blink)
+     Finished release [optimized] target(s) in 29.39s
+
+The resulting binary is located in the target subfolder: ``target/riscv32i-unknown-none-elf/release/riscv-rust-blink``. It can
+be flashed using the ``flash.sh`` script, also located in the ``riscv-rust-blink`` folder:
+
+.. session::
+
+     $ ./flash.sh
+     dfu-suffix (dfu-util) 0.9
+
+     Copyright 2011-2012 Stefan Schmidt, 2013-2014 Tormod Volden
+     This program is Free Software and has ABSOLUTELY NO WARRANTY
+     Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+     
+     Suffix successfully added to file
+     dfu-util 0.9
+     
+     Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+     Copyright 2010-2019 Tormod Volden and Stefan Schmidt
+     This program is Free Software and has ABSOLUTELY NO WARRANTY
+     Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+     
+     Match vendor ID from file: 1209
+     Match product ID from file: 70b1
+     Opening DFU capable USB device...
+     ID 1209:5bf0
+     Run-time device DFU version 0101
+     Claiming USB DFU Interface...
+     Setting Alternate Setting #0 ...
+     Determining device status: state = dfuIDLE, status = 0
+     dfuIDLE, continuing
+     DFU mode device DFU version 0101
+     Device returned transfer size 1024
+     Copying data from PC to DFU device
+     Download	[=========================] 100%         3012 bytes
+     Download done.
+     state(7) = dfuMANIFEST, status(0) = No error condition is present
+     state(8) = dfuMANIFEST-WAIT-RESET, status(0) = No error condition is present
+     Done!
+
+
+Now the Fomu should blink in the same rainbow pattern as before.
+
+
+.. warning::
+
+     The Rust example currently does not support the USB functionality. After programming the example, we will not be able to
+     acces the Fomu over USB anymore. To enable USB again, we have to reset the Fomu by removing it from the USB port and 
+     plugging it in again.
+
+
 Further RISC-V experiments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
