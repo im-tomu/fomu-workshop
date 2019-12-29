@@ -39,7 +39,6 @@ For this workshop you will need;
     If your Fomu is running an version older than |Foboot Version| follow the
     :ref:`bootloader-update` section.
 
-
 .. _required-files:
 
 Required Files
@@ -137,8 +136,8 @@ open up a terminal window and add that directory to your PATH:
 To confirm installation, run the ``yosys`` command and confirm you get
 the following output;
 
-.. code:: sh
-   :emphasize-lines: 22
+.. code-block:: shell-session
+   :emphasize-lines: 23
 
    $ yosys
 
@@ -163,7 +162,6 @@ the following output;
     \----------------------------------------------------------------------------/
 
     Yosys 78b30bbb1102047585d1a2eac89b1c7f5ca7344e (Fomu build) (git sha1 41d9173, gcc 5.5.0-12ubuntu1~14.04 -fPIC -Os)
-
 
    yosys>
 
@@ -302,6 +300,7 @@ following you should add a ``udev`` rule as to give your user permission to the
 usb device.
 
 .. session:: shell-session
+   :emphasize-lines: 9
 
    $ dfu-util -l
    dfu-util 0.9
