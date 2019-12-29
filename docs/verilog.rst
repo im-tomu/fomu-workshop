@@ -53,7 +53,7 @@ the Required Hardware section.**
    Built 'blink' for Fomu XXXXX
    $
 
-You can load ``blink.bin`` onto Fomu by using the same ``dfu-util -D``
+You can load ``blink.dfu`` onto Fomu by using the same ``dfu-util -D``
 command we’ve been using. The LED should begin blinking on and off
 regularly, indicating your bitstream was successfully loaded.
 
