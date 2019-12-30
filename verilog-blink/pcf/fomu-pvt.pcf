@@ -14,9 +14,9 @@ set_io user_1 E4
 set_io user_2 D5
 set_io user_3 E5
 set_io user_4 F5
-set_io touch_1 E4
+set_io touch_1 E4 -pullup yes
 set_io touch_2 D5
-set_io touch_3 E5
+set_io touch_3 E5 -pullup yes
 set_io touch_4 F5
 set_io spi_mosi F1
 set_io spi_miso E1
