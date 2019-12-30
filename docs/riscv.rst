@@ -249,8 +249,11 @@ the entire system. We can even reset the program by running
 Further RISC-V experiments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There is an additional RISC-V demo in the workshop. The
-``riscv-usb-cdcacm`` directory contains a simple USB serial device that
-simply echoes back any characters that you type, incremented by 1. This
-is a good way to get started with an interactive terminal program, or
-logging data via USB serial.
+The `TinyUSB <https://github.com/hathach/tinyusb>` USB stack supports Fomu. To get started with it, you might compile the mass storage example it provides. To do so, follow these steps:
+
+* Clone the TinyUSB git repository: ``git clone https://github.com/hathach/tinyusb`` (you don't need to initialize the subrepositories)
+* Change to ``tinyusb/examples/device/cdc_msc``
+* Compile: ``make BOARD=fomu CROSS_COMPILE=riscv64-unknown-elf-``
+* Load it onto the Fomu:  ``dfu-util -D _build/build-fomu/fomu-firmware.bin``
+
+Fomu should now appear as a USB storage device containing a README.
