@@ -664,9 +664,6 @@ The [TinyUSB](https://github.com/hathach/tinyusb) USB stack supports Fomu. To ge
 
 Fomu should now appear as a USB storage device containing a README.
 
-Additionally, there is another RISC-V demo in the workshop.  The `riscv-usb-cdcacm` directory contains a simple USB serial device that simply echoes back any characters that you type, incremented by 1.  This is a good way to get started with an interactive terminal program, or logging data via USB serial.
-
-
 ## Hardware Description Languages
 
 The two most common **H**ardware **D**escription **L**anguages are Verilog and VHDL (the toolchain we are using only supports Verilog).
