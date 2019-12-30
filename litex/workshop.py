@@ -17,7 +17,7 @@ import lxbuildenv
 from migen import *
 from migen.genlib.resetsync import AsyncResetSynchronizer
 
-from litex.soc.integration import SoCCore
+from litex.soc.integration.soc_core import SoCCore
 from litex.soc.integration.builder import Builder
 from litex.soc.interconnect.csr import AutoCSR, CSRStatus, CSRStorage
 
