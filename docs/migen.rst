@@ -6,8 +6,6 @@ Migen and LiteX
 “Hello world!” - Blink an LED
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-FIXME: Add the Migen and LiteX equivalent for the Verilog above.
-
 Wishbone Bus
 ^^^^^^^^^^^^
 
