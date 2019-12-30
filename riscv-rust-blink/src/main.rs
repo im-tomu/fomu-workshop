@@ -23,8 +23,6 @@ fn main() -> ! {
     let mut rgb_control = rgb::RgbControl::new(peripherals.RGB);
     let mut timer = Timer::new(peripherals.TIMER0);
 
-    //rgb_control.set(255, 0, 0);
-
     let mut i = 0;
 
     loop {
@@ -68,6 +66,6 @@ fn msleep(timer: &mut Timer, ms: u32) {
 
     timer.enable();
 
-    // Wait unitl the time has elapsed
+    // Wait until the time has elapsed
     while timer.value() > 0 {}
 }

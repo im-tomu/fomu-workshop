@@ -22,7 +22,7 @@ impl Timer {
     }
 
     pub fn load(&mut self, value: u32) {
-        let buff = value.to_be_bytes();
+        let buff = value.to_le_bytes();
 
         unsafe {
             self.registers.load0.write(|w| w.bits(buff[0] as u32));
@@ -33,7 +33,7 @@ impl Timer {
     }
 
     pub fn reload(&mut self, value: u32) {
-        let buff = value.to_be_bytes();
+        let buff = value.to_le_bytes();
 
         unsafe {
             self.registers.reload0.write(|w| w.bits(buff[0] as u32));
@@ -55,6 +55,6 @@ impl Timer {
         buff[2] = self.registers.value2.read().bits() as u8;
         buff[3] = self.registers.value3.read().bits() as u8;
 
-        u32::from_be_bytes(buff)
+        u32::from_le_bytes(buff)
     }
 }

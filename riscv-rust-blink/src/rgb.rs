@@ -5,12 +5,12 @@ const BREATHE_MODE_FIXED: u8 = (0 << 5);
 
 // Breathe rate is in 128 ms increments
 const fn breathe_rate_ms(x: u8) -> u8 {
-    ((((x) + 1) / 128 & 7) << 0)
+    ((x + 1) / 128) & 7
 }
 
 // Blink on/off time is in 32 ms increments
 const fn blink_time_ms(x: u8) -> u8 {
-    ((x) / 32)
+    x / 32
 }
 
 const LEDDEN: u8 = (1 << 7);
