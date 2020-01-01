@@ -22,7 +22,7 @@ static void color_wheel(uint8_t WheelPos) {
     }
     else {
         WheelPos -= 170;
-        r =WheelPos * 3;
+        r = WheelPos * 3;
         g = 255 - WheelPos * 3;
         b = 0;
     }
