@@ -29,6 +29,7 @@ dependencies = [
 [[package]]
 name = "fomu-rt"
 version = "0.0.3"
+source = "git+https://github.com/Tiwalun/fomu-rt?branch=fix-flash-start-addr#34772867fa571f4d9fec906ef54c5edf33a645dc"
 dependencies = [
  "r0",
  "riscv-rt-macros",
@@ -92,6 +93,7 @@ checksum = "9c33a3c44ca05fa6f1807d8e6743f3824e8509beca625669633be0acbdf509dc"
 [[package]]
 name = "riscv-rt-macros"
 version = "0.1.6"
+source = "git+https://github.com/Tiwalun/fomu-rt?branch=fix-flash-start-addr#34772867fa571f4d9fec906ef54c5edf33a645dc"
 dependencies = [
  "proc-macro2",
  "quote",
