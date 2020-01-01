@@ -7,7 +7,17 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-fomu-rt  = "0.0.3"
+#fomu-rt  = "0.0.3"
 fomu-pac = "0.0.1"
+fomu-rt  = { path = "../../fomu-rt" }
 
 panic-halt = "0.2"
+
+[profile.release]
+# Keep debug information for release builds, for easier debugging.
+# It will be removed during the conversion to the .dfu file.
+debug = true
+
+# Improve code generation
+lto = true
+codegen-units = 1

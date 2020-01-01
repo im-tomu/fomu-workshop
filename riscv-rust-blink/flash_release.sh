@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Create bin file
-riscv64-unknown-elf-objcopy target/riscv32i-unknown-none-elf/debug/riscv-rust-blink -O binary fomu-rust.bin
+riscv64-unknown-elf-objcopy target/riscv32i-unknown-none-elf/release/riscv-rust-blink -O binary fomu-rust.bin
 
 # Add DFU suffix
 cp fomu-rust.bin fomu-rust.dfu
