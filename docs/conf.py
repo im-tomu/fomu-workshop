@@ -130,9 +130,12 @@ html_theme_options = {
     # For details see link.
     # https://material.io/icons/
     'header_links': [
-        ('Home', 'index', False, 'home'),
-        ("GitHub", "https://github.com/im-tomu/fomu-workshop",
-         True, 'link'),
+        ('Workshop Home', 'index', False, 'home'),
+        ("Website", "https://fomu.im", True, 'web'),
+        ("GitHub", "https://github.com/im-tomu/fomu-workshop", True, 'code'),
+        ("Report Issue", "https://github.com/im-tomu/fomu-workshop/issues/new", True, 'bug_report'),
+        ("Buy", "https://j.mp/fomu-cs", True, 'shopping_cart'),
+        ("Contact", "help", False, 'live_help'),
     ],
 
     # Customize css colors.
