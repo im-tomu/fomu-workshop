@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 fomu-pac = "0.0.1"
-fomu-rt  = "0.0.3" 
+fomu-rt  = "0.0.4" 
 
 panic-halt = "0.2"
 
@@ -20,7 +20,3 @@ debug = true
 # Improve code generation
 lto = true
 codegen-units = 1
-
-
-[patch.crates-io]
-fomu-rt = { git = "https://github.com/Tiwalun/fomu-rt", branch = "fix-flash-start-addr" }

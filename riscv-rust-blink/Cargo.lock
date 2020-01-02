@@ -28,8 +28,9 @@ dependencies = [
 
 [[package]]
 name = "fomu-rt"
-version = "0.0.3"
-source = "git+https://github.com/Tiwalun/fomu-rt?branch=fix-flash-start-addr#34772867fa571f4d9fec906ef54c5edf33a645dc"
+version = "0.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "707861803ad6fb2546cc7d3bbaed02e27633e6c27629938cf0b7cebc149dce4b"
 dependencies = [
  "r0",
  "riscv-rt-macros",
@@ -93,7 +94,8 @@ checksum = "9c33a3c44ca05fa6f1807d8e6743f3824e8509beca625669633be0acbdf509dc"
 [[package]]
 name = "riscv-rt-macros"
 version = "0.1.6"
-source = "git+https://github.com/Tiwalun/fomu-rt?branch=fix-flash-start-addr#34772867fa571f4d9fec906ef54c5edf33a645dc"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3525f8341898dec060782087b7a15969e1cfe52818afacc47709265c19a23d53"
 dependencies = [
  "proc-macro2",
  "quote",
