@@ -6,7 +6,6 @@ import hashlib
 import json
 import os
 import sys
-import tarfile
 
 if sys.version_info.major == 2:
     from urllib import urlretrieve
@@ -124,12 +123,22 @@ def main(argv):
     assert to_download
 
     tarball = [f for f, u, s in to_download if f.endswith('.tar.gz')]
-    print(tarball)
-    assert len(tarball) == 1, tarball
-    tarball = tarball[0]
+    if tarball:
+        import tarfile
+        assert len(tarball) == 1, tarball
+        tarball = tarball[0]
 
-    with tarfile.open(tarball) as tar:
-        tar.extractall()
+        with tarfile.open(tarball) as tarf:
+            tarf.extractall()
+
+    zipball = [f for f, u, s in to_download if f.endswith('.zip')]
+    if zipball:
+        import zipfile
+        assert len(zipball) == 1, zipball
+        zipball = zipball[0]
+
+        with zipfile.ZipFile(zipball) as zipf:
+            zipf.extractall()
 
     return 0
 
