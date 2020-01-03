@@ -399,7 +399,7 @@ We can also look at some information from the SPI flash, such as the SPI ID.  Th
 
 ### Memory-mapped Registers
 
-If we look at the generated Fomu header files, we can see many, many memory-mapped registers.  For example, the major, minor, and revision numbers all have registers:
+If we look at the generated Fomu header files (to be found for instance in [riscv-blink](riscv-blink/include/generated/csr.h)), we can see many, many memory-mapped registers.  For example, the major, minor, and revision numbers all have registers:
 
 ```cpp
 #define CSR_VERSION_MAJOR_ADDR 0xe0007000
@@ -670,9 +670,9 @@ The two most common **H**ardware **D**escription **L**anguages are Verilog and V
 
 ### Verilog
 
-#### "Hello world!" - Blink an LED
+#### "Hello world!" - Blink a LED
 
-The canonical "Hello, world!" of hardware is to blink an LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
+The canonical "Hello, world!" of hardware is to blink a LED.  The directory `verilog-blink` contains a Verilog example of a blink project.  This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.  It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope.
 
 Enter the `verilog-blink` directory and build the `verilog-blink` demo by using `make`:
 
@@ -732,7 +732,7 @@ You can load `blink.bin` onto Fomu by using the same `dfu-util -D` command we've
 
 ### Migen and LiteX
 
-#### "Hello world!" - Blink an LED
+#### "Hello world!" - Blink a LED
 
 FIXME: Add the Migen and LiteX equivalent for the Verilog above.
 
@@ -823,7 +823,8 @@ Value at 10000000: 98765432
 $
 ```
 
-Aside from that, there's not much we can _do_ with this design.  But there's a lot of infrastructure there.  So let's add something.
+Aside from that, there's not much we can _do_ with this design.  But there's a lot of infrastructure there.  So let's add something (see `workshop_rgb.py` for full example).
+
 
 ![SB_RGBA_DRV](img/ice40-rgb.jpg "RGB block")
 

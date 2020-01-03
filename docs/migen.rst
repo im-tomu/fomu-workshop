@@ -3,8 +3,8 @@ Migen and LiteX
 
 .. _hello-world---blink-an-led-1:
 
-“Hello world!” - Blink an LED
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+“Hello world!” - Blink a LED
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 FIXME: Add the Migen and LiteX equivalent for the Verilog above.
 
@@ -113,7 +113,8 @@ of LiteX. Let’s try reading and writing RAM:
    $
 
 Aside from that, there’s not much we can *do* with this design. But
-there’s a lot of infrastructure there. So let’s add something.
+there’s a lot of infrastructure there. So let’s add something (see
+``workshop_rgb.py`` for full example).
 
 .. image:: ../img/ice40-rgb.jpg
    :width: 100%
