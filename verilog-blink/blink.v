@@ -55,6 +55,10 @@ module blink (
     output usb_dp,
     output usb_dn,
     output usb_dp_pu,
+    input touch_1,
+    output touch_2,
+    input touch_3,
+    output touch_4,
     input clki         // Clock
 );
 
@@ -95,9 +99,9 @@ module blink (
     ) RGBA_DRIVER (
         .CURREN(1'b1),
         .RGBLEDEN(1'b1),
-        .`BLUEPWM(counter[26]),     // Blue
-        .`REDPWM(counter[27]),      // Red
-        .`GREENPWM(counter[28]),    // Green
+        .`BLUEPWM(!touch_1),     // Blue
+        .`REDPWM(!touch_3),      // Red
+        .`GREENPWM(!(touch_1 | touch_3)),    // Green
         .RGB0(rgb0),
         .RGB1(rgb1),
         .RGB2(rgb2)
@@ -106,5 +110,7 @@ module blink (
     // For more information see the iCE40 UltraPlus LED Driver Usage Guide, pages 19-20
     //
     // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/ICE40LEDDriverUsageGuide.ashx?document_id=50668
+    assign touch_2 = 0;
+    assign touch_4 = 0;
 
 endmodule
