@@ -28,6 +28,9 @@ def platform():
 
 
 def reporthook(chunk, chunk_size, total_size):
+    # Be quiet on travis.
+    if os.environ.get('CI', False):
+        return
     download_size = min(total_size, chunk * chunk_size)
     print("Downloaded", download_size, "of", total_size, "%.2f%%" % (download_size*1.0/total_size*100.0))
 
@@ -97,11 +100,12 @@ def main(argv):
             break
     assert to_download
 
-    tarball = [f for f, u, s in to_download if f.endswith('tar.gz')]
+    tarball = [f for f, u, s in to_download if f.endswith('.tar.gz')]
+    print(tarball)
     assert len(tarball) == 1, tarball
     tarball = tarball[0]
 
-    with tarfile.open(tarball[0]) as tar:
+    with tarfile.open(tarball) as tar:
         tar.extractall()
 
     return 0
