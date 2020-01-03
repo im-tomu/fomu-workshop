@@ -36,6 +36,7 @@ def reporthook(chunk, chunk_size, total_size):
 
 def download_files(toolchain_data):
     plat = platform()
+    print("Platform:", plat)
     to_download = []
     for asset in toolchain_data['assets']:
         if plat not in asset['name']:
