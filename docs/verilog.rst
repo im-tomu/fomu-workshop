@@ -1,10 +1,10 @@
 Verilog on Fomu
 ---------------
 
-“Hello world!” - Blink an LED
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+“Hello world!” - Blink a LED
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The canonical “Hello, world!” of hardware is to blink an LED. The
+The canonical “Hello, world!” of hardware is to blink a LED. The
 directory ``verilog-blink`` contains a Verilog example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
 number so you get an on/off pattern. It also exposes some of the signals
