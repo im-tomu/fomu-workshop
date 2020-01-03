@@ -66,7 +66,7 @@ def check_files(to_download):
         filename = os.path.basename(path)
 
         hasher = hashlib.sha1()
-        with open(filename, 'r') as f:
+        with open(filename, 'rb') as f:
             while True:
                 data = f.read(4096)
                 if not data:
@@ -95,7 +95,10 @@ TOOLCHAIN = "https://api.github.com/repos/im-tomu/fomu-toolchain/releases/latest
 
 
 def get_toolchain_data():
-    from urllib2 import urlopen, Request
+    if sys.version_info.major == 2:
+        from urllib2 import urlopen, Request
+    elif sys.version_info.major == 3:
+        from urllib.request import urlopen, Request
 
     request = Request(TOOLCHAIN)
 
