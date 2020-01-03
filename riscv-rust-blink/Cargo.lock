@@ -17,9 +17,9 @@ checksum = "ed8765909f9009617974ab6b7d332625b320b33c326b1e9321382ef1999b5d56"
 
 [[package]]
 name = "fomu-pac"
-version = "0.0.1"
+version = "0.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2140e3e7e6eda700bf34b2d3992b78950086fd264b33aaa526045065654dc0fa"
+checksum = "f2af12cce32cfd4cfc9c3f7fddbb384331f17b90dacfe28f20cf5e65032a88c6"
 dependencies = [
  "bare-metal",
  "vcell",

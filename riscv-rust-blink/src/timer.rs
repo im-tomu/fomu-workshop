@@ -25,10 +25,10 @@ impl Timer {
         let buff = value.to_le_bytes();
 
         unsafe {
-            self.registers.load0.write(|w| w.bits(buff[0] as u32));
-            self.registers.load1.write(|w| w.bits(buff[1] as u32));
-            self.registers.load2.write(|w| w.bits(buff[2] as u32));
-            self.registers.load3.write(|w| w.bits(buff[3] as u32));
+            self.registers.load0.write(|w| w.bits(buff[0]));
+            self.registers.load1.write(|w| w.bits(buff[1]));
+            self.registers.load2.write(|w| w.bits(buff[2]));
+            self.registers.load3.write(|w| w.bits(buff[3]));
         }
     }
 
@@ -36,10 +36,10 @@ impl Timer {
         let buff = value.to_le_bytes();
 
         unsafe {
-            self.registers.reload0.write(|w| w.bits(buff[0] as u32));
-            self.registers.reload1.write(|w| w.bits(buff[1] as u32));
-            self.registers.reload2.write(|w| w.bits(buff[2] as u32));
-            self.registers.reload3.write(|w| w.bits(buff[3] as u32));
+            self.registers.reload0.write(|w| w.bits(buff[0]));
+            self.registers.reload1.write(|w| w.bits(buff[1]));
+            self.registers.reload2.write(|w| w.bits(buff[2]));
+            self.registers.reload3.write(|w| w.bits(buff[3]));
         }
     }
 
@@ -50,10 +50,10 @@ impl Timer {
 
         let mut buff = [0u8; 4];
 
-        buff[0] = self.registers.value0.read().bits() as u8;
-        buff[1] = self.registers.value1.read().bits() as u8;
-        buff[2] = self.registers.value2.read().bits() as u8;
-        buff[3] = self.registers.value3.read().bits() as u8;
+        buff[0] = self.registers.value0.read().bits();
+        buff[1] = self.registers.value1.read().bits();
+        buff[2] = self.registers.value2.read().bits();
+        buff[3] = self.registers.value3.read().bits();
 
         u32::from_le_bytes(buff)
     }
