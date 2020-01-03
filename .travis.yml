@@ -4,6 +4,9 @@ os:
   - linux
   - osx
 
+git:
+  depth: false
+
 install:
  - git fetch --tags
  - python ./get-toolchain.py
