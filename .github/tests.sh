@@ -2,7 +2,7 @@
 
 set -e
 
-TOOLCHAIN_PATH="$(find fomu-toolchain-* -type d -maxdepth 0 2>/dev/null)"
+TOOLCHAIN_PATH="$PWD/$(find fomu-toolchain-* -type d -maxdepth 0 2>/dev/null)"
 echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
@@ -31,29 +31,29 @@ travis_time_start
 travis_time_finish
 travis_fold end "Verilog Blink (basic) example"
 
-# Test the Verilog Blink (extended) example for Hacker
-travis_fold start "Verilog Blink (extended) example for Hacker board"
+# Test the Verilog Blink (expanded) example for Hacker
+travis_fold start "Verilog Blink (expanded) example for Hacker board"
 travis_time_start
 (
 	set -x
-	cd verilog/blink-extended
+	cd verilog/blink-expanded
 	make FOMU_DEV=hacker
 	file blink.dfu
 )
 travis_time_finish
-travis_fold end "Verilog Blink (extended) example for Hacker board"
+travis_fold end "Verilog Blink (expanded) example for Hacker board"
 
-# Test the Verilog Blink (extended) example for PVT
-travis_fold start "Verilog Blink (extended) example for PVT board"
+# Test the Verilog Blink (expanded) example for PVT
+travis_fold start "Verilog Blink (expanded) example for PVT board"
 travis_time_start
 (
 	set -x
-	cd verilog/blink-extended
+	cd verilog/blink-expanded
 	make FOMU_DEV=pvt
 	file blink.dfu
 )
 travis_time_finish
-travis_fold end "Verilog Blink (extended) example for PVT board"
+travis_fold end "Verilog Blink (expanded) example for PVT board"
 
 # Test the LiteX example for Hacker
 travis_fold start "LiteX example for Hacker"
