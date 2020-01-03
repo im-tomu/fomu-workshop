@@ -2,7 +2,7 @@
 FPGA Tomu Workshop
 ==================
 
-.. image:: ../img/logo.png
+.. image:: _static/logo.png
    :alt: Fomu logo
 
 Hi, I’m Fomu! This workshop covers the basics of Fomu in a top-down

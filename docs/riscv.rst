@@ -8,7 +8,7 @@ The CPU in Fomu is built on LiteX, which places every device on a
 Wishbone bus. This is a 32-bit internal bus that maps peripherals into
 memory.
 
-.. image:: ../img/litex-design.png
+.. image:: _static/litex-design.png
    :width: 100%
    :alt: Fomu peripherals on the Wishbone bus
 
@@ -29,7 +29,7 @@ You’ll notice a “Bridge” in the diagram above. This is an optional
 feature that we ship by default on Fomu. It bridges the Wishbone bus to
 another device. In our case, it makes Wishbone available over USB.
 
-.. image:: ../img/wishbone-usb-debug-bridge.png
+.. image:: _static/wishbone-usb-debug-bridge.png
    :width: 100%
    :alt: Wishbone USB debug bridge interface
 

@@ -1,6 +1,6 @@
 # [Fomu Workshop](https://workshop.fomu.im/)
 
-![Hi, I'm Fomu!](img/logo.png "Fomu logo")
+![Hi, I'm Fomu!](docs/_static/logo.png "Fomu logo")
 
 Hi, I'm Fomu!  [This workshop](https://workshop.fomu.im/) covers the basics of
 Fomu in a top-down approach.  We'll start out by learning what Fomu is, how to

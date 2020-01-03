@@ -116,7 +116,7 @@ Aside from that, there’s not much we can *do* with this design. But
 there’s a lot of infrastructure there. So let’s add something (see
 ``workshop_rgb.py`` for full example).
 
-.. image:: ../img/ice40-rgb.jpg
+.. image:: _static/ice40-rgb.jpg
    :width: 100%
    :alt: RGB block
 

@@ -15,7 +15,7 @@ FPGA that they usually form part of the name of the part. For example,
 Fomu uses a UP5K, which has about 5000 LUTs. NeTV used an LX9, which had
 about 9000 LUTs, and NeTV2 uses a XC7A35T that has about 35000 LUTs.
 
-.. image:: ../img/ice40-lut.png
+.. image:: _static/ice40-lut.png
    :width: 100%
    :alt: The ICE40 LUT4 is a basic 4-input 1-output LUT
 
@@ -80,7 +80,7 @@ We can run this Verilog module through a synthesizer to turn it into
 ``SB_LUT4`` blocks, or we can turn it into a more familiar logic
 diagram:
 
-.. image:: ../img/verilog-synthesis.png
+.. image:: _static/verilog-synthesis.png
    :width: 100%
    :alt: A syntheis of the above logic into some gates
 
@@ -138,7 +138,7 @@ the ability to communicate over USB. This uses up a lot of storage on
 this small FPGA, but it also enables us to have such a tiny form factor,
 and lets us do some really cool things with it.
 
-.. image:: ../img/fomu-block-diagram.png
+.. image:: _static/fomu-block-diagram.png
    :width: 100%
    :alt: Block diagram of Fomu
 
