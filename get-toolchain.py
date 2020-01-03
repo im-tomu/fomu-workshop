@@ -15,9 +15,6 @@ else:
     sys.exit(1)
 
 
-TOOLCHAIN = "https://api.github.com/repos/im-tomu/fomu-toolchain/releases/latest"
-
-
 def platform():
     if 'linux' in sys.platform:
         return 'linux'
@@ -89,9 +86,24 @@ def check_files(to_download):
     return not error
 
 
+TOOLCHAIN = "https://api.github.com/repos/im-tomu/fomu-toolchain/releases/latest"
+
+
+def get_toolchain_data():
+    from urllib2 import urlopen, Request
+
+    request = Request(TOOLCHAIN)
+
+    token = os.environ.get('GH_TOKEN', None)
+    if token:
+        request.add_header('Authorization', 'token %s' % token)
+
+    response = urlopen(request)
+    return json.loads(response.read())
+
+
 def main(argv):
-    filename, status = urlretrieve(TOOLCHAIN, reporthook=reporthook)
-    toolchain_data = json.load(open(filename))
+    toolchain_data = get_toolchain_data()
 
     to_download = None
     while True:
