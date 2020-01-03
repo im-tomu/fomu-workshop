@@ -104,6 +104,9 @@ def get_toolchain_data():
 
 def main(argv):
     toolchain_data = get_toolchain_data()
+    if 'assets' not in toolchain_data:
+        import pprint
+        pprint.pprint(toolchain_data)
 
     to_download = None
     while True:
