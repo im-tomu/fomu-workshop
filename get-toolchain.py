@@ -96,6 +96,13 @@ def main(argv):
             break
     assert to_download
 
+    tarball = [f for f, u, s in to_download if f.endswith('tar.gz')]
+    assert len(tarball) == 1, tarball
+    tarball = tarball[0]
+
+    with tarfile.open(tarball[0]) as tar:
+        tar.extractall()
+
     return 0
 
 

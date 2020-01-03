@@ -3,6 +3,9 @@
 set -x
 set -e
 
+TOOLCHAIN_PATH="$(find fomu-toolchain-* -type d -maxdepth 0 2>/dev/null)"
+export PATH=$TOOLCHAIN_PATH/bin:$PATH
+
 # Test the RISC-V C example
 travis_fold start "RISC-V C Example"
 travis_time_start
