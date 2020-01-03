@@ -8,7 +8,8 @@ echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
 
 # Test the RISC-V C example
-travis_fold start "RISC-V C Example"
+travis_fold start riscv-c
+echo "RISC-V C Example"
 travis_time_start
 (
 	set -x
@@ -17,10 +18,11 @@ travis_time_start
 	file riscv-blink.dfu
 )
 travis_time_finish
-travis_fold end "RISC-V C Example"
+travis_fold end riscv-c
 
 # Test the Verilog Blink (basic) example
-travis_fold start "Verilog Blink (basic) example"
+travis_fold start verilog-blink-basic
+echo "Verilog Blink (basic) example"
 travis_time_start
 (
 	set -x
@@ -29,34 +31,37 @@ travis_time_start
 	file blink.dfu
 )
 travis_time_finish
-travis_fold end "Verilog Blink (basic) example"
+travis_fold end verilog-blink-basic
 
 # Test the Verilog Blink (expanded) example for Hacker
-travis_fold start "Verilog Blink (expanded) example for Hacker board"
+travis_fold start verilog-blink-expanded-hacker
+echo "Verilog Blink (expanded) example for Hacker board"
 travis_time_start
 (
 	set -x
 	cd verilog/blink-expanded
-	make FOMU_DEV=hacker
+	make FOMU_REV=hacker
 	file blink.dfu
 )
 travis_time_finish
-travis_fold end "Verilog Blink (expanded) example for Hacker board"
+travis_fold end verilog-blink-expanded-hacker
 
 # Test the Verilog Blink (expanded) example for PVT
-travis_fold start "Verilog Blink (expanded) example for PVT board"
+travis_fold start verilog-blink-expanded-pvt
+echo "Verilog Blink (expanded) example for PVT board"
 travis_time_start
 (
 	set -x
 	cd verilog/blink-expanded
-	make FOMU_DEV=pvt
+	make FOMU_REV=pvt
 	file blink.dfu
 )
 travis_time_finish
-travis_fold end "Verilog Blink (expanded) example for PVT board"
+travis_fold end verilog-blink-expanded-pvt
 
 # Test the LiteX example for Hacker
-travis_fold start "LiteX example for Hacker"
+travis_fold start litex-hacker
+echo "LiteX example for Hacker"
 travis_time_start
 (
 	set -x
@@ -65,10 +70,11 @@ travis_time_start
 	file build/gateware/top.dfu
 )
 travis_time_finish
-travis_fold end "LiteX example for Hacker"
+travis_fold end litex-hacker
 
 # Test the LiteX example for PVT
-travis_fold start "LiteX example for PVT"
+travis_fold start litex-pvt
+echo "LiteX example for PVT"
 travis_time_start
 (
 	set -x
@@ -77,4 +83,4 @@ travis_time_start
 	file build/gateware/top.dfu
 )
 travis_time_finish
-travis_fold end "LiteX example for PVT"
+travis_fold end litex-pvt
