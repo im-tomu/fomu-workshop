@@ -1,0 +1,11 @@
+language: minimal
+
+os:
+  - linux
+  - osx
+
+install:
+ - python ./get-toolchain.py
+
+script:
+ - ./.github/test.sh
