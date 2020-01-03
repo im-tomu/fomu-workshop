@@ -8,4 +8,4 @@ install:
  - python ./get-toolchain.py
 
 script:
- - ./.github/test.sh
+ - source ./.github/tests.sh
