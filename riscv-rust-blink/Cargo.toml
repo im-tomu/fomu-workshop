@@ -7,7 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-fomu-pac = "0.0.1"
+fomu-pac = "0.0.3"
 fomu-rt  = "0.0.4" 
 
 panic-halt = "0.2"

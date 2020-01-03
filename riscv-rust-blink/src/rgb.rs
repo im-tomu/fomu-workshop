@@ -82,13 +82,13 @@ impl RgbControl {
 
     fn addr_write(&mut self, addr: LedRegister) {
         unsafe {
-            self.registers.addr.write(|w| w.bits(addr as u32));
+            self.registers.addr.write(|w| w.bits(addr as u8));
         }
     }
 
     fn data_write(&mut self, value: u8) {
         unsafe {
-            self.registers.dat.write(|w| w.bits(value as u32));
+            self.registers.dat.write(|w| w.bits(value));
         }
     }
 }
