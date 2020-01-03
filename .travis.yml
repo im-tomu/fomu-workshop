@@ -5,6 +5,7 @@ os:
   - osx
 
 install:
+ - git fetch --tags
  - python ./get-toolchain.py
 
 script:
