@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import sys
+import tarfile
 
 if sys.version_info.major == 2:
     from urllib import urlretrieve
