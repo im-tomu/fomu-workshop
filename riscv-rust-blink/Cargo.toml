@@ -1,0 +1,22 @@
+[package]
+name = "riscv-rust-blink"
+version = "0.1.0"
+authors = ["Tiwalun <dominik.boehi@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fomu-pac = "0.0.1"
+fomu-rt  = "0.0.4" 
+
+panic-halt = "0.2"
+
+[profile.release]
+# Keep debug information for release builds, for easier debugging.
+# It will be removed during the conversion to the .dfu file.
+debug = true
+
+# Improve code generation
+lto = true
+codegen-units = 1
