@@ -20,7 +20,9 @@ else:
 def platform():
     if 'linux' in sys.platform:
         return 'linux'
-    elif 'win' in sys.platform:
+    elif 'darwin' in sys.platform:
+        return 'mac'
+    elif 'win' in sys.platform or 'msys' in sys.platform:
         return 'windows'
     else:
         return sys.platform
