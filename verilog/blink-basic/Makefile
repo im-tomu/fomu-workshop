@@ -1,7 +1,7 @@
 # Simple Fomu Makefile
 # --------------------
 # This Makefile shows the steps to generate an DFU loadable image onto
-# Fomu hacker board.
+# Fomu PVT board.
 
 # Default target.
 all: blink.dfu
@@ -16,10 +16,10 @@ blink.json: blink.v
 
 # Use **nextpnr** generate the FPGA configuration.
 # This is called the **place** and **route** step.
-blink.asc: blink.json ../pcf/fomu-hacker.pcf
+blink.asc: blink.json ../pcf/fomu-pvt.pcf
 	nextpnr-ice40 \
 		--up5k --package uwg30 \
-		--pcf ../pcf/fomu-hacker.pcf \
+		--pcf ../pcf/fomu-pvt.pcf \
 		--json blink.json \
 		--asc blink.asc
 

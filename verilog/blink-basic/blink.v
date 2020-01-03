@@ -1,13 +1,13 @@
 // Simple tri-colour LED blink example, with button control
 //
 // Green LED blinks forever.
-// Blue LED turned on when Button 5 is pressed.
-// Red LED turned on when Button 6 is pressed.
+// Blue LED turned on when pads 1 and 2 are connected.
+// Red LED turned on when pads 3 and 4 are connected.
 //
 
-`define BLUEPWM  RGB0PWM
-`define GREENPWM RGB1PWM
-`define REDPWM   RGB2PWM
+`define GREENPWM RGB0PWM
+`define REDPWM   RGB1PWM
+`define BLUEPWM  RGB2PWM
 
 module top (
     // 48MHz Clock input
