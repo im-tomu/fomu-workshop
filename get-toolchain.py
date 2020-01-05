@@ -134,10 +134,21 @@ def main(argv):
     zipball = [f for f, u, s in to_download if f.endswith('.zip')]
     if zipball:
         import zipfile
+        class ZipFileWithPerm(zipfile.ZipFile):
+            def _extract_member(self, member, targetpath, pwd):
+                if not isinstance(member, zipfile.ZipInfo):
+                    member = self.getinfo(member)
+
+                targetpath = zipfile.ZipFile._extract_member(self, member, targetpath, pwd)
+
+                attr = member.external_attr >> 16
+                if attr != 0:
+                    os.chmod(targetpath, attr)
+                return targetpath
+
         assert len(zipball) == 1, zipball
         zipball = zipball[0]
-
-        with zipfile.ZipFile(zipball) as zipf:
+        with ZipFileWithPerm(zipball) as zipf:
             zipf.extractall()
 
     return 0
