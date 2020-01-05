@@ -167,7 +167,7 @@ memory in Fomu. Some of these registers control things such as the
 timing of the fade in and fade out pulses, and some control the level of
 each of the three colors.
 
-.. image:: ../img/ice40-ledd.png
+.. image:: _static/ice40-ledd.png
    :width: 100%
    :alt: Registers of the ICE40 RGB driver
 

@@ -9,7 +9,7 @@ NEXTPNR   ?= nextpnr-ice40
 YOSYS     ?= yosys
 ICEPACK   ?= icepack
 
-PCF_PATH ?= pcf
+PCF_PATH ?= ../pcf
 
 # Add Windows and Unix support
 RM         = rm -rf

@@ -3,10 +3,11 @@
 # This Makefile shows the steps to generate an DFU loadable image onto
 # Fomu hacker board.
 
-
 # Default target.
 all: blink.dfu
 	@true
+
+.DEFAULT: all
 
 # Use *Yosys* generate the synthesized netlist
 # This is called the **synthesis** and **tech mapping** step.
@@ -15,8 +16,12 @@ blink.json: blink.v
 
 # Use **nextpnr** generate the FPGA configuration.
 # This is called the **place** and **route** step.
-blink.asc: blink.json blink.pcf
-	nextpnr-ice40 --up5k --package uwg30 --json blink.json --pcf blink.pcf --asc blink.asc
+blink.asc: blink.json ../pcf/fomu-hacker.pcf
+	nextpnr-ice40 \
+		--up5k --package uwg30 \
+		--pcf ../pcf/fomu-hacker.pcf \
+		--json blink.json \
+		--asc blink.asc
 
 # Use icepack to convert the FPGA configuration into a "bitstream" loadable onto the FPGA.
 # This is called the bitstream generation step.

@@ -248,14 +248,14 @@ Which Fomu do I have?
 
     <span style="background-color: #03b1c4;">cyan / light blue</span>
 
-.. |Hacker Hardware Front without case| image:: ../img/hw-hacker-front-bare-small.jpg
-.. |Production Hardware Front without case| image:: ../img/hw-pvt-front-bare-small.jpg
-.. |Hacker Hardware Back without case| image:: ../img/hw-hacker-back-bare-small.jpg
-.. |Production Hardware Back without case| image:: ../img/hw-pvt-back-bare-small.jpg
-.. |Hacker Hardware Back with case| image:: ../img/hw-hacker-back-case-small.jpg
-.. |Production Hardware Back with case| image:: ../img/hw-pvt-back-case-small.jpg
-.. |Hacker Hardware Annotated Diagram| image:: ../img/hw-hacker-annotated.png
-.. |Production Hardware Annotated Diagram| image:: ../img/hw-pvt-annotated.png
+.. |Hacker Hardware Front without case| image:: _static/hw-hacker-front-bare-small.jpg
+.. |Production Hardware Front without case| image:: _static/hw-pvt-front-bare-small.jpg
+.. |Hacker Hardware Back without case| image:: _static/hw-hacker-back-bare-small.jpg
+.. |Production Hardware Back without case| image:: _static/hw-pvt-back-bare-small.jpg
+.. |Hacker Hardware Back with case| image:: _static/hw-hacker-back-case-small.jpg
+.. |Production Hardware Back with case| image:: _static/hw-pvt-back-case-small.jpg
+.. |Hacker Hardware Annotated Diagram| image:: _static/hw-hacker-annotated.png
+.. |Production Hardware Annotated Diagram| image:: _static/hw-pvt-annotated.png
 
 
 .. note::
@@ -374,6 +374,6 @@ Installing Zadig Drivers
 #. In the dropdown, select your Fomu and in the field right of the green arrow
    choose the `WinUSB` driver and hit Upgrade Driver.
 
-   .. image:: ../img/Zadeg-Setup.PNG
+   .. image:: _static/Zadeg-Setup.PNG
       :alt: Setup of ZADEG for Updating USBport driver on WIN7
 
