@@ -25,8 +25,5 @@ install:
  - python ./get-toolchain.py
 
 script:
- - export -f travis_fold
- - export -f travis_time_start
- - export -f travis_time_finish
- - export -f travis_nanoseconds
+ - source .github/travis-pretty.inc.sh
  - ./.github/tests.sh
