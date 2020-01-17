@@ -12,7 +12,10 @@ To install all the dependencies and prepare the environment for building
 the Zephyr application follow the official `Zephyr Getting Started
 Guide <https://docs.zephyrproject.org/latest/getting_started/index.html>`__
 up to point 4. On Linux you can follow the instructions from the point 5
-on installing the Software Development Toolchain. For other operating
+on installing the Software Development Toolchain. The python version
+in the FOMU toolchain may not work; remove it from your PATH before
+attempting to build zephyr.
+For other operating
 systems, if you followed the instructions from the ``Required Software``
 section of this tutorial, you should have a toolchain in ``PATH``.
 
