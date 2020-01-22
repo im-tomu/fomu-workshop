@@ -1,0 +1,60 @@
+ENTRY(_start)
+
+__DYNAMIC = 0;
+
+MEMORY {
+	sram : ORIGIN = 0x10000000, LENGTH = 0x00020000
+	rom : ORIGIN = 0x20040000, LENGTH = 0x100000 /* 1 MBit */
+}
+
+SECTIONS
+{
+	.text :
+	{
+		_ftext = .;
+		*(.text.start)
+		*(.text .stub .text.* .gnu.linkonce.t.*)
+		_etext = .;
+	} > rom
+
+	.rodata :
+	{
+		. = ALIGN(4);
+		_frodata = .;
+		*(.rodata .rodata.* .gnu.linkonce.r.*)
+		*(.rodata1)
+		*(.srodata)
+		. = ALIGN(4);
+		_erodata = .;
+	} > rom
+
+	.data : AT (ADDR(.rodata) + SIZEOF (.rodata))
+	{
+		. = ALIGN(4);
+		_fdata = .;
+		*(.data .data.* .gnu.linkonce.d.*)
+		*(.data1)
+		*(.ramtext .ramtext.*)
+		_gp = ALIGN(16);
+		*(.sdata .sdata.* .gnu.linkonce.s.* .sdata2 .sdata2.*)
+		_edata = ALIGN(16); /* Make sure _edata is >= _gp. */
+	} > sram
+
+	.bss :
+	{
+		. = ALIGN(4);
+		_fbss = .;
+		*(.dynsbss)
+		*(.sbss .sbss.* .gnu.linkonce.sb.*)
+		*(.scommon)
+		*(.dynbss)
+		*(.bss .bss.* .gnu.linkonce.b.*)
+		*(COMMON)
+		. = ALIGN(4);
+		_ebss = .;
+	} > sram
+
+	_end = .;
+}
+
+PROVIDE(_fstack = ORIGIN(sram) + LENGTH(sram) - 4);
