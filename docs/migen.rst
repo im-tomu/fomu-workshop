@@ -6,15 +6,24 @@ Migen and LiteX
 “Hello world!” - Blink a LED
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-FIXME: Add the Migen and LiteX equivalent for the Verilog above.
+Migen is an HDL embedded in Python. The verilog examples (in directory
+``verilog``) can also be written using Migen; an implementation is provided
+in directory ``migen``.
+
+To try them out, go to the ``migen`` directory and execute ``blink.py`` or
+``blink-expanded.py`` respectively (before, ensure that you have set
+the ``FOMU_REV`` environment variable correctly). This will create a
+``build`` directory with a ``top.bin`` file.
+
+Using ``dfu-util -D build/top.bin``, it can be loaded onto the Fomu and should
+work identically as the corresponding verilog example.
 
 Wishbone Bus
 ^^^^^^^^^^^^
 
-Migen is an HDL embedded in Python, and LiteX provides us with a
-Wishbone abstraction layer. There really is no reason we need to include
-a CPU with our design, but we can still reuse the USB Wishbone bridge in
-order to write HDL code.
+LiteX provides us with a Wishbone abstraction layer. There really is no
+reason we need to include a CPU with our design, but we can still reuse
+the USB Wishbone bridge in order to write HDL code.
 
 We can use ``DummyUsb`` to respond to USB requests and bridge USB to
 Wishbone, and rely on LiteX to generate registers and wire them to
