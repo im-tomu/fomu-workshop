@@ -75,13 +75,17 @@ m = Module()
 # Assign USB pins to "0" so as to disconnect Fomu from
 # the host system.  Otherwise it would try to talk to
 # us over USB, which wouldn't work since we have no stack.
-m.comb += [usb_pins.d_p.eq(0),
-           usb_pins.d_n.eq(0),
-           usb_pins.pullup.eq(0)]
+m.comb += [
+    usb_pins.d_p.eq(0),
+    usb_pins.d_n.eq(0),
+    usb_pins.pullup.eq(0)
+]
 
-m.comb += [red_pwm.eq(counter[24]),
-           green_pwm.eq(counter[23]),
-           blue_pwm.eq(counter[25])]
+m.comb += [
+    red_pwm.eq(counter[24]),
+    green_pwm.eq(counter[23]),
+    blue_pwm.eq(counter[25])
+]
 
 # Increment counter on clock signal
 m.sync += counter.eq(counter + 1)
@@ -95,18 +99,20 @@ m.sync += counter.eq(counter + 1)
 #
 # See also:
 # https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/ICE40LEDDriverUsageGuide.ashx?document_id=50668
-m.specials += Instance('SB_RGBA_DRV',
-                       i_CURREN=0b1,
-                       i_RGBLEDEN=0b1,
-                       i_RGB0PWM=rgb0_pwm,
-                       i_RGB1PWM=rgb1_pwm,
-                       i_RGB2PWM=rgb2_pwm,
-                       o_RGB0=rgb_pins.r,
-                       o_RGB1=rgb_pins.g,
-                       o_RGB2=rgb_pins.b,
-                       p_CURRENT_MODE=RGBA_CURRENT_MODE_HALF,
-                       p_RGB0_CURRENT=RGBA_CURRENT_08MA_04MA,
-                       p_RGB1_CURRENT=RGBA_CURRENT_08MA_04MA,
-                       p_RGB2_CURRENT=RGBA_CURRENT_08MA_04MA)
+m.specials += Instance(
+    'SB_RGBA_DRV',
+    i_CURREN=0b1,
+    i_RGBLEDEN=0b1,
+    i_RGB0PWM=rgb0_pwm,
+    i_RGB1PWM=rgb1_pwm,
+    i_RGB2PWM=rgb2_pwm,
+    o_RGB0=rgb_pins.r,
+    o_RGB1=rgb_pins.g,
+    o_RGB2=rgb_pins.b,
+    p_CURRENT_MODE=RGBA_CURRENT_MODE_HALF,
+    p_RGB0_CURRENT=RGBA_CURRENT_08MA_04MA,
+    p_RGB1_CURRENT=RGBA_CURRENT_08MA_04MA,
+    p_RGB2_CURRENT=RGBA_CURRENT_08MA_04MA
+)
 
 platform.build(m)

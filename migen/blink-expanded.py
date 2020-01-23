@@ -89,17 +89,19 @@ m.comb += [
     usb_pins.d_n.eq(0),
     usb_pins.pullup.eq(0),
 ]
-           usb_pins.d_n.eq(0),
-           usb_pins.pullup.eq(0)]
 
 # Use touch pins 1+2 to ground pulled-up inputs
-m.comb += [touch_pins[1].eq(0),
-           touch_pins[2].eq(0)]
+m.comb += [
+    touch_pins[1].eq(0),
+    touch_pins[2].eq(0)
+]
 
 # Wire inputs and clock divider to LEDs
-m.comb += [red_pwm.eq(~input2),
-           green_pwm.eq(counter[23]),
-           blue_pwm.eq(~input1)]
+m.comb += [
+    red_pwm.eq(~input2),
+    green_pwm.eq(counter[23]),
+    blue_pwm.eq(~input1)
+]
 
 # Increment counter on clock signal
 m.sync += counter.eq(counter + 1)
@@ -113,32 +115,38 @@ m.sync += counter.eq(counter + 1)
 #
 # See also:
 # https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/ICE40LEDDriverUsageGuide.ashx?document_id=50668
-m.specials += Instance('SB_RGBA_DRV',
-                       i_CURREN=0b1,
-                       i_RGBLEDEN=0b1,
-                       i_RGB0PWM=rgb0_pwm,
-                       i_RGB1PWM=rgb1_pwm,
-                       i_RGB2PWM=rgb2_pwm,
-                       o_RGB0=rgb_pins.r,
-                       o_RGB1=rgb_pins.g,
-                       o_RGB2=rgb_pins.b,
-                       p_CURRENT_MODE=RGBA_CURRENT_MODE_HALF,
-                       p_RGB0_CURRENT=RGBA_CURRENT_08MA_04MA,
-                       p_RGB1_CURRENT=RGBA_CURRENT_08MA_04MA,
-                       p_RGB2_CURRENT=RGBA_CURRENT_08MA_04MA)
+m.specials += Instance(
+    'SB_RGBA_DRV',
+    i_CURREN=0b1,
+    i_RGBLEDEN=0b1,
+    i_RGB0PWM=rgb0_pwm,
+    i_RGB1PWM=rgb1_pwm,
+    i_RGB2PWM=rgb2_pwm,
+    o_RGB0=rgb_pins.r,
+    o_RGB1=rgb_pins.g,
+    o_RGB2=rgb_pins.b,
+    p_CURRENT_MODE=RGBA_CURRENT_MODE_HALF,
+    p_RGB0_CURRENT=RGBA_CURRENT_08MA_04MA,
+    p_RGB1_CURRENT=RGBA_CURRENT_08MA_04MA,
+    p_RGB2_CURRENT=RGBA_CURRENT_08MA_04MA
+)
 
-m.specials += Instance('SB_IO',
-                       i_PACKAGE_PIN=touch_pins[0],
-                       i_OUTPUT_ENABLE=0b0,
-                       o_D_IN_0=input1,
-                       p_PIN_TYPE=SB_IO_TYPE_SIMPLE_INPUT,
-                       p_PULLUP=0b1)
+m.specials += Instance(
+    'SB_IO',
+    i_PACKAGE_PIN=touch_pins[0],
+    i_OUTPUT_ENABLE=0b0,
+    o_D_IN_0=input1,
+    p_PIN_TYPE=SB_IO_TYPE_SIMPLE_INPUT,
+    p_PULLUP=0b1
+)
 
-m.specials += Instance('SB_IO',
-                       i_PACKAGE_PIN=touch_pins[3],
-                       i_OUTPUT_ENABLE=0b0,
-                       o_D_IN_0=input2,
-                       p_PIN_TYPE=SB_IO_TYPE_SIMPLE_INPUT,
-                       p_PULLUP=0b1)
+m.specials += Instance(
+    'SB_IO',
+    i_PACKAGE_PIN=touch_pins[3],
+    i_OUTPUT_ENABLE=0b0,
+    o_D_IN_0=input2,
+    p_PIN_TYPE=SB_IO_TYPE_SIMPLE_INPUT,
+    p_PULLUP=0b1
+)
 
 platform.build(m)
