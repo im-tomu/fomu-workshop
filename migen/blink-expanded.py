@@ -84,7 +84,11 @@ m = Module()
 # Assign USB pins to "0" so as to disconnect Fomu from
 # the host system.  Otherwise it would try to talk to
 # us over USB, which wouldn't work since we have no stack.
-m.comb += [usb_pins.d_p.eq(0),
+m.comb += [
+    usb_pins.d_p.eq(0),
+    usb_pins.d_n.eq(0),
+    usb_pins.pullup.eq(0),
+]
            usb_pins.d_n.eq(0),
            usb_pins.pullup.eq(0)]
 
