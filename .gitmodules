@@ -22,4 +22,3 @@
 [submodule "migen/deps/migen"]
 	path = migen/deps/migen
 	url = https://github.com/m-labs/migen.git
-	branch = 0.6.dev-283-g562c046
