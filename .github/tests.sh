@@ -27,7 +27,7 @@ travis_time_start
 (
 	set -x
 	cd verilog/blink
-	make
+	make FOMU_REV=pvt
 	file blink.dfu
 )
 travis_time_finish
