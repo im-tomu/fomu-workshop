@@ -5,13 +5,12 @@ Verilog on Fomu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``verilog-blink`` contains a Verilog example of a blink
+directory ``verilog/blink-expanded`` contains a Verilog example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
 number so you get an on/off pattern. It also exposes some of the signals
 on the touchpads, making it possible to probe them with an oscilloscope.
 
-Enter the ``verilog-blink`` directory and build the ``verilog-blink``
-demo by using ``make``:
+Enter the ``verilog/blink-expanded`` directory and build the demo by using ``make``:
 
 **Make sure you set the ``FOMU_REV`` value to match your hardware! See
 the Required Hardware section.**
@@ -54,15 +53,15 @@ the Required Hardware section.**
    $
 
 You can load ``blink.dfu`` onto Fomu by using the same ``dfu-util -D``
-command we’ve been using. The LED should begin blinking on and off
-regularly, indicating your bitstream was successfully loaded.
+command we’ve been using. The LED should begin rotating through colors,
+indicating your bitstream was successfully loaded.
 
    When writing HDL, a tool called ``yosys`` is used to convert the
    human readable verilog into a netlist representation, this is called
    synthesis. Once we have the netlist representation a tool called
    ``nextpnr`` performs an operation called “place and route” which
    makes it something that will actually run on the FPGA. This is all
-   done for you using the ``Makefile`` in the ``verilog-blink``
+   done for you using the ``Makefile`` in the ``verilog/blink-expanded``
    directory.
 
    A big feature of ``nextpnr`` over its predecessor, is the fact that
