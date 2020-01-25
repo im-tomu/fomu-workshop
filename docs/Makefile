@@ -1,6 +1,8 @@
 # Minimal makefile for Sphinx documentation
 #
 
+SHELL:=/bin/bash
+
 # You can set these variables from the command line.
 SPHINXOPTS      =
 SPHINXBUILD     = [ -e env/bin/activate ] && source env/bin/activate; sphinx-build
