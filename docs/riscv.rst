@@ -50,15 +50,15 @@ out of Fomu:
 .. session:: shell-session
 
    $ wishbone-tool 0xe0007000
-   Value at e0007000: 00000001
+   Value at e0007000: 00000002
    $ wishbone-tool 0xe0007004
-   Value at e0007004: 00000008
+   Value at e0007004: 00000000
    $ wishbone-tool 0xe0007008
-   Value at e0007008: 00000007
+   Value at e0007008: 00000003
    $
 
 The three values correspond to the version number of the board at time
-of writing: v1.8.7.
+of writing: v2.0.3.
 
 We can also read and write directly to memory. Recall that memory is
 mapped to address ``0x10000000``. Let’s write a test value there and try
