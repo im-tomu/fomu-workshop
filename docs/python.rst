@@ -131,11 +131,11 @@ They may be different from what you see here:
 
    >>> import machine
    >>> machine.mem32[0xe0007000]
-   1
+   2
    >>> machine.mem32[0xe0007004]
-   8
+   0
    >>> machine.mem32[0xe0007008]
-   7
+   3
    >>>
 
 The ``CSR_VERSION_MODEL_ADDR`` contains a single character that
