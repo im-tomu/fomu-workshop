@@ -201,14 +201,14 @@ To start with, run ``wishbone-tool -s gdb``:
 
    $ wishbone-tool -s gdb
    INFO [wishbone_tool::usb_bridge] opened USB device device 008 on bus 001
-   INFO [wishbone_tool::server] accepting connections on 0.0.0.0:1234
+   INFO [wishbone_tool::server] accepting connections on 127.0.0.1:3333
    $
 
 In a second window, run gdb on ``riscv-blink.elf``:
 
 .. session:: shell-session
 
-   $ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:1234'
+   $ riscv64-unknown-elf-gdb riscv-blink.elf -ex 'target remote localhost:3333'
    GNU gdb (GDB) 8.2.90.20190228-git
    Copyright (C) 2019 Free Software Foundation, Inc.
    License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
