@@ -20,10 +20,10 @@ On macOS and Windows you also need to set some additional variables.
 
 For macOS:
 
-.. code:: bash
+.. session:: shell-session
 
-   export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
-   export CROSS_COMPILE=riscv64-unknown-elf-
+   $ export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
+   $ export CROSS_COMPILE=riscv64-unknown-elf-
 
 For Windows:
 
@@ -35,11 +35,11 @@ For Windows:
 To build the ``shell`` demo application for the LiteX/VexRiscv board run
 the following commands on Linux and macOS:
 
-.. code:: bash
+.. session:: shell-session
 
-   cd ~/zephyrproject/zephyr
-   source zephyr-env.sh
-   west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
+   $ cd ~/zephyrproject/zephyr
+   $ source zephyr-env.sh
+   $ west build -p auto -b litex_vexriscv samples/subsys/shell/shell_module/
 
 And on Windows:
 

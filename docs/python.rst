@@ -34,7 +34,7 @@ Use ``dfu-util`` to load it:
         If you’re on a macOS machine, use the following command to connect to
         the device:
 
-        .. code:: sh
+        .. session:: shell-session
 
            $ screen /dev/cu.usb*
 
@@ -43,7 +43,7 @@ Use ``dfu-util`` to load it:
         If you’re on Linux, use the following command to connect to the device,
         it will be called ``ttyACM?``:
 
-        .. code:: sh
+        .. session:: shell-session
 
            $ screen /dev/ttyACM*
 
@@ -57,7 +57,7 @@ Use ``dfu-util`` to load it:
         You can then use a program such as `Tera Term
         <https://tera-term.en.lo4d.com/download>`__.
 
-        .. code:: powershell
+        .. session:: powershell
 
            PS> ttermpro.exe
 
