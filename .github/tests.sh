@@ -20,18 +20,18 @@ travis_time_start
 travis_time_finish
 travis_fold end riscv-c
 
-# Test the Verilog Blink (basic) example
-travis_fold start verilog-blink-basic
-echo "Verilog Blink (basic) example"
+# Test the Verilog Blink example
+travis_fold start verilog-blink
+echo "Verilog Blink example"
 travis_time_start
 (
 	set -x
-	cd verilog/blink-basic
-	make
+	cd verilog/blink
+	make FOMU_REV=pvt
 	file blink.dfu
 )
 travis_time_finish
-travis_fold end verilog-blink-basic
+travis_fold end verilog-blink
 
 # Test the Verilog Blink (expanded) example for Hacker
 travis_fold start verilog-blink-expanded-hacker
