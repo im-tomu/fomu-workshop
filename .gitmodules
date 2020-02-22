@@ -19,3 +19,6 @@
 [submodule "litex/deps/litedram"]
 	path = litex/deps/litedram
 	url = https://github.com/enjoy-digital/litedram.git
+[submodule "migen/deps/migen"]
+	path = migen/deps/migen
+	url = https://github.com/m-labs/migen.git
