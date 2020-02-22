@@ -72,7 +72,10 @@ Other sphinx extensions which are used include;
 
 ```shell-session
 $ cd docs
-$ # Download conda environment with Python utilities
+```
+Download conda environment with Python utilities:
+
+```shell-session
 $ make env
 rm -rf env
 make _download/Miniconda3-latest-Linux-x86_64.sh
@@ -118,7 +121,11 @@ conda-package-handli | 942 KB    | ########################### | 100%
 Preparing transaction: done
 Verifying transaction: done
 Executing transaction: done
-$ # Build the html output
+```
+
+Build the html output:
+
+```shell-session
 $ make html
 Running Sphinx v2.3.1
 loading pickled environment... done
@@ -136,7 +143,11 @@ build succeeded, 15 warnings.
 
 The HTML pages are in _build/html.
 Copying tabs assets
-$ # Start your web browser
+```
+
+Start your web browser:
+
+```shell-session
 $ xdg-open ./_build/html/index.html
 ```
 

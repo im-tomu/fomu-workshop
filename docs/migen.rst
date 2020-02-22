@@ -8,8 +8,8 @@ Migen and LiteX
 
 FIXME: Add the Migen and LiteX equivalent for the Verilog above.
 
-Wishbone Bus
-^^^^^^^^^^^^
+Wishbone Bus Basics
+^^^^^^^^^^^^^^^^^^^
 
 Migen is an HDL embedded in Python, and LiteX provides us with a
 Wishbone abstraction layer. There really is no reason we need to include
@@ -112,9 +112,12 @@ of LiteX. Let’s try reading and writing RAM:
    Value at 10000000: 98765432
    $
 
+Wishbone Bus Extension
+^^^^^^^^^^^^^^^^^^^^^^
+
 Aside from that, there’s not much we can *do* with this design. But
-there’s a lot of infrastructure there. So let’s add something (see
-``workshop_rgb.py`` for full example).
+there’s a lot of infrastructure there. So let’s add something we can see
+(``workshop_rgb.py`` contains the completed example).
 
 .. image:: _static/ice40-rgb.jpg
    :width: 100%
@@ -126,8 +129,8 @@ has three outputs: ``RGB0``, ``RGB1``, and ``RGB2``. It also has four
 parameters: ``CURRENT_MODE``, ``RGB0_CURRENT``, ``RGB1_CURRENT``, and
 ``RGB2_CURRENT``.
 
-This block is defined in Verilog, but we can very easily import it as a
-Module into Migen:
+This block is defined in Verilog (as ``SB_RGBA_DRV``), but we can import it as
+a Module into Migen:
 
 .. code:: python
 
@@ -177,10 +180,10 @@ our new register:
 
 .. code:: csv
 
-   csr_register,rgb_output,0xe0006800,1,rw
+   csr_register,fomu_rgb_output,0xe0006800,1,rw
 
-We can use ``wishbone-tool`` to write values to ``0xe0006800`` and see
-them take effect immediately.
+We can use ``wishbone-tool`` to write values to ``0xe0006800`` (or whatever
+your ``build/csr.csv`` says) and see them take effect immediately.
 
 You can see that it takes very little code to take a Signal from HDL and
 expose it on the Wishbone bus.
