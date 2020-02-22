@@ -341,7 +341,7 @@ Now the Fomu should blink in the same rainbow pattern as before.
 Further RISC-V experiments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The `TinyUSB <https://github.com/hathach/tinyusb>` USB stack supports Fomu. To get started with it, you might compile the mass storage example it provides. To do so, follow these steps:
+The `TinyUSB <https://github.com/hathach/tinyusb>`__ USB stack supports Fomu. To get started with it, you might compile the mass storage example it provides. To do so, follow these steps:
 
 * Clone the TinyUSB git repository: ``git clone https://github.com/hathach/tinyusb`` (you don't need to initialize the subrepositories)
 * Change to ``tinyusb/examples/device/cdc_msc``
