@@ -1,4 +1,3 @@
-const builtin = @import("builtin");
 const std = @import("std");
 
 pub const MESSIBLE = @import("./fomu/messible.zig").MESSIBLE;
@@ -16,7 +15,7 @@ comptime {
 }
 
 /// Panic function that sets LED to red and flashing + prints the panic message over messible
-pub fn panic(message: []const u8, stack_trace: ?*builtin.StackTrace) noreturn {
+pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noreturn {
     @setCold(true);
 
     // Put LED into non-raw flashing mode
