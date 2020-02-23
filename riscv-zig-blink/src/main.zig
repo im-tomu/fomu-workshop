@@ -1,8 +1,7 @@
-const builtin = @import("builtin");
 const std = @import("std");
 const fomu = @import("./fomu.zig");
 
-pub fn panic(message: []const u8, stack_trace: ?*builtin.StackTrace) noreturn {
+pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noreturn {
     @setCold(true);
     fomu.panic(message, stack_trace);
 }

@@ -8,11 +8,11 @@ pub fn build(b: *Builder) void {
     const elf = b.addExecutable("riscv-zig-blink", "src/main.zig");
     elf.setTheTarget(.{
         .Cross = .{
-            .arch = .riscv32,
             .os = .freestanding,
             .abi = .none,
-            .cpu_features = .{
-                .cpu = &std.Target.riscv.cpu.generic_rv32,
+            .cpu = .{
+                .arch = .riscv32,
+                .model = &std.Target.riscv.cpu.generic_rv32,
                 .features = std.Target.Cpu.Feature.Set.empty,
             },
         },
