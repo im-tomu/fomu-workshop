@@ -40,6 +40,8 @@ Run ``renode`` and in the Monitor type:
 
    (monitor) include @scripts/complex/fomu/renode_etherbone_fomu.resc
    (machine-0) start
+   Starting emulation...
+   (machine-0) sysbus LogPeripheralAccess sysbus.led
 
 You see a new window with a `shell
 application <https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a>`__,
