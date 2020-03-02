@@ -18,40 +18,16 @@ the remaining part of the physical system for I/O.
 Setting up the server
 ^^^^^^^^^^^^^^^^^^^^^
 
-Ensure your Fomu is plugged in and setup the Etherbone server.
+You can use ``wishbone-tool`` to bridge protocols such as USB to Etherbone.
+To start the server, run the following command:
 
-In the workshop directory execute the following commands (on Linux and
-macOS):
+.. session:: shell-session
 
-.. code:: bash
+   $ wishbone-tool -s wishbone
+   INFO [wishbone_tool::bridge::usb] opened USB device device 006 on bus 001
 
-   cd litex/deps/litex
-   git checkout master && git pull # this will fetch newer LiteX, required to handle communication properly
-   ./litex_setup.py init  # this will clone dependencies
-   export PYTHONPATH=`pwd`:`pwd`/litex:`pwd`/migen
-
-When on Windows, run:
-
-::
-
-   cd litex\deps\litex
-   git checkout master && git pull
-   litex_setup.py init
-   set PYTHONPATH=%cd%;%cd%\litex;%cd%\migen
-
-After this preparation, we are ready to start the server:
-
-.. code:: bash
-
-   python3 litex/tools/litex_server.py --usb --usb-vid 0x1209 --usb-pid 0x5bf0
-
-You should see the following output, confirming that the server is
-connected to Fomu:
-
-::
-
-   LiteX remote server
-   [CommUSB] vid: 0x1209 / pid: 0x5bf0 / tcp port: 1234
+This starts an Etherbone server on ``localhost:1234`` by default.  See
+``wishbone-tool --help`` to change these settings.
 
 Now you can start Renode and setup the platform.
 
@@ -65,13 +41,7 @@ Run ``renode`` and in the Monitor type:
    (monitor) include @scripts/complex/fomu/renode_etherbone_fomu.resc
    (machine-0) start
 
-The ``litex_server.py`` should print:
-
-::
-
-   Connected with 127.0.0.1:<port>
-
-You will also see a new window with a `shell
+You see a new window with a `shell
 application <https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a>`__,
 that provides additional commands allowing you to control LEDs on Fomu.
 
