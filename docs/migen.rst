@@ -189,9 +189,9 @@ our new register:
 
 .. code:: csv
 
-   csr_register,fomu_rgb_output,0xe0006800,1,rw
+   csr_register,fomu_rgb_output,0x60003000,1,rw
 
-We can use ``wishbone-tool`` to write values to ``0xe0006800`` (or whatever
+We can use ``wishbone-tool`` to write values to ``0x60003000`` (or whatever
 your ``build/csr.csv`` says) and see them take effect immediately.
 
 You can see that it takes very little code to take a Signal from HDL and
