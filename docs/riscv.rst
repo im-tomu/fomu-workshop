@@ -254,7 +254,7 @@ As an alternative to C, the `Rust Language <https://www.rust-lang.org/>`_ can be
 To install Rust, follow the instructions on https://rustup.rs/. After installing Rust, we can install support for RISCV 
 targets using ``rustup``:
 
-.. session::
+.. session:: shell-session
 
      $ rustup target add riscv32i-unknown-none-elf
      info: downloading component 'rust-std' for 'riscv32i-unknown-none-elf'
@@ -264,7 +264,7 @@ targets using ``rustup``:
 A Rust version of the C program used above is located in the ``riscv-rust-blink`` directory. Change into that directory, 
 and build it using ``cargo``, the Rust package manager:
 
-.. session::
+.. session:: shell-session
      
      $ cargo build --release
      Compiling semver-parser v0.7.0
@@ -292,7 +292,7 @@ and build it using ``cargo``, the Rust package manager:
 The resulting binary is located in the target subfolder: ``target/riscv32i-unknown-none-elf/release/riscv-rust-blink``. It can
 be flashed using the ``flash.sh`` script, also located in the ``riscv-rust-blink`` folder:
 
-.. session::
+.. session:: shell-session
 
      $ ./flash.sh
      dfu-suffix (dfu-util) 0.9
