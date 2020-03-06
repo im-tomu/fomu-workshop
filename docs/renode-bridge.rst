@@ -47,7 +47,7 @@ You see a new window with a `shell
 application <https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a>`__,
 that provides additional commands allowing you to control LEDs on Fomu.
 
-.. code:: bash
+.. session:: shell-session
 
    uart:~$ led_toggle
    uart:~$ led_breathe

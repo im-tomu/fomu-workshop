@@ -15,7 +15,7 @@ Enter the ``verilog/blink-expanded`` directory and build the demo by using ``mak
 **Make sure you set the ``FOMU_REV`` value to match your hardware! See
 the Required Hardware section.**
 
-.. session::
+.. session:: shell-session
 
    $ make FOMU_REV=$FOMU_REV
    ...
