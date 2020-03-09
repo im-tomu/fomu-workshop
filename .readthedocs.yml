@@ -9,8 +9,8 @@ version: 2
 sphinx:
   configuration: docs/conf.py
 
-formats:
- - htmlzip
+#formats:
+#- htmlzip
 
 conda:
   environment: docs/environment.yml
