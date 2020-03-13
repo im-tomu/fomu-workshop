@@ -68,7 +68,7 @@ You will see the Monitor, where you should type:
 
 ::
 
-   (monitor) $zephyr=@~/zephyrproject/zephyr/build/zephyr/zephyr.elf
+   (monitor) $zephyr=@/path/to/zephyrproject/zephyr/build/zephyr/zephyr.elf
    (monitor) start @scripts/single-node/litex_vexriscv_zephyr.resc
 
 You should see a new window pop up for the serial port. In it, you
