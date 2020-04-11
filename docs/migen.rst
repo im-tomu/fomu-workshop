@@ -189,10 +189,20 @@ our new register:
 
 .. code:: csv
 
-   csr_register,fomu_rgb_output,0xe0006800,1,rw
+   csr_register,fomu_rgb_output,0x60003000,1,rw
 
-We can use ``wishbone-tool`` to write values to ``0xe0006800`` (or whatever
+We can use ``wishbone-tool`` to write values to ``0x60003000`` (or whatever
 your ``build/csr.csv`` says) and see them take effect immediately.
+
+.. session:: shell-session
+
+   $ wishbone-tool 0x60003000 0x1 # make LED green
+   $ wishbone-tool 0x60003000 0x2 # make LED red
+   $ wishbone-tool 0x60003000 0x3 # make LED yellow   
+   $ wishbone-tool 0x60003000 0x4 # make LED blue
+   $ wishbone-tool 0x60003000 0x5 # make LED teal
+   $ wishbone-tool 0x60003000 0x6 # make LED pink
+   $ wishbone-tool 0x60003000 0x7 # make LED white
 
 You can see that it takes very little code to take a Signal from HDL and
 expose it on the Wishbone bus.
