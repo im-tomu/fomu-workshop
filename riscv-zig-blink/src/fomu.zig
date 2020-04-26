@@ -43,8 +43,7 @@ pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noretur
     messibleOutStream.print("PANIC: {}\r\n", .{message}) catch void;
 
     while (true) {
-        // TODO: Use @breakpoint() once https://reviews.llvm.org/D69390 is available
-        asm volatile ("ebreak");
+        @breakpoint();
     }
 }
 
