@@ -38,7 +38,7 @@ The workshop is written in
 
 It is hosted on [Read The Docs](http://readthedocs.org/) and currently uses the
 [Material Design style](https://material.io/) developed by Google through
-[a slightly custom version of the `sphinx_materialdesign_theme` package](http://github.com/SymbiFlow/sphinx_symbiflow_theme).
+[a slightly custom version of the `sphinx_materialdesign_theme` package](http://github.com/SymbiFlow/sphinx_materialdesign_theme).
 
 It uses the [`sphinxcontrib-session` extension](https://github.com/mithro/sphinxcontrib-session)
 to properly highlight the example sessions and to allow copying only the
