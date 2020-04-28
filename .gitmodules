@@ -10,9 +10,6 @@
 [submodule "litex/deps/litescope"]
 	path = litex/deps/litescope
 	url = https://github.com/enjoy-digital/litescope.git
-[submodule "litex/deps/pyserial"]
-	path = litex/deps/pyserial
-	url = https://github.com/pyserial/pyserial.git
 [submodule "litex/deps/valentyusb"]
 	path = litex/deps/valentyusb
 	url = https://github.com/im-tomu/valentyusb.git
