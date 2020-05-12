@@ -40,35 +40,28 @@ pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noretur
         .BRMSBEXT = 0,
     });
 
-    messibleOutstream.print("PANIC: {}\r\n", .{message}) catch void;
+    messibleOutStream.print("PANIC: {}\r\n", .{message}) catch void;
 
     while (true) {
-        // TODO: Use @breakpoint() once https://reviews.llvm.org/D69390 is available
-        asm volatile ("ebreak");
+        @breakpoint();
     }
 }
 
-const OutStream = std.io.OutStream(error{});
-pub const messibleOutstream = &OutStream{
-    .writeFn = struct {
-        pub fn messibleWrite(self: *const OutStream, bytes: []const u8) error{}!void {
-            var left: []const u8 = bytes;
-            while (left.len > 0) {
-                const bytes_written = MESSIBLE.write(left);
-                left = left[bytes_written..];
-            }
-        }
-    }.messibleWrite,
-};
 
-const InStream = std.io.InStream(error{});
-pub const messibleInstream = &InStream{
-    .writeFn = struct {
-        pub fn messibleRead(self: *const InStream, buffer: []u8) error{}!usize {
-            while (true) {
-                const bytes_read = MESSIBLE.read(buffer);
-                if (bytes_read != 0) return bytes_read;
-            }
-        }
-    }.messibleRead,
-};
+const WriteError = error{};
+fn messibleWrite(self: void, bytes: []const u8) WriteError!usize {
+    while (true) {
+        const bytes_written = MESSIBLE.write(bytes);
+        if (bytes_written != 0) return bytes_written;
+    }
+}
+pub const messibleOutStream = std.io.OutStream(void, WriteError, messibleWrite){.context = {}};
+
+const ReadError = error{};
+fn messibleRead(self: void, buffer: []u8) ReadError!usize {
+    while (true) {
+        const bytes_read = MESSIBLE.read(buffer);
+        if (bytes_read != 0) return bytes_read;
+    }
+}
+pub const messibleInStream = std.io.InStream(void, ReadError, messibleRead){.context = {}};

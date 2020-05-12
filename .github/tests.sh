@@ -20,6 +20,20 @@ travis_time_start
 travis_time_finish
 travis_fold end riscv-c
 
+# Test the RISC-V zig example
+travis_fold start riscv-zig
+echo "RISC-V Zig Example"
+travis_time_start
+(
+	set -x
+	cd riscv-zig-blink
+	zig build
+	file riscv-zig-blink.bin
+)
+travis_time_finish
+travis_fold end riscv-zig
+
+
 # Test the Verilog Blink example
 travis_fold start verilog-blink
 echo "Verilog Blink example"

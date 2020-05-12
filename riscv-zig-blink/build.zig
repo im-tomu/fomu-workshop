@@ -6,15 +6,12 @@ pub fn build(b: *Builder) void {
     const mode = b.standardReleaseOptions();
 
     const elf = b.addExecutable("riscv-zig-blink", "src/main.zig");
-    elf.setTheTarget(.{
-        .Cross = .{
-            .os = .freestanding,
-            .abi = .none,
-            .cpu = .{
-                .arch = .riscv32,
-                .model = &std.Target.riscv.cpu.generic_rv32,
-                .features = std.Target.Cpu.Feature.Set.empty,
-            },
+    elf.setTarget(.{
+        .os_tag = .freestanding,
+        .abi = .none,
+        .cpu_arch = .riscv32,
+        .cpu_model = .{
+            .explicit = &std.Target.riscv.cpu.generic_rv32,
         },
     });
     elf.setLinkerScriptPath("ld/linker.ld");

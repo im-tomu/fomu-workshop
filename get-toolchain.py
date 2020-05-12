@@ -34,28 +34,18 @@ def reporthook(chunk, chunk_size, total_size):
     download_size = min(total_size, chunk * chunk_size)
     print("Downloaded", download_size, "of", total_size, "%.2f%%" % (download_size*1.0/total_size*100.0))
 
-
-def download_files(toolchain_data):
-    plat = platform()
-    print("Platform:", plat)
-    to_download = []
-    for asset in toolchain_data['assets']:
-        if plat not in asset['name']:
-            continue
-        to_download.append((asset['name'], asset['browser_download_url'], asset['size']))
-
-    for filename, url, size in to_download:
+def download_files(to_download):
+    for filename, url in to_download:
         if "sha" in filename and "sha1" not in filename:
             continue
         if os.path.exists(filename):
             continue
         print("Downloading", url, "into", filename)
         urlretrieve(url, filename, reporthook=reporthook)
-    return to_download
 
 
 def check_files(to_download):
-    sumfile = [f for f, u, s in to_download if f.endswith('sha1')][0]
+    sumfile = [f for f, u in to_download if f.endswith('sha1')][0]
     print("Checksum file", sumfile)
     sumfile_lines = [l.split() for l in open(sumfile, 'r').read().strip().splitlines()]
     print(sumfile_lines)
@@ -115,24 +105,28 @@ def main(argv):
         import pprint
         pprint.pprint(toolchain_data)
 
-    to_download = None
+    plat = platform()
+    print("Platform:", plat)
+
+    to_download = []
+
+    for asset in toolchain_data['assets']:
+        if plat not in asset['name']:
+            continue
+        to_download.append((asset['name'], asset['browser_download_url']))
+
     while True:
-        to_download = download_files(toolchain_data)
+        download_files(to_download)
         if check_files(to_download):
             break
-    assert to_download
 
-    tarball = [f for f, u, s in to_download if f.endswith('.tar.gz')]
-    if tarball:
+    for tarball in [f for f, u in to_download if f.endswith(('.tar.gz', '.tar.xz'))]:
         import tarfile
-        assert len(tarball) == 1, tarball
-        tarball = tarball[0]
 
         with tarfile.open(tarball) as tarf:
             tarf.extractall()
 
-    zipball = [f for f, u, s in to_download if f.endswith('.zip')]
-    if zipball:
+    for zipball in [f for f, u in to_download if f.endswith('.zip')]:
         import zipfile
         class ZipFileWithPerm(zipfile.ZipFile):
             def _extract_member(self, member, targetpath, pwd):
@@ -146,8 +140,6 @@ def main(argv):
                     os.chmod(targetpath, attr)
                 return targetpath
 
-        assert len(zipball) == 1, zipball
-        zipball = zipball[0]
         with ZipFileWithPerm(zipball) as zipf:
             zipf.extractall()
 
