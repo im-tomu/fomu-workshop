@@ -21,3 +21,9 @@ Makefile text eol=lf
 *.bin binary
 *.elf binary
 *.bin binary
+
+*.gif diff=image
+*.jpeg diff=image
+*.jpg diff=image
+*.png diff=image
+*.gds diff=gds
