@@ -168,8 +168,10 @@ html_theme_options = {
     'show_drawer_title': True,
     # Render footer.
     # Values: True, False (Default: True)
-    'show_footer': True
+    'show_footer': True,
 
+    # Hide the symbiflow links
+    'hide_symbiflow_links': True,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
