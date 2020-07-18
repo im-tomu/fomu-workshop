@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../migen.rst:2
+msgid "Migen and LiteX"
+msgstr ""
+
+#: ../../migen.rst:7
+msgid "“Hello world!” - Blink a LED"
+msgstr ""
+
+#: ../../migen.rst:9
+msgid "Migen is an HDL embedded in Python. The verilog examples (in directory ``verilog``) can also be written using Migen; an implementation is provided in directory ``migen``."
+msgstr ""
+
+#: ../../migen.rst:13
+msgid "To try them out, go to the ``migen`` directory and execute ``blink.py`` or ``blink-expanded.py`` respectively (before, ensure that you have set the ``FOMU_REV`` environment variable correctly). This will create a ``build`` directory with a ``top.bin`` file."
+msgstr ""
+
+#: ../../migen.rst:18
+msgid "Using ``dfu-util -D build/top.bin``, it can be loaded onto the Fomu and should work identically as the corresponding verilog example."
+msgstr ""
+
+#: ../../migen.rst:22
+msgid "Wishbone Bus Basics"
+msgstr ""
+
+#: ../../migen.rst:24
+msgid "LiteX provides us with a Wishbone abstraction layer. There really is no reason we need to include a CPU with our design, but we can still reuse the USB Wishbone bridge in order to write HDL code."
+msgstr ""
+
+#: ../../migen.rst:28
+msgid "We can use ``DummyUsb`` to respond to USB requests and bridge USB to Wishbone, and rely on LiteX to generate registers and wire them to hardware signals. We can still use ``wishbone-tool`` to read and write memory, and with a wishbone bridge we can actually have code running on our local system that can read and write memory on Fomu."
+msgstr ""
+
+#: ../../migen.rst:34
+msgid "Go to the ``litex`` directory and build the design;"
+msgstr ""
+
+#: ../../migen.rst:72
+msgid "Load it onto Fomu:"
+msgstr ""
+
+#: ../../migen.rst:100
+msgid "If you get an error message about missing modules, check you have all submodules cloned and setup with;"
+msgstr ""
+
+#: ../../migen.rst:108
+msgid "Take a look at ``build/csr.csv``. This describes the various regions present in our design. You can see ``memory_region,sram,0x10000000,131072``, which indicates the RAM is 128 kilobytes long and is located at ``0x10000000``, just as when we had a CPU. You can also see the timer, which is a feature that comes as part of LiteX. Let’s try reading and writing RAM:"
+msgstr ""
+
+#: ../../migen.rst:125
+msgid "Wishbone Bus Extension"
+msgstr ""
+
+#: ../../migen.rst:127
+msgid "Aside from that, there’s not much we can *do* with this design. But there’s a lot of infrastructure there. So let’s add something we can see (``workshop_rgb.py`` contains the completed example)."
+msgstr ""
+
+#: ../../migen.rst:135
+msgid "This is the RGB block from the datasheet. It has five inputs: ``CURREN``, ``RGBLEDEN``, ``RGB0PWM``, ``RGB1PWM``, and ``RGB2PWM``. It has three outputs: ``RGB0``, ``RGB1``, and ``RGB2``. It also has four parameters: ``CURRENT_MODE``, ``RGB0_CURRENT``, ``RGB1_CURRENT``, and ``RGB2_CURRENT``."
+msgstr ""
+
+#: ../../migen.rst:141
+msgid "This block is defined in Verilog (as ``SB_RGBA_DRV``), but we can import it as a Module into Migen:"
+msgstr ""
+
+#: ../../migen.rst:164
+msgid "This will instantiate this Verilog block and connect it up. It also creates a ``CSRStorage`` object that is three bits wide, and assigns it to ``output``. By having this derive from ``AutoCSR``, the CSRStorage will have CSR bus accessor methods added to it automatically. Finally, it wires the pads up to the outputs of the block."
+msgstr ""
+
+#: ../../migen.rst:170
+msgid "We can instantiate this block by simply creating a new object and adding it to ``self.specials`` in our design:"
+msgstr ""
+
+#: ../../migen.rst:180
+msgid "Finally, we need to add it to the ``csr_map``:"
+msgstr ""
+
+#: ../../migen.rst:187
+msgid "Now, when we rebuild this design and check ``build/csr.csv`` we can see our new register:"
+msgstr ""
+
+#: ../../migen.rst:194
+msgid "We can use ``wishbone-tool`` to write values to ``0x60003000`` (or whatever your ``build/csr.csv`` says) and see them take effect immediately."
+msgstr ""
+
+#: ../../migen.rst:207
+msgid "You can see that it takes very little code to take a Signal from HDL and expose it on the Wishbone bus."
+msgstr ""

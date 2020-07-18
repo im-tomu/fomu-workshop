@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../renode-starting.rst:2
+msgid "Getting Renode"
+msgstr ""
+
+#: ../../renode-starting.rst:4
+msgid "Renode is available for Linux, macOS and Windows."
+msgstr ""
+
+#: ../../renode-starting.rst:6
+msgid "On Linux and macOS, you need to have `Mono <https://www.mono-project.com>`__ installed on your computer. You should follow the `Mono installation instructions <https://www.mono-project.com/download/stable/>`__ and install the ``mono-complete`` package."
+msgstr ""
+
+#: ../../renode-starting.rst:12
+msgid "On Windows it’s enough to have a fairly recent `.NET Framework <https://dotnet.microsoft.com/download/dotnet-framework>`__ installed."
+msgstr ""
+
+#: ../../renode-starting.rst:16
+msgid "Then you can either install Renode from `prebuilt packages <https://github.com/renode/renode#installation>`__, or `compile it yourself <https://renode.readthedocs.io/en/latest/advanced/building_from_sources.html>`__."
+msgstr ""
+
+#: ../../renode-starting.rst:22
+msgid "Try out Renode quickly with precompiled LiteX demos"
+msgstr ""
+
+#: ../../renode-starting.rst:24
+msgid "Renode comes with several precompiled demos, which can be used to verify everything works for you before starting to compile and use your own software binaries."
+msgstr ""
+
+#: ../../renode-starting.rst:28
+msgid "There are three demo scripts available:"
+msgstr ""
+
+#: ../../renode-starting.rst:30
+msgid "``litex_vexriscv_micropython.resc``"
+msgstr ""
+
+#: ../../renode-starting.rst:31
+msgid "``litex_vexriscv_zephyr.resc``"
+msgstr ""
+
+#: ../../renode-starting.rst:32
+msgid "``litex_vexriscv_linux.resc``"
+msgstr ""
+
+#: ../../renode-starting.rst:34
+msgid "To run them, start Renode using the ``renode`` command (or ``./renode`` if you built from sources)."
+msgstr ""
+
+#: ../../renode-starting.rst:37
+msgid "You will see a terminal window pop up, which is the Renode CLI, called the Monitor."
+msgstr ""
+
+#: ../../renode-starting.rst:40
+msgid "In the Monitor type:"
+msgstr ""
+
+#: ../../renode-starting.rst:46
+msgid "(where is one of the above)."
+msgstr ""
+
+#: ../../renode-starting.rst:48
+msgid "Voila! A UART analyzer window should appear and you should see LiteX booting the respective binary."
+msgstr ""

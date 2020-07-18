@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../riscv.rst:2
+msgid "Fomu as a CPU"
+msgstr ""
+
+#: ../../riscv.rst:4
+msgid "The MicroPython interface is simply a RISC-V program. It interacts with the RISC-V softcore inside Fomu by reading and writing memory directly."
+msgstr ""
+
+#: ../../riscv.rst:7
+msgid "The CPU in Fomu is built on LiteX, which places every device on a Wishbone bus. This is a 32-bit internal bus that maps peripherals into memory."
+msgstr ""
+
+#: ../../riscv.rst:15
+msgid "If you look at the diagram above, you can see that everything in the system is on the Wishbone bus. The CPU is a bus master, and can initiate reads and writes. The system’s RAM is on the wishbone bus, and is currently located at address ``0x10000000``. The boot ROM is also on the bus, and is located at ``0x00000000``. There is also SPI flash which is memory-mapped, so when you load your program onto the SPI flash it shows up on the Wishbone bus at offset ``0x20040000``."
+msgstr ""
+
+#: ../../riscv.rst:23
+msgid "The Configuration and Status Registers (CSRs) all show up at offset ``0xe0000000``. These are the registers we were accessing from Python. Just like before, these special memory addresses correspond to control values."
+msgstr ""
+
+#: ../../riscv.rst:28
+msgid "You’ll notice a “Bridge” in the diagram above. This is an optional feature that we ship by default on Fomu. It bridges the Wishbone bus to another device. In our case, it makes Wishbone available over USB."
+msgstr ""
+
+#: ../../riscv.rst:36
+msgid "The above image shows the structure of a special USB packet we can generate to access the Wishbone bus from a host PC. It lets us do two things: Read a 32-bit value from Wishbone, or write a 32-bit value to Wishbone. These two primitives give us complete control over Fomu."
+msgstr ""
+
+#: ../../riscv.rst:41
+msgid "Recall these definitions from earlier:"
+msgstr ""
+
+#: ../../riscv.rst:47
+msgid "We can use the ``wishbone-tool`` program to read these values directly out of Fomu:"
+msgstr ""
+
+#: ../../riscv.rst:60
+msgid "The three values correspond to the version number of the board at time of writing: v2.0.3."
+msgstr ""
+
+#: ../../riscv.rst:63
+msgid "We can also read and write directly to memory. Recall that memory is mapped to address ``0x10000000``. Let’s write a test value there and try to read it back."
+msgstr ""
+
+#: ../../riscv.rst:75
+msgid "We can see that the value got stored in memory, just like we thought it would. The bridge is working, and we have access to Fomu over USB."
+msgstr ""
+
+#: ../../riscv.rst:79
+msgid "Interacting with the LED Directly"
+msgstr ""
+
+#: ../../riscv.rst:81
+msgid "Recall the LED block from Python. We used ``rgb.write_raw()`` to write values to the LED block. Because of how the LED block is implemented, we need to actually make two writes to the Wishbone bus in order to write one value to the LED block. The first write sets the address, and the second write sends the actual data."
+msgstr ""
+
+#: ../../riscv.rst:87
+msgid "The registers for the LED block are defined as:"
+msgstr ""
+
+#: ../../riscv.rst:94
+msgid "Let’s change the red color to the maximum value. To do that, we’ll write a ``1`` to the address register, and ``0xff`` to the data register:"
+msgstr ""
+
+#: ../../riscv.rst:103
+msgid "We can see that the LED immediately changed its behavior. Try playing around with various values to see what combinations you can come up with!"
+msgstr ""
+
+#: ../../riscv.rst:107
+msgid "You can reset Fomu by writing a special value to the ``CSR_REBOOT_CTRL`` register at ``0xe0006000L``. All writes to this register must start with ``0xac``, to ensure random values aren’t written. We can reboot Fomu by simply writing this value:"
+msgstr ""
+
+#: ../../riscv.rst:120
+msgid "We can see that ``wishbone-tool`` has crashed with an error of ``USBError(Pipe)``, because the USB device went away as we were talking to it. This is expected behavior. Fomu should be back to its normal color and blink rate now."
+msgstr ""
+
+#: ../../riscv.rst:126
+msgid "Compiling RISC-V Code"
+msgstr ""
+
+#: ../../riscv.rst:128
+msgid "Of course, Fomu’s softcore is a full CPU, so we can write C code for it. Go to the ``riscv-blink/`` directory and run ``make``. This will generate ``riscv-blink.dfu``, which we can load onto Fomu."
+msgstr ""
+
+#: ../../riscv.rst:164
+msgid "This will load the binary onto Fomu and start it immediately. The LED should be blinking quickly in a rainbow pattern. Congratulations! You’ve compiled and loaded a RISC-V program onto a softcore."
+msgstr ""
+
+#: ../../riscv.rst:168
+msgid "Let’s modify the program by increasing the fade rate so much that it appears solid. First, reboot Fomu by running ``wishbone-tool 0xe0006000 0xac``. Next, apply the following patch to ``src/main.c``:"
+msgstr ""
+
+#: ../../riscv.rst:186
+msgid "What this does is increase the LED blink rate from 250 Hz to a much higher value. Compile this and load it again with ``dfu-util -D riscv-blink.bin``. The blink rate should appear solid, because it’s blinking too quickly to see."
+msgstr ""
+
+#: ../../riscv.rst:192
+msgid "Debugging RISC-V Code"
+msgstr ""
+
+#: ../../riscv.rst:194
+msgid "Because we have ``peek`` and ``poke``, and because the USB bridge is a bus master, we can actually halt (and reset!) the CPU over the USB bridge. We can go even further and attach a full debugger to it!"
+msgstr ""
+
+#: ../../riscv.rst:198
+msgid "To start with, run ``wishbone-tool -s gdb``:"
+msgstr ""
+
+#: ../../riscv.rst:207
+msgid "In a second window, run gdb on ``riscv-blink.elf``:"
+msgstr ""
+
+#: ../../riscv.rst:233
+msgid "If we run ``bt`` we can get a backtrace, and chances are that we landed in an ``msleep`` function:"
+msgstr ""
+
+#: ../../riscv.rst:245
+msgid "We can insert breakpoints, step, continue execution, and generally debug the entire system. We can even reset the program by running ``mon reset``."
+msgstr ""
+
+#: ../../riscv.rst:251
+msgid "Using Rust"
+msgstr ""
+
+#: ../../riscv.rst:253
+msgid "As an alternative to C, the `Rust Language <https://www.rust-lang.org/>`_ can be used to write software for the Fomu softcore. To install Rust, follow the instructions on https://rustup.rs/. After installing Rust, we can install support for RISCV targets using ``rustup``:"
+msgstr ""
+
+#: ../../riscv.rst:264
+msgid "A Rust version of the C program used above is located in the ``riscv-rust-blink`` directory. Change into that directory, and build it using ``cargo``, the Rust package manager:"
+msgstr ""
+
+#: ../../riscv.rst:292
+msgid "The resulting binary is located in the target subfolder: ``target/riscv32i-unknown-none-elf/release/riscv-rust-blink``. It can be flashed using the ``flash.sh`` script, also located in the ``riscv-rust-blink`` folder:"
+msgstr ""
+
+#: ../../riscv.rst:331
+msgid "Now the Fomu should blink in the same rainbow pattern as before."
+msgstr ""
+
+#: ../../riscv.rst:336
+msgid "The Rust example currently does not support the USB functionality. After programming the example, we will not be able to acces the Fomu over USB anymore. To enable USB again, we have to reset the Fomu by removing it from the USB port and plugging it in again."
+msgstr ""
+
+#: ../../riscv.rst:342
+msgid "Further RISC-V experiments"
+msgstr ""
+
+#: ../../riscv.rst:344
+msgid "The `TinyUSB <https://github.com/hathach/tinyusb>`__ USB stack supports Fomu. To get started with it, you might compile the mass storage example it provides. To do so, follow these steps:"
+msgstr ""
+
+#: ../../riscv.rst:346
+msgid "Clone the TinyUSB git repository: ``git clone https://github.com/hathach/tinyusb`` (you don't need to initialize the subrepositories)"
+msgstr ""
+
+#: ../../riscv.rst:347
+msgid "Change to ``tinyusb/examples/device/cdc_msc``"
+msgstr ""
+
+#: ../../riscv.rst:348
+msgid "Compile: ``make BOARD=fomu CROSS_COMPILE=riscv64-unknown-elf-``"
+msgstr ""
+
+#: ../../riscv.rst:349
+msgid "Load it onto the Fomu:  ``dfu-util -D _build/build-fomu/fomu-firmware.bin``"
+msgstr ""
+
+#: ../../riscv.rst:351
+msgid "Fomu should now appear as a USB storage device containing a README."
+msgstr ""

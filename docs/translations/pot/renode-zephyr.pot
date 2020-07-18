@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../renode-zephyr.rst:2
+msgid "Running your own Zephyr binary on LiteX/VexRiscv in Renode"
+msgstr ""
+
+#: ../../renode-zephyr.rst:4
+msgid "Zephyr is a very capable RTOS governed by a Linux Foundation subproject. It is very well supported on the RISC-V architecture, as well as in LiteX."
+msgstr ""
+
+#: ../../renode-zephyr.rst:9
+msgid "Building a Zephyr application"
+msgstr ""
+
+#: ../../renode-zephyr.rst:11
+msgid "To install all the dependencies and prepare the environment for building the Zephyr application follow the official `Zephyr Getting Started Guide <https://docs.zephyrproject.org/latest/getting_started/index.html>`__ up to point 4. On Linux you can follow the instructions from the point 5 on installing the Software Development Toolchain. The python version in the FOMU toolchain may not work; remove it from your PATH before attempting to build zephyr. For other operating systems, if you followed the instructions from the ``Required Software`` section of this tutorial, you should have a toolchain in ``PATH``."
+msgstr ""
+
+#: ../../renode-zephyr.rst:22
+msgid "On macOS and Windows you also need to set some additional variables."
+msgstr ""
+
+#: ../../renode-zephyr.rst:24
+msgid "For macOS:"
+msgstr ""
+
+#: ../../renode-zephyr.rst:31
+msgid "For Windows:"
+msgstr ""
+
+#: ../../renode-zephyr.rst:38
+msgid "To build the ``shell`` demo application for the LiteX/VexRiscv board run the following commands on Linux and macOS:"
+msgstr ""
+
+#: ../../renode-zephyr.rst:47
+msgid "And on Windows:"
+msgstr ""
+
+#: ../../renode-zephyr.rst:55
+msgid "The resulting ELF file will be in ``build/zephyr/zephyr.elf``."
+msgstr ""
+
+#: ../../renode-zephyr.rst:58
+msgid "Run the app in Renode"
+msgstr ""
+
+#: ../../renode-zephyr.rst:60
+msgid "To run the app you just compiled, you basically need to replace the precomipled demo binary with the one you want, by setting the ``zephyr`` variable - see below."
+msgstr ""
+
+#: ../../renode-zephyr.rst:64
+msgid "Just like before, start Renode using the ``renode`` command (or ``./renode`` if you built from sources)."
+msgstr ""
+
+#: ../../renode-zephyr.rst:67
+msgid "You will see the Monitor, where you should type:"
+msgstr ""
+
+#: ../../renode-zephyr.rst:74
+msgid "You should see a new window pop up for the serial port. In it, you should see the Zephyr interactive shell."
+msgstr ""
+
+#: ../../renode-zephyr.rst:78
+msgid "Debugging the app in Renode"
+msgstr ""
+
+#: ../../renode-zephyr.rst:80
+msgid "In general, debugging in Renode is done with GDB just like with a physical board - you connect to a debug port and execute GDB commands as usual. For details, see the `Renode debugging documentation <https://renode.readthedocs.io/en/latest/debugging/gdb.html>`__."
+msgstr ""

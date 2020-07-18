@@ -1,0 +1,33 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../index.rst:3
+msgid "FPGA Tomu Workshop"
+msgstr ""
+
+#: ../../index.rst:8
+msgid "Hi, I’m Fomu! This workshop covers the basics of Fomu in a top-down approach. We’ll start out by learning what Fomu is, how to load software into Fomu, and finally how to write software for Fomu."
+msgstr ""
+
+#: ../../index.rst:12
+msgid "FPGAs are complex, weird things, so we’ll take a gentle approach and start out by treating it like a Python interpreter first, and gradually peel away layers until we’re writing our own hardware registers. You can take a break at any time and explore! Stop when you feel the concepts are too unfamiliar, or plough on and dig deep into the world of hardware."
+msgstr ""
+
+#: ../../index.rst:20
+msgid "Table of Contents"
+msgstr ""

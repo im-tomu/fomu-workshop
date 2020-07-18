@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../renode-bridge.rst:2
+msgid "Wishbone bridge between Renode and Fomu"
+msgstr ""
+
+#: ../../renode-bridge.rst:4
+msgid "This part of the workshop is based on a `Renode, Fomu and Etherbone bridge example <https://renode.readthedocs.io/en/latest/tutorials/fomu-example.html>`__ from the Renode documentation."
+msgstr ""
+
+#: ../../renode-bridge.rst:9
+msgid "Just like we can access Fomu peripherals using ``wishbone-tool``, we can also connect to a physical board from Renode, mapping a part of the memory space to be accessible via the Etherbone protocol."
+msgstr ""
+
+#: ../../renode-bridge.rst:13
+msgid "This is a very useful capability as it enables us to potentially simulate an advanced LiteX SoC system which would not normally fit in the FPGA (or e.g. take a long time to synthesize), and interface it with the remaining part of the physical system for I/O."
+msgstr ""
+
+#: ../../renode-bridge.rst:19
+msgid "Setting up the server"
+msgstr ""
+
+#: ../../renode-bridge.rst:21
+msgid "You can use ``wishbone-tool`` to bridge protocols such as USB to Etherbone. To start the server, run the following command:"
+msgstr ""
+
+#: ../../renode-bridge.rst:29
+msgid "This starts an Etherbone server on ``localhost:1234`` by default.  See ``wishbone-tool --help`` to change these settings."
+msgstr ""
+
+#: ../../renode-bridge.rst:32
+msgid "Now you can start Renode and setup the platform."
+msgstr ""
+
+#: ../../renode-bridge.rst:35
+msgid "Connecting from Renode"
+msgstr ""
+
+#: ../../renode-bridge.rst:37
+msgid "Run ``renode`` and in the Monitor type:"
+msgstr ""
+
+#: ../../renode-bridge.rst:46
+msgid "You see a new window with a `shell application <https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a>`__, that provides additional commands allowing you to control LEDs on Fomu."
+msgstr ""
+
+#: ../../renode-bridge.rst:55
+msgid "The ``led_toggle`` command controls the LED by turning it on and off. ``led_breathe`` makes the LED fade slowly in and out, creating a “breathe” effect."
+msgstr ""
+
+#: ../../renode-bridge.rst:59
+msgid "The script you loaded configures Renode to log all communication with Fomu. After issuing some commands in Zephyr’s shell you’ll see:"
+msgstr ""
+
+#: ../../renode-bridge.rst:86
+msgid "You can interact with Fomu manually, via the Monitor. To do that, you first need to find the name of the peripheral that serves the connection to Fomu."
+msgstr ""
+
+#: ../../renode-bridge.rst:90
+msgid "Type in ``peripherals`` to see a list of all the elements of the emulated SoC. Look for ``EtherBoneBridge`` entry:"
+msgstr ""
+
+#: ../../renode-bridge.rst:146
+msgid "The device that acts as a connector to Fomu is called ``led`` and is registered at ``0xE0006800``:"
+msgstr ""
+
+#: ../../renode-bridge.rst:154
+msgid "You can either use a full or relative address (via the ``sysbus`` or ``led`` objects, respectively) to communicate with the physical LED controller:"
+msgstr ""
+
+#: ../../renode-bridge.rst:163
+msgid "Note: the above values are just an example and won’t change the LED status in any visible way. If you want to enable “breathe” effect directly from the Monitor, see the necessary sequence in `the application source code <https://github.com/antmicro/zephyr/commit/29d8e51da15237f2a6bd2a3c8c97e004a66fc97a>`__."
+msgstr ""

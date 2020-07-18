@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../python.rst:2
+msgid "Python on Fomu"
+msgstr ""
+
+#: ../../python.rst:4
+msgid "You can load `MicroPython <https://micropython.org/>`__, a small Python implementation, onto Fomu as an ordinary RISC-V binary. A precompiled binary is located in the root of the Fomu workshop files."
+msgstr ""
+
+#: ../../python.rst:8
+msgid "Use ``dfu-util`` to load it:"
+msgstr ""
+
+#: ../../python.rst:34
+msgid "If you’re on a macOS machine, use the following command to connect to the device:"
+msgstr ""
+
+#: ../../python.rst:43
+msgid "If you’re on Linux, use the following command to connect to the device, it will be called ``ttyACM?``:"
+msgstr ""
+
+#: ../../python.rst:52
+msgid "If you’re running a version of Windows earlier than Windows 10, you will need to install a driver for the serial port. Open Zadag again and select ``Fomu`` from the dropdown list. Install the driver for ``USB Serial (CDC)``."
+msgstr ""
+
+#: ../../python.rst:57
+msgid "You can then use a program such as `Tera Term <https://tera-term.en.lo4d.com/download>`__."
+msgstr ""
+
+#: ../../python.rst:64
+msgid "In Teraterm hit ``New Connection`` and select the ``Serial Port`` Radio Button. If it is greyed out you might have to change your USB Port driver for the Fomu."
+msgstr ""
+
+#: ../../python.rst:68
+msgid "See `Working with Fomu <#working-with-fomu>`__, above."
+msgstr ""
+
+#: ../../python.rst:71
+msgid "You should be greeted with a MicroPython banner and REPL:"
+msgstr ""
+
+#: ../../python.rst:78
+msgid "This is a fully-functioning MicroPython shell. Try running some simple commands such as ``print()`` and ``hex(9876+1234)``."
+msgstr ""
+
+#: ../../python.rst:82
+msgid "Fomu Python Extensions"
+msgstr ""
+
+#: ../../python.rst:84
+msgid "Fomu’s MicroPython binary contains a few extended Python modules that you can use to interact with some of the hardware. For example, the RGB LED has some predefined modes you can access. These are all located under the ``fomu`` module."
+msgstr ""
+
+#: ../../python.rst:89
+msgid "Import the ``fomu`` module and access the ``rgb`` block to change the mode to the predefined ``error`` mode:"
+msgstr ""
+
+#: ../../python.rst:99
+msgid "We can also look at some information from the SPI flash, such as the SPI ID. This ID varies between Fomu models, so it can be a good indication of what kind of Fomu your code is running on:"
+msgstr ""
+
+#: ../../python.rst:111
+msgid "Memory-mapped Registers"
+msgstr ""
+
+#: ../../python.rst:113
+msgid "If we look at the generated Fomu header files (to be found for instance in `riscv-blink <_static/riscv-blink/include/generated/csr.h>`__), we can see many, many memory-mapped registers. For example, the major, minor, and revision numbers all have registers:"
+msgstr ""
+
+#: ../../python.rst:125
+msgid "These are special areas of memory that don’t really exist. Instead, they correspond to hardware. We can read these values using the ``machine`` class. Read out the major, minor, and revision codes from your Fomu. They may be different from what you see here:"
+msgstr ""
+
+#: ../../python.rst:141
+msgid "The ``CSR_VERSION_MODEL_ADDR`` contains a single character that indicates what version of the hardware you have. We can convert this to a character and print it out."
+msgstr ""
+
+#: ../../python.rst:145
+msgid "If you have a production board you will get ``P`` as shown below;"
+msgstr ""
+
+#: ../../python.rst:153
+msgid "If you have a hacker board you will get ``H`` as shown below;"
+msgstr ""
+
+#: ../../python.rst:162
+msgid "Memory-mapped RGB driver"
+msgstr ""
+
+#: ../../python.rst:164
+msgid "The blinking LED is actually a hardware block from Lattice. It has control registers, and we can modify these registers by writing to memory in Fomu. Some of these registers control things such as the timing of the fade in and fade out pulses, and some control the level of each of the three colors."
+msgstr ""
+
+#: ../../python.rst:174
+msgid "There is a wrapper in Fomu’s MicroPython that simplifies the process of writing to these registers. The first argument is the register number, and the second argument is the value to write."
+msgstr ""
+
+#: ../../python.rst:178
+msgid "For the ``LEDDPWR`` registers, the second argument determines the brightness, value ranges from 0 to 255."
+msgstr ""
+
+#: ../../python.rst:181
+msgid "Try changing the color of the three LEDs:"
+msgstr ""
+
+#: ../../python.rst:193
+msgid "The color should change immediately. More information on these registers can be found in the `ICE40 LED Driver Usage Guide <_static/reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf>`__."
+msgstr ""
