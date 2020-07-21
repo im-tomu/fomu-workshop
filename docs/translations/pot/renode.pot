@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../renode.rst:2
+msgid "Working with LiteX and (co-)simulation with Renode"
+msgstr ""
+
+#: ../../renode.rst:4
+msgid "LiteX used as the soft SoC on Fomu is a very robust and scalable soft SoC platform, capable of running both bare metal binaries, Zephyr and even Linux."
+msgstr ""
+
+#: ../../renode.rst:8
+msgid "It is also supported in `Renode <https://renode.io>`__, which is an open source simulation framework that lets you run unmodified software in a fully controlled and inspectable environment. Renode is a functional simulator, which means it aims to mimic the observable behavior of the hardware instead of trying to be cycle-accurate."
+msgstr ""
+
+#: ../../renode.rst:14
+msgid "We will now see how a full-blown Zephyr RTOS can be run on LiteX in Renode, and then how this simulation can be interfaced with a Fomu for a useful HW/SW co-development workflow."
+msgstr ""
+
+#: ../../renode.rst:19
+msgid "Apart from RISC-V and LiteX platforms, Renode supports many other architectures and platforms, as described in the `documentation <https://renode.readthedocs.io/en/latest/introduction/supported-boards.html>`__, which also includes a user manual and a few tutorials. You can also take a look at a `Video Tutorials section on Renode’s website <https://renode.io/tutorials/>`__."
+msgstr ""
+
+#: ../../renode.rst:26
+msgid "Keep in mind that all platforms and configurations in Renode used in this tutorial are contained in text/config files - you can also explore Renode’s usage patterns by just inspecting those files for details."
+msgstr ""

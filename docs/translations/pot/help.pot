@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../help.rst:2
+msgid "Getting Help"
+msgstr ""
+
+#: ../../help.rst:4
+msgid "If you get stuck anywhere in the workshop you can use the following channels to get help!"
+msgstr ""
+
+#: ../../help.rst:8
+msgid "IRC Chat Channel"
+msgstr ""
+
+#: ../../help.rst:10
+msgid "IRC (`Internet Relay Chat <https://en.wikipedia.org/wiki/Internet_Relay_Chat>`__) is old school chat before Slack became popular. You can connect with a wide range of different clients including web based clients like `IRCCloud <https://irccloud.com>`__."
+msgstr ""
+
+#: ../../help.rst:15
+msgid "`#tomu channel on irc.freenode.net <irc://irc.freenode.net/#tomu>`__"
+msgstr ""
+
+#: ../../help.rst:16
+msgid "`Freenode WebChat <https://webchat.freenode.net/?channels=#tomu>`__"
+msgstr ""
+
+#: ../../help.rst:17
+msgid "`Channel Logs <https://logs.timvideos.us/%23tomu/>`__ - `Latest <https://logs.timvideos.us/%23tomu/latest.log.html>`__"
+msgstr ""
+
+#: ../../help.rst:20
+msgid "Mailing Lists"
+msgstr ""
+
+#: ../../help.rst:22
+msgid "`Announcement mailing list <https://groups.google.com/forum/#!forum/tomu-announce/join>`__ - Low traffic list for announcements."
+msgstr ""
+
+#: ../../help.rst:23
+msgid "`Discussion mailing list <https://groups.google.com/forum/#!forum/tomu-discuss/join>`__ - List for discussing development / new features / etc."
+msgstr ""

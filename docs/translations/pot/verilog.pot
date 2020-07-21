@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../verilog.rst:2
+msgid "Verilog on Fomu"
+msgstr ""
+
+#: ../../verilog.rst:5
+msgid "“Hello world!” - Blink a LED"
+msgstr ""
+
+#: ../../verilog.rst:7
+msgid "The canonical “Hello, world!” of hardware is to blink a LED. The directory ``verilog/blink-expanded`` contains a Verilog example of a blink project. This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern. It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope."
+msgstr ""
+
+#: ../../verilog.rst:13
+msgid "Enter the ``verilog/blink-expanded`` directory and build the demo by using ``make``:"
+msgstr ""
+
+#: ../../verilog.rst:15
+msgid "**Make sure you set the ``FOMU_REV`` value to match your hardware! See the Required Hardware section.**"
+msgstr ""
+
+#: ../../verilog.rst:62
+msgid "You can then load ``blink.dfu`` onto Fomu by using the same ``dfu-util -D`` command we’ve been using so far. You should see a blinking pattern of varying color on your Fomu, indicating your bitstream was successfully loaded."
+msgstr ""
+
+#: ../../verilog.rst:66
+msgid "When writing HDL, a tool called ``yosys`` is used to convert the human readable verilog into a netlist representation, this is called synthesis. Once we have the netlist representation a tool called ``nextpnr`` performs an operation called “place and route” which makes it something that will actually run on the FPGA. This is all done for you using the ``Makefile`` in the ``verilog/blink`` directory."
+msgstr ""
+
+#: ../../verilog.rst:74
+msgid "A big feature of ``nextpnr`` over its predecessor, is the fact that it is timing-driven. This means that a design will be generated with a given clock domain guaranteed to perform fast enough."
+msgstr ""
+
+#: ../../verilog.rst:78
+msgid "When the ``make`` command runs ``nextpnr-ice40`` you will see something similar included in the output:"
+msgstr ""
+
+#: ../../verilog.rst:85
+msgid "This output example shows that we could run ``clk`` at up to 73.26 MHz and it would still be stable, even though we only requested 12.00 MHz. Note that there is some variation between designs depending on how the placer and router decided to lay things out, so your exact frequency numbers might be different."
+msgstr ""
+
+#: ../../verilog.rst:92
+msgid "Reading Input"
+msgstr ""
+
+#: ../../verilog.rst:94
+msgid "There is another small example in ``verilog/blink-expanded`` which shows how to read out some given pins. Build and flash it like described above and see if you can enable the blue and red LED by shorting pins 1+2 or 3+4 on your Fomu (the pins are the exposed contacts sticking out of the USB port)."
+msgstr ""

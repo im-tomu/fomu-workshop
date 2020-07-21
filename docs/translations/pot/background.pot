@@ -1,0 +1,308 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../background.rst:2
+msgid "Background"
+msgstr ""
+
+#: ../../background.rst:5
+msgid "About FPGAs"
+msgstr ""
+
+#: ../../background.rst:7
+msgid "Field Programmable Gate Arrays (FPGAs) are arrays of gates that are programmable in the field. Unlike most chips you will encounter, which have transistor gates arranged in a fixed order, FPGAs can change their configuration by simply loading new code. Fundamentally, this code programs lookup tables which form the basic building blocks of logic."
+msgstr ""
+
+#: ../../background.rst:13
+msgid "These lookup tables (called LUTs) are so important to the design of an FPGA that they usually form part of the name of the part. For example, Fomu uses a UP5K, which has about 5000 LUTs. NeTV used an LX9, which had about 9000 LUTs, and NeTV2 uses a XC7A35T that has about 35000 LUTs."
+msgstr ""
+
+#: ../../background.rst:22
+msgid "This is the ``SB_LUT4``, which is the basic building block of Fomu. It has four inputs and one output. To program Fomu, we must define what each possible input pattern will create on the output."
+msgstr ""
+
+#: ../../background.rst:26
+msgid "To do this, we turn to a truth table:"
+msgstr ""
+
+#: ../../background.rst:29
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+msgid "0"
+msgstr ""
+
+#: ../../background.rst:29
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:31
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:33
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:35
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+#: ../../background.rst:37
+msgid "1"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "2"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "3"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "4"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "5"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "6"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "7"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "8"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "9"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "10"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "11"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "12"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "13"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "14"
+msgstr ""
+
+#: ../../background.rst:29
+msgid "15"
+msgstr ""
+
+#: ../../background.rst:31
+msgid "IO0"
+msgstr ""
+
+#: ../../background.rst:33
+msgid "IO1"
+msgstr ""
+
+#: ../../background.rst:35
+msgid "IO2"
+msgstr ""
+
+#: ../../background.rst:37
+msgid "IO3"
+msgstr ""
+
+#: ../../background.rst:39
+msgid "O"
+msgstr ""
+
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+#: ../../background.rst:39
+msgid "*?*"
+msgstr ""
+
+#: ../../background.rst:42
+msgid "For example, to create a LUT that acted as an AND gate, we would define O to be 0 for everything except the last column. To create a NAND gate, we would define O to be 1 for everything except the last column."
+msgstr ""
+
+#: ../../background.rst:46
+msgid "FPGA LUTs are almost always *n*-inputs to 1-output. The ICE family of FPGAs from Lattice have 4-input LUTs. Xilinx parts tend to have 5- or 6-input LUTs which generally means they can do more logic in fewer LUTs. Comparing LUT count between FPGAs is a bit like comparing clock speed between different CPUs - not entirely accurate, but certainly a helpful rule of thumb."
+msgstr ""
+
+#: ../../background.rst:53
+msgid "It is from this simple primitive that we build up the building blocks of FPGA design."
+msgstr ""
+
+#: ../../background.rst:57
+msgid "Turning code into gates"
+msgstr ""
+
+#: ../../background.rst:59
+msgid "Writing lookup tables is hard, so people have come up with abstract Hardware Description Languages (HDLs) we can use to describe them. The two most common languages are Verilog and VHDL. In the open source world, Verilog is more common. However, a modern trend is to embed an HDL inside an existing programming language, such as how Migen is embedded in Python, or SpinalHDL is embedded in Scala."
+msgstr ""
+
+#: ../../background.rst:66
+msgid "Here is an example of a Verilog module:"
+msgstr ""
+
+#: ../../background.rst:79
+msgid "We can run this Verilog module through a synthesizer to turn it into ``SB_LUT4`` blocks, or we can turn it into a more familiar logic diagram:"
+msgstr ""
+
+#: ../../background.rst:87
+msgid "If we do decide to synthesize to ``SB_LUT4`` blocks, we will end up with a pile of LUTs that need to be strung together somehow. This is done by a Place-and-Route tool. This performs the job of assigning physical LUTs to each LUT that gets defined by the synthesizer, and then figuring out how to wire it all up."
+msgstr ""
+
+#: ../../background.rst:93
+msgid "Once the place-and-route tool is done, it generates an abstract file that needs to be translated into a format that the hardware can recognize. This is done by a bitstream packing tool. Finally, this bitstream needs to be loaded onto the device somehow, either off of a SPI flash or by manually programming it by toggling wires."
+msgstr ""
+
+#: ../../background.rst:100
+msgid "About the ICE40UP5K"
+msgstr ""
+
+#: ../../background.rst:102
+msgid "We will use an ICE40UP5K for this workshop. This chip has a number of very nice features:"
+msgstr ""
+
+#: ../../background.rst:105
+msgid "5280 4-input LUTs (LC)"
+msgstr ""
+
+#: ../../background.rst:106
+msgid "16 kilobytes BRAM"
+msgstr ""
+
+#: ../../background.rst:107
+msgid "**128 kilobytes “SPRAM”**"
+msgstr ""
+
+#: ../../background.rst:108
+msgid "Current-limited 3-channel LED driver"
+msgstr ""
+
+#: ../../background.rst:109
+msgid "2x I2C and 2x SPI"
+msgstr ""
+
+#: ../../background.rst:110
+msgid "8 16-bit DSP units"
+msgstr ""
+
+#: ../../background.rst:111
+msgid "**Warmboot capability**"
+msgstr ""
+
+#: ../../background.rst:112
+msgid "**Open toolchain**"
+msgstr ""
+
+#: ../../background.rst:114
+msgid "Many FPGAs have what’s called block RAM, or BRAM. This is frequently used to store data such as buffers, CPU register files, and large arrays of data. This type of memory is frequently reused as RAM on many FPGAs. The ICE40UP5K is unusual in that it also as 128 kilobytes of Single Ported RAM that can be used as memory for a softcore (a term used for a CPU core running inside an FPGA, to differentiate it from a ‘hard’ - i.e. fixed chip - implementation). That means that, unlike other FPGAs, valuable block RAM isn’t taken up by system memory."
+msgstr ""
+
+#: ../../background.rst:123
+msgid "Additionally, the ICE40 family of devices generally supports “warmboot” capability. This enables us to have multiple designs live on the same FPGA and tell the FPGA to swap between them."
+msgstr ""
+
+#: ../../background.rst:127
+msgid "As always, this workshop wouldn’t be nearly as easy without the open toolchain that enables us to port it to a lot of different platforms."
+msgstr ""
+
+#: ../../background.rst:131
+msgid "About Fomu"
+msgstr ""
+
+#: ../../background.rst:133
+msgid "Fomu is an ICE40UP5K that fits in your USB port. It contains two megabytes of SPI flash memory, four edge buttons, and a three-color LED. Unlike most other ICE40 projects, Fomu implements its USB in a softcore. That means that the bitstream that runs on the FPGA must also provide the ability to communicate over USB. This uses up a lot of storage on this small FPGA, but it also enables us to have such a tiny form factor, and lets us do some really cool things with it."
+msgstr ""
+
+#: ../../background.rst:145
+msgid "The ICE40UP5K at the heart of Fomu really controls everything, and this workshop is all about trying to unlock the power of this chip."
+msgstr ""

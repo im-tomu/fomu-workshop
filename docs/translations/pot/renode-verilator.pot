@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2019, Tomu Project Authors
+# This file is distributed under the same license as the FPGA Tomu (Fomu) Workshop package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FPGA Tomu (Fomu) Workshop 0.1-196-g5985d6b\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-18 04:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../renode-verilator.rst:2
+msgid "Renode Co-simulation using Verilator"
+msgstr ""
+
+#: ../../renode-verilator.rst:4
+msgid "While connecting Renode to a real FPGA gives you some interesting possibilities in testing and debugging your gateware together with your software, there is another usage scenario which is completely hardware independent - connecting functional simulation of the base system in Renode with HDL simulation of a part of the system that is under development."
+msgstr ""
+
+#: ../../renode-verilator.rst:11
+msgid "To this end, Renode provides an integration layer for Verilator. A typical setup with Renode + Verilator consists of several components:"
+msgstr ""
+
+#: ../../renode-verilator.rst:14
+msgid "the ‘verilated’ HDL code itself (e.g. a UART peripheral),"
+msgstr ""
+
+#: ../../renode-verilator.rst:15
+msgid "Verilator integration library, `provided as a plugin to Renode <https://github.com/renode/renode/tree/master/src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary/src>`__,"
+msgstr ""
+
+#: ../../renode-verilator.rst:17
+msgid "shim layer in C++ connecting the above."
+msgstr ""
+
+#: ../../renode-verilator.rst:19
+msgid "Currently Renode supports peripherals with the AXILite interface. Keep in mind that due to the abstract nature of bus operations in Renode, it doesn’t matter what kind of bus is used on the hardware you want to simulate."
+msgstr ""
+
+#: ../../renode-verilator.rst:24
+msgid "In the Renode tree you will find an example with all the elements already prepared. To run it, start Renode and type:"
+msgstr ""
+
+#: ../../renode-verilator.rst:32
+msgid "This script loads a RISC-V-based system with a verilated UARTLite. You can verify it by calling:"
+msgstr ""
+
+#: ../../renode-verilator.rst:40
+msgid "To inspect the communication with the UART, run:"
+msgstr ""
+
+#: ../../renode-verilator.rst:46
+msgid "You will see every read and write to the peripheral displayed in the Renode log."
+msgstr ""
+
+#: ../../renode-verilator.rst:49
+msgid "Please note that, despite not being a Renode-native model, the UART is also capable of displaying an analyzer window. This is because Renode adds a special support for UART-type peripherals, allowing you not only to connect bus lines, but also the TX and RX UART lines, to the Renode infrastructure."
+msgstr ""
+
+#: ../../renode-verilator.rst:55
+msgid "The HDL and integration layer for this UART peripheral is available on `Antmicro’s GitHub <https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite>`__."
+msgstr ""
+
+#: ../../renode-verilator.rst:59
+msgid "To compile it manually, you need to have ``ZeroMQ`` (``libzmq3-dev`` on Debian-like systems) and ``Verilator`` installed in your system. You also need to provide a full path to the ``src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary`` directory as the ``INTEGRATION_DIR`` environment variable. This means that you need to have a copy of Renode sources to build a verilated peripheral."
+msgstr ""
+
+#: ../../renode-verilator.rst:66
+msgid "With this set up, simply run ``make``."
+msgstr ""
+
+#: ../../renode-verilator.rst:69
+msgid "Integration with verilated code"
+msgstr ""
+
+#: ../../renode-verilator.rst:71
+msgid "Renode supports integration with Verilator via AXILite bus, but can be easily expanded to support other standards as well."
+msgstr ""
+
+#: ../../renode-verilator.rst:74
+msgid "We’ll briefly take a look on the integration layer implemented in `sim-main.cpp <https://github.com/antmicro/renode-verilator-integration/blob/master/samples/uartlite/sim_main.cpp>`__."
+msgstr ""
+
+#: ../../renode-verilator.rst:77
+msgid "First, the user has to decide on the bus type and peripheral type. These are provided by the integration library:"
+msgstr ""
+
+#: ../../renode-verilator.rst:85
+msgid "A bus is a type declaring all the signals and how should they be handled on each transaction. These signals have to be connected to the signals in the HDL design:"
+msgstr ""
+
+#: ../../renode-verilator.rst:111
+msgid "To handle the “external” communication, the user can either use the base ``RenodeAgent`` class of one of its derivatives: for example the ``UART`` type allows you to connect RX and TX signals:"
+msgstr ""
+
+#: ../../renode-verilator.rst:121
+msgid "For more details, see the `verilated uartlite repository <https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite>`__."
+msgstr ""
