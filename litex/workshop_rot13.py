@@ -31,12 +31,21 @@ import argparse
 # ROT13 input CSR. Doesn't need to do anything special.
 class FomuROT13In(Module, AutoCSR):
     def __init__(self):
+        # 8-Bit CSR (one ASCII character)
         self.csr = CSRStorage(8)
 
 # ROT13 output CSR, plus the wiring to automatically create the output from the input CSR.
 class FomuROT13Out(Module, AutoCSR):
     def __init__(self, rot13_in):
+        # Set up an 8-bit CSR (one ASCII character)
         self.csr = CSRStorage(8)
+        # There are three cases:
+        # 1. It's "A" through "M": Add 13, to make the letters "N" through "Z".
+        # 2. It's "N" through "Z": Remove 13, to make the letters "A" through "M".
+        # 3. It's something else, so leave it alone.
+        #
+        # In all three cases, we want to wire up the "output" signal (self.csr.storage)
+        # to be equal to something based on the input signal (rot13_in.csr.storage).
         self.sync += If( # A-M, a-m
                 (rot13_in.csr.storage >= ord('A')) & (rot13_in.csr.storage <= ord('M')) | (rot13_in.csr.storage >= ord('a')) & (rot13_in.csr.storage <= ord('m')),
                 self.csr.storage.eq(rot13_in.csr.storage + 13)
