@@ -206,3 +206,10 @@ your ``build/csr.csv`` says) and see them take effect immediately.
 
 You can see that it takes very little code to take a Signal from HDL and
 expose it on the Wishbone bus.
+
+Tying Signals together
+^^^^^^^^^^^^^^^^^^^^^^
+
+See ``workshop_rot13.py`` for another example, where two CSRs are connected
+(one as an input, one as an output) in order to create a one-character ROT13
+encoder/decoder.
