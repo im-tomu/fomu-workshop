@@ -34,14 +34,28 @@ class FomuROT13In(Module, AutoCSR):
         # 8-Bit CSR (one ASCII character)
         self.csr = CSRStorage(8)
 
-# ROT13 output CSR, plus the wiring to automatically create the output from the input CSR.
+# ROT13 output CSR, plus the wiring to automatically create the output from
+# the input CSR.
 class FomuROT13Out(Module, AutoCSR):
     def __init__(self, rot13_in):
         # Set up an 8-bit CSR (one ASCII character)
         self.csr = CSRStorage(8)
-        # There are three cases:
+        # ROT13 is described fully here - https://en.wikipedia.org/wiki/ROT13
+        #
+        # In short, for letters of the English alphabet, they're "rotated" 13
+        # places along ("A" becomes "N", "B" becomes "O"); at the end of the
+        # alphabet you wrap back around ("Z" becomes "M").  Anything not in
+        # the English alphabet (numbers, special characters) is left
+        # untouched.
+        #
+        # Conveniently (due to the wrap-around property) we can just
+        # *subtract* 13 to get the same result as the wrap-around.
+        #
+        # This means we care about three cases:
         # 1. It's "A" through "M": Add 13, to make the letters "N" through "Z".
+        #    (Likewise for lowercase "a" through "m").
         # 2. It's "N" through "Z": Remove 13, to make the letters "A" through "M".
+        #    (Likewise for lowercase "n" through "z").
         # 3. It's something else, so leave it alone.
         #
         # In all three cases, we want to wire up the "output" signal (self.csr.storage)
