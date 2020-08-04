@@ -1,7 +1,7 @@
 use fomu_pac::RGB;
 
-const BREATHE_ENABLE: u8 = (1 << 7);
-const BREATHE_MODE_FIXED: u8 = (0 << 5);
+const BREATHE_ENABLE: u8 = 1 << 7;
+const BREATHE_MODE_FIXED: u8 = 0 << 5;
 
 // Breathe rate is in 128 ms increments
 const fn breathe_rate_ms(x: u8) -> u8 {
@@ -13,13 +13,13 @@ const fn blink_time_ms(x: u8) -> u8 {
     x / 32
 }
 
-const LEDDEN: u8 = (1 << 7);
-const FR250: u8 = (1 << 6);
-//const OUTPUL: u8 = (1 << 5);
-//const OUTSKEW: u8 = (1 << 4);
-const QUICK_STOP: u8 = (1 << 3);
-//const PWM_MODE_LFSR: u8 = (1 << 2);
-//const PWM_MODE_LINEAR: u8 = (0 << 2);
+const LEDDEN: u8 = 1 << 7;
+const FR250: u8 = 1 << 6;
+//const OUTPUL: u8 = 1 << 5;
+//const OUTSKEW: u8 = 1 << 4;
+const QUICK_STOP: u8 = 1 << 3;
+//const PWM_MODE_LFSR: u8 = 1 << 2;
+//const PWM_MODE_LINEAR: u8 = 0 << 2;
 
 enum LedRegister {
     LEDDCR0 = 8,
