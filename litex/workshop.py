@@ -50,7 +50,7 @@ def main():
                       compile_software=False)
     vns = builder.build()
     soc.do_exit(vns)
-    add_dfu_suffix(os.path.join('build', 'gateware', 'top.bin'))
+    add_dfu_suffix(os.path.join('build', 'gateware', 'fomu_{}.bin'.format(args.board)))
 
 
 if __name__ == "__main__":
