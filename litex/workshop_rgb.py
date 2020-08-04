@@ -21,7 +21,7 @@ from litex.soc.integration.soc_core import SoCCore
 from litex.soc.integration.builder import Builder
 from litex.soc.interconnect.csr import AutoCSR, CSRStatus, CSRStorage
 
-from litex_boards.partner.targets.fomu import BaseSoC, add_dfu_suffix
+from litex_boards.targets.fomu import BaseSoC, add_dfu_suffix
 
 from valentyusb.usbcore import io as usbio
 from valentyusb.usbcore.cpu import dummyusb
