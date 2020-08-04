@@ -7,8 +7,8 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-fomu-pac = "0.0.3"
-fomu-rt  = "0.0.5"
+fomu-pac = { git = "https://github.com/xobs/fomu-pac-rs.git", branch = "use-riscv-crate" }
+fomu-rt  = "0.0.6"
 
 panic-halt = "0.2"
 
