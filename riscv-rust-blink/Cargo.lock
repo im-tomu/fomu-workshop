@@ -28,9 +28,9 @@ dependencies = [
 
 [[package]]
 name = "fomu-rt"
-version = "0.0.4"
+version = "0.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "707861803ad6fb2546cc7d3bbaed02e27633e6c27629938cf0b7cebc149dce4b"
+checksum = "d2dc2cec9c34141dbb49e01b229fb8eb75e4a4f70bcee0ec2cf11cff1bbd4a3f"
 dependencies = [
  "r0",
  "riscv-rt-macros",
