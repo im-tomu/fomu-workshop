@@ -72,7 +72,7 @@ Here is an example of a Verilog module:
        always @(posedge C)
        begin
            counter <= counter + 1'b1;
-           Q = counter[3] ^ counter[5] | counter<<2;
+           Q <= counter[3] ^ counter[5] | counter<<2;
        end
    endmodule
 
