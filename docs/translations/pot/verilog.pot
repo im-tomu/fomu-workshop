@@ -25,11 +25,11 @@ msgid "“Hello world!” - Blink a LED"
 msgstr ""
 
 #: ../../verilog.rst:7
-msgid "The canonical “Hello, world!” of hardware is to blink a LED. The directory ``verilog/blink-expanded`` contains a Verilog example of a blink project. This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern. It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope."
+msgid "The canonical “Hello, world!” of hardware is to blink a LED. The directory ``verilog/blink`` contains a Verilog example of a blink project. This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern. It also exposes some of the signals on the touchpads, making it possible to probe them with an oscilloscope."
 msgstr ""
 
 #: ../../verilog.rst:13
-msgid "Enter the ``verilog/blink-expanded`` directory and build the demo by using ``make``:"
+msgid "Enter the ``verilog/blink`` directory and build the demo by using ``make``:"
 msgstr ""
 
 #: ../../verilog.rst:15
