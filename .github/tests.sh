@@ -7,94 +7,65 @@ echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
 
-# Test the RISC-V C example
-travis_fold start riscv-c
-echo "RISC-V C Example"
-travis_time_start
+echo '::group::RISC-V C Example'
 (
 	set -x
 	cd riscv-blink
 	make
 	file riscv-blink.dfu
 )
-travis_time_finish
-travis_fold end riscv-c
+echo '::endgroup::'
 
-# Test the RISC-V zig example
-travis_fold start riscv-zig
-echo "RISC-V Zig Example"
-travis_time_start
+echo '::group::RISC-V Zig Example'
 (
 	set -x
 	cd riscv-zig-blink
 	zig build
 	file riscv-zig-blink.bin
 )
-travis_time_finish
-travis_fold end riscv-zig
+echo '::endgroup::'
 
-
-# Test the Verilog Blink example
-travis_fold start verilog-blink
-echo "Verilog Blink example"
-travis_time_start
+echo '::group::Verilog Blink example'
 (
 	set -x
 	cd verilog/blink
 	make FOMU_REV=pvt
 	file blink.dfu
 )
-travis_time_finish
-travis_fold end verilog-blink
+echo '::endgroup::'
 
-# Test the Verilog Blink (expanded) example for Hacker
-travis_fold start verilog-blink-expanded-hacker
-echo "Verilog Blink (expanded) example for Hacker board"
-travis_time_start
+echo '::group::Verilog Blink (expanded) example for Hacker board'
 (
 	set -x
 	cd verilog/blink-expanded
 	make FOMU_REV=hacker
 	file blink.dfu
 )
-travis_time_finish
-travis_fold end verilog-blink-expanded-hacker
+echo '::endgroup::'
 
-# Test the Verilog Blink (expanded) example for PVT
-travis_fold start verilog-blink-expanded-pvt
-echo "Verilog Blink (expanded) example for PVT board"
-travis_time_start
+echo '::group::Verilog Blink (expanded) example for PVT board'
 (
 	set -x
 	cd verilog/blink-expanded
 	make FOMU_REV=pvt
 	file blink.dfu
 )
-travis_time_finish
-travis_fold end verilog-blink-expanded-pvt
+echo '::endgroup::'
 
-# Test the LiteX example for Hacker
-travis_fold start litex-hacker
-echo "LiteX example for Hacker"
-travis_time_start
+echo '::group::LiteX example for Hacker'
 (
 	set -x
 	cd litex
 	./workshop.py --board=hacker
 	file build/gateware/top.dfu
 )
-travis_time_finish
-travis_fold end litex-hacker
+echo '::endgroup::'
 
-# Test the LiteX example for PVT
-travis_fold start litex-pvt
-echo "LiteX example for PVT"
-travis_time_start
+echo '::group::LiteX example for PVT'
 (
 	set -x
 	cd litex
 	./workshop.py --board=pvt
 	file build/gateware/top.dfu
 )
-travis_time_finish
-travis_fold end litex-pvt
+echo '::endgroup::'

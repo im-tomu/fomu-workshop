@@ -1,0 +1,51 @@
+name: 'test'
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  test:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        os: [ ubuntu, windows, macos ]
+    runs-on: ${{ matrix.os }}-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+
+    - run: git config --global core.autocrlf input
+      shell: bash
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install (Ubuntu)
+      if: matrix.os == 'ubuntu'
+      run: |
+        curl -L https://ziglang.org/download/0.6.0/zig-linux-x86_64-0.6.0.tar.xz | tar -xJf -
+        echo "::add-path::$(pwd)/zig-linux-x86_64-0.6.0"
+
+    - name: Install (Mac OS)
+      if: matrix.os == 'macos'
+      run: brew install zig
+
+    - name: Install (Windows)
+      if: matrix.os == 'windows'
+      run: |
+        choco install zig --version 0.6.0
+        ln -s $(which python) /usr/bin/python3
+
+    - run: python ./get-toolchain.py
+
+    - run: ./.github/tests.sh
