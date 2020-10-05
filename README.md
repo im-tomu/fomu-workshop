@@ -16,19 +16,15 @@ The contents of this workshop is published at https://workshop.fomu.im
 
 ## Repository Contents
 
- - [docs](./docs) - The actual workshop directions and content.
-
- - [litex](./litex) - The files required for
-   [the Migen / LiteX section of the workshop](https://workshop.fomu.im/en/latest/migen.html).
-
- - [reference](./reference) - Extra reference documentation such as schematics
-   and part datasheets.
-
- - [riscv-blink](./riscv-blink) - The files required for the
-   [Fomu as a RISC-V CPU section of the workshop](https://workshop.fomu.im/en/latest/riscv.html).
-
- - [verilog](./verilog) - The files required for the
-   [Verilog on Fomu section of the workshop](https://workshop.fomu.im/en/latest/verilog.html).
+- [docs](./docs) - The actual workshop directions and content.
+- [litex](./litex) - The files required for [the Migen / LiteX section of the
+  workshop](https://workshop.fomu.im/en/latest/migen.html).
+- [reference](./reference) - Extra reference documentation such as schematics
+  and part datasheets.
+- [riscv-blink](./riscv-blink) - The files required for the [Fomu as a RISC-V
+  CPU section of the workshop](https://workshop.fomu.im/en/latest/riscv.html).
+- [verilog](./verilog) - The files required for the [Verilog on Fomu section
+  of the workshop](https://workshop.fomu.im/en/latest/verilog.html).
 
 # Developing the Workshop
 
@@ -45,26 +41,21 @@ to properly highlight the example sessions and to allow copying only the
 session lines.
 
 Other sphinx extensions which are used include;
- - [`sphinxcontrib-hdl-diagrams`](http://sphinxcontrib-hdl-diagrams.rtfd.io/)
-   to generate nice diagrams from Verilog examples.
 
- - [`sphinx-wavedrom`](https://github.com/bavovanachte/sphinx-wavedrom) to
-   generate [nice waveform diagrams](http://wavedrom.com/).
-   `sphinxcontrib-wavedrom`?
-
- - [`symbolator`](https://kevinpt.github.io/symbolator/) to generate block
-   level diagrams from Verilog examples.
-
- - [`sphinx_tabs`](https://github.com/djungelorm/sphinx-tabs) to support tabs
-   for different Linux / Windows / Mac OS X instructions.
+- [`sphinxcontrib-hdl-diagrams`](http://sphinxcontrib-hdl-diagrams.rtfd.io/) to
+  generate nice diagrams from Verilog examples.
+- [`sphinx-wavedrom`](https://github.com/bavovanachte/sphinx-wavedrom) to
+  generate [nice waveform diagrams](http://wavedrom.com/). `sphinxcontrib-wavedrom`?
+- [`symbolator`](https://kevinpt.github.io/symbolator/) to generate block level
+  diagrams from Verilog examples.
+- [`sphinx_tabs`](https://github.com/djungelorm/sphinx-tabs) to support tabs
+  for different Linux / Windows / Mac OS X instructions.
 
 ## Useful Resources for writing docs
 
- - [Sphinx RestructuredText Primer](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html)
-
- - [ReStructuredText directives](https://docutils.sourceforge.io/docs/ref/rst/directives.html)
-
- - [Material Design Icons](https://material.io/resources/icons/)
+- [Sphinx RestructuredText Primer](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html)
+- [ReStructuredText directives](https://docutils.sourceforge.io/docs/ref/rst/directives.html)
+- [Material Design Icons](https://material.io/resources/icons/)
 
 # Building Workshop Locally
 
