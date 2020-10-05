@@ -58,10 +58,9 @@ Turning code into gates
 
 Writing lookup tables is hard, so people have come up with abstract
 Hardware Description Languages (HDLs) we can use to describe them. The
-two most common languages are Verilog and VHDL. In the open source
-world, Verilog is more common. However, a modern trend is to embed an
-HDL inside an existing programming language, such as how Migen is
-embedded in Python, or SpinalHDL is embedded in Scala.
+two most common languages are Verilog and VHDL. However, a modern trend
+is to embed an HDL inside an existing programming language, such as how
+Migen is embedded in Python, or SpinalHDL is embedded in Scala.
 
 Here is an example of a Verilog module:
 

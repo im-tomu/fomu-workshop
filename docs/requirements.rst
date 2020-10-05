@@ -175,7 +175,7 @@ Ensure it says **(Fomu build)**. Type ``exit`` to quit ``yosys``.
    ================================================================ =============================================
    Tool                                                             Purpose
    ================================================================ =============================================
-   `yosys <https://github.com/YosysHQ/yosys>`__                     Verilog synthesis
+   `yosys <https://github.com/YosysHQ/yosys>`__                     Synthesis
    `nextpnr-ice40 <https://github.com/YosysHQ/nextpnr>`__           FPGA place-and-route
    `icestorm <https://github.com/cliffordwolf/icestorm>`__          FPGA bitstream packing
    `riscv toolchain <https://www.sifive.com/boards/>`__             Compile code for a RISC-V softcore
