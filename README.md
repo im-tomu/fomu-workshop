@@ -114,6 +114,12 @@ Verifying transaction: done
 Executing transaction: done
 ```
 
+Install dependencies:
+
+```shell-session
+$ pip install -r requirements.txt
+```
+
 Build the html output:
 
 ```shell-session
