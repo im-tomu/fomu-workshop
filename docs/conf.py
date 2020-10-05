@@ -41,7 +41,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'symbolator_sphinx',
-    'sphinxcontrib_verilog_diagrams',
+    'sphinxcontrib_hdl_diagrams',
     'sphinx_tabs.tabs',
     'sphinxcontrib_session',
 ]
