@@ -42,6 +42,8 @@ The contents of this workshop is published at [workshop.fomu.im](https://worksho
   CPU section of the workshop](https://workshop.fomu.im/en/latest/riscv.html).
 - [verilog](./verilog) - The files required for the [Verilog on Fomu section
   of the workshop](https://workshop.fomu.im/en/latest/verilog.html).
+- [vhdl](./vhdl) - The files required for the [VHDL on Fomu section
+  of the workshop](https://workshop.fomu.im/en/latest/vhdl.html).
 
 # Development
 

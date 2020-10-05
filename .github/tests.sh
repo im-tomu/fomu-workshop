@@ -7,6 +7,16 @@ echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
 
+echo '::group::VHDL Blink example'
+(
+
+	set -x
+	cd vhdl/blink
+	make FOMU_REV=pvt
+	file blink.dfu
+)
+echo '::endgroup::'
+
 echo '::group::RISC-V C Example'
 (
 	set -x
