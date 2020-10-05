@@ -26,4 +26,4 @@ sphinxcontrib-wavedrom
 symbolator
 
 # Verilog diagrams using Yosys + netlistsvg
-git+https://github.com/SymbiFlow/sphinxcontrib-verilog-diagrams.git#egg=sphinxcontrib-verilog-diagrams
+git+https://github.com/SymbiFlow/sphinxcontrib-hdl-diagrams.git#egg=sphinxcontrib-hdl-diagrams

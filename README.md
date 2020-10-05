@@ -45,7 +45,7 @@ to properly highlight the example sessions and to allow copying only the
 session lines.
 
 Other sphinx extensions which are used include;
- - [`sphinxcontrib-verilog-diagrams`](http://sphinxcontrib-verilog-diagrams.rtfd.io/)
+ - [`sphinxcontrib-hdl-diagrams`](http://sphinxcontrib-hdl-diagrams.rtfd.io/)
    to generate nice diagrams from Verilog examples.
 
  - [`sphinx-wavedrom`](https://github.com/bavovanachte/sphinx-wavedrom) to
