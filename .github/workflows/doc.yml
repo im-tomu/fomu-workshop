@@ -1,0 +1,41 @@
+name: 'doc'
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  sphinx:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Build docs
+      run: |
+        cd docs
+        make env
+        pip3 install -U wheel setuptools
+        pip3 install -r requirements.txt
+        make html
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: docs
+        path: docs/_build/html
+
+    - name: Publish site to gh-pages
+      if: github.event_name != 'pull_request'
+      run: |
+        cd docs/_build/html
+        touch .nojekyll
+        git init
+        cp ../../../.git/config ./.git/config
+        git add .
+        git config --local user.email "push@gha"
+        git config --local user.name "GHA"
+        git commit -a -m "update ${{ github.sha }}"
+        git push -u origin +HEAD:gh-pages
