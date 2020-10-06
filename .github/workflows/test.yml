@@ -34,7 +34,7 @@ jobs:
       if: matrix.os == 'ubuntu'
       run: |
         curl -L https://ziglang.org/download/0.6.0/zig-linux-x86_64-0.6.0.tar.xz | tar -xJf -
-        echo "::add-path::$(pwd)/zig-linux-x86_64-0.6.0"
+        echo "$(pwd)/zig-linux-x86_64-0.6.0" >> $GITHUB_PATH
 
     - name: Install (Mac OS)
       if: matrix.os == 'macos'
