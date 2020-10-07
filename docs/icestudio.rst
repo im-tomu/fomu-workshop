@@ -78,6 +78,28 @@ Modules are browsable, as shown in the screencast above:
 .. image:: _static/icestudio/sb_rgba_drv.png
    :width: 33%
 
+Board rules
+===========
+
+You can use a feature in *icestudio Nightly*.
+Fomu needs to disconnect its USB communication stack,
+so it is always necessary to set pins *usb_dn*, *usb_dp* and *usb_dp_pu*,
+so that it can use the option *"board rules"* for a cleaner desing.
+As an example see the result of applying this feature in the previous example.
+
+.. image:: _static/icestudio/blinky_board_rules.png
+   :width: 600 px
+   :align: center
+
+To use this feature, activate the option in the card properties.
+You can see the rules applied to each pin by using the appropriate option.
+
+.. image:: _static/icestudio/blinky_board_options.gif
+   :width: 600 px
+   :align: center
+
+You can use the file ``Blinky_BoardTop_rules.ice`` as an example.
+
 .. HINT:: Find more info about features of IceStudio (such as collections or
   plugins) in the `documentation <https://juanmard.github.io/icestudio/index.html>`_.
 
