@@ -28,7 +28,7 @@ jobs:
         path: docs/_build/html
 
     - name: Publish site to gh-pages
-      if: github.event_name != 'pull_request'
+      if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
       run: |
         cd docs/_build/html
         touch .nojekyll
