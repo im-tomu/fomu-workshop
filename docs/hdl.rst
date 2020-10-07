@@ -45,3 +45,4 @@ Languages and generators
    vhdl
    mixed-hdl
    migen
+   icestudio
