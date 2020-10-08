@@ -12,4 +12,3 @@ Verilog and VHDL.
 
    verilog
    migen
-   spinal
