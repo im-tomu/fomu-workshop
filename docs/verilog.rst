@@ -7,8 +7,7 @@ Verilog on Fomu
 The canonical “Hello, world!” of hardware is to blink a LED. The
 directory ``verilog/blink`` contains a Verilog example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
-number so you get an on/off pattern. It also exposes some of the signals
-on the touchpads, making it possible to probe them with an oscilloscope.
+number so you get an on/off pattern.
 
 Enter the ``verilog/blink`` directory and build the demo by using ``make``:
 
