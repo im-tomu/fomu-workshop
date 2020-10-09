@@ -23,9 +23,12 @@ and use the buttons on the botton:
 3. **Upload** the bitstream to the board.
 
 .. IMPORTANT:: Fomu is currently not supported in the stable releases
-  of IceStudio. Development or nightly releases need to be used.
-  Moreover, Apio needs to be updated from the git repository:
+  of IceStudio. Development or `nightly <https://github.com/juanmard/icestudio/releases/tag/nightly>`_
+  releases need to be used. Moreover, Apio needs to be updated from
+  the git repository.
+
+  NOTE: on GNU/Linux, first ``source ~/.icestudio/venv/bin/activate``.
 
   .. code-block:: shell
 
-      pip install git+https://github.com/FPGAwars/apio.git@develop#egg=apio
+      pip install -U git+https://github.com/FPGAwars/apio.git@develop#egg=apio
