@@ -2,7 +2,7 @@
 
 set -e
 
-TOOLCHAIN_PATH="$PWD/$(find fomu-toolchain-* -type d -maxdepth 0 2>/dev/null)"
+TOOLCHAIN_PATH="${TOOLCHAIN_PATH:-$PWD/$(find fomu-toolchain-* -type d -maxdepth 0 2>/dev/null)}"
 echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
