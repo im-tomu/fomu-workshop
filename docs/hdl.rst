@@ -43,4 +43,5 @@ Languages and generators
 
    verilog
    vhdl
+   mixed-hdl
    migen

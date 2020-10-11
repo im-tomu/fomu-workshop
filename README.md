@@ -44,6 +44,8 @@ The contents of this workshop is published at [workshop.fomu.im](https://worksho
   of the workshop](https://workshop.fomu.im/en/latest/verilog.html).
 - [vhdl](./vhdl) - The files required for the [VHDL on Fomu section
   of the workshop](https://workshop.fomu.im/en/latest/vhdl.html).
+- [mixed-hdl](./mixed-hdl) - The files required for the [Mixed HDL on Fomu section
+  of the workshop](https://workshop.fomu.im/en/latest/mixedhdl.html).
 
 # Development
 
