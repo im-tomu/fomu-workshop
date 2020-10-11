@@ -1,3 +1,5 @@
+.. _HDLs:VHDL:
+
 VHDL on Fomu
 ------------
 

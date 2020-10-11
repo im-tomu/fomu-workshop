@@ -1,3 +1,5 @@
+.. _HDLs:Verilog:
+
 Verilog on Fomu
 ---------------
 

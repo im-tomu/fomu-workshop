@@ -1,3 +1,5 @@
+.. _HDLs:
+
 Hardware Description Languages
 ------------------------------
 
