@@ -24,17 +24,22 @@ __pycache__/
 build/
 test/
 
-# Output from yosys
+# Output from yosys and nextpnr
 abc.history
+*.asc
+*.bit
 
 # Jekyll files
 .bundle
 Gemfile
 Gemfile.lock
-_*
+_*.*
 
 # Fomu Toolchain
 fomu-toolchain*
 
 # Conda Python Environments
 env
+
+# Output from Sphinx
+docs/_build/
