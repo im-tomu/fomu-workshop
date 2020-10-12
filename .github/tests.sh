@@ -6,6 +6,7 @@ TOOLCHAIN_PATH="${TOOLCHAIN_PATH:-$PWD/$(find fomu-toolchain-* -type d -maxdepth
 echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
+export GHDL_PREFIX=$TOOLCHAIN_PATH/lib/ghdl
 
 echo '::group::VHDL Blink example'
 (

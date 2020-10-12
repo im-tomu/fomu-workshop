@@ -80,7 +80,7 @@ def check_files(to_download):
     return not error
 
 
-TOOLCHAIN = "https://api.github.com/repos/im-tomu/fomu-toolchain/releases/latest"
+TOOLCHAIN = "https://api.github.com/repos/im-tomu/fomu-toolchain/releases/%s" % ("tags/nightly" if os.environ.get('CI', False) else "latest")
 
 
 def get_toolchain_data():
@@ -107,6 +107,14 @@ def main(argv):
 
     plat = platform()
     print("Platform:", plat)
+
+    if os.environ.get('CI', False):
+        platforms = {
+            "windows": "Windows",
+            "linux": "Linux",
+            "mac": "macOS"
+        }
+        plat = platforms[plat]
 
     to_download = []
 
