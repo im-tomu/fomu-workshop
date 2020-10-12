@@ -22,7 +22,7 @@ Table of Contents
 .. toctree::
    :maxdepth: 5
 
-   requirements
+   requirements/index
    background
    python
    riscv
