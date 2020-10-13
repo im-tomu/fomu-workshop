@@ -29,7 +29,7 @@ blink.json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
 		"$(GHDLSYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e; \
 		synth_ice40 \
 		-top Fomu_Blink \
-		-json $@" -q $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
+		-json $@" $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
 
 # Use **nextpnr** to generate the FPGA configuration.
 # This is called the **place** and **route** step.
