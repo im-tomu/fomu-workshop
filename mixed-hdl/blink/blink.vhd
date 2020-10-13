@@ -42,7 +42,7 @@ begin
   usb_dp_pu <= '0';
 
   -- Instantiate clkgen for reducing the system clock
-  clk_generator: component clkgen
+  clk_generator: clkgen
   port map (
       clk => clki,
       cnt => color
