@@ -1,27 +1,29 @@
-.. _HDLs:Verilog:
+.. _HDLs:mixed:
 
-Verilog on Fomu
----------------
+Mixed HDL on Fomu
+-----------------
+
+.. HINT:: It is strongly suggested to get familiar with :ref:`HDLs:Verilog` and :ref:`HDLs:VHDL`
+  examples before tinkering with these mixed language use cases.
+
 
 “Hello world!” - Blink a LED
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``verilog/blink`` contains a Verilog example of a blink
+directory ``mixedhdl/blink`` contains a VHDL + Verilog example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
 number so you get an on/off pattern.
 
-Enter the ``verilog/blink`` directory and build the demo by using ``make``:
-
-**Make sure you set the** ``FOMU_REV`` **value to match your hardware!** See :ref:`required-hardware`.
+Enter the ``mixedhdl/blink`` directory and build the demo by using ``make``:
 
 .. session:: shell-session
 
    $ make FOMU_REV=$FOMU_REV
    ...
-   Info: Max frequency for clock 'clk': 73.26 MHz (PASS at 12.00 MHz)
+   Info: Max frequency for clock 'clk_generator.clko': 73.26 MHz (PASS at 12.00 MHz)
 
-   Info: Max delay posedge clk -> <async>: 3.15 ns
+   Info: Max delay posedge clk_generator.clko -> <async>: 3.15 ns
 
    Info: Slack histogram:
    Info:  legend: * represents 1 endpoint(s)
@@ -59,15 +61,20 @@ Enter the ``verilog/blink`` directory and build the demo by using ``make``:
    Suffix successfully added to file
    $
 
-You can then load ``blink.dfu`` onto Fomu by using the same ``dfu-util -D``
-command we’ve been using so far. You should see a blinking pattern of
+You can then load ``blink.dfu`` onto Fomu by using ``make load`` or the same
+``dfu-util -D`` command we’ve been using so far. You should see a blinking pattern of
 varying color on your Fomu, indicating your bitstream was successfully loaded.
 
+If you take a closer look at the sources in ``mixedhdl/blink``, you will find that
+modules/components ``blink`` and ``clkgen`` are written both in VHDL and Verilog.
+The Makefile uses ``blink.vhd`` and ``clkgen.v`` by default. However, any of the
+following cases produce the same result:
 
-Reading Input
-^^^^^^^^^^^^^
+- ``blink.vhd`` + ``clkgen.v``
+- ``blink.v`` + ``clkgen.vhdl``
+- ``blink.vhd`` + ``clkgen.vhdl``
+- ``blink.v`` + ``clkgen.v``
 
-There is another small example in ``verilog/blink-expanded`` which shows
-how to read out some given pins. Build and flash it like described above
-and see if you can enable the blue and red LED by shorting pins 1+2 or 3+4
-on your Fomu (the pins are the exposed contacts sticking out of the USB port).
+You can modify variables `VHDL_SYN_FILES` and ``VERILOG_SYN_FILES`` in the Makefile
+for trying other combinations. For a better understanding, it is suggested to compare
+these modules with the single file solutions in :ref:`HDLs:Verilog` and :ref:`HDLs:VHDL`.

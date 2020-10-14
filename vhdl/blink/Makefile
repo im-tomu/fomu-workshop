@@ -1,9 +1,13 @@
-# Simple Fomu Makefile
-# --------------------
-# This Makefile shows the steps to generate a DFU loadable image onto
-# Fomu hacker board.
-
 include ../../board.mk
+
+VHDL_SYN_FILES = ../sb_ice40_components.vhd blink.vhd
+
+GHDL_FLAGS += --std=08
+GHDL      ?= ghdl
+GHDLSYNTH ?= ghdl
+YOSYS     ?= yosys
+NEXTPNR   ?= nextpnr-ice40
+ICEPACK   ?= icepack
 
 # Default target: run all required targets to build the DFU image.
 all: blink.dfu
@@ -13,40 +17,40 @@ all: blink.dfu
 
 # Use *Yosys* to generate the synthesized netlist.
 # This is called the **synthesis** and **tech mapping** step.
-blink.json: blink.v
-	yosys \
-		$(YOSYSFLAGS) \
-		-p 'synth_ice40 -top top -json blink.json' blink.v
+blink.json: $(VHDL_SYN_FILES)
+	$(YOSYS) $(YOSYSFLAGS) \
+		-p \
+		"$(GHDLSYNTH) $(GHDL_FLAGS) $^ -e; \
+		synth_ice40 \
+		-top Fomu_Blink \
+		-json $@" 2>&1 | tee yosys-report.txt
 
 # Use **nextpnr** to generate the FPGA configuration.
 # This is called the **place** and **route** step.
 blink.asc: blink.json
-	nextpnr-ice40 \
+	$(NEXTPNR) \
 		$(PNRFLAGS) \
-		--json blink.json \
-		--asc blink.asc
+		--json $< \
+		--asc $@
 
 # Use icepack to convert the FPGA configuration into a "bitstream" loadable onto the FPGA.
 # This is called the bitstream generation step.
 blink.bit: blink.asc
-	icepack blink.asc blink.bit
+	$(ICEPACK) $< $@
 
 # Use dfu-suffix to generate the DFU image from the FPGA bitstream.
 blink.dfu: blink.bit
-	cp blink.bit blink.dfu
-	dfu-suffix -v 1209 -p 70b1 -a blink.dfu
+	cp $< $@
+	dfu-suffix -v 1209 -p 70b1 -a $@
 
 # Use df-util to load the DFU image onto the Fomu.
 load: blink.dfu
-	dfu-util -D blink.dfu
+	dfu-util -D $<
 
 .PHONY: load
 
 # Cleanup the generated files.
 clean:
-	-rm -f blink.json 	# Generate netlist
-	-rm -f blink.asc 	# FPGA configuration
-	-rm -f blink.bit 	# FPGA bitstream
-	-rm -f blink.dfu 	# DFU image loadable onto the Fomu
+	rm -fr *.cf *.json *-report.txt *.asc *.bit *.dfu
 
 .PHONY: clean

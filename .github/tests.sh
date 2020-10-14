@@ -6,6 +6,7 @@ TOOLCHAIN_PATH="${TOOLCHAIN_PATH:-$PWD/$(find fomu-toolchain-* -type d -maxdepth
 echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
+export GHDL_PREFIX=$TOOLCHAIN_PATH/lib/ghdl
 
 echo '::group::RISC-V C Example'
 (
@@ -47,6 +48,26 @@ echo '::group::Verilog Blink (expanded) example for PVT board'
 (
 	set -x
 	cd verilog/blink-expanded
+	make FOMU_REV=pvt
+	file blink.dfu
+)
+echo '::endgroup::'
+
+echo '::group::VHDL Blink example'
+(
+
+	set -x
+	cd vhdl/blink
+	make FOMU_REV=pvt
+	file blink.dfu
+)
+echo '::endgroup::'
+
+echo '::group::Mixed HDL Blink example'
+(
+
+	set -x
+	cd mixed-hdl/blink
 	make FOMU_REV=pvt
 	file blink.dfu
 )
