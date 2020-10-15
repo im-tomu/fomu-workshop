@@ -90,3 +90,25 @@ echo '::group::LiteX example for PVT'
 	file build/gateware/top.dfu
 )
 echo '::endgroup::'
+
+echo '::group::Migen Blink example for PVT board'
+(
+
+	set -x
+	cd migen
+	FOMU_REV=pvt ./blink.py
+	file build/top.bin
+	rm -rf build
+)
+echo '::endgroup::'
+
+echo '::group::Migen Blink (expanded) example for PVT board'
+(
+
+	set -x
+	cd migen
+	FOMU_REV=pvt ./blink-expanded.py
+	file build/top.bin
+	rm -rf build
+)
+echo '::endgroup::'
