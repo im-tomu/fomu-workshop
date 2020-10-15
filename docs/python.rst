@@ -111,7 +111,7 @@ Memory-mapped Registers
 -----------------------
 
 If we look at the generated Fomu header files (to be found for instance in
-`riscv-blink <_static/riscv-blink/include/generated/csr.h>`__), we can see
+`riscv-blink <https://github.com/im-tomu/fomu-workshop/blob/master/riscv-blink/include/generated/csr.h>`__), we can see
 many, many memory-mapped registers. For example, the major, minor, and revision
 numbers all have registers:
 
