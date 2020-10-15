@@ -283,3 +283,7 @@ todo_include_todos = True
 
 locale_dirs = ['translations/']   # path is example but recommended.
 gettext_compact = False     # optional.
+
+extlinks = {
+   'repo':  ('https://github.com/im-tomu/fomu-workshop/blob/master/%s', None)
+}
