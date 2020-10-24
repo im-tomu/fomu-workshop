@@ -40,6 +40,7 @@ extensions = [
 #    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
+    'sphinx.ext.extlinks',
     'symbolator_sphinx',
     'sphinxcontrib_hdl_diagrams',
     'sphinx_tabs.tabs',
@@ -283,3 +284,7 @@ todo_include_todos = True
 
 locale_dirs = ['translations/']   # path is example but recommended.
 gettext_compact = False     # optional.
+
+extlinks = {
+   'repo':  ('https://github.com/im-tomu/fomu-workshop/blob/master/%s', None)
+}
