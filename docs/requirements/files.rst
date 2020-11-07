@@ -3,16 +3,15 @@
 Required Files
 --------------
 
-.. note::
-
+.. NOTE::
    If you’re attending a workshop that provides USB drives, these files may be
    available on the USB drive under the ``Workshop`` directory.
 
 You will need the Workshop files. They are located in the
-`fomu-workshop <https://github.com/im-tomu/fomu-workshop>`__ Github
-repository. You can download
-`master.zip <https://github.com/im-tomu/fomu-workshop/archive/master.zip>`__
-or clone it from git:
+`fomu-workshop <https://github.com/im-tomu/fomu-workshop>`_ Github
+repository. You can clone it with git, or download
+`master.zip <https://codeload.github.com/im-tomu/fomu-workshop/zip/master>`_ |
+`master.tar.gz <https://codeload.github.com/im-tomu/fomu-workshop/tar.gz/master>`_.
 
 .. session:: shell-session
 

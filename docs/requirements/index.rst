@@ -3,21 +3,18 @@
 Requirements
 ############
 
-For this workshop you will need;
+.. NOTE::
+  If you are at a workshop, please **install the tools first** and then get
+  the hardware from your presenter.
 
-#. The Fomu workshop files - see :ref:`required-files` section.
-#. The Fomu toolchain - see :ref:`required-software` section.
-#. A Fomu board - see :ref:`required-hardware` section.
-#. Set up drivers - see :ref:`required-drivers` section.
+For this workshop you will need:
 
-.. note::
+- :ref:`The Fomu workshop files <required-files>`
+- :ref:`The Fomu toolchain <required-software>`
+- :ref:`A Fomu board <required-hardware>`
+- :ref:`Set up drivers <required-drivers>`
 
-    If you are at a workshop, please **install the tools first** and then get
-    the hardware from your presenter.
-
-
-.. warning::
-
+.. WARNING::
     Your Fomu should be running Foboot |Foboot Version| or newer.
 
     You can see what version you are running by typing ``dfu-util -l`` like so;
@@ -36,7 +33,7 @@ For this workshop you will need;
         Found DFU: [1209:5bf0] ver=0101, devnum=19, cfg=1, intf=0, path="1-2", alt=0, name="Fomu PVT running DFU Bootloader v2.0.3", serial="UNKNOWN"
         $
 
-    If your Fomu is running an version older than |Foboot Version| follow the
+    If your Fomu is running an version older than |Foboot Version|, follow the
     :ref:`bootloader-update` section.
 
 .. toctree::
