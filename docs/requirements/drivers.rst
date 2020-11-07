@@ -105,5 +105,5 @@ Installing Zadig Drivers
 #. In the dropdown, select your Fomu and in the field right of the green arrow
    choose the `WinUSB` driver and hit Upgrade Driver.
 
-   .. image:: ../_static/Zadeg-Setup.PNG
-      :alt: Setup of ZADEG for Updating USBport driver on WIN7
+   .. image:: ../_static/Zadig-Setup.png
+      :alt: Setup of Zadig for Updating USBport driver on WIN7
