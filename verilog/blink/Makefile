@@ -20,9 +20,10 @@ blink.json: blink.v
 
 # Use **nextpnr** to generate the FPGA configuration.
 # This is called the **place** and **route** step.
-blink.asc: blink.json
+blink.asc: blink.json $(PCF)
 	nextpnr-ice40 \
 		$(PNRFLAGS) \
+		--pcf $(PCF) \
 		--json blink.json \
 		--asc blink.asc
 

@@ -33,9 +33,10 @@ blink.json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
 
 # Use **nextpnr** to generate the FPGA configuration.
 # This is called the **place** and **route** step.
-blink.asc: blink.json
+blink.asc: blink.json $(PCF)
 	$(NEXTPNR) \
 		$(PNRFLAGS) \
+		--pcf $(PCF) \
 		--json $< \
 		--asc $@
 
