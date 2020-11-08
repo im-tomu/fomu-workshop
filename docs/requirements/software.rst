@@ -3,8 +3,7 @@
 Required Software
 #################
 
-.. note::
-
+.. NOTE::
    If you’re taking this workshop as a class, the toolchains are provided
    on the USB disk.
 
@@ -13,7 +12,7 @@ and Windows, via `Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/rele
 Debian packages are also `available for Raspberry Pi <https://github.com/im-tomu/fomu-raspbian-packages>`__.
 
 To install the software, extract it somewhere on your computer, then
-open up a terminal window and add that directory to your PATH:
+open up a terminal window and add that directory to your ``PATH``:
 
 .. tabs::
 
@@ -37,9 +36,9 @@ open up a terminal window and add that directory to your PATH:
 
          C:\> PATH=[path-to-toolchain]\bin;%PATH%
 
-Examples in :ref:`HDLs:VHDL` and :ref:`HDLs:mixed` use ghdl-yosys-plugin, which
-looks for standard libraries in the path used when GHDL was configured/built.
-Therefore, when the toolchain is extracted to an arbitrary location, `GHDL_PREFIX`
+Examples in :ref:`HDLs:VHDL` and :ref:`HDLs:mixed` use `ghdl-yosys-plugin <https://github.com/ghdl/ghdl-yosys-plugin>`_,
+which looks for standard libraries in the path used when GHDL was configured/built.
+Therefore, when the toolchain is extracted to an arbitrary location, ``GHDL_PREFIX``
 needs to be set:
 
 .. tabs::
@@ -98,7 +97,6 @@ the following output;
 
 Type ``exit`` to quit ``yosys``.
 
-.. note::
-
+.. NOTE::
    See the README of `Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`_
    for a complete list of the tools included in the toolchain.

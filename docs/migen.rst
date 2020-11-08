@@ -1,3 +1,5 @@
+.. _HDLs:migen:
+
 Migen and LiteX
 ---------------
 
@@ -128,18 +130,8 @@ Aside from that, there’s not much we can *do* with this design. But
 there’s a lot of infrastructure there. So let’s add something we can see
 (``workshop_rgb.py`` contains the completed example).
 
-.. image:: _static/ice40-rgb.jpg
-   :width: 100%
-   :alt: RGB block
-
-This is the RGB block from the datasheet. It has five inputs:
-``CURREN``, ``RGBLEDEN``, ``RGB0PWM``, ``RGB1PWM``, and ``RGB2PWM``. It
-has three outputs: ``RGB0``, ``RGB1``, and ``RGB2``. It also has four
-parameters: ``CURRENT_MODE``, ``RGB0_CURRENT``, ``RGB1_CURRENT``, and
-``RGB2_CURRENT``.
-
-This block is defined in Verilog (as ``SB_RGBA_DRV``), but we can import it as
-a Module into Migen:
+As explained in :ref:`HDLs` the RGB LED driver is defined in Verilog/VHDL
+(as ``SB_RGBA_DRV``), but we can import it as a Module into Migen:
 
 .. code:: python
 
@@ -198,7 +190,7 @@ your ``build/csr.csv`` says) and see them take effect immediately.
 
    $ wishbone-tool 0x60003000 0x1 # make LED green
    $ wishbone-tool 0x60003000 0x2 # make LED red
-   $ wishbone-tool 0x60003000 0x3 # make LED yellow   
+   $ wishbone-tool 0x60003000 0x3 # make LED yellow
    $ wishbone-tool 0x60003000 0x4 # make LED blue
    $ wishbone-tool 0x60003000 0x5 # make LED teal
    $ wishbone-tool 0x60003000 0x6 # make LED pink
