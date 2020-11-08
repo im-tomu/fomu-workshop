@@ -9,8 +9,6 @@ NEXTPNR   ?= nextpnr-ice40
 YOSYS     ?= yosys
 ICEPACK   ?= icepack
 
-PCF_PATH ?= ../../pcf
-
 # Add Windows and Unix support
 RM         = rm -rf
 COPY       = cp -a
@@ -29,34 +27,7 @@ RM         = del
 PATH_SEP   = \\
 endif
 
-ifeq ($(FOMU_REV),evt3)
-PCF       ?= $(PCF_PATH)/fomu-evt3.pcf
-PKG       ?= sg48
-YOSYSFLAGS?= -D EVT=1 -D EVT3=1 -D HAVE_PMOD=1
-PNRFLAGS  ?= --up5k --package $(PKG)
-else ifeq ($(FOMU_REV),evt2)
-PCF       ?= $(PCF_PATH)/fomu-evt2.pcf
-PKG       ?= sg48
-YOSYSFLAGS?= -D EVT=1 -D EVT2=1 -D HAVE_PMOD=1
-PNRFLAGS  ?= --up5k --package $(PKG)
-else ifeq ($(FOMU_REV),evt1)
-PCF       ?= $(PCF_PATH)/fomu-evt2.pcf
-PKG       ?= sg48
-YOSYSFLAGS?= -D EVT=1 -D EVT1=1 -D HAVE_PMOD=1
-PNRFLAGS  ?= --up5k --package $(PKG)
-else ifeq ($(FOMU_REV),hacker)
-PCF       ?= $(PCF_PATH)/fomu-hacker.pcf
-PKG       ?= uwg30
-YOSYSFLAGS?= -D HACKER=1
-PNRFLAGS  ?= --up5k --package $(PKG)
-else ifeq ($(FOMU_REV),pvt)
-PCF       ?= $(PCF_PATH)/fomu-pvt.pcf
-PKG       ?= uwg30
-YOSYSFLAGS?= -D PVT=1 -D PVT1=1
-PNRFLAGS  ?= --up5k --package $(PKG)
-else
-$(error Unrecognized FOMU_REV value. must be "evt1", "evt2", "evt3", "pvt", or "hacker")
-endif
+include ../../board.mk
 
 BUILD_DIR  = build
 VSOURCES   = $(wildcard *.v)
