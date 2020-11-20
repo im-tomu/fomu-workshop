@@ -1,0 +1,17 @@
+# Verilog/SystemVerilog generated from src/Blink.scala
+/Blink.sv
+/Blink.v
+# Annotations for the firrtl compiler, also generated from src/Blink.scala
+/Blink.anno.json
+# Intermediate representation of the circuit generated from src/Blink.scala
+/Blink.fir
+# IntelliJ IDE folder
+/.idea/
+# Scala build artifacts
+target/
+
+# same as for the verilog example
+blink.json
+blink.asc
+blink.bit
+blink.dfu
