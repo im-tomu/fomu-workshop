@@ -30,14 +30,7 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install Java + Scala (Linux/Windows)
-      if: matrix.os == 'ubuntu' || matrix.os == 'windows'
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Install Java + Scala (Mac OS)
-      if: matrix.os == 'macos'
+    - name: Install Scala
       uses: olafurpg/setup-scala@v10
       with:
         java-version: openjdk@1.11
