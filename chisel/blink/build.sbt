@@ -1,0 +1,6 @@
+name := "fomu-blink"
+version := "0.1"
+scalaVersion := "2.12.8"
+libraryDependencies += "edu.berkeley.cs" %% "chisel3" % "3.4.0"
+scalaSource in Compile := baseDirectory.value / "src"
+scalaSource in Test := baseDirectory.value / "test"
