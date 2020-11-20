@@ -112,3 +112,12 @@ echo '::group::Migen Blink (expanded) example for PVT board'
 	rm -rf build
 )
 echo '::endgroup::'
+
+echo '::group::Chisel Blink example'
+(
+	set -x
+	cd chisel/blink
+	make FOMU_REV=pvt
+	file blink.dfu
+)
+echo '::endgroup::'
