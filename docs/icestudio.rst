@@ -33,14 +33,20 @@ and use the buttons on the botton:
    - Click on the button with a 'microchip' icon, and a modal window will open.
    - There, select the device (UP5K) in the first dropdown list and the board (Fomu) in the second list.
 
-
 1. Click on the **Verify** button for checking the design.
 2. Click on the **Build** button for having the design exported to Verilog, synthesised, placed, routed and, finally, the bitstream generated.
 3. Click on the **Upload** for sending the bitstream to the board.
 4. After each of the steps is executed, the corresponding log can be shown through button **View command output**.
 
 You should see the rainbow pattern in the Fomu as soon as the *Upload*
-step is finished. However, that's just the beginning of the trip. You
+step is finished:
+
+.. image:: _static/icestudio/blinky_video.gif
+   :width: 600 px
+   :align: center
+   :target: https://github.com/juanmard/icestudio
+
+However, that's just the beginning of the trip. You
 can navigate the hierarchy of the designs by double-clicking on the main
 block. Go as deep as you want, until you find raw Verilog code. As you
 can observe, ICE modules are fancy wrappers around the Verilog code from
