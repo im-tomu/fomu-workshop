@@ -27,3 +27,9 @@ Makefile text eol=lf
 *.jpg diff=image
 *.png diff=image
 *.gds diff=gds
+
+# Settings to improve linguist data reporting (used by GitHub)
+*.v                     linguist-language=Verilog
+*.vh                    linguist-language=Verilog
+*.vhd                   linguist-language=VHDL
+*.vhdl                  linguist-language=VHDL
