@@ -81,24 +81,34 @@ Modules are browsable, as shown in the screencast above:
 Board rules
 ===========
 
-You can use a feature in *icestudio Nightly*.
-Fomu needs to disconnect its USB communication stack,
-so it is always necessary to set pins *usb_dn*, *usb_dp* and *usb_dp_pu*,
-so that it can use the option *"board rules"* for a cleaner desing.
-As an example see the result of applying this feature in the previous example.
+A feature in *IceStudio Nightly* named "*board rules*" allows predefining
+assignments for I/O pins. For instance, Fomu needs to disconnect its USB
+communication stack when writting raw HDL. Therefore, it is always necessary
+to define and set pins *usb_dn*, *usb_dp* and *usb_dp_pu*. Option
+*board rules* does so, allowing a cleaner graphical desing.
+
+Open ``Blinky_BoardTop_rules.ice``, which is the result of using this feature
+in the Blinky example. As you see, USB pins need not to be defined explicitly:
 
 .. image:: _static/icestudio/blinky_board_rules.png
    :width: 600 px
    :align: center
 
-To use this feature, activate the option in the card properties.
-You can see the rules applied to each pin by using the appropriate option.
+Instead, ensure that option *board rules* is activate in the board properties:
 
 .. image:: _static/icestudio/blinky_board_options.gif
    :width: 600 px
    :align: center
 
-You can use the file ``Blinky_BoardTop_rules.ice`` as an example.
+As shown in the screencast, you can inpect the specific rules applied to each
+pin by using the "*View board rules*" button in the board properties window.
+
+The same rules can be applied to modules lower in the hierarchy. For example, open
+``Blinky_rules.ice`` and compare with ``Blinky_rules.ice`` above:
+
+.. image:: _static/icestudio/blinky_module_rules.png
+   :width: 600 px
+   :align: center
 
 .. HINT:: Find more info about features of IceStudio (such as collections or
   plugins) in the `documentation <https://juanmard.github.io/icestudio/index.html>`_.
