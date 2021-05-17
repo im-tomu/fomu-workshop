@@ -9,6 +9,11 @@ YOSYS     ?= yosys
 NEXTPNR   ?= nextpnr-ice40
 ICEPACK   ?= icepack
 
+# If ghdl-yosys-plugin is built as a module (not the case with fomu-toolchain)
+ifdef GHDL_PLUGIN_MODULE
+YOSYSFLAGS += -m $(GHDL_PLUGIN_MODULE)
+endif
+
 # Default target: run all required targets to build the DFU image.
 all: blink.dfu
 	@true
