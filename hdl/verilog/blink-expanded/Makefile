@@ -1,5 +1,9 @@
-PACKAGE   ?= blink
-TOP       ?= $(PACKAGE)
+include ../../board.mk
+
+DESIGN = blink
+TOP    = $(DESIGN)
+
+VERILOG_SYN_FILES = blink.v
 
 # Currently GIT_VERSION is unusd and there are no tags, so skip calculating it
 #GIT_VERSION := $(shell git describe --tags)
@@ -27,40 +31,38 @@ RM         = del
 PATH_SEP   = \\
 endif
 
-include ../../board.mk
-
 BUILD_DIR  = build
 VSOURCES   = $(wildcard *.v)
 QUIET      = @
 
 ALL        = all
-TARGET     = $(PACKAGE).bin
+TARGET     = $(DESIGN).bin
 CLEAN      = clean
 
-$(ALL): $(TARGET) $(PACKAGE).dfu
-	$(QUIET) echo "Built '$(PACKAGE)' for Fomu $(FOMU_REV)"
+$(ALL): $(TARGET) $(DESIGN).dfu
+	$(QUIET) echo "Built '$(DESIGN)' for Fomu $(FOMU_REV)"
 
 run: $(TARGET)
 	fomu-flash -f $(TARGET)
 
-run-dfu: $(PACKAGE).dfu
-	dfu-util -D $(PACKAGE).dfu
+run-dfu: $(DESIGN).dfu
+	dfu-util -D $(DESIGN).dfu
 
-$(BUILD_DIR)/$(PACKAGE).json: $(VSOURCES) | $(BUILD_DIR)
+$(BUILD_DIR)/$(DESIGN).json: $(VSOURCES) | $(BUILD_DIR)
 	$(QUIET) echo " SYNTH    $@"
-	$(QUIET) $(YOSYS) $(YOSYSFLAGS) -p 'synth_ice40 -top $(TOP) -json $@' $(PACKAGE).v
+	$(QUIET) $(YOSYS) $(YOSYSFLAGS) -p 'synth_ice40 -top $(TOP) -json $@' $(VERILOG_SYN_FILES)
 
-$(BUILD_DIR)/$(PACKAGE).asc: $(BUILD_DIR)/$(PACKAGE).json $(PCF)
+$(BUILD_DIR)/$(DESIGN).asc: $(BUILD_DIR)/$(DESIGN).json $(PCF)
 	$(QUIET) echo " PNR      $@"
-	$(QUIET) $(NEXTPNR) $(PNRFLAGS) --json $(BUILD_DIR)/$(PACKAGE).json --pcf $(PCF) --asc $@
+	$(QUIET) $(NEXTPNR) $(PNRFLAGS) --json $(BUILD_DIR)/$(DESIGN).json --pcf $(PCF) --asc $@
 
-$(TARGET): $(BUILD_DIR)/$(PACKAGE).asc
+$(TARGET): $(BUILD_DIR)/$(DESIGN).asc
 	$(QUIET) echo " PACK     $@"
-	$(QUIET) $(ICEPACK) $(BUILD_DIR)/$(PACKAGE).asc $@
+	$(QUIET) $(ICEPACK) $(BUILD_DIR)/$(DESIGN).asc $@
 
-$(PACKAGE).dfu: $(TARGET)
+$(DESIGN).dfu: $(TARGET)
 	$(QUIET) echo "  DFU      $@"
-	$(QUIET) $(COPY) $(PACKAGE).bin $@
+	$(QUIET) $(COPY) $(DESIGN).bin $@
 	$(QUIET) dfu-suffix -v 1209 -p 70b1 -a $@
 
 $(BUILD_DIR):
@@ -73,7 +75,7 @@ clean:
 	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.json))
 	$(QUIET) echo "  RM      $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.asc))"
 	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.asc))
-	$(QUIET) echo "  RM      $(TARGET) $(PACKAGE).bin $(PACKAGE).dfu"
+	$(QUIET) echo "  RM      $(TARGET) $(DESIGN).bin $(DESIGN).dfu"
 	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),abc.history)
 	$(QUIET) echo "  RM      $(TARGET) abc.history"
-	-$(QUIET) $(RM) $(TARGET) $(PACKAGE).bin $(PACKAGE).dfu
+	-$(QUIET) $(RM) $(TARGET) $(DESIGN).bin $(DESIGN).dfu
