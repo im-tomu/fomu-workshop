@@ -5,13 +5,11 @@ TOP    = $(DESIGN)
 
 VERILOG_SYN_FILES = blink.v
 
-# Currently GIT_VERSION is unusd and there are no tags, so skip calculating it
-#GIT_VERSION := $(shell git describe --tags)
-
-# Default programs
-NEXTPNR   ?= nextpnr-ice40
 YOSYS     ?= yosys
+NEXTPNR   ?= nextpnr-ice40
 ICEPACK   ?= icepack
+
+QUIET = @
 
 # If a container engine is used, each tool is executed in a separated container
 ifdef CONTAINER_ENGINE
@@ -36,51 +34,26 @@ RM         = del
 PATH_SEP   = \\
 endif
 
-BUILD_DIR  = build
-VSOURCES   = $(wildcard *.v)
-QUIET      = @
-
-ALL        = all
-TARGET     = $(DESIGN).bin
-CLEAN      = clean
-
-$(ALL): $(TARGET) $(DESIGN).dfu
+all: $(DESIGN).dfu
 	$(QUIET) echo "Built '$(DESIGN)' for Fomu $(FOMU_REV)"
 
-run: $(TARGET)
-	fomu-flash -f $(TARGET)
+.DEFAULT: all
 
-run-dfu: $(DESIGN).dfu
-	dfu-util -D $(DESIGN).dfu
+# Use *Yosys* to generate the synthesized netlist.
+# This is called the **synthesis** and **tech mapping** step.
+$(DESIGN).json: $(VERILOG_SYN_FILES)
+	$(QUIET) $(YOSYS) $(YOSYSFLAGS) \
+		-p \
+		"synth_ice40 \
+		-top $(TOP) \
+		-json $@" $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
 
-$(BUILD_DIR)/$(DESIGN).json: $(VSOURCES) | $(BUILD_DIR)
-	$(QUIET) echo " SYNTH    $@"
-	$(QUIET) $(YOSYS) $(YOSYSFLAGS) -p 'synth_ice40 -top $(TOP) -json $@' $(VERILOG_SYN_FILES)
+include ../../PnR_Prog.mk
 
-$(BUILD_DIR)/$(DESIGN).asc: $(BUILD_DIR)/$(DESIGN).json $(PCF)
-	$(QUIET) echo " PNR      $@"
-	$(QUIET) $(NEXTPNR) $(PNRFLAGS) --json $(BUILD_DIR)/$(DESIGN).json --pcf $(PCF) --asc $@
+run: $(DESIGN).bin
+	fomu-flash -f $<
 
-$(TARGET): $(BUILD_DIR)/$(DESIGN).asc
-	$(QUIET) echo " PACK     $@"
-	$(QUIET) $(ICEPACK) $(BUILD_DIR)/$(DESIGN).asc $@
-
-$(DESIGN).dfu: $(TARGET)
-	$(QUIET) echo "  DFU      $@"
-	$(QUIET) $(COPY) $(DESIGN).bin $@
-	$(QUIET) dfu-suffix -v 1209 -p 70b1 -a $@
-
-$(BUILD_DIR):
-	$(QUIET) mkdir $(BUILD_DIR)
-
-.PHONY: clean
+.PHONY: load
 
 clean:
-	$(QUIET) echo "  RM      $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.json))"
-	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.json))
-	$(QUIET) echo "  RM      $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.asc))"
-	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),$(wildcard $(BUILD_DIR)/*.asc))
-	$(QUIET) echo "  RM      $(TARGET) $(DESIGN).bin $(DESIGN).dfu"
-	-$(QUIET) $(RM) $(subst /,$(PATH_SEP),abc.history)
-	$(QUIET) echo "  RM      $(TARGET) abc.history"
-	-$(QUIET) $(RM) $(TARGET) $(DESIGN).bin $(DESIGN).dfu
+	rm -fr *.json *-report.txt *.asc *.bit *.dfu

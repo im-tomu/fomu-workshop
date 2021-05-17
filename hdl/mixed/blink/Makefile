@@ -18,6 +18,8 @@ YOSYS      ?= yosys
 NEXTPNR    ?= nextpnr-ice40
 ICEPACK    ?= icepack
 
+QUIET = @
+
 # If ghdl-yosys-plugin is built as a module (not the case with fomu-toolchain)
 ifdef GHDL_PLUGIN_MODULE
 YOSYSFLAGS += -m $(GHDL_PLUGIN_MODULE)
@@ -30,42 +32,21 @@ endif
 
 # Default target: run all required targets to build the DFU image.
 all: $(DESIGN).dfu
-	@true
+	$(QUIET) echo "Built '$(DESIGN)' for Fomu $(FOMU_REV)"
 
 .DEFAULT: all
 
 # Use *Yosys* to generate the synthesized netlist.
 # This is called the **synthesis** and **tech mapping** step.
 $(DESIGN).json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
-	$(YOSYS) $(YOSYSFLAGS) \
+	$(QUIET) $(YOSYS) $(YOSYSFLAGS) \
 		-p \
 		"$(GHDLSYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e; \
 		synth_ice40 \
 		-top $(TOP) \
 		-json $@" $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
 
-# Use **nextpnr** to generate the FPGA configuration.
-# This is called the **place** and **route** step.
-$(DESIGN).asc: $(DESIGN).json $(PCF)
-	$(NEXTPNR) \
-		$(PNRFLAGS) \
-		--pcf $(PCF) \
-		--json $< \
-		--asc $@
-
-# Use icepack to convert the FPGA configuration into a "bitstream" loadable onto the FPGA.
-# This is called the bitstream generation step.
-$(DESIGN).bit: $(DESIGN).asc
-	$(ICEPACK) $< $@
-
-# Use dfu-suffix to generate the DFU image from the FPGA bitstream.
-$(DESIGN).dfu: $(DESIGN).bit
-	cp $< $@
-	dfu-suffix -v 1209 -p 70b1 -a $@
-
-# Use df-util to load the DFU image onto the Fomu.
-load: $(DESIGN).dfu
-	dfu-util -D $<
+include ../../PnR_Prog.mk
 
 .PHONY: load
 
