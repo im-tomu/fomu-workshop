@@ -2,7 +2,7 @@
 # require different configurations for yosys and nextpnr.
 # Configuration is performed by setting the environment variable FOMU_REV accordingly.
 
-PCF_PATH   ?= ../../pcf
+PCF_PATH   ?= ../../../pcf
 
 ifeq ($(FOMU_REV),evt1)
 YOSYSFLAGS ?= -D EVT=1 -D EVT1=1 -D HAVE_PMOD=1

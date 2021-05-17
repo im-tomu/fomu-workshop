@@ -7,11 +7,11 @@ Verilog on Fomu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``verilog/blink`` contains a Verilog example of a blink
+directory ``hdl/verilog/blink`` contains a Verilog example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
 number so you get an on/off pattern.
 
-Enter the ``verilog/blink`` directory and build the demo by using ``make``:
+Enter the ``hdl/verilog/blink`` directory and build the demo by using ``make``:
 
 **Make sure you set the** ``FOMU_REV`` **value to match your hardware!** See :ref:`required-hardware`.
 
@@ -67,7 +67,7 @@ varying color on your Fomu, indicating your bitstream was successfully loaded.
 Reading Input
 ^^^^^^^^^^^^^
 
-There is another small example in ``verilog/blink-expanded`` which shows
+There is another small example in ``hdl/verilog/blink-expanded`` which shows
 how to read out some given pins. Build and flash it like described above
 and see if you can enable the blue and red LED by shorting pins 1+2 or 3+4
 on your Fomu (the pins are the exposed contacts sticking out of the USB port).
