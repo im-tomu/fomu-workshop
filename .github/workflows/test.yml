@@ -81,3 +81,25 @@ jobs:
     - uses: docker://ghcr.io/hdl/debian-buster/impl
       with:
         args: ./.github/hdl-tests.sh
+
+
+  fine-grained:
+    name: '🛳️ Fine-grained'
+    runs-on: ubuntu-latest
+    env:
+      GHDL_PLUGIN_MODULE: ghdl
+      CONTAINER_ENGINE: docker
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - name: Pull container images
+      run: |
+        docker pull hdlc/ghdl:yosys
+        docker pull hdlc/nextpnr:ice40
+        docker pull hdlc/icestorm
+
+    - run: ./.github/hdl-tests.sh

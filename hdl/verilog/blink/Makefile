@@ -14,6 +14,11 @@ YOSYS     ?= yosys
 NEXTPNR   ?= nextpnr-ice40
 ICEPACK   ?= icepack
 
+# If a container engine is used, each tool is executed in a separated container
+ifdef CONTAINER_ENGINE
+include ../../container.mk
+endif
+
 # Default target: run all required targets to build the DFU image.
 all: $(DESIGN).dfu
 	@true

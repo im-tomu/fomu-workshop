@@ -13,6 +13,11 @@ NEXTPNR   ?= nextpnr-ice40
 YOSYS     ?= yosys
 ICEPACK   ?= icepack
 
+# If a container engine is used, each tool is executed in a separated container
+ifdef CONTAINER_ENGINE
+include ../../container.mk
+endif
+
 # Add Windows and Unix support
 RM         = rm -rf
 COPY       = cp -a
