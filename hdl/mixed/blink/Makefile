@@ -1,7 +1,10 @@
 include ../../board.mk
 
+DESIGN = blink
+TOP    = Fomu_Blink
+
 # VHDL top with instantiated Verilog
-VHDL_SYN_FILES = ../../sb_ice40_components.vhd blink.vhd
+VHDL_SYN_FILES    = ../../sb_ice40_components.vhd blink.vhd
 VERILOG_SYN_FILES = clkgen.v
 
 # Verilog top with instantiated VHDL
@@ -9,11 +12,11 @@ VERILOG_SYN_FILES = clkgen.v
 #VERILOG_SYN_FILES = blink.v
 
 GHDL_FLAGS += --std=08
-GHDL      ?= ghdl
-GHDLSYNTH ?= ghdl
-YOSYS     ?= yosys
-NEXTPNR   ?= nextpnr-ice40
-ICEPACK   ?= icepack
+GHDL       ?= ghdl
+GHDLSYNTH  ?= ghdl
+YOSYS      ?= yosys
+NEXTPNR    ?= nextpnr-ice40
+ICEPACK    ?= icepack
 
 # If ghdl-yosys-plugin is built as a module (not the case with fomu-toolchain)
 ifdef GHDL_PLUGIN_MODULE
@@ -21,24 +24,24 @@ YOSYSFLAGS += -m $(GHDL_PLUGIN_MODULE)
 endif
 
 # Default target: run all required targets to build the DFU image.
-all: blink.dfu
+all: $(DESIGN).dfu
 	@true
 
 .DEFAULT: all
 
 # Use *Yosys* to generate the synthesized netlist.
 # This is called the **synthesis** and **tech mapping** step.
-blink.json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
+$(DESIGN).json: $(VHDL_SYN_FILES) $(VERILOG_SYN_FILES)
 	$(YOSYS) $(YOSYSFLAGS) \
 		-p \
 		"$(GHDLSYNTH) $(GHDL_FLAGS) $(VHDL_SYN_FILES) -e; \
 		synth_ice40 \
-		-top Fomu_Blink \
+		-top $(TOP) \
 		-json $@" $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
 
 # Use **nextpnr** to generate the FPGA configuration.
 # This is called the **place** and **route** step.
-blink.asc: blink.json $(PCF)
+$(DESIGN).asc: $(DESIGN).json $(PCF)
 	$(NEXTPNR) \
 		$(PNRFLAGS) \
 		--pcf $(PCF) \
@@ -47,16 +50,16 @@ blink.asc: blink.json $(PCF)
 
 # Use icepack to convert the FPGA configuration into a "bitstream" loadable onto the FPGA.
 # This is called the bitstream generation step.
-blink.bit: blink.asc
+$(DESIGN).bit: $(DESIGN).asc
 	$(ICEPACK) $< $@
 
 # Use dfu-suffix to generate the DFU image from the FPGA bitstream.
-blink.dfu: blink.bit
+$(DESIGN).dfu: $(DESIGN).bit
 	cp $< $@
 	dfu-suffix -v 1209 -p 70b1 -a $@
 
 # Use df-util to load the DFU image onto the Fomu.
-load: blink.dfu
+load: $(DESIGN).dfu
 	dfu-util -D $<
 
 .PHONY: load
