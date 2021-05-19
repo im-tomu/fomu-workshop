@@ -1,6 +1,6 @@
 include ../../board.mk
 
-VHDL_SYN_FILES = ../sb_ice40_components.vhd blink.vhd
+VHDL_SYN_FILES = ../../sb_ice40_components.vhd blink.vhd
 
 GHDL_FLAGS += --std=08
 GHDL      ?= ghdl

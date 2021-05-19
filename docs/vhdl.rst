@@ -12,11 +12,11 @@ VHDL on Fomu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``vhdl/blink`` contains a VHDL example of a blink
+directory ``hdl/vhdl/blink`` contains a VHDL example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
 number so you get an on/off pattern.
 
-Enter the ``vhdl/blink`` directory and build the demo by using ``make``:
+Enter the ``hdl/vhdl/blink`` directory and build the demo by using ``make``:
 
 **Make sure you set the** ``FOMU_REV`` **value to match your hardware!** See :ref:`required-hardware`.
 
@@ -52,7 +52,7 @@ Enter the ``vhdl/blink`` directory and build the demo by using ``make``:
    Info: [ 79081,  79634) |**
    Info: [ 79634,  80187) |***
    22 warnings, 0 errors
-   docker run --rm -v //t/fomu/fomu-workshop/vhdl/blink/../..://src -w //src/vhdl/blink ghdl/synth:icestorm icepack blink.asc blink.bit
+   docker run --rm -v //t/fomu/fomu-workshop/hdl/vhdl/blink/../..://src -w //src/hdl/vhdl/blink ghdl/synth:icestorm icepack blink.asc blink.bit
    cp blink.bit blink.dfu
    dfu-suffix -v 1209 -p 70b1 -a blink.dfu
    dfu-suffix (dfu-util) 0.9

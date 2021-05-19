@@ -29,7 +29,7 @@ echo '::endgroup::'
 echo '::group::Verilog Blink example'
 (
 	set -x
-	cd verilog/blink
+	cd hdl/verilog/blink
 	make FOMU_REV=pvt
 	file blink.dfu
 )
@@ -38,7 +38,7 @@ echo '::endgroup::'
 echo '::group::Verilog Blink (expanded) example for Hacker board'
 (
 	set -x
-	cd verilog/blink-expanded
+	cd hdl/verilog/blink-expanded
 	make FOMU_REV=hacker
 	file blink.dfu
 )
@@ -47,7 +47,7 @@ echo '::endgroup::'
 echo '::group::Verilog Blink (expanded) example for PVT board'
 (
 	set -x
-	cd verilog/blink-expanded
+	cd hdl/verilog/blink-expanded
 	make FOMU_REV=pvt
 	file blink.dfu
 )
@@ -55,9 +55,8 @@ echo '::endgroup::'
 
 echo '::group::VHDL Blink example'
 (
-
 	set -x
-	cd vhdl/blink
+	cd hdl/vhdl/blink
 	make FOMU_REV=pvt
 	file blink.dfu
 )
@@ -65,9 +64,8 @@ echo '::endgroup::'
 
 echo '::group::Mixed HDL Blink example'
 (
-
 	set -x
-	cd mixed-hdl/blink
+	cd hdl/mixed/blink
 	make FOMU_REV=pvt
 	file blink.dfu
 )
@@ -93,7 +91,6 @@ echo '::endgroup::'
 
 echo '::group::Migen Blink example for PVT board'
 (
-
 	set -x
 	cd migen
 	FOMU_REV=pvt ./blink.py
@@ -104,7 +101,6 @@ echo '::endgroup::'
 
 echo '::group::Migen Blink (expanded) example for PVT board'
 (
-
 	set -x
 	cd migen
 	FOMU_REV=pvt ./blink-expanded.py

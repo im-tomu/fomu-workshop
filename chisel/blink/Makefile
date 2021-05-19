@@ -3,7 +3,7 @@
 # This Makefile shows the steps to generate a DFU loadable image onto
 # Fomu hacker board.
 
-include ../../board.mk
+include ../../hdl/board.mk
 
 # Default target: run all required targets to build the DFU image.
 all: blink.dfu

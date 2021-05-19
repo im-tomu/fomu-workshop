@@ -11,11 +11,11 @@ Mixed HDL on Fomu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``mixedhdl/blink`` contains a VHDL + Verilog example of a blink
+directory ``hdl/mixed/blink`` contains a VHDL + Verilog example of a blink
 project. This takes the 48 MHz clock and divides it down by a large
 number so you get an on/off pattern.
 
-Enter the ``mixedhdl/blink`` directory and build the demo by using ``make``:
+Enter the ``hdl/mixed/blink`` directory and build the demo by using ``make``:
 
 .. session:: shell-session
 
@@ -65,7 +65,7 @@ You can then load ``blink.dfu`` onto Fomu by using ``make load`` or the same
 ``dfu-util -D`` command we’ve been using so far. You should see a blinking pattern of
 varying color on your Fomu, indicating your bitstream was successfully loaded.
 
-If you take a closer look at the sources in ``mixedhdl/blink``, you will find that
+If you take a closer look at the sources in ``hdl/mixed/blink``, you will find that
 modules/components ``blink`` and ``clkgen`` are written both in VHDL and Verilog.
 The Makefile uses ``blink.vhd`` and ``clkgen.v`` by default. However, any of the
 following cases produce the same result:

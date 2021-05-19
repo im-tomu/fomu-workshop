@@ -1,11 +1,11 @@
 include ../../board.mk
 
 # VHDL top with instantiated Verilog
-VHDL_SYN_FILES = ../../vhdl/sb_ice40_components.vhd blink.vhd
+VHDL_SYN_FILES = ../../sb_ice40_components.vhd blink.vhd
 VERILOG_SYN_FILES = clkgen.v
 
 # Verilog top with instantiated VHDL
-#VHDL_SYN_FILES = ../../vhdl/sb_ice40_components.vhd clkgen.vhd
+#VHDL_SYN_FILES = ../../sb_ice40_components.vhd clkgen.vhd
 #VERILOG_SYN_FILES = blink.v
 
 GHDL_FLAGS += --std=08
