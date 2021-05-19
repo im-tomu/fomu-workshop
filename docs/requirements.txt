@@ -1,5 +1,5 @@
 docutils
-sphinx>=2.3.1
+sphinx<4.0.0
 sphinx-autobuild
 
 # Better looking Sphinx theme
