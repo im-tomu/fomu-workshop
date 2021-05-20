@@ -3,20 +3,19 @@
 VHDL on Fomu
 ------------
 
-.. HINT:: Component declarations for instantiating hard cores (such as the
-  ones in ``sb_ice40_components.vhd``) are found in the installation of
+.. HINT:: Component declarations for instantiating hard cores (such as the ones in
+  :repo:`hdl/sb_ice40_components.vhd <hdl/sb_ice40_components.vhd>`) are found in the installation of
   `iCEcube2 <http://www.latticesemi.com/iCEcube2>`_.
 
 
 “Hello world!” - Blink a LED
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``hdl/vhdl/blink`` contains a VHDL example of a blink
-project. This takes the 48 MHz clock and divides it down by a large
-number so you get an on/off pattern.
+The canonical “Hello, world!” of hardware is to blink a LED.
+The directory :repo:`hdl/vhdl/blink <hdl/vhdl/blink>` contains a VHDL example of a blink project.
+This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.
 
-Enter the ``hdl/vhdl/blink`` directory and build the demo by using ``make``:
+Enter the :repo:`hdl/vhdl/blink <hdl/vhdl/blink>` directory and build the demo by using ``make``:
 
 **Make sure you set the** ``FOMU_REV`` **value to match your hardware!** See :ref:`required-hardware`.
 
@@ -64,6 +63,6 @@ Enter the ``hdl/vhdl/blink`` directory and build the demo by using ``make``:
    Suffix successfully added to file
    $
 
-You can then load ``blink.dfu`` onto Fomu by using ``make load`` or the same
-``dfu-util -D`` command we’ve been using so far. You should see a blinking pattern of
-varying color on your Fomu, indicating your bitstream was successfully loaded.
+You can then load ``blink.dfu`` onto Fomu by using ``make load`` or the same ``dfu-util -D`` command we’ve been using so
+far.
+You should see a blinking pattern of varying color on your Fomu, indicating your bitstream was successfully loaded.
