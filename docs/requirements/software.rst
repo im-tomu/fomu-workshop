@@ -3,13 +3,21 @@
 Required Software
 #################
 
+Fomu requires specialized software.
+
 .. NOTE::
    If you’re taking this workshop as a class, the toolchains are provided
    on the USB disk.
 
-Fomu requires specialized software. This software is provided for GNU/Linux, macOS,
-and Windows, via `Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`__.
+Static builds of this software are provided for GNU/Linux, macOS, and Windows via
+`Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`__.
+
 Debian packages are also `available for Raspberry Pi <https://github.com/im-tomu/fomu-raspbian-packages>`__.
+
+Moreover, some examples can be executed using :ref:`required-software:containers`.
+
+Fomu Toolchain
+--------------
 
 To install the software, extract it somewhere on your computer, then
 open up a terminal window and add that directory to your ``PATH``:
@@ -100,3 +108,39 @@ Type ``exit`` to quit ``yosys``.
 .. NOTE::
    See the README of `Fomu Toolchain <https://github.com/im-tomu/fomu-toolchain/releases/latest>`_
    for a complete list of the tools included in the toolchain.
+
+.. _required-software:containers:
+
+Containers
+----------
+
+There are several projects which provide ready to use container images including open source EDA tools.
+One of those is `hdl/containers <https://hdl.github.io/containers/>`__.
+As explained in `hdl.github.io/containers: Usage <https://hdl.github.io/containers/#_usage>`__, there are two main
+strategies for running EDA tools through containers:
+
+* All-in-one: a single container is used, which includes all the required tools and dependencies.
+  `make` and all the tools are executed inside that single container.
+* Fine-grained: `make` is executed on the host. For each tool/step, an specific container is used.
+
+Both strategies are supported by the examples in subdir :repo:`hdl <hdl>` of this repository.
+Users willing to run those examples with containers need to take care about the following environment variables:
+
+* `GHDL_PLUGIN_MODULE`: while ghdl-yosys-plugin is built into Yosys in the fomu-toolchain, it is provided as a module in
+  most containers.
+  Typically, `GHDL_PLUGIN_MODULE=ghdl` is required.
+  Some specific containers might require `GHDL_PLUGIN_MODULE=path/to/ghdl-plugin-name.so`.
+* `CONTAINER_ENGINE`: in order to enable the fine-grained approach, `CONTAINER_ENGINE` needs to contain the CLI tool
+  name of a container engine, such as `docker` or `podman`.
+  This variable needs to be unset for the all-in-one approach.
+  In that case, the build is agnostic to the fact that everything is being done inside a container.
+
+  .. NOTE::
+    By default, container images defined in :repo:`hdl/container.mk <hdl/container.mk>` are used when
+    `CONTAINER_ENGINE` is set.
+    It's up to the users to customise that file in order to use different container images, or for executing some of the
+    tools locally.
+
+.. TIP::
+  Find both approaches (and environment variables) used in the CI workflow
+  (:repo:`.github/workflows/test.yml <.github/workflows/test.yml>`) of this repository.
