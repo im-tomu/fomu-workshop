@@ -113,6 +113,7 @@ html_theme = 'sphinx_symbiflow_theme'
 # Html logo in drawer.
 # Fit in the drawer at the width of image is 240 px.
 html_logo = '_static/logo.png'
+html_favicon = '_static/icon.png'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
