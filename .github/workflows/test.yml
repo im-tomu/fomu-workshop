@@ -9,13 +9,18 @@ on:
 
 jobs:
 
+
   test:
     strategy:
       fail-fast: false
       max-parallel: 3
       matrix:
-        os: [ ubuntu, windows, macos ]
+        include:
+          - { icon: 🐧, os: ubuntu }
+          - { icon: 🟦, os: windows }
+          - { icon: 🍎, os: macos }
     runs-on: ${{ matrix.os }}-latest
+    name: '${{ matrix.icon}} ${{ matrix.os }}'
     defaults:
       run:
         shell: bash
@@ -59,3 +64,20 @@ jobs:
         GH_TOKEN: ${{ github.token }}
 
     - run: ./.github/tests.sh
+
+
+  all-in-one:
+    name: '🛳️ All-in-one'
+    runs-on: ubuntu-latest
+    env:
+      GHDL_PLUGIN_MODULE: ghdl
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - uses: docker://ghcr.io/hdl/debian-buster/impl
+      with:
+        args: ./.github/hdl-tests.sh

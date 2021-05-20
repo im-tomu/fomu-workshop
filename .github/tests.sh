@@ -8,6 +8,8 @@ echo "TOOLCHAIN_PATH: $TOOLCHAIN_PATH"
 export PATH=$TOOLCHAIN_PATH/bin:$PATH
 export GHDL_PREFIX=$TOOLCHAIN_PATH/lib/ghdl
 
+$(dirname "$0")/hdl-tests.sh
+
 echo '::group::RISC-V C Example'
 (
 	set -x
@@ -23,51 +25,6 @@ echo '::group::RISC-V Zig Example'
 	cd riscv-zig-blink
 	zig build
 	file riscv-zig-blink.bin
-)
-echo '::endgroup::'
-
-echo '::group::Verilog Blink example'
-(
-	set -x
-	cd hdl/verilog/blink
-	make FOMU_REV=pvt
-	file blink.dfu
-)
-echo '::endgroup::'
-
-echo '::group::Verilog Blink (expanded) example for Hacker board'
-(
-	set -x
-	cd hdl/verilog/blink-expanded
-	make FOMU_REV=hacker
-	file blink.dfu
-)
-echo '::endgroup::'
-
-echo '::group::Verilog Blink (expanded) example for PVT board'
-(
-	set -x
-	cd hdl/verilog/blink-expanded
-	make FOMU_REV=pvt
-	file blink.dfu
-)
-echo '::endgroup::'
-
-echo '::group::VHDL Blink example'
-(
-	set -x
-	cd hdl/vhdl/blink
-	make FOMU_REV=pvt
-	file blink.dfu
-)
-echo '::endgroup::'
-
-echo '::group::Mixed HDL Blink example'
-(
-	set -x
-	cd hdl/mixed/blink
-	make FOMU_REV=pvt
-	file blink.dfu
 )
 echo '::endgroup::'
 
