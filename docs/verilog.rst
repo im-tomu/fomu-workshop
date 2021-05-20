@@ -6,12 +6,11 @@ Verilog on Fomu
 “Hello world!” - Blink a LED
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``hdl/verilog/blink`` contains a Verilog example of a blink
-project. This takes the 48 MHz clock and divides it down by a large
-number so you get an on/off pattern.
+The canonical “Hello, world!” of hardware is to blink a LED.
+The directory :repo:`hdl/verilog/blink <hdl/verilog/blink>` contains a Verilog example of a blink project.
+This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.
 
-Enter the ``hdl/verilog/blink`` directory and build the demo by using ``make``:
+Enter the :repo:`hdl/verilog/blink <hdl/verilog/blink>` directory and build the demo by using ``make``:
 
 **Make sure you set the** ``FOMU_REV`` **value to match your hardware!** See :ref:`required-hardware`.
 
@@ -59,15 +58,14 @@ Enter the ``hdl/verilog/blink`` directory and build the demo by using ``make``:
    Suffix successfully added to file
    $
 
-You can then load ``blink.dfu`` onto Fomu by using the same ``dfu-util -D``
-command we’ve been using so far. You should see a blinking pattern of
-varying color on your Fomu, indicating your bitstream was successfully loaded.
+You can then load ``blink.dfu`` onto Fomu by using the same ``dfu-util -D`` command we’ve been using so far.
+You should see a blinking pattern of varying color on your Fomu, indicating your bitstream was successfully loaded.
 
 
 Reading Input
 ^^^^^^^^^^^^^
 
-There is another small example in ``hdl/verilog/blink-expanded`` which shows
-how to read out some given pins. Build and flash it like described above
-and see if you can enable the blue and red LED by shorting pins 1+2 or 3+4
-on your Fomu (the pins are the exposed contacts sticking out of the USB port).
+There is another small example in :repo:`hdl/verilog/blink-expanded <hdl/verilog/blink-expanded>` which shows how to read
+out some given pins.
+Build and flash it like described above and see if you can enable the blue and red LED by shorting pins 1+2 or 3+4 on
+your Fomu (the pins are the exposed contacts sticking out of the USB port).

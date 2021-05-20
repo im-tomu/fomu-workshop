@@ -3,19 +3,18 @@
 Mixed HDL on Fomu
 -----------------
 
-.. HINT:: It is strongly suggested to get familiar with :ref:`HDLs:Verilog` and :ref:`HDLs:VHDL`
-  examples before tinkering with these mixed language use cases.
+.. HINT:: It is strongly suggested to get familiar with :ref:`HDLs:Verilog` and :ref:`HDLs:VHDL` examples before
+  tinkering with these mixed language use cases.
 
 
 “Hello world!” - Blink a LED
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The canonical “Hello, world!” of hardware is to blink a LED. The
-directory ``hdl/mixed/blink`` contains a VHDL + Verilog example of a blink
-project. This takes the 48 MHz clock and divides it down by a large
-number so you get an on/off pattern.
+The canonical “Hello, world!” of hardware is to blink a LED.
+The directory :repo:`hdl/mixed/blink <hdl/mixed/blink>` contains a VHDL + Verilog example of a blink project.
+This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.
 
-Enter the ``hdl/mixed/blink`` directory and build the demo by using ``make``:
+Enter the :repo:`hdl/mixed/blink <hdl/mixed/blink>` directory and build the demo by using ``make``:
 
 .. session:: shell-session
 
@@ -61,20 +60,21 @@ Enter the ``hdl/mixed/blink`` directory and build the demo by using ``make``:
    Suffix successfully added to file
    $
 
-You can then load ``blink.dfu`` onto Fomu by using ``make load`` or the same
-``dfu-util -D`` command we’ve been using so far. You should see a blinking pattern of
-varying color on your Fomu, indicating your bitstream was successfully loaded.
+You can then load ``blink.dfu`` onto Fomu by using ``make load`` or the same ``dfu-util -D`` command we’ve been using so
+far.
+You should see a blinking pattern of varying color on your Fomu, indicating your bitstream was successfully loaded.
 
-If you take a closer look at the sources in ``hdl/mixed/blink``, you will find that
+If you take a closer look at the sources in :repo:`hdl/mixed/blink <hdl/mixed/blink>`, you will find that
 modules/components ``blink`` and ``clkgen`` are written both in VHDL and Verilog.
-The Makefile uses ``blink.vhd`` and ``clkgen.v`` by default. However, any of the
-following cases produce the same result:
+The :repo:`Makefile <hdl/mixed/blink/Makefile>` uses ``blink.vhd`` and ``clkgen.v`` by default.
+However, any of the following cases produce the same result:
 
 - ``blink.vhd`` + ``clkgen.v``
 - ``blink.v`` + ``clkgen.vhdl``
 - ``blink.vhd`` + ``clkgen.vhdl``
 - ``blink.v`` + ``clkgen.v``
 
-You can modify variables `VHDL_SYN_FILES` and ``VERILOG_SYN_FILES`` in the Makefile
-for trying other combinations. For a better understanding, it is suggested to compare
-these modules with the single file solutions in :ref:`HDLs:Verilog` and :ref:`HDLs:VHDL`.
+You can modify variables `VHDL_SYN_FILES` and ``VERILOG_SYN_FILES`` in the :repo:`Makefile <hdl/mixed/blink/Makefile>`
+for trying other combinations.
+For a better understanding, it is suggested to compare these modules with the single file solutions in
+:ref:`HDLs:Verilog` and :ref:`HDLs:VHDL`.
