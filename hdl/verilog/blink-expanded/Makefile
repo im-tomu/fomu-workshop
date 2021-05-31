@@ -21,6 +21,7 @@ RM         = rm -rf
 COPY       = cp -a
 PATH_SEP   = /
 ifeq ($(OS),Windows_NT)
+ifndef MSYSTEM
 # When SHELL=sh.exe and this actually exists, make will silently
 # switch to using that instead of cmd.exe.  Unfortunately, there's
 # no way to tell which environment we're running under without either
@@ -32,6 +33,7 @@ SHELL      = cmd.exe
 COPY       = copy
 RM         = del
 PATH_SEP   = \\
+endif
 endif
 
 all: $(DESIGN).dfu
