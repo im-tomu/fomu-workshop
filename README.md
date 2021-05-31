@@ -13,39 +13,42 @@
   -->
 </p>
 
-Hi, I'm Fomu!  [This workshop](https://workshop.fomu.im/) covers the basics of
-Fomu in a top-down approach.  We'll start out by learning **what** Fomu is, **how to
-load software** into Fomu, **how to write software** for Fomu and finally **how to
-write hardware** for Fomu.
+Hi, I'm Fomu!  [This workshop](https://workshop.fomu.im/) covers the basics of Fomu in a top-down approach.
+We'll start out by learning **what** Fomu is, **how to load software** into Fomu, **how to write software** for Fomu and
+finally **how to write hardware** for Fomu.
 
 <p align="center">
   <a title="FPGA Tomu (Fomu) Workshop" href="https://workshop.fomu.im/"><img src="docs/_static/hw-pvt-back-bare-small.jpg"/></a>
   <a title="FPGA Tomu (Fomu) Workshop" href="https://workshop.fomu.im/"><img src="docs/_static/hw-pvt-front-bare-small.jpg"/></a>
 </p>
 
-FPGAs are complex, weird things, so we'll take a gentle approach and start out
-by treating it like a Python interpreter first, and gradually peel away layers
-until we're writing our own hardware registers.  You can take a break at any
-time and explore!  Stop when you feel the concepts are too unfamiliar, or
-plough on and dig deep into the world of hardware.
+FPGAs are complex, weird things, so we'll take a gentle approach and start out by treating it like a Python interpreter
+first, and gradually peel away layers until we're writing our own hardware registers.
+You can take a break at any time and explore!
+Stop when you feel the concepts are too unfamiliar, or plough on and dig deep into the world of hardware.
 
 The contents of this workshop is published at [workshop.fomu.im](https://workshop.fomu.im).
 
 ## Repository Contents
 
 - [docs](./docs) - The actual workshop directions and content.
-- [litex](./litex) - The files required for [the Migen / LiteX section of the
-  workshop](https://workshop.fomu.im/en/latest/migen.html).
-- [reference](./reference) - Extra reference documentation such as schematics
-  and part datasheets.
-- [riscv-blink](./riscv-blink) - The files required for the [Fomu as a RISC-V
-  CPU section of the workshop](https://workshop.fomu.im/en/latest/riscv.html).
-- [verilog](./verilog) - The files required for the [Verilog on Fomu section
-  of the workshop](https://workshop.fomu.im/en/latest/verilog.html).
-- [vhdl](./vhdl) - The files required for the [VHDL on Fomu section
-  of the workshop](https://workshop.fomu.im/en/latest/vhdl.html).
-- [mixed-hdl](./mixed-hdl) - The files required for the [Mixed HDL on Fomu section
-  of the workshop](https://workshop.fomu.im/en/latest/mixedhdl.html).
+- [hdl](./hdl)
+  - [verilog](./hdl/verilog) - The files required for the [Verilog on Fomu](https://workshop.fomu.im/en/latest/verilog.html)
+    section of the workshop.
+  - [vhdl](./hdl/vhdl) - The files required for the [VHDL on Fomu](https://workshop.fomu.im/en/latest/vhdl.html) section
+    of the workshop.
+  - [mixed](./hdl/mixed) - The files required for the [Mixed HDL on Fomu](https://workshop.fomu.im/en/latest/mixedhdl.html)
+    section of the workshop.
+- [icestudio](./icestudio) - The files required for the [Fomu on IceStudio *Nightly*](https://workshop.fomu.im/en/latest/icestudio.html)
+    section of the workshop.
+- [litex](./litex), [migen](./migen) - The files required for the [Migen and LiteX](https://workshop.fomu.im/en/latest/migen.html)
+  section of the workshop.
+- [reference](./reference) - Extra reference documentation such as schematics and part datasheets.
+- riscv
+  - [riscv-blink](./riscv-blink) - The files required for the [Fomu as a CPU](https://workshop.fomu.im/en/latest/riscv.html)
+    section of the workshop.
+  - [riscv-rust-blink](./riscv-rust-blink) - The files required for the [Fomu as a CPU, Using Rust](https://workshop.fomu.im/en/latest/riscv.html#using-rust)
+    section of the workshop.
 
 # Development
 
