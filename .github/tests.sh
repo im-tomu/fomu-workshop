@@ -46,6 +46,15 @@ echo '::group::LiteX example for PVT'
 )
 echo '::endgroup::'
 
+echo '::group::LiteX RGB example for PVT'
+(
+	set -x
+	cd litex
+	./workshop_rgb.py --board=pvt
+	file build/gateware/top.dfu
+)
+echo '::endgroup::'
+
 echo '::group::Migen Blink example for PVT board'
 (
 	set -x
