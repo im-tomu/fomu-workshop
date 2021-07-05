@@ -10,17 +10,17 @@ on:
 jobs:
 
 
-  test:
+  fomu-toolchain:
     strategy:
       fail-fast: false
       max-parallel: 3
       matrix:
         include:
-          - { icon: 🐧, os: ubuntu }
-          - { icon: 🟦, os: windows }
-          - { icon: 🍎, os: macos }
+          - { icon: 🐧, os: Ubuntu }
+          - { icon: 🧊, os: Windows }
+          - { icon: 🍎, os: macOS }
     runs-on: ${{ matrix.os }}-latest
-    name: '${{ matrix.icon}} ${{ matrix.os }}'
+    name: '${{ matrix.icon}} ${{ matrix.os }} | fomu-toolchain'
     defaults:
       run:
         shell: bash
@@ -67,7 +67,7 @@ jobs:
 
 
   all-in-one:
-    name: '🛳️ All-in-one'
+    name: '🛳️ Container | All-in-one'
     runs-on: ubuntu-latest
     env:
       GHDL_PLUGIN_MODULE: ghdl
@@ -84,7 +84,7 @@ jobs:
 
 
   fine-grained:
-    name: '🛳️ Fine-grained'
+    name: '🛳️ Container | Fine-grained'
     runs-on: ubuntu-latest
     env:
       GHDL_PLUGIN_MODULE: ghdl
@@ -101,5 +101,43 @@ jobs:
         docker pull hdlc/ghdl:yosys
         docker pull hdlc/nextpnr:ice40
         docker pull hdlc/icestorm
+
+    - run: ./.github/hdl-tests.sh
+
+
+  msys2:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include: [
+          {icon: '🟪', installs: 'MINGW32', arch: i686   },
+          {icon: '🟦', installs: 'MINGW64', arch: x86_64 },
+        ]
+    name: '${{ matrix.icon }} MSYS2 | ${{ matrix.installs }}'
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+
+    - name: '${{ matrix.icon }} Setup MSYS2'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.installs }}
+        update: true
+        install: >
+          make
+          mingw-w64-${{ matrix.arch }}-icestorm
+          mingw-w64-${{ matrix.arch }}-yosys
+          mingw-w64-${{ matrix.arch }}-nextpnr
+
+    - run: git config --global core.autocrlf input
+      shell: bash
+
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
 
     - run: ./.github/hdl-tests.sh

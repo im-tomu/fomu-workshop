@@ -17,8 +17,8 @@ echo '::group::Verilog Blink (expanded) example for Hacker board'
 (
 	set -x
 	cd verilog/blink-expanded
-	make FOMU_REV=hacker blink.bin
-	[ -f blink.bin ]
+	make FOMU_REV=hacker blink.bit
+	[ -f blink.bit ]
 )
 echo '::endgroup::'
 
@@ -26,8 +26,8 @@ echo '::group::Verilog Blink (expanded) example for PVT board'
 (
 	set -x
 	cd verilog/blink-expanded
-	make FOMU_REV=pvt blink.bin
-	[ -f blink.bin ]
+	make FOMU_REV=pvt blink.bit
+	[ -f blink.bit ]
 )
 echo '::endgroup::'
 
