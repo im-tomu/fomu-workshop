@@ -1,0 +1,3 @@
+[data-content]::before {
+  content: attr(data-content);
+}
