@@ -9,8 +9,8 @@ the human readable HDL into a netlist representation. The synthesis tool used in
 toolchain is called ``yosys``. Once we have the netlist representation, a tool called
 ``nextpnr`` performs an operation called *place and route* (PnR), which makes it something
 that will actually run on the FPGA. This is all done for you using the ``Makefiles`` in the
-subdirectories of any of the following examples: :repo:`verilog <verilog>`,
-:repo:`vhdl <vhdl>`, :repo:`mixed-hdl <mixed-hdl>`, or :repo:`migen <migen>`.
+subdirectories of any of the following examples: :repo:`verilog <hdl/verilog>`,
+:repo:`vhdl <hdl/vhdl>`, :repo:`mixed-hdl <hdl/mixed>`, or :repo:`migen <migen>`.
 
 .. NOTE::
    ``nextpnr`` is timing-driven. This means that a design will be generated with a given
