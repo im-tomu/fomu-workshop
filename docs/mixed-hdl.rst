@@ -74,7 +74,7 @@ However, any of the following cases produce the same result:
 - ``blink.vhd`` + ``clkgen.vhdl``
 - ``blink.v`` + ``clkgen.v``
 
-You can modify variables `VHDL_SYN_FILES` and ``VERILOG_SYN_FILES`` in the :repo:`Makefile <hdl/mixed/blink/Makefile>`
+You can modify variables ``VHDL_SYN_FILES`` and ``VERILOG_SYN_FILES`` in the :repo:`Makefile <hdl/mixed/blink/Makefile>`
 for trying other combinations.
 For a better understanding, it is suggested to compare these modules with the single file solutions in
 :ref:`HDLs:Verilog` and :ref:`HDLs:VHDL`.
