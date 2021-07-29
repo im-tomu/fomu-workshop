@@ -75,7 +75,7 @@ Load it onto Fomu:
 
 .. session:: shell-session
 
-   $ dfu-util -D build/gateware/top.dfu
+   $ dfu-util -D build/gateware/fomu_$FOMU_REV.bin
    dfu-util 0.8
    Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
    Copyright 2010-2014 Tormod Volden and Stefan Schmidt
