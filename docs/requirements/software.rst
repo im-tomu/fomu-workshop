@@ -46,8 +46,11 @@ open up a terminal window and add that directory to your ``PATH``:
 
 Examples in :ref:`HDLs:VHDL` and :ref:`HDLs:mixed` use `ghdl-yosys-plugin <https://github.com/ghdl/ghdl-yosys-plugin>`_,
 which looks for standard libraries in the path used when GHDL was configured/built.
-Therefore, when the toolchain is extracted to an arbitrary location, ``GHDL_PREFIX``
-needs to be set:
+Therefore, the nightly
+<https://github.com/im-tomu/fomu-toolchain/releases/tag/nightly>
+version of the toolchain (that includes the yosys GHDL plugin) needs
+to be installed, and when the toolchain is extracted to an arbitrary
+location, ``GHDL_PREFIX`` needs to be set:
 
 .. tabs::
 
