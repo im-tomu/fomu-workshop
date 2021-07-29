@@ -346,6 +346,6 @@ The `TinyUSB <https://github.com/hathach/tinyusb>`__ USB stack supports Fomu. To
 * Clone the TinyUSB git repository: ``git clone https://github.com/hathach/tinyusb`` (you don't need to initialize the subrepositories)
 * Change to ``tinyusb/examples/device/cdc_msc``
 * Compile: ``make BOARD=fomu CROSS_COMPILE=riscv64-unknown-elf-``
-* Load it onto the Fomu:  ``dfu-util -D _build/build-fomu/fomu-firmware.bin``
+* Load it onto the Fomu:  ``dfu-util -D _build/fomu/cdc_msc.bin``
 
 Fomu should now appear as a USB storage device containing a README.
