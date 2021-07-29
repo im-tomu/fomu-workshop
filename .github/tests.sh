@@ -19,6 +19,7 @@ echo '::group::RISC-V C Example'
 )
 echo '::endgroup::'
 
+if [ "x$RUNNER_OS" != "xmacOS" ]; then
 echo '::group::RISC-V Zig Example'
 (
 	set -x
@@ -27,6 +28,7 @@ echo '::group::RISC-V Zig Example'
 	file riscv-zig-blink.bin
 )
 echo '::endgroup::'
+fi
 
 echo '::group::LiteX example for Hacker'
 (
