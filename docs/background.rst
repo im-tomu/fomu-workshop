@@ -125,9 +125,9 @@ diagram:
 .. figure:: _static/verilog-synthesis.png
    :align: center
    :width: 600px
-   :alt: A syntheis of the above logic into some gates
+   :alt: A synthesis of the above logic into some gates
 
-   A syntheis of the above logic into basic blocks.
+   A synthesis of the above logic into basic blocks.
 
 Turning gates into a bitstream
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -147,7 +147,7 @@ Loading a bitstream into a device
 
 Finally, the bitstream needs to be loaded onto the device somehow. It can be
 done manually by toggling wires of the FPGAs programming interface. However,
-most FPGAs are volatile, which means the the configuration is lost when
+most FPGAs are volatile, which means the configuration is lost when
 unplugged. Therefore, most FPGA boards include some flash memory, which is
 typically programmed through SPI. Then, when the FPGA is plugged again, it loads
 the configuration from a predefined location in the flash.
