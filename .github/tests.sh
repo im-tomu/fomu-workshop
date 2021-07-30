@@ -30,28 +30,34 @@ echo '::endgroup::'
 
 echo '::group::LiteX example for Hacker'
 (
-	set -x
+	set -ex
 	cd litex
 	./workshop.py --board=hacker
-	file build/gateware/top.dfu
+	file build/gateware/fomu_hacker.dfu
+	file build/gateware/fomu_hacker.bin
+	rm -rf build        
 )
 echo '::endgroup::'
 
 echo '::group::LiteX example for PVT'
 (
-	set -x
+	set -ex
 	cd litex
 	./workshop.py --board=pvt
-	file build/gateware/top.dfu
+	file build/gateware/fomu_pvt.dfu
+	file build/gateware/fomu_pvt.bin
+	rm -rf build        
 )
 echo '::endgroup::'
 
 echo '::group::LiteX RGB example for PVT'
 (
-	set -x
+	set -ex
 	cd litex
 	./workshop_rgb.py --board=pvt
-	file build/gateware/top.dfu
+	file build/gateware/fomu_pvt.dfu
+	file build/gateware/fomu_pvt.bin
+	rm -rf build        
 )
 echo '::endgroup::'
 
