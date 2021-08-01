@@ -40,13 +40,12 @@ pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noretur
         .BRMSBEXT = 0,
     });
 
-    messibleOutStream.print("PANIC: {}\r\n", .{message}) catch void;
+    messibleWriter.print("PANIC: {s}\r\n", .{message}) catch void;
 
     while (true) {
         @breakpoint();
     }
 }
-
 
 const WriteError = error{};
 fn messibleWrite(self: void, bytes: []const u8) WriteError!usize {
@@ -55,7 +54,7 @@ fn messibleWrite(self: void, bytes: []const u8) WriteError!usize {
         if (bytes_written != 0) return bytes_written;
     }
 }
-pub const messibleOutStream = std.io.OutStream(void, WriteError, messibleWrite){.context = {}};
+pub const messibleWriter = std.io.Writer(void, WriteError, messibleWrite){ .context = {} };
 
 const ReadError = error{};
 fn messibleRead(self: void, buffer: []u8) ReadError!usize {
@@ -64,4 +63,4 @@ fn messibleRead(self: void, buffer: []u8) ReadError!usize {
         if (bytes_read != 0) return bytes_read;
     }
 }
-pub const messibleInStream = std.io.InStream(void, ReadError, messibleRead){.context = {}};
+pub const messibleReader = std.io.Reader(void, ReadError, messibleRead){ .context = {} };
