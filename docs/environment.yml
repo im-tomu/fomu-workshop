@@ -11,5 +11,5 @@ dependencies:
 - pygobject
 - yosys
 - netlistsvg
-- pip:                            # Packages installed from PyPI
-  - -r file:requirements.txt
+- pip:
+  - -r requirements.txt
