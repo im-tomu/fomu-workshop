@@ -3,6 +3,7 @@
 # This Makefile shows the steps to generate a DFU loadable image onto
 # Fomu hacker board.
 
+PCF_PATH = ../../pcf
 include ../../hdl/board.mk
 
 # Default target: run all required targets to build the DFU image.
@@ -31,6 +32,7 @@ blink.json: Blink.sv
 blink.asc: blink.json
 	nextpnr-ice40 \
 		$(PNRFLAGS) \
+		--pcf $(PCF) \
 		--json blink.json \
 		--asc blink.asc
 
