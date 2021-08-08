@@ -31,6 +31,7 @@ blink.json: Blink.sv
 blink.asc: blink.json
 	nextpnr-ice40 \
 		$(PNRFLAGS) \
+		--pcf ../../pcf/fomu-$(FOMU_REV).pcf \
 		--json blink.json \
 		--asc blink.asc
 
