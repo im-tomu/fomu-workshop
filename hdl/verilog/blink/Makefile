@@ -9,6 +9,9 @@ YOSYS     ?= yosys
 NEXTPNR   ?= nextpnr-ice40
 ICEPACK   ?= icepack
 
+SHELL = /bin/bash
+.SHELLFLAGS = -o pipefail -c
+
 QUIET = @
 
 # If a container engine is used, each tool is executed in a separated container

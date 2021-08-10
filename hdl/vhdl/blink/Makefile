@@ -12,6 +12,9 @@ YOSYS      ?= yosys
 NEXTPNR    ?= nextpnr-ice40
 ICEPACK    ?= icepack
 
+SHELL = /bin/bash
+.SHELLFLAGS = -o pipefail -c
+
 QUIET = @
 
 # If ghdl-yosys-plugin is built as a module (not the case with fomu-toolchain)
