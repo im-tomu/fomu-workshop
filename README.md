@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a title="Nightly build" href="https://workshop.fomu.im/"><img src="https://img.shields.io/website.svg?label=workshop.fomu.im&longCache=true&style=flat-square&url=http%3A%2F%2Fworkshop.fomu.im%2Findex.html&logo=Read%20the%20Docs&logoColor=fff"></a><!--
+  <a title="Nightly build" href="https://workshop.fomu.im/"><img src="https://img.shields.io/website.svg?label=workshop.fomu.im&longCache=true&style=flat-square&url=http%3A%2F%2Fworkshop.fomu.im%2Fen%2Flatest%2Findex.html&logo=Read%20the%20Docs&logoColor=fff"></a><!--
   -->
   <a title="Nightly build" href="https://im-tomu.github.io/fomu-workshop"><img src="https://img.shields.io/website.svg?label=im-tomu.github.io%2Ffomu-workshop&longCache=true&style=flat-square&url=http%3A%2F%2Fim-tomu.github.io%2Ffomu-workshop%2Findex.html&logo=GitHub&logoColor=fff"></a><!--
   -->
