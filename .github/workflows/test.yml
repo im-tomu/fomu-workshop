@@ -78,7 +78,7 @@ jobs:
         submodules: true
         fetch-depth: 0
 
-    - uses: docker://ghcr.io/hdl/debian-buster/impl
+    - uses: docker://gcr.io/hdl-containers/impl
       with:
         args: ./.github/hdl-tests.sh
 
@@ -98,9 +98,9 @@ jobs:
 
     - name: Pull container images
       run: |
-        docker pull hdlc/ghdl:yosys
-        docker pull hdlc/nextpnr:ice40
-        docker pull hdlc/icestorm
+        docker pull gcr.io/hdl-containers/ghdl/yosys
+        docker pull gcr.io/hdl-containers/nextpnr/ice40
+        docker pull gcr.io/hdl-containers/icestorm
 
     - run: ./.github/hdl-tests.sh
 
