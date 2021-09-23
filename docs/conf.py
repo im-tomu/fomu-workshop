@@ -41,7 +41,6 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'sphinx.ext.extlinks',
-    'symbolator_sphinx',
     'sphinxcontrib_hdl_diagrams',
     'sphinx_tabs.tabs',
     'sphinxcontrib_session',
