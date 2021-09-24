@@ -18,8 +18,6 @@ Other sphinx extensions which are used include;
   generate nice diagrams from Verilog examples.
 - [`sphinx-wavedrom`](https://github.com/bavovanachte/sphinx-wavedrom) to
   generate [nice waveform diagrams](http://wavedrom.com/). `sphinxcontrib-wavedrom`?
-- [`symbolator`](https://kevinpt.github.io/symbolator/) to generate block level
-  diagrams from Verilog examples.
 - [`sphinx_tabs`](https://github.com/djungelorm/sphinx-tabs) to support tabs
   for different Linux / Windows / Mac OS X instructions.
 

@@ -12,18 +12,10 @@ sphinx_tabs
 # Support copying without prompts.
 git+https://github.com/mithro/sphinxcontrib-session.git#egg=sphinxcontrib-session
 
-# C API
-# --------------------------------------
-
-
-# HDL specific functionality
-# --------------------------------------
+#- HDL specific functionality
 
 # Wavedrom diagrams!
 sphinxcontrib-wavedrom
-
-# Model diagrams from Verilog code.
-symbolator
 
 # Verilog diagrams using Yosys + netlistsvg
 git+https://github.com/SymbiFlow/sphinxcontrib-hdl-diagrams.git#egg=sphinxcontrib-hdl-diagrams
