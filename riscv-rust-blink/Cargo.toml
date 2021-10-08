@@ -12,6 +12,9 @@ fomu-rt  = "0.0.6"
 
 panic-halt = "0.2"
 
+[build-dependencies]
+cc = "1.0.71"
+
 [profile.release]
 # Keep debug information for release builds, for easier debugging.
 # It will be removed during the conversion to the .dfu file.
