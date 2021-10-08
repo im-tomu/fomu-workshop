@@ -14,10 +14,37 @@ use timer::Timer;
 
 const SYSTEM_CLOCK_FREQUENCY: u32 = 12_000_000;
 
+
+// USB-support using the c-code from riscv-blink
+#[link(name = "fomu-usb", kind = "static")]
+extern "C" {
+    fn usb_init();
+    fn usb_connect();
+    fn irq_init();
+    fn isr();
+    fn _start_trap_rust();
+}
+
+// set irq handler and call c-implementation
+#[doc(hidden)]
+#[link_section = ".trap.rust"]
+#[no_mangle]
+fn trap_handler() {
+    unsafe {isr();}
+}
+
 // This is the entry point for the application.
 // It is not allowed to return.
 #[entry]
 fn main() -> ! {
+
+    // Call riscv-blink c-usb-initialization code
+    unsafe {
+        irq_init();
+        usb_init();
+        usb_connect();
+    }
+
     let peripherals = fomu_pac::Peripherals::take().unwrap();
 
     let mut rgb_control = rgb::RgbControl::new(peripherals.RGB);
