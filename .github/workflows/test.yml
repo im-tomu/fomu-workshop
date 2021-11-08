@@ -114,6 +114,7 @@ jobs:
         include: [
           {icon: '⬛', sys: 'mingw32'},
           {icon: '🟦', sys: 'mingw64'},
+          {icon: '🟨', sys: 'ucrt64' },
         ]
     name: '${{ matrix.icon }} MSYS2 | ${{ matrix.sys }}'
     defaults:
