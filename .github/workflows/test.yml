@@ -112,10 +112,10 @@ jobs:
       max-parallel: 2
       matrix:
         include: [
-          {icon: '🟪', installs: 'MINGW32', arch: i686   },
-          {icon: '🟦', installs: 'MINGW64', arch: x86_64 },
+          {icon: '⬛', sys: 'mingw32'},
+          {icon: '🟦', sys: 'mingw64'},
         ]
-    name: '${{ matrix.icon }} MSYS2 | ${{ matrix.installs }}'
+    name: '${{ matrix.icon }} MSYS2 | ${{ matrix.sys }}'
     defaults:
       run:
         shell: msys2 {0}
@@ -124,13 +124,13 @@ jobs:
     - name: '${{ matrix.icon }} Setup MSYS2'
       uses: msys2/setup-msys2@v2
       with:
-        msystem: ${{ matrix.installs }}
+        msystem: ${{ matrix.sys }}
         update: true
-        install: >
-          make
-          mingw-w64-${{ matrix.arch }}-icestorm
-          mingw-w64-${{ matrix.arch }}-yosys
-          mingw-w64-${{ matrix.arch }}-nextpnr
+        install: make
+        pacboy: >
+          icestorm:p
+          yosys:p
+          nextpnr:p
 
     - run: git config --global core.autocrlf input
       shell: bash
