@@ -13,7 +13,6 @@ jobs:
   fomu-toolchain:
     strategy:
       fail-fast: false
-      max-parallel: 3
       matrix:
         include:
           - { icon: 🐧, os: Ubuntu }
@@ -109,7 +108,6 @@ jobs:
     runs-on: windows-latest
     strategy:
       fail-fast: false
-      max-parallel: 2
       matrix:
         include: [
           {icon: '⬛', sys: 'mingw32'},
