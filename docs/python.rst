@@ -47,6 +47,25 @@ Use ``dfu-util`` to load it:
 
            $ screen /dev/ttyACM*
 
+        If you are unable to connect you may need ``sudo`` access unless you
+        grant permission for using the serial device from a non-privileged
+        account.
+
+        .. session:: shell-session
+
+           $ ls -alh /dev/ttyACM*
+           crw-rw---- 1 root dialout 166, 0 Nov  9 21:28 /dev/ttyACM0
+
+           $ sudo usermod -a -G dialout $USER
+
+        .. WARNING::
+          You **must** log out and then log in again for the addition to group
+          ``dialout`` to take affect.
+
+        .. WARNING::
+          Adding your user to the ``dialout`` group grants full and direct
+          access to serial ports.
+
    .. group-tab:: Windows
 
         If you’re running a version of Windows earlier than Windows 10, you will
