@@ -49,7 +49,11 @@ Use ``dfu-util`` to load it:
 
         If you are unable to connect you may need ``sudo`` access unless you
         grant permission for using the serial device from a non-privileged
-        account.
+        account by adding that account to the ``dialout`` group.
+
+        .. WARNING::
+          Adding your user to the ``dialout`` group grants full and direct
+          access to serial ports.
 
         .. session:: shell-session
 
@@ -61,10 +65,6 @@ Use ``dfu-util`` to load it:
         .. WARNING::
           You **must** log out and then log in again for the addition to group
           ``dialout`` to take affect.
-
-        .. WARNING::
-          Adding your user to the ``dialout`` group grants full and direct
-          access to serial ports.
 
    .. group-tab:: Windows
 
