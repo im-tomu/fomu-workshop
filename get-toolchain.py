@@ -18,11 +18,11 @@ else:
 
 def platform():
     if 'linux' in sys.platform:
-        return 'linux'
+        return 'Linux'
     elif 'darwin' in sys.platform:
-        return 'mac'
+        return 'macOS'
     elif 'win' in sys.platform or 'msys' in sys.platform:
-        return 'windows'
+        return 'Windows'
     else:
         return sys.platform
 
@@ -107,14 +107,6 @@ def main(argv):
 
     plat = platform()
     print("Platform:", plat)
-
-    if os.environ.get('CI', False):
-        platforms = {
-            "windows": "Windows",
-            "linux": "Linux",
-            "mac": "macOS"
-        }
-        plat = platforms[plat]
 
     to_download = []
 
