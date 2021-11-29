@@ -1,4 +1,5 @@
 include ../../board.mk
+include ../../ghdl-prefix.mk
 
 DESIGN = blink
 TOP    = Fomu_Blink
