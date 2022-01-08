@@ -49,9 +49,10 @@ all: $(DESIGN).dfu
 $(DESIGN).json: $(VERILOG_SYN_FILES)
 	$(QUIET) $(YOSYS) $(YOSYSFLAGS) \
 		-p \
-		"synth_ice40 \
+		"read_verilog $(VERILOG_SYN_FILES); \
+		synth_ice40 \
 		-top $(TOP) \
-		-json $@" $(VERILOG_SYN_FILES) 2>&1 | tee yosys-report.txt
+		-json $@" 2>&1 | tee yosys-report.txt
 
 include ../../PnR_Prog.mk
 
