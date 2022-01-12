@@ -1,6 +1,6 @@
 name: fomu-workshop
 channels:
-- SymbiFlow
+- litex-hub
 - conda-forge
 - defaults
 dependencies:
