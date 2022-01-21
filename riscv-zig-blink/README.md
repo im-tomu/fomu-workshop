@@ -1,12 +1,12 @@
 # riscv-zig-blink
 
-Written against zig 0.8.0
+Written against zig 0.9.0
 
 You can obtain the zig compiler via https://ziglang.org/download/
 e.g. a linux user might run:
 ```
-curl -L https://ziglang.org/download/0.8.0/zig-linux-x86_64-0.8.0.tar.xz | tar -xJf -
-alias zig=./zig-linux-x86_64-0.8.0/zig
+curl -L https://ziglang.org/download/0.9.0/zig-linux-x86_64-0.9.0.tar.xz | tar -xJf -
+alias zig=./zig-linux-x86_64-0.9.0/zig
 ```
 
 Run `zig build --help` from this directory for usage and options.

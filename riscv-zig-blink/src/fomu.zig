@@ -17,6 +17,7 @@ comptime {
 /// Panic function that sets LED to red and flashing + prints the panic message over messible
 pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noreturn {
     @setCold(true);
+    _ = stack_trace;
 
     // Put LED into non-raw flashing mode
     RGB.CTRL.* = .{
@@ -49,6 +50,7 @@ pub fn panic(message: []const u8, stack_trace: ?*std.builtin.StackTrace) noretur
 
 const WriteError = error{};
 fn messibleWrite(self: void, bytes: []const u8) WriteError!usize {
+    _ = self;
     while (true) {
         const bytes_written = MESSIBLE.write(bytes);
         if (bytes_written != 0) return bytes_written;
@@ -58,6 +60,7 @@ pub const messibleWriter = std.io.Writer(void, WriteError, messibleWrite){ .cont
 
 const ReadError = error{};
 fn messibleRead(self: void, buffer: []u8) ReadError!usize {
+    _ = self;
     while (true) {
         const bytes_read = MESSIBLE.read(buffer);
         if (bytes_read != 0) return bytes_read;
