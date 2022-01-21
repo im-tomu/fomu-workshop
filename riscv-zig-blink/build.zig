@@ -14,7 +14,7 @@ pub fn build(b: *Builder) void {
             .explicit = &std.Target.riscv.cpu.generic_rv32,
         },
     });
-    elf.setLinkerScriptPath("ld/linker.ld");
+    elf.setLinkerScriptPath(.{ .path = "ld/linker.ld" });
     elf.setBuildMode(mode);
     // The ELF file contains debug symbols and can be passed to gdb for remote debugging
     if (b.option(bool, "emit-elf", "Should an ELF file be emitted in the current directory?") orelse false) {

@@ -14,7 +14,7 @@ pub const RGB = struct {
     /// Writing to this register has no immediate effect – data isn’t written until the DAT register is written.
     pub const ADDR = @intToPtr(*volatile u4, base + 0x4);
 
-    pub const Register = enum {
+    pub const Register = enum(u4) {
         PWRR = 1,
         PWRG = 2,
         PWRB = 3,
