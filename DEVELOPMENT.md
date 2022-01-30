@@ -120,4 +120,61 @@ $ xdg-open ./_build/html/index.html
 
 ## On Windows
 
-FIXME: @xobs to add instructions here.
+You may use either cmd.exe or Powershell. To begin with, set up venv. This may prompt you to install Python from the Microsoft Store:
+```shell-session
+$ cd docs
+$ python -mvenv .
+```
+
+Activate the venv by running `Activate.bat` (if using cmd.exe) or `Activate.ps1` (if using Powershell). You must do this any time you want to work on the documentation:
+
+```shell-session
+$ .\Scripts\Activate.ps1
+(docs) $
+```
+
+You'll notice that the word `(docs)` is added to your command prompt. This indicates you're in a venv directory.
+
+Next, install dependencies:
+
+```shell-session
+(docs) $ pip install -r requirements.txtCollecting sphinx_symbiflow_theme
+  Cloning http://github.com/SymbiFlow/sphinx_materialdesign_theme.git (to revision master) to c:\users\sean\appdata\local\temp\pip-install-do82_l8w\sphinx-symbiflow-theme_75938b6aa0c04180962403b9b4b53fae
+  Running command git clone -q http://github.com/SymbiFlow/sphinx_materialdesign_theme.git 'C:\Users\sean\AppData\Local\Temp\pip-install-do82_l8w\sphinx-symbiflow-theme_75938b6aa0c04180962403b9b4b53fae'
+  Resolved http://github.com/SymbiFlow/sphinx_materialdesign_theme.git to commit 5a7c118c6485461de299366f638a0f3cc41ed4e8
+Collecting sphinxcontrib-session
+  Cloning https://github.com/mithro/sphinxcontrib-session.git to c:\users\sean\appdata\local\temp\pip-install-do82_l8w\sphinxcontrib-session_468cf0a370a04b079fd59a990969f629
+  Running command git clone -q https://github.com/mithro/sphinxcontrib-session.git 'C:\Users\sean\AppData\Local\Temp\pip-install-do82_l8w\sphinxcontrib-session_468cf0a370a04b079fd59a990969f629'
+  Resolved https://github.com/mithro/sphinxcontrib-session.git to commit f9e959a696ba02d874ffc291a3b83a4458c1bad6
+
+<snip>
+
+    Running setup.py install for sphinxcontrib-session ... done
+    Running setup.py install for sphinxcontrib-hdl-diagrams ... done
+    Running setup.py install for sphinx-symbiflow-theme ... done
+Successfully installed Jinja2-3.0.3 MarkupSafe-2.0.1 Pygments-2.11.2 alabaster-0.7.12 appdirs-1.4.4 attrdict-2.0.1 babel-2.9.1 cairocffi-1.3.0 cairosvg-2.5.2 certifi-2021.10.8 cffi-1.15.0 charset-normalizer-2.0.10 colorama-0.4.4 cssselect2-0.4.1 defusedxml-0.7.1 docutils-0.16 idna-3.3 imagesize-1.3.0 livereload-2.6.3 nmigen-0.2 packaging-21.3 pillow-9.0.0 pycparser-2.21 pyparsing-3.0.7 pytz-2021.3 pyvcd-0.1.7 requests-2.27.1 six-1.16.0 snowballstemmer-2.2.0 sphinx-3.5.4 sphinx-autobuild-2021.3.14 sphinx-symbiflow-theme-0.1.11 sphinx-tabs-3.2.0 sphinxcontrib-applehelp-1.0.2 sphinxcontrib-devhelp-1.0.2 sphinxcontrib-hdl-diagrams-0.0.dev0 sphinxcontrib-htmlhelp-2.0.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-1.0.3 sphinxcontrib-serializinghtml-1.1.5 sphinxcontrib-session-0.0.1 sphinxcontrib-wavedrom-3.0.2 svgwrite-1.4.1 tinycss2-1.1.1 tornado-6.1 urllib3-1.26.8 wasmtime-0.30.0 wavedrom-2.0.3.post2 webencodings-0.5.1 xcffib-0.11.1 yowasp-yosys-0.13.dev285
+WARNING: You are using pip version 21.2.4; however, version 22.0 is available.
+You should consider upgrading via the 'E:\Code\Fomu\workshop\docs\Scripts\python.exe -m pip install --upgrade pip' command.
+(docs) $
+```
+
+Build HTML:
+```
+(docs) $ sphinx-build -M html . _build
+Running Sphinx v3.5.4
+
+<snip>
+
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 20 warnings.
+
+The HTML pages are in _build\html.
+(docs) $
+```
+
+Start your web browser:
+
+```shell-session
+$ explorer ./_build/html/index.html
+```
