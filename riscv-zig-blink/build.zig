@@ -21,15 +21,7 @@ pub fn build(b: *Builder) void {
         elf.setOutputDir(".");
     }
 
-    const binary = b.addSystemCommand(&[_][]const u8{
-        b.option([]const u8, "objcopy", "objcopy executable to use (defaults to riscv64-unknown-elf-objcopy)") orelse "riscv64-unknown-elf-objcopy",
-        "-I",
-        "elf32-littleriscv",
-        "-O",
-        "binary",
-    });
-    binary.addArtifactArg(elf);
-    binary.addArg("riscv-zig-blink.bin");
+    const binary = elf.installRaw("riscv-zig-blink.bin", .{ .dest_dir = .{ .custom = "../" } });
     b.default_step.dependOn(&binary.step);
 
     const run_cmd = b.addSystemCommand(&[_][]const u8{
