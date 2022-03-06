@@ -36,7 +36,7 @@ pub const MESSIBLE = struct {
 
     pub fn write(data: []const u8) usize {
         for (data) |c, i| {
-            if (STATUS.*.FULL) return i;
+            if (STATUS.FULL) return i;
             IN.* = c;
         }
         return data.len;
@@ -44,7 +44,7 @@ pub const MESSIBLE = struct {
 
     pub fn read(dst: []u8) usize {
         for (dst) |*c, i| {
-            if (!STATUS.*.HAVE) return i;
+            if (!STATUS.HAVE) return i;
             c.* = OUT.*;
         }
         return dst.len;
