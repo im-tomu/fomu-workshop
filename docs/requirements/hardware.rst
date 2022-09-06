@@ -45,7 +45,7 @@ Which Fomu do I have?
 |                  | probably have one of these. Hacker boards have white silkscreen on  | silkscreen on it. This model of Fomu has a large silver crystal   |
 |                  | the back.                                                           | oscillator that is the tallest component on the board.            |
 +------------------+---------------------------------------------------------------------+-------------------------------------------------------------------+
-| **Schematic**    | `schematic-hacker.pdf <../_static/reference/schematic-hacker.pdf>`__   | `schematic-pvt.pdf <../_static/reference/schematic-pvt.pdf>`__       |
+| **Schematic**    | `schematic-hacker.pdf <_static/reference/schematic-hacker.pdf>`__   | `schematic-pvt.pdf <_static/reference/schematic-pvt.pdf>`__       |
 +------------------+---------------------------------------------------------------------+-------------------------------------------------------------------+
 | **Received at**  | From Tim at 35C3, CCCamp19, HackADay Supercon 2019                  | At RISC-V Summit 2019, 36C3, Crowdsupply, Mouser                  |
 +------------------+---------------------------------------------------------------------+-------------------------------------------------------------------+
