@@ -7,9 +7,9 @@
   -->
   <a title="Nightly build" href="https://im-tomu.github.io/fomu-workshop"><img src="https://img.shields.io/website.svg?label=im-tomu.github.io%2Ffomu-workshop&longCache=true&style=flat-square&url=http%3A%2F%2Fim-tomu.github.io%2Ffomu-workshop%2Findex.html&logo=GitHub&logoColor=fff"></a><!--
   -->
-  <a title="'test' workflow status" href="https://github.com/im-tomu/fomu-workshop/actions?query=workflow%3Atest"><img alt="'test' workflow status" src="https://img.shields.io/github/workflow/status/im-tomu/fomu-workshop/test?longCache=true&style=flat-square&label=test&logo=Github%20Actions&logoColor=fff"></a><!--
+  <a title="'test' workflow status" href="https://github.com/im-tomu/fomu-workshop/actions/workflows/test.yml"><img alt="'test' workflow status" src="https://img.shields.io/github/actions/workflow/status/im-tomu/fomu-workshop/test.yml?branch=master&longCache=true&style=flat-square&label=test&logo=Github%20Actions&logoColor=fff"></a><!--
   -->
-  <a title="'doc' workflow status" href="https://github.com/im-tomu/fomu-workshop/actions?query=workflow%3Adoc"><img alt="'doc' workflow status" src="https://img.shields.io/github/workflow/status/im-tomu/fomu-workshop/doc?longCache=true&style=flat-square&label=doc&logo=Github%20Actions&logoColor=fff"></a><!--
+  <a title="'doc' workflow status" href="https://github.com/im-tomu/fomu-workshop/actions/workflows/doc.yml"><img alt="'doc' workflow status" src="https://img.shields.io/github/actions/workflow/status/im-tomu/fomu-workshop/doc.yml?branch=master&longCache=true&style=flat-square&label=doc&logo=Github%20Actions&logoColor=fff"></a><!--
   -->
 </p>
 
