@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Migen and LiteX &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fomu on IceStudio Nightly" href="icestudio.html" />
+    <link rel="prev" title="Mixed HDL on Fomu" href="mixed-hdl.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="hdl.html">Hardware Description Languages</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active">Migen and LiteX</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/migen.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="migen-and-litex">
+<span id="hdls-migen"></span><h1>Migen and LiteX<a class="headerlink" href="#migen-and-litex" title="Permalink to this heading">¶</a></h1>
+<section id="hello-world-blink-a-led">
+<span id="hello-world-blink-an-led-1"></span><h2>“Hello world!” - Blink a LED<a class="headerlink" href="#hello-world-blink-a-led" title="Permalink to this heading">¶</a></h2>
+<p>Migen is an HDL embedded in Python. The verilog examples (in directory
+<code class="docutils literal notranslate"><span class="pre">verilog</span></code>) can also be written using Migen; an implementation is provided
+in directory <code class="docutils literal notranslate"><span class="pre">migen</span></code>.</p>
+<p>To try them out, go to the <code class="docutils literal notranslate"><span class="pre">migen</span></code> directory and execute <code class="docutils literal notranslate"><span class="pre">blink.py</span></code> or
+<code class="docutils literal notranslate"><span class="pre">blink-expanded.py</span></code> respectively (before, ensure that you have set
+the <code class="docutils literal notranslate"><span class="pre">FOMU_REV</span></code> environment variable correctly). This will create a
+<code class="docutils literal notranslate"><span class="pre">build</span></code> directory with a <code class="docutils literal notranslate"><span class="pre">top.bin</span></code> file.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">dfu-util</span> <span class="pre">-D</span> <span class="pre">build/top.bin</span></code>, it can be loaded onto the Fomu and should
+work identically as the corresponding verilog example.</p>
+</section>
+<section id="wishbone-bus-basics">
+<h2>Wishbone Bus Basics<a class="headerlink" href="#wishbone-bus-basics" title="Permalink to this heading">¶</a></h2>
+<p>LiteX provides us with a Wishbone abstraction layer. There really is no
+reason we need to include a CPU with our design, but we can still reuse
+the USB Wishbone bridge in order to write HDL code.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">DummyUsb</span></code> to respond to USB requests and bridge USB to
+Wishbone, and rely on LiteX to generate registers and wire them to
+hardware signals. We can still use <code class="docutils literal notranslate"><span class="pre">wishbone-tool</span></code> to read and write
+memory, and with a wishbone bridge we can actually have code running on
+our local system that can read and write memory on Fomu.</p>
+<p>Go to the <code class="docutils literal notranslate"><span class="pre">litex</span></code> directory and build the design;</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>python3<span class="w"> </span>workshop.py<span class="w"> </span>--board<span class="w"> </span><span class="nv">$FOMU_REV</span>
+<span class="go" data-content="lxbuildenv: v2019.8.19.1 (run .\workshop.py --lx-help for help)
+"></span><span class="go" data-content="lxbuildenv: Skipping git configuration because &quot;skip-git&quot; was found in LX_CONFIGURATION
+"></span><span class="go" data-content="lxbuildenv: To fetch from git, run .\workshop.py --placer heap --lx-check-git
+"></span><span class="go" data-content="Warning: Wire top.basesoc_adr has an unprocessed &#39;init&#39; attribute.
+"></span><span class="go" data-content="Warning: Wire top.basesoc_bus_wishbone_ack has an unprocessed &#39;init&#39; attribute.
+"></span><span class="go" data-content="Warning: Wire top.basesoc_bus_wishbone_dat_r has an unprocessed &#39;init&#39; attribute.
+"></span><span class="go" data-content="...
+"></span><span class="go" data-content="Info: Device utilisation:
+"></span><span class="go" data-content="Info:            ICESTORM_LC:  1483/ 5280    28%
+"></span><span class="go" data-content="Info:           ICESTORM_RAM:     1/   30     3%
+"></span><span class="go" data-content="Info:                  SB_IO:     4/   96     4%
+"></span><span class="go" data-content="Info:                  SB_GB:     8/    8   100%
+"></span><span class="go" data-content="Info:           ICESTORM_PLL:     1/    1   100%
+"></span><span class="go" data-content="Info:            SB_WARMBOOT:     0/    1     0%
+"></span><span class="go" data-content="Info:           ICESTORM_DSP:     0/    8     0%
+"></span><span class="go" data-content="Info:         ICESTORM_HFOSC:     0/    1     0%
+"></span><span class="go" data-content="Info:         ICESTORM_LFOSC:     0/    1     0%
+"></span><span class="go" data-content="Info:                 SB_I2C:     0/    2     0%
+"></span><span class="go" data-content="Info:                 SB_SPI:     0/    2     0%
+"></span><span class="go" data-content="Info:                 IO_I3C:     0/    2     0%
+"></span><span class="go" data-content="Info:            SB_LEDDA_IP:     0/    1     0%
+"></span><span class="go" data-content="Info:            SB_RGBA_DRV:     0/    1     0%
+"></span><span class="go" data-content="Info:         ICESTORM_SPRAM:     4/    4   100%
+"></span><span class="go" data-content="...
+"></span><span class="go" data-content="Info: [ 55530,  59533) |********+
+"></span><span class="go" data-content="Info: [ 59533,  63536) |************************************************+
+"></span><span class="go" data-content="Info: [ 63536,  67539) |******************************+
+"></span><span class="go" data-content="Info: [ 67539,  71542) |*************+
+"></span><span class="go" data-content="Info: [ 71542,  75545) |********************+
+"></span><span class="go" data-content="Info: [ 75545,  79548) |************************************************************
+"></span><span class="go" data-content="5 warnings, 0 errors
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>Load it onto Fomu:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>dfu-util<span class="w"> </span>-D<span class="w"> </span>build/gateware/fomu_<span class="nv">$FOMU_REV</span>.bin
+<span class="go" data-content="dfu-util 0.8
+"></span><span class="go" data-content="Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+"></span><span class="go" data-content="Copyright 2010-2014 Tormod Volden and Stefan Schmidt
+"></span><span class="go" data-content="This program is Free Software and has ABSOLUTELY NO WARRANTY
+"></span><span class="go" data-content="Please report bugs to dfu-util@lists.gnumonks.org
+
+"></span><span class="go" data-content="Opening DFU capable USB device...
+"></span><span class="go" data-content="ID 1209:5bf0
+"></span><span class="go" data-content="Run-time device DFU version 0101
+"></span><span class="go" data-content="Claiming USB DFU Interface...
+"></span><span class="go" data-content="Setting Alternate Setting #0 ...
+"></span><span class="go" data-content="Determining device status: state = dfuIDLE, status = 0
+"></span><span class="go" data-content="dfuIDLE, continuing
+"></span><span class="go" data-content="DFU mode device DFU version 0101
+"></span><span class="go" data-content="Device returned transfer size 1024
+"></span><span class="go" data-content="Copying data from PC to DFU device
+"></span><span class="go" data-content="Download        [=========================] 100%       104090 bytes
+"></span><span class="go" data-content="Download done.
+"></span><span class="go" data-content="state(7) = dfuMANIFEST, status(0) = No error condition is present
+"></span><span class="go" data-content="state(8) = dfuMANIFEST-WAIT-RESET, status(0) = No error condition is present
+"></span><span class="go" data-content="Done!
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>If you get an error message about missing modules, check you have all
+submodules cloned and setup with;</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--recursive<span class="w"> </span>--init
+<span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>Take a look at <code class="docutils literal notranslate"><span class="pre">build/csr.csv</span></code>. This describes the various regions
+present in our design. You can see
+<code class="docutils literal notranslate"><span class="pre">memory_region,sram,0x10000000,131072</span></code>, which indicates the RAM is 128
+kilobytes long and is located at <code class="docutils literal notranslate"><span class="pre">0x10000000</span></code>, just as when we had a
+CPU. You can also see the timer, which is a feature that comes as part
+of LiteX. Let’s try reading and writing RAM:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x10000000
+<span class="go" data-content="Value at 10000000: 0baf801e
+"></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x10000000<span class="w"> </span>0x98765432
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x10000000
+<span class="go" data-content="Value at 10000000: 98765432
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+</section>
+<section id="wishbone-bus-extension">
+<h2>Wishbone Bus Extension<a class="headerlink" href="#wishbone-bus-extension" title="Permalink to this heading">¶</a></h2>
+<p>Aside from that, there’s not much we can <em>do</em> with this design. But
+there’s a lot of infrastructure there. So let’s add something we can see
+(<code class="docutils literal notranslate"><span class="pre">workshop_rgb.py</span></code> contains the completed example).</p>
+<p>As explained in <a class="reference internal" href="hdl.html#hdls"><span class="std std-ref">Hardware Description Languages</span></a> the RGB LED driver is defined in Verilog/VHDL
+(as <code class="docutils literal notranslate"><span class="pre">SB_RGBA_DRV</span></code>), but we can import it as a Module into Migen:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FomuRGB</span><span class="p">(</span><span class="n">Module</span><span class="p">,</span> <span class="n">AutoCSR</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pads</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">CSRStorage</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">specials</span> <span class="o">+=</span> <span class="n">Instance</span><span class="p">(</span><span class="s2">&quot;SB_RGBA_DRV&quot;</span><span class="p">,</span>
+            <span class="n">i_CURREN</span> <span class="o">=</span> <span class="mb">0b1</span><span class="p">,</span>
+            <span class="n">i_RGBLEDEN</span> <span class="o">=</span> <span class="mb">0b1</span><span class="p">,</span>
+            <span class="n">i_RGB0PWM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">i_RGB1PWM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">i_RGB2PWM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">storage</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="n">o_RGB0</span> <span class="o">=</span> <span class="n">pads</span><span class="o">.</span><span class="n">r</span><span class="p">,</span>
+            <span class="n">o_RGB1</span> <span class="o">=</span> <span class="n">pads</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+            <span class="n">o_RGB2</span> <span class="o">=</span> <span class="n">pads</span><span class="o">.</span><span class="n">b</span><span class="p">,</span>
+            <span class="n">p_CURRENT_MODE</span> <span class="o">=</span> <span class="s2">&quot;0b1&quot;</span><span class="p">,</span>
+            <span class="n">p_RGB0_CURRENT</span> <span class="o">=</span> <span class="s2">&quot;0b000011&quot;</span><span class="p">,</span>
+            <span class="n">p_RGB1_CURRENT</span> <span class="o">=</span> <span class="s2">&quot;0b000011&quot;</span><span class="p">,</span>
+            <span class="n">p_RGB2_CURRENT</span> <span class="o">=</span> <span class="s2">&quot;0b000011&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>This will instantiate this Verilog block and connect it up. It also
+creates a <code class="docutils literal notranslate"><span class="pre">CSRStorage</span></code> object that is three bits wide, and assigns it
+to <code class="docutils literal notranslate"><span class="pre">output</span></code>. By having this derive from <code class="docutils literal notranslate"><span class="pre">AutoCSR</span></code>, the CSRStorage
+will have CSR bus accessor methods added to it automatically. Finally,
+it wires the pads up to the outputs of the block.</p>
+<p>We can instantiate this block by simply creating a new object and adding
+it to <code class="docutils literal notranslate"><span class="pre">self.specials</span></code> in our design:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+    <span class="c1"># Add the LED driver block</span>
+    <span class="n">led_pads</span> <span class="o">=</span> <span class="n">soc</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;rgb_led&quot;</span><span class="p">)</span>
+    <span class="n">soc</span><span class="o">.</span><span class="n">submodules</span><span class="o">.</span><span class="n">fomu_rgb</span> <span class="o">=</span> <span class="n">FomuRGB</span><span class="p">(</span><span class="n">led_pads</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we need to add it to the <code class="docutils literal notranslate"><span class="pre">csr_map</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+    <span class="n">soc</span><span class="o">.</span><span class="n">add_csr</span><span class="p">(</span><span class="s2">&quot;fomu_rgb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, when we rebuild this design and check <code class="docutils literal notranslate"><span class="pre">build/csr.csv</span></code> we can see
+our new register:</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>csr_register,fomu_rgb_output,0x60003000,1,rw
+</pre></div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">wishbone-tool</span></code> to write values to <code class="docutils literal notranslate"><span class="pre">0x60003000</span></code> (or whatever
+your <code class="docutils literal notranslate"><span class="pre">build/csr.csv</span></code> says) and see them take effect immediately.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x1<span class="w"> </span><span class="c1"># make LED green</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x2<span class="w"> </span><span class="c1"># make LED red</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x3<span class="w"> </span><span class="c1"># make LED yellow</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x4<span class="w"> </span><span class="c1"># make LED blue</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x5<span class="w"> </span><span class="c1"># make LED teal</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x6<span class="w"> </span><span class="c1"># make LED pink</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x60003000<span class="w"> </span>0x7<span class="w"> </span><span class="c1"># make LED white</span>
+</pre></div>
+</div>
+<p>You can see that it takes very little code to take a Signal from HDL and
+expose it on the Wishbone bus.</p>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Migen and LiteX</a><ul>
+<li><a class="reference internal" href="#hello-world-blink-a-led">“Hello world!” - Blink a LED</a></li>
+<li><a class="reference internal" href="#wishbone-bus-basics">Wishbone Bus Basics</a></li>
+<li><a class="reference internal" href="#wishbone-bus-extension">Wishbone Bus Extension</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="mixed-hdl.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Mixed HDL on Fomu</div>
+         </div>
+     </a>
+     <a id="button-next" href="icestudio.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Fomu on IceStudio Nightly</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

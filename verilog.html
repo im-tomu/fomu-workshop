@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Verilog on Fomu &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VHDL on Fomu" href="vhdl.html" />
+    <link rel="prev" title="Hardware Description Languages" href="hdl.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="hdl.html">Hardware Description Languages</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active">Verilog on Fomu</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/verilog.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="verilog-on-fomu">
+<span id="hdls-verilog"></span><h1>Verilog on Fomu<a class="headerlink" href="#verilog-on-fomu" title="Permalink to this heading">¶</a></h1>
+<section id="hello-world-blink-a-led">
+<h2>“Hello world!” - Blink a LED<a class="headerlink" href="#hello-world-blink-a-led" title="Permalink to this heading">¶</a></h2>
+<p>The canonical “Hello, world!” of hardware is to blink a LED.
+The directory <a class="reference external" href="https://github.com/im-tomu/fomu-workshop/blob/master/hdl/verilog/blink">hdl/verilog/blink</a> contains a Verilog example of a blink project.
+This takes the 48 MHz clock and divides it down by a large number so you get an on/off pattern.</p>
+<p>Enter the <a class="reference external" href="https://github.com/im-tomu/fomu-workshop/blob/master/hdl/verilog/blink">hdl/verilog/blink</a> directory and build the demo by using <code class="docutils literal notranslate"><span class="pre">make</span></code>:</p>
+<p><strong>Make sure you set the</strong> <code class="docutils literal notranslate"><span class="pre">FOMU_REV</span></code> <strong>value to match your hardware!</strong> See <a class="reference internal" href="requirements/hardware.html#required-hardware"><span class="std std-ref">Required Hardware</span></a>.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>make<span class="w"> </span><span class="nv">FOMU_REV</span><span class="o">=</span><span class="nv">$FOMU_REV</span>
+<span class="go" data-content="...
+"></span><span class="go" data-content="Info: Max frequency for clock &#39;clk&#39;: 73.26 MHz (PASS at 12.00 MHz)
+
+"></span><span class="go" data-content="Info: Max delay posedge clk -&gt; &lt;async&gt;: 3.15 ns
+
+"></span><span class="go" data-content="Info: Slack histogram:
+"></span><span class="go" data-content="Info:  legend: * represents 1 endpoint(s)
+"></span><span class="go" data-content="Info:          + represents [1,1) endpoint(s)
+"></span><span class="go" data-content="Info: [ 69683,  70208) |**
+"></span><span class="go" data-content="Info: [ 70208,  70733) |
+"></span><span class="go" data-content="Info: [ 70733,  71258) |**
+"></span><span class="go" data-content="Info: [ 71258,  71783) |**
+"></span><span class="go" data-content="Info: [ 71783,  72308) |**
+"></span><span class="go" data-content="Info: [ 72308,  72833) |**
+"></span><span class="go" data-content="Info: [ 72833,  73358) |
+"></span><span class="go" data-content="Info: [ 73358,  73883) |**
+"></span><span class="go" data-content="Info: [ 73883,  74408) |*
+"></span><span class="go" data-content="Info: [ 74408,  74933) |**
+"></span><span class="go" data-content="Info: [ 74933,  75458) |**
+"></span><span class="go" data-content="Info: [ 75458,  75983) |*
+"></span><span class="go" data-content="Info: [ 75983,  76508) |*
+"></span><span class="go" data-content="Info: [ 76508,  77033) |**
+"></span><span class="go" data-content="Info: [ 77033,  77558) |**
+"></span><span class="go" data-content="Info: [ 77558,  78083) |*
+"></span><span class="go" data-content="Info: [ 78083,  78608) |
+"></span><span class="go" data-content="Info: [ 78608,  79133) |*************************
+"></span><span class="go" data-content="Info: [ 79133,  79658) |**
+"></span><span class="go" data-content="Info: [ 79658,  80183) |***
+"></span><span class="go" data-content="22 warnings, 0 errors
+"></span><span class="go" data-content="icepack blink.asc blink.bit
+"></span><span class="go" data-content="cp blink.bit blink.dfu
+"></span><span class="go" data-content="dfu-suffix -v 1209 -p 70b1 -a blink.dfu
+"></span><span class="go" data-content="dfu-suffix (dfu-util) 0.9
+
+"></span><span class="go" data-content="Copyright 2011-2012 Stefan Schmidt, 2013-2014 Tormod Volden
+"></span><span class="go" data-content="This program is Free Software and has ABSOLUTELY NO WARRANTY
+"></span><span class="go" data-content="Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+"></span><span class="go" data-content="Suffix successfully added to file
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>You can then load <code class="docutils literal notranslate"><span class="pre">blink.dfu</span></code> onto Fomu by using the same <code class="docutils literal notranslate"><span class="pre">dfu-util</span> <span class="pre">-D</span></code> command we’ve been using so far.
+You should see a blinking pattern of varying color on your Fomu, indicating your bitstream was successfully loaded.</p>
+</section>
+<section id="reading-input">
+<h2>Reading Input<a class="headerlink" href="#reading-input" title="Permalink to this heading">¶</a></h2>
+<p>There is another small example in <a class="reference external" href="https://github.com/im-tomu/fomu-workshop/blob/master/hdl/verilog/blink-expanded">hdl/verilog/blink-expanded</a> which shows how to read
+out some given pins.
+Build and flash it like described above and see if you can enable the blue and red LED by shorting pins 1+2 or 3+4 on
+your Fomu (the pins are the exposed contacts sticking out of the USB port).</p>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Verilog on Fomu</a><ul>
+<li><a class="reference internal" href="#hello-world-blink-a-led">“Hello world!” - Blink a LED</a></li>
+<li><a class="reference internal" href="#reading-input">Reading Input</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="hdl.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Hardware Description Languages</div>
+         </div>
+     </a>
+     <a id="button-next" href="vhdl.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>VHDL on Fomu</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

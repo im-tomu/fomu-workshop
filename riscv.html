@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Fomu as a CPU &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hardware Description Languages" href="hdl.html" />
+    <link rel="prev" title="Python on Fomu" href="python.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active">Fomu as a CPU</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/riscv.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="fomu-as-a-cpu">
+<h1>Fomu as a CPU<a class="headerlink" href="#fomu-as-a-cpu" title="Permalink to this heading">¶</a></h1>
+<p>The MicroPython interface is simply a RISC-V program. It interacts with
+the RISC-V softcore inside Fomu by reading and writing memory directly.</p>
+<p>The CPU in Fomu is built on LiteX, which places every device on a
+Wishbone bus. This is a 32-bit internal bus that maps peripherals into
+memory.</p>
+<a class="reference internal image-reference" href="_images/litex-design.png"><img alt="Fomu peripherals on the Wishbone bus" src="_images/litex-design.png" style="width: 100%;" /></a>
+<p>If you look at the diagram above, you can see that everything in the
+system is on the Wishbone bus. The CPU is a bus master, and can initiate
+reads and writes. The system’s RAM is on the wishbone bus, and is
+currently located at address <code class="docutils literal notranslate"><span class="pre">0x10000000</span></code>. The boot ROM is also on the
+bus, and is located at <code class="docutils literal notranslate"><span class="pre">0x00000000</span></code>. There is also SPI flash which is
+memory-mapped, so when you load your program onto the SPI flash it shows
+up on the Wishbone bus at offset <code class="docutils literal notranslate"><span class="pre">0x20040000</span></code>.</p>
+<p>The Configuration and Status Registers (CSRs) all show up at offset
+<code class="docutils literal notranslate"><span class="pre">0xe0000000</span></code>. These are the registers we were accessing from Python.
+Just like before, these special memory addresses correspond to control
+values.</p>
+<p>You’ll notice a “Bridge” in the diagram above. This is an optional
+feature that we ship by default on Fomu. It bridges the Wishbone bus to
+another device. In our case, it makes Wishbone available over USB.</p>
+<a class="reference internal image-reference" href="_images/wishbone-usb-debug-bridge.png"><img alt="Wishbone USB debug bridge interface" src="_images/wishbone-usb-debug-bridge.png" style="width: 100%;" /></a>
+<p>The above image shows the structure of a special USB packet we can
+generate to access the Wishbone bus from a host PC. It lets us do two
+things: Read a 32-bit value from Wishbone, or write a 32-bit value to
+Wishbone. These two primitives give us complete control over Fomu.</p>
+<p>Recall these definitions from earlier:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CSR_VERSION_MAJOR_ADDR 0xe0007000L</span>
+<span class="cp">#define CSR_VERSION_MINOR_ADDR 0xe0007004L</span>
+<span class="cp">#define CSR_VERSION_REVISION_ADDR 0xe0007008L</span>
+<span class="cp">#define CSR_VERSION_MODEL_ADDR 0xe0007028L</span>
+</pre></div>
+</div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">wishbone-tool</span></code> program to read these values directly
+out of Fomu:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0xe0007000
+<span class="go" data-content="Value at e0007000: 00000002
+"></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0xe0007004
+<span class="go" data-content="Value at e0007004: 00000000
+"></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0xe0007008
+<span class="go" data-content="Value at e0007008: 00000003
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>The three values correspond to the version number of the board at time
+of writing: v2.0.3.</p>
+<p>We can also read and write directly to memory. Recall that memory is
+mapped to address <code class="docutils literal notranslate"><span class="pre">0x10000000</span></code>. Let’s write a test value there and try
+to read it back.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x10000000
+<span class="go" data-content="Value at 10000000: 00000005
+"></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x10000000<span class="w"> </span>0x12345678
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0x10000000
+<span class="go" data-content="Value at 10000000: 0x12345678
+"></span></pre></div>
+</div>
+<p>We can see that the value got stored in memory, just like we thought it
+would. The bridge is working, and we have access to Fomu over USB.</p>
+<section id="interacting-with-the-led-directly">
+<h2>Interacting with the LED Directly<a class="headerlink" href="#interacting-with-the-led-directly" title="Permalink to this heading">¶</a></h2>
+<p>Recall the LED block from Python. We used <code class="docutils literal notranslate"><span class="pre">rgb.write_raw()</span></code> to write
+values to the LED block. Because of how the LED block is implemented, we
+need to actually make two writes to the Wishbone bus in order to write
+one value to the LED block. The first write sets the address, and the
+second write sends the actual data.</p>
+<p>The registers for the LED block are defined as:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CSR_RGB_DAT_ADDR 0xe0006800</span>
+<span class="cp">#define CSR_RGB_ADDR_ADDR 0xe0006804</span>
+</pre></div>
+</div>
+<p>Let’s change the red color to the maximum value. To do that, we’ll write
+a <code class="docutils literal notranslate"><span class="pre">1</span></code> to the address register, and <code class="docutils literal notranslate"><span class="pre">0xff</span></code> to the data register:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0xe0006804<span class="w"> </span><span class="m">1</span>
+<span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0xe0006800<span class="w"> </span>0xff
+<span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>We can see that the LED immediately changed its behavior. Try playing
+around with various values to see what combinations you can come up
+with!</p>
+<p>You can reset Fomu by writing a special value to the <code class="docutils literal notranslate"><span class="pre">CSR_REBOOT_CTRL</span></code>
+register at <code class="docutils literal notranslate"><span class="pre">0xe0006000L</span></code>. All writes to this register must start with
+<code class="docutils literal notranslate"><span class="pre">0xac</span></code>, to ensure random values aren’t written. We can reboot Fomu by
+simply writing this value:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>0xe0006000<span class="w"> </span>0xac
+<span class="go" data-content="INFO [wishbone_tool::usb_bridge] opened USB device device 007 on bus 001
+"></span><span class="go" data-content="INFO [wishbone_tool::usb_bridge] waiting for target device
+"></span><span class="go" data-content="ERROR [wishbone_tool] server error: BridgeError(USBError(Pipe))
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>We can see that <code class="docutils literal notranslate"><span class="pre">wishbone-tool</span></code> has crashed with an error of
+<code class="docutils literal notranslate"><span class="pre">USBError(Pipe)</span></code>, because the USB device went away as we were talking
+to it. This is expected behavior. Fomu should be back to its normal
+color and blink rate now.</p>
+</section>
+<section id="compiling-risc-v-code">
+<h2>Compiling RISC-V Code<a class="headerlink" href="#compiling-risc-v-code" title="Permalink to this heading">¶</a></h2>
+<p>Of course, Fomu’s softcore is a full CPU, so we can write C code for it.
+Go to the <code class="docutils literal notranslate"><span class="pre">riscv-blink/</span></code> directory and run <code class="docutils literal notranslate"><span class="pre">make</span></code>. This will
+generate <code class="docutils literal notranslate"><span class="pre">riscv-blink.dfu</span></code>, which we can load onto Fomu.</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>make
+<span class="go" data-content="  CC       ./src/main.c        main.o
+"></span><span class="go" data-content="  CC       ./src/rgb.c rgb.o
+"></span><span class="go" data-content="  CC       ./src/time.c        time.o
+"></span><span class="go" data-content="  AS       ./src/crt0-vexriscv.S       crt0-vexriscv.o
+"></span><span class="go" data-content="  LD       riscv-blink.elf
+"></span><span class="go" data-content="  OBJCOPY  riscv-blink.bin
+"></span><span class="go" data-content="  IHEX     riscv-blink.ihex
+"></span><span class="go" data-content="  DFU      riscv-blink.dfu
+"></span><span class="gp" data-content="$ "></span>dfu-util<span class="w"> </span>-D<span class="w"> </span>riscv-blink.dfu
+<span class="go" data-content="Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+"></span><span class="go" data-content="Copyright 2010-2014 Tormod Volden and Stefan Schmidt
+"></span><span class="go" data-content="This program is Free Software and has ABSOLUTELY NO WARRANTY
+"></span><span class="go" data-content="Please report bugs to dfu-util@lists.gnumonks.org
+
+"></span><span class="go" data-content="Match vendor ID from file: 1209
+"></span><span class="go" data-content="Match product ID from file: 5bf0
+"></span><span class="go" data-content="Opening DFU capable USB device...
+"></span><span class="go" data-content="ID 1209:5bf0
+"></span><span class="go" data-content="Run-time device DFU version 0101
+"></span><span class="go" data-content="Claiming USB DFU Interface...
+"></span><span class="go" data-content="Setting Alternate Setting #0 ...
+"></span><span class="go" data-content="Determining device status: state = dfuIDLE, status = 0
+"></span><span class="go" data-content="dfuIDLE, continuing
+"></span><span class="go" data-content="DFU mode device DFU version 0101
+"></span><span class="go" data-content="Device returned transfer size 1024
+"></span><span class="go" data-content="Copying data from PC to DFU device
+"></span><span class="go" data-content="Download        [======                   ]  24%        804 bytes
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>This will load the binary onto Fomu and start it immediately. The LED
+should be blinking quickly in a rainbow pattern. Congratulations! You’ve
+compiled and loaded a RISC-V program onto a softcore.</p>
+<p>Let’s modify the program by increasing the fade rate so much that it
+appears solid. First, reboot Fomu by running
+<code class="docutils literal notranslate"><span class="pre">wishbone-tool</span> <span class="pre">0xe0006000</span> <span class="pre">0xac</span></code>. Next, apply the following patch to
+<code class="docutils literal notranslate"><span class="pre">src/main.c</span></code>:</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gd">--- a/riscv-blink/src/main.c</span>
+<span class="gi">+++ b/riscv-blink/src/main.c</span>
+<span class="gu">@@ -46,6 +46,7 @@ int main(void) {</span>
+<span class="w"> </span>    usb_init();
+<span class="w"> </span>    rgb_init();
+<span class="w"> </span>    usb_connect();
+<span class="gi">+    rgb_write((100000/64000)-1, LEDDBR);</span>
+<span class="w"> </span>    int i = 0;
+<span class="w"> </span>    while (1) {
+<span class="w"> </span>        color_wheel(i++);
+</pre></div>
+</div>
+<p>What this does is increase the LED blink rate from 250 Hz to a much
+higher value. Compile this and load it again with
+<code class="docutils literal notranslate"><span class="pre">dfu-util</span> <span class="pre">-D</span> <span class="pre">riscv-blink.bin</span></code>. The blink rate should appear solid,
+because it’s blinking too quickly to see.</p>
+</section>
+<section id="debugging-risc-v-code">
+<h2>Debugging RISC-V Code<a class="headerlink" href="#debugging-risc-v-code" title="Permalink to this heading">¶</a></h2>
+<p>Because we have <code class="docutils literal notranslate"><span class="pre">peek</span></code> and <code class="docutils literal notranslate"><span class="pre">poke</span></code>, and because the USB bridge is a
+bus master, we can actually halt (and reset!) the CPU over the USB
+bridge. We can go even further and attach a full debugger to it!</p>
+<p>To start with, run <code class="docutils literal notranslate"><span class="pre">wishbone-tool</span> <span class="pre">-s</span> <span class="pre">gdb</span></code>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>wishbone-tool<span class="w"> </span>-s<span class="w"> </span>gdb
+<span class="go" data-content="INFO [wishbone_tool::usb_bridge] opened USB device device 008 on bus 001
+"></span><span class="go" data-content="INFO [wishbone_tool::server] accepting connections on 127.0.0.1:3333
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<p>In a second window, run gdb on <code class="docutils literal notranslate"><span class="pre">riscv-blink.elf</span></code>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>riscv64-unknown-elf-gdb<span class="w"> </span>riscv-blink.elf<span class="w"> </span>-ex<span class="w"> </span><span class="s1">&#39;target remote localhost:3333&#39;</span>
+<span class="go" data-content="GNU gdb (GDB) 8.2.90.20190228-git
+"></span><span class="go" data-content="Copyright (C) 2019 Free Software Foundation, Inc.
+"></span><span class="go" data-content="License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+"></span><span class="go" data-content="This is free software: you are free to change and redistribute it.
+"></span><span class="go" data-content="There is NO WARRANTY, to the extent permitted by law.
+"></span><span class="go" data-content="Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+"></span><span class="go" data-content="This GDB was configured as &quot;--host=x86_64-w64-mingw32 --target=riscv64-unknown-elf&quot;.
+"></span><span class="go" data-content="Type &quot;show configuration&quot; for configuration details.
+"></span><span class="go" data-content="For bug reporting instructions, please see:
+"></span><span class="go" data-content="&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
+"></span><span class="go" data-content="Find the GDB manual and other documentation resources online at:
+"></span><span class="go" data-content="    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+"></span><span class="go" data-content="For help, type &quot;help&quot;.
+"></span><span class="go" data-content="Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+"></span><span class="go" data-content="Reading symbols from .\riscv-blink.elf...
+"></span><span class="go" data-content="Remote debugging using localhost:1234
+"></span><span class="go" data-content="csr_writel (addr=3758106660, value=1) at ./include/hw/common.h:41
+"></span><span class="go" data-content="41              *((volatile uint32_t *)addr) = value;
+"></span><span class="gp gp-VirtualEnv">(gdb)</span>
+</pre></div>
+</div>
+<p>If we run <code class="docutils literal notranslate"><span class="pre">bt</span></code> we can get a backtrace, and chances are that we landed
+in an <code class="docutils literal notranslate"><span class="pre">msleep</span></code> function:</p>
+<div class="highlight-gdb notranslate"><div class="highlight"><pre><span></span>(gdb) bt
+#0  0x2004014c in csr_readl (addr=3758106664) at ./include/hw/common.h:46
+#1  timer0_value_read () at ./include/generated/csr.h:242
+#2  0x200401dc in msleep (ms=ms@entry=80) at ./include/hw/common.h:41
+#3  0x20040074 in main () at ./src/main.c:45
+(gdb)
+</pre></div>
+</div>
+<p>We can insert breakpoints, step, continue execution, and generally debug
+the entire system. We can even reset the program by running
+<code class="docutils literal notranslate"><span class="pre">mon</span> <span class="pre">reset</span></code>.</p>
+</section>
+<section id="using-rust">
+<h2>Using Rust<a class="headerlink" href="#using-rust" title="Permalink to this heading">¶</a></h2>
+<p>As an alternative to C, the <a class="reference external" href="https://www.rust-lang.org/">Rust Language</a> can be used to write software for the Fomu softcore.
+To install Rust, follow the instructions on <a class="reference external" href="https://rustup.rs/">https://rustup.rs/</a>. After installing Rust, we can install support for RISCV
+targets using <code class="docutils literal notranslate"><span class="pre">rustup</span></code>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>rustup<span class="w"> </span>target<span class="w"> </span>add<span class="w"> </span>riscv32i-unknown-none-elf
+<span class="go" data-content="info: downloading component &#39;rust-std&#39; for &#39;riscv32i-unknown-none-elf&#39;
+"></span><span class="go" data-content="4.5 MiB /   4.5 MiB (100 %)   2.1 MiB/s in  2s ETA:  0s
+"></span><span class="go" data-content="info: installing component &#39;rust-std&#39; for &#39;riscv32i-unknown-none-elf&#39;
+"></span></pre></div>
+</div>
+<p>A Rust version of the C program used above is located in the <code class="docutils literal notranslate"><span class="pre">riscv-rust-blink</span></code> directory. Change into that directory,
+and build it using <code class="docutils literal notranslate"><span class="pre">cargo</span></code>, the Rust package manager:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>cargo<span class="w"> </span>build<span class="w"> </span>--release
+<span class="go" data-content="Compiling semver-parser v0.7.0
+"></span><span class="go" data-content="Compiling proc-macro2 v0.4.30
+"></span><span class="go" data-content="Compiling unicode-xid v0.1.0
+"></span><span class="go" data-content="Compiling rand_core v0.4.2
+"></span><span class="go" data-content="Compiling vexriscv v0.0.1
+"></span><span class="go" data-content="Compiling syn v0.15.44
+"></span><span class="go" data-content="Compiling bit_field v0.9.0
+"></span><span class="go" data-content="Compiling fomu-rt v0.0.3
+"></span><span class="go" data-content="Compiling r0 v0.2.2
+"></span><span class="go" data-content="Compiling vcell v0.1.2
+"></span><span class="go" data-content="Compiling panic-halt v0.2.0
+"></span><span class="go" data-content="Compiling rand_core v0.3.1
+"></span><span class="go" data-content="Compiling semver v0.9.0
+"></span><span class="go" data-content="Compiling rand v0.5.6
+"></span><span class="go" data-content="Compiling rustc_version v0.2.3
+"></span><span class="go" data-content="Compiling bare-metal v0.2.4
+"></span><span class="go" data-content="Compiling quote v0.6.13
+"></span><span class="go" data-content="Compiling fomu-pac v0.0.1
+"></span><span class="go" data-content="Compiling riscv-rt-macros v0.1.6
+"></span><span class="go" data-content="Compiling riscv-rust-blink v0.1.0 (/home/dominik/Coding/fomu-workshop/riscv-rust-blink)
+"></span><span class="go" data-content="Finished release [optimized] target(s) in 29.39s
+"></span></pre></div>
+</div>
+<p>The resulting binary is located in the target subfolder: <code class="docutils literal notranslate"><span class="pre">target/riscv32i-unknown-none-elf/release/riscv-rust-blink</span></code>. It can
+be flashed using the <code class="docutils literal notranslate"><span class="pre">flash.sh</span></code> script, also located in the <code class="docutils literal notranslate"><span class="pre">riscv-rust-blink</span></code> folder:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>./flash.sh
+<span class="go" data-content="dfu-suffix (dfu-util) 0.9
+
+"></span><span class="go" data-content="Copyright 2011-2012 Stefan Schmidt, 2013-2014 Tormod Volden
+"></span><span class="go" data-content="This program is Free Software and has ABSOLUTELY NO WARRANTY
+"></span><span class="go" data-content="Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+"></span><span class="go" data-content="Suffix successfully added to file
+"></span><span class="go" data-content="dfu-util 0.9
+
+"></span><span class="go" data-content="Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+"></span><span class="go" data-content="Copyright 2010-2019 Tormod Volden and Stefan Schmidt
+"></span><span class="go" data-content="This program is Free Software and has ABSOLUTELY NO WARRANTY
+"></span><span class="go" data-content="Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
+
+"></span><span class="go" data-content="Match vendor ID from file: 1209
+"></span><span class="go" data-content="Match product ID from file: 70b1
+"></span><span class="go" data-content="Opening DFU capable USB device...
+"></span><span class="go" data-content="ID 1209:5bf0
+"></span><span class="go" data-content="Run-time device DFU version 0101
+"></span><span class="go" data-content="Claiming USB DFU Interface...
+"></span><span class="go" data-content="Setting Alternate Setting #0 ...
+"></span><span class="go" data-content="Determining device status: state = dfuIDLE, status = 0
+"></span><span class="go" data-content="dfuIDLE, continuing
+"></span><span class="go" data-content="DFU mode device DFU version 0101
+"></span><span class="go" data-content="Device returned transfer size 1024
+"></span><span class="go" data-content="Copying data from PC to DFU device
+"></span><span class="go" data-content="Download   [=========================] 100%         3012 bytes
+"></span><span class="go" data-content="Download done.
+"></span><span class="go" data-content="state(7) = dfuMANIFEST, status(0) = No error condition is present
+"></span><span class="go" data-content="state(8) = dfuMANIFEST-WAIT-RESET, status(0) = No error condition is present
+"></span><span class="go" data-content="Done!
+"></span></pre></div>
+</div>
+<p>Now the Fomu should blink in the same rainbow pattern as before.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Rust example currently does not support the USB functionality. After programming the example, we will not be able to
+acces the Fomu over USB anymore. To enable USB again, we have to reset the Fomu by removing it from the USB port and
+plugging it in again.</p>
+</div>
+</section>
+<section id="further-risc-v-experiments">
+<h2>Further RISC-V experiments<a class="headerlink" href="#further-risc-v-experiments" title="Permalink to this heading">¶</a></h2>
+<p>The <a class="reference external" href="https://github.com/hathach/tinyusb">TinyUSB</a> USB stack supports Fomu. To get started with it, you might compile the mass storage example it provides. To do so, follow these steps:</p>
+<ul class="simple">
+<li><p>Clone the TinyUSB git repository: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/hathach/tinyusb</span></code> (you don’t need to initialize the subrepositories)</p></li>
+<li><p>Change to <code class="docutils literal notranslate"><span class="pre">tinyusb/examples/device/cdc_msc</span></code></p></li>
+<li><p>Compile: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">BOARD=fomu</span> <span class="pre">CROSS_COMPILE=riscv64-unknown-elf-</span></code></p></li>
+<li><p>Load it onto the Fomu:  <code class="docutils literal notranslate"><span class="pre">dfu-util</span> <span class="pre">-D</span> <span class="pre">_build/fomu/cdc_msc.bin</span></code></p></li>
+</ul>
+<p>Fomu should now appear as a USB storage device containing a README.</p>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Fomu as a CPU</a><ul>
+<li><a class="reference internal" href="#interacting-with-the-led-directly">Interacting with the LED Directly</a></li>
+<li><a class="reference internal" href="#compiling-risc-v-code">Compiling RISC-V Code</a></li>
+<li><a class="reference internal" href="#debugging-risc-v-code">Debugging RISC-V Code</a></li>
+<li><a class="reference internal" href="#using-rust">Using Rust</a></li>
+<li><a class="reference internal" href="#further-risc-v-experiments">Further RISC-V experiments</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="python.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Python on Fomu</div>
+         </div>
+     </a>
+     <a id="button-next" href="hdl.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Hardware Description Languages</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

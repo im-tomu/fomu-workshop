@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Required Hardware &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/session.css" />
+    <link rel="stylesheet" href="../_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="../_static/icon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Required Drivers" href="drivers.html" />
+    <link rel="prev" title="Required Software" href="software.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="index.html">Requirements</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active">Required Hardware</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/requirements/hardware.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="../index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="../help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requirements</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Required Software</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requirements</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Required Software</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="required-hardware">
+<span id="id1"></span><h1>Required Hardware<a class="headerlink" href="#required-hardware" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>For this workshop, you will need a <a class="reference external" href="https://github.com/im-tomu/fomu-hardware">Fomu board</a>.</p></li>
+<li><p>Aside from that, you need a computer with a USB port that can run the <a class="reference internal" href="software.html#required-software"><span class="std std-ref">Required Software</span></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should not need any special drivers, though on Linux you may need <code class="docutils literal notranslate"><span class="pre">sudo</span></code>
+access, or special <code class="docutils literal notranslate"><span class="pre">udev</span></code> rules for granting permission to use the USB device from a
+non-privileged account.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This workshop may be competed with any model of Fomu, though there are some
+parts that require you to identify which model you have. See the
+<a class="reference internal" href="#which-fomu"><span class="std std-ref">Which Fomu do I have?</span></a> below.</p>
+</div>
+<section id="which-fomu-do-i-have">
+<span id="which-fomu"></span><h2>Which Fomu do I have?<a class="headerlink" href="#which-fomu-do-i-have" title="Permalink to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Hacker</p></th>
+<th class="head"><p>Production</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>String</strong></p></td>
+<td><p>hacker</p></td>
+<td><p>pvt</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Bash Command</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">FOMU_REV=hacker</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">FOMU_REV=pvt</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Front</strong></p></td>
+<td><p><img alt="Hacker Hardware Front without case" src="../_images/hw-hacker-front-bare-small.jpg" /></p></td>
+<td><p><img alt="Production Hardware Front without case" src="../_images/hw-pvt-front-bare-small.jpg" /></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Back</strong></p></td>
+<td><p><img alt="Hacker Hardware Back without case" src="../_images/hw-hacker-back-bare-small.jpg" /></p></td>
+<td><p><img alt="Production Hardware Back without case" src="../_images/hw-pvt-back-bare-small.jpg" /></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>In Case</strong></p></td>
+<td><p><img alt="Hacker Hardware Back with case" src="../_images/hw-hacker-back-case-small.jpg" /></p></td>
+<td><p><img alt="Production Hardware Back with case" src="_static/hw-pvt-back-case-small.jpg" /></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Parts</strong></p></td>
+<td><p><img alt="Hacker Hardware Annotated Diagram" src="../_images/hw-hacker-annotated.png" /></p></td>
+<td><p><img alt="Production Hardware Annotated Diagram" src="../_images/hw-pvt-annotated.png" /></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Color</strong></p></td>
+<td><p><span style="background-color: #051b70; color: white;">dark blue</span></p></td>
+<td><p><span style="background-color: #03b1c4;">cyan / light blue</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Bootloader</strong></p></td>
+<td><p>Fomu <strong>Hacker</strong> running DFU Bootloader vX.X.X</p></td>
+<td><p>Fomu <strong>PVT</strong> running DFU Bootloader vX.X.X</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Description</strong></p></td>
+<td><p>These are the original design and cut corners to make it easier to
+manufacture. If you received one directly from Tim before 36C3, you
+probably have one of these. Hacker boards have white silkscreen on
+the back.</p></td>
+<td><p>If you ordered a Fomu from Crowd Supply, this is the model you’ll
+receive. It is small, and fits in a USB port. There is no
+silkscreen on it. This model of Fomu has a large silver crystal
+oscillator that is the tallest component on the board.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Schematic</strong></p></td>
+<td><p><a class="reference external" href="../_static/reference/schematic-hacker.pdf">schematic-hacker.pdf</a></p></td>
+<td><p><a class="reference external" href="../_static/reference/schematic-pvt.pdf">schematic-pvt.pdf</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Received at</strong></p></td>
+<td><p>From Tim at 35C3, CCCamp19, HackADay Supercon 2019</p></td>
+<td><p>At RISC-V Summit 2019, 36C3, Crowdsupply, Mouser</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Buy more</strong></p></td>
+<td><p>End of Life</p></td>
+<td><p><a class="reference external" href="https://j.mp/fomu-cs">CrowdSupply</a>,</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are also Fomu EVT boards which were shipped to early backers of
+the Fomu crowd funding campaign. This model of Fomu is about the size
+of a credit card. It should have the text “Fomu EVT3” written across
+it in white silkscreen. If you have a different EVT board such as
+EVT2 or EVT1, they should also work.</p>
+</div>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Required Hardware</a><ul>
+<li><a class="reference internal" href="#which-fomu-do-i-have">Which Fomu do I have?</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="software.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Required Software</div>
+         </div>
+     </a>
+     <a id="button-next" href="drivers.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Required Drivers</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Python on Fomu &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/tabs.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fomu as a CPU" href="riscv.html" />
+    <link rel="prev" title="Background" href="background.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active">Python on Fomu</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/python.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="python-on-fomu">
+<h1>Python on Fomu<a class="headerlink" href="#python-on-fomu" title="Permalink to this heading">¶</a></h1>
+<p>You can load <a class="reference external" href="https://micropython.org/">MicroPython</a>, a small Python
+implementation, onto Fomu as an ordinary RISC-V binary. A precompiled
+binary is located in the root of the Fomu workshop files.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code> to load it:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>dfu-util<span class="w"> </span>-D<span class="w"> </span>micropython-fomu.dfu
+<span class="go" data-content="Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
+"></span><span class="go" data-content="Copyright 2010-2014 Tormod Volden and Stefan Schmidt
+"></span><span class="go" data-content="This program is Free Software and has ABSOLUTELY NO WARRANTY
+"></span><span class="go" data-content="Please report bugs to dfu-util@lists.gnumonks.org
+
+"></span><span class="go" data-content="Opening DFU capable USB device...
+"></span><span class="go" data-content="ID 1209:5bf0
+"></span><span class="go" data-content="Run-time device DFU version 0101
+"></span><span class="go" data-content="Claiming USB DFU Interface...
+"></span><span class="go" data-content="Setting Alternate Setting #0 ...
+"></span><span class="go" data-content="Determining device status: state = dfuIDLE, status = 0
+"></span><span class="go" data-content="dfuIDLE, continuing
+"></span><span class="go" data-content="DFU mode device DFU version 0101
+"></span><span class="go" data-content="Device returned transfer size 1024
+"></span><span class="gp" data-content="$
+"></span></pre></div>
+</div>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-TWFjT1MgWA==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-TWFjT1MgWA==" name="TWFjT1MgWA==" role="tab" tabindex="0">MacOS X</button><button aria-controls="panel-0-TGludXg=" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-TGludXg=" name="TGludXg=" role="tab" tabindex="-1">Linux</button><button aria-controls="panel-0-V2luZG93cw==" aria-selected="false" class="sphinx-tabs-tab group-tab" id="tab-0-V2luZG93cw==" name="V2luZG93cw==" role="tab" tabindex="-1">Windows</button></div><div aria-labelledby="tab-0-TWFjT1MgWA==" class="sphinx-tabs-panel group-tab" id="panel-0-TWFjT1MgWA==" name="TWFjT1MgWA==" role="tabpanel" tabindex="0"><p>If you’re on a macOS machine, use the following command to connect to
+the device:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>screen<span class="w"> </span>/dev/cu.usb*
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-TGludXg=" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-TGludXg=" name="TGludXg=" role="tabpanel" tabindex="0"><p>If you’re on Linux, use the following command to connect to the device,
+it will be called <code class="docutils literal notranslate"><span class="pre">ttyACM?</span></code>:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>screen<span class="w"> </span>/dev/ttyACM*
+</pre></div>
+</div>
+<p>If you are unable to connect you may need <code class="docutils literal notranslate"><span class="pre">sudo</span></code> access unless you
+grant permission for using the serial device from a non-privileged
+account by adding that account to the <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Adding your user to the <code class="docutils literal notranslate"><span class="pre">dialout</span></code> group grants full and direct
+access to serial ports.</p>
+</div>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="$ "></span>ls<span class="w"> </span>-alh<span class="w"> </span>/dev/ttyACM*
+<span class="go" data-content="crw-rw---- 1 root dialout 166, 0 Nov  9 21:28 /dev/ttyACM0
+
+"></span><span class="gp" data-content="$ "></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>dialout<span class="w"> </span><span class="nv">$USER</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You <strong>must</strong> log out and then log in again for the addition to group
+<code class="docutils literal notranslate"><span class="pre">dialout</span></code> to take affect.</p>
+</div>
+</div><div aria-labelledby="tab-0-V2luZG93cw==" class="sphinx-tabs-panel group-tab" hidden="true" id="panel-0-V2luZG93cw==" name="V2luZG93cw==" role="tabpanel" tabindex="0"><p>If you’re running a version of Windows earlier than Windows 10, you will
+need to install a driver for the serial port. Open Zadag again and
+select <code class="docutils literal notranslate"><span class="pre">Fomu</span></code> from the dropdown list. Install the driver for
+<code class="docutils literal notranslate"><span class="pre">USB</span> <span class="pre">Serial</span> <span class="pre">(CDC)</span></code>.</p>
+<p>You can then use a program such as <a class="reference external" href="https://tera-term.en.lo4d.com/download">Tera Term</a>.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">ttermpro</span><span class="p">.</span><span class="n">exe</span>
+</pre></div>
+</div>
+<p>In Teraterm hit <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Connection</span></code> and select the <code class="docutils literal notranslate"><span class="pre">Serial</span> <span class="pre">Port</span></code> Radio
+Button. If it is greyed out you might have to change your USB Port
+driver for the Fomu.</p>
+<p>See <a class="reference external" href="#working-with-fomu">Working with Fomu</a>,
+above.</p>
+</div></div>
+<p>You should be greeted with a MicroPython banner and REPL:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="go" data-content="MicroPython v1.10-299-g8603316 on 2019-08-19; fomu with vexriscv
+"></span><span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+<p>This is a fully-functioning MicroPython shell. Try running some simple
+commands such as <code class="docutils literal notranslate"><span class="pre">print()</span></code> and <code class="docutils literal notranslate"><span class="pre">hex(9876+1234)</span></code>.</p>
+<section id="fomu-python-extensions">
+<h2>Fomu Python Extensions<a class="headerlink" href="#fomu-python-extensions" title="Permalink to this heading">¶</a></h2>
+<p>Fomu’s MicroPython binary contains a few extended Python modules that
+you can use to interact with some of the hardware. For example, the RGB
+LED has some predefined modes you can access. These are all located
+under the <code class="docutils literal notranslate"><span class="pre">fomu</span></code> module.</p>
+<p>Import the <code class="docutils literal notranslate"><span class="pre">fomu</span></code> module and access the <code class="docutils literal notranslate"><span class="pre">rgb</span></code> block to change the
+mode to the predefined <code class="docutils literal notranslate"><span class="pre">error</span></code> mode:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="kn">import</span> <span class="nn">fomu</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">rgb</span> <span class="o">=</span> <span class="n">fomu</span><span class="o">.</span><span class="n">rgb</span><span class="p">()</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">rgb</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+<span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+<p>We can also look at some information from the SPI flash, such as the SPI
+ID. This ID varies between Fomu models, so it can be a good indication
+of what kind of Fomu your code is running on:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">spi</span> <span class="o">=</span> <span class="n">fomu</span><span class="o">.</span><span class="n">spi</span><span class="p">()</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="nb">hex</span><span class="p">(</span><span class="n">spi</span><span class="o">.</span><span class="n">id</span><span class="p">())</span>
+<span class="go" data-content="&#39;0xc2152815&#39;
+"></span><span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+</section>
+<section id="memory-mapped-registers">
+<h2>Memory-mapped Registers<a class="headerlink" href="#memory-mapped-registers" title="Permalink to this heading">¶</a></h2>
+<p>If we look at the generated Fomu header files (to be found for instance in
+<a class="reference external" href="https://github.com/im-tomu/fomu-workshop/blob/master/riscv-blink/include/generated/csr.h">riscv-blink</a>), we can see
+many, many memory-mapped registers. For example, the major, minor, and revision
+numbers all have registers:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#define CSR_VERSION_MAJOR_ADDR 0xe0007000</span>
+<span class="cp">#define CSR_VERSION_MINOR_ADDR 0xe0007004</span>
+<span class="cp">#define CSR_VERSION_REVISION_ADDR 0xe0007008</span>
+<span class="cp">#define CSR_VERSION_MODEL_ADDR 0xe0007028</span>
+</pre></div>
+</div>
+<p>These are special areas of memory that don’t really exist. Instead, they
+correspond to hardware. We can read these values using the <code class="docutils literal notranslate"><span class="pre">machine</span></code>
+class. Read out the major, minor, and revision codes from your Fomu.
+They may be different from what you see here:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="kn">import</span> <span class="nn">machine</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">machine</span><span class="o">.</span><span class="n">mem32</span><span class="p">[</span><span class="mh">0xe0007000</span><span class="p">]</span>
+<span class="go" data-content="2
+"></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">machine</span><span class="o">.</span><span class="n">mem32</span><span class="p">[</span><span class="mh">0xe0007004</span><span class="p">]</span>
+<span class="go" data-content="0
+"></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">machine</span><span class="o">.</span><span class="n">mem32</span><span class="p">[</span><span class="mh">0xe0007008</span><span class="p">]</span>
+<span class="go" data-content="3
+"></span><span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CSR_VERSION_MODEL_ADDR</span></code> contains a single character that
+indicates what version of the hardware you have. We can convert this to
+a character and print it out.</p>
+<p>If you have a production board you will get <code class="docutils literal notranslate"><span class="pre">P</span></code> as shown below;</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="nb">chr</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">mem32</span><span class="p">[</span><span class="mh">0xe0007028</span><span class="p">])</span>
+<span class="go" data-content="&#39;P&#39;
+"></span><span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+<p>If you have a hacker board you will get <code class="docutils literal notranslate"><span class="pre">H</span></code> as shown below;</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="nb">chr</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">mem32</span><span class="p">[</span><span class="mh">0xe0007028</span><span class="p">])</span>
+<span class="go" data-content="&#39;H&#39;
+"></span><span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+<section id="memory-mapped-rgb-driver">
+<h3>Memory-mapped RGB driver<a class="headerlink" href="#memory-mapped-rgb-driver" title="Permalink to this heading">¶</a></h3>
+<p>The blinking LED is actually a hardware block from Lattice. It has
+control registers, and we can modify these registers by writing to
+memory in Fomu. Some of these registers control things such as the
+timing of the fade in and fade out pulses, and some control the level of
+each of the three colors.</p>
+<a class="reference internal image-reference" href="_images/ice40-ledd.png"><img alt="Registers of the ICE40 RGB driver" src="_images/ice40-ledd.png" style="width: 100%;" /></a>
+<p>There is a wrapper in Fomu’s MicroPython that simplifies the process of
+writing to these registers. The first argument is the register number,
+and the second argument is the value to write.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">LEDDPWR</span></code> registers, the second argument determines the
+brightness, value ranges from 0 to 255.</p>
+<p>Try changing the color of the three LEDs:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">ADDR_RED_LED_PULSE_WIDTH</span>   <span class="o">=</span> <span class="mb">0b0001</span> <span class="c1"># LEDDPWRR</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">ADDR_GREEN_LED_PULSE_WIDTH</span> <span class="o">=</span> <span class="mb">0b0010</span> <span class="c1"># LEDDPWRG</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">ADDR_BLUE_LED_PULSE_WIDTH</span>  <span class="o">=</span> <span class="mb">0b0011</span> <span class="c1"># LEDDPWRB</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">rgb</span><span class="o">.</span><span class="n">write_raw</span><span class="p">(</span><span class="n">ADDR_RED_LED_PULSE_WIDTH</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>  <span class="c1"># Red LED fully on</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">rgb</span><span class="o">.</span><span class="n">write_raw</span><span class="p">(</span><span class="n">ADDR_GREEN_LED_PULSE_WIDTH</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span> <span class="c1"># Green LED mostly off</span>
+<span class="gp" data-content="&gt;&gt;&gt; "></span><span class="n">rgb</span><span class="o">.</span><span class="n">write_raw</span><span class="p">(</span><span class="n">ADDR_BLUE_LED_PULSE_WIDTH</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># Blue LED off</span>
+<span class="gp" data-content="&gt;&gt;&gt;
+"></span></pre></div>
+</div>
+<p>The color should change immediately. More information on these registers
+can be found in the <a class="reference external" href="_static/reference/FPGA-TN-1288-ICE40LEDDriverUsageGuide.pdf">ICE40 LED Driver Usage Guide</a>.</p>
+</section>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Python on Fomu</a><ul>
+<li><a class="reference internal" href="#fomu-python-extensions">Fomu Python Extensions</a></li>
+<li><a class="reference internal" href="#memory-mapped-registers">Memory-mapped Registers</a><ul>
+<li><a class="reference internal" href="#memory-mapped-rgb-driver">Memory-mapped RGB driver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="background.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Background</div>
+         </div>
+     </a>
+     <a id="button-next" href="riscv.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Fomu as a CPU</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

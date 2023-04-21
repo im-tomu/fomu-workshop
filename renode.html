@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Working with LiteX and (co-)simulation with Renode &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Renode" href="renode-starting.html" />
+    <link rel="prev" title="Fomu on IceStudio Nightly" href="icestudio.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active">Working with LiteX and (co-)simulation with Renode</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/renode.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="working-with-litex-and-co-simulation-with-renode">
+<h1>Working with LiteX and (co-)simulation with Renode<a class="headerlink" href="#working-with-litex-and-co-simulation-with-renode" title="Permalink to this heading">¶</a></h1>
+<p>LiteX used as the soft SoC on Fomu is a very robust and scalable soft
+SoC platform, capable of running both bare metal binaries, Zephyr and
+even Linux.</p>
+<p>It is also supported in <a class="reference external" href="https://renode.io">Renode</a>, which is an open
+source simulation framework that lets you run unmodified software in a
+fully controlled and inspectable environment. Renode is a functional
+simulator, which means it aims to mimic the observable behavior of the
+hardware instead of trying to be cycle-accurate.</p>
+<p>We will now see how a full-blown Zephyr RTOS can be run on LiteX in
+Renode, and then how this simulation can be interfaced with a Fomu for a
+useful HW/SW co-development workflow.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Apart from RISC-V and LiteX platforms, Renode supports many
+other architectures and platforms, as described in the
+<a class="reference external" href="https://renode.readthedocs.io/en/latest/introduction/supported-boards.html">documentation</a>,
+which also includes a user manual and a few tutorials. You can also
+take a look at a <a class="reference external" href="https://renode.io/tutorials/">Video Tutorials section on Renode’s
+website</a>.</p>
+</div>
+<p>Keep in mind that all platforms and configurations in Renode used in
+this tutorial are contained in text/config files - you can also explore
+Renode’s usage patterns by just inspecting those files for details.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="renode-starting.html">Getting Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html#try-out-renode-quickly-with-precompiled-litex-demos">Try out Renode quickly with precompiled LiteX demos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html#building-a-zephyr-application">Building a Zephyr application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html#run-the-app-in-renode">Run the app in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html#debugging-the-app-in-renode">Debugging the app in Renode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html#setting-up-the-server">Setting up the server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html#connecting-from-renode">Connecting from Renode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html#integration-with-verilated-code">Integration with verilated code</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="icestudio.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Fomu on IceStudio Nightly</div>
+         </div>
+     </a>
+     <a id="button-next" href="renode-starting.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Getting Renode</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Background &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/tabs.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python on Fomu" href="python.html" />
+    <link rel="prev" title="Required Drivers" href="requirements/drivers.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active">Background</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/background.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-verilator.html">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="background">
+<span id="id1"></span><h1>Background<a class="headerlink" href="#background" title="Permalink to this heading">¶</a></h1>
+<section id="about-fpgas">
+<h2>About FPGAs<a class="headerlink" href="#about-fpgas" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">Field Programmable Gate Arrays (FPGAs)</a>
+are integrated circuits containing arrays of gates which are programmable
+in the field. Most chips you will encounter, have transistor gates arranged
+in a fixed order, thus providing a fixed functionality. Conversely, FPGAs
+can change their internal connections by simply loading new configurations.
+Fundamentally, configurations program lookup tables (LUTs), which form the basic
+building blocks of logic. These lookup tables are so important to the design and usage of an
+FPGA that they usually form part of the name of the part. For example,
+Fomu uses a <a class="reference external" href="http://www.latticesemi.com/Products/FPGAandCPLD/iCE40UltraPlus">UP5K</a>,
+which has about 5000 LUTs. NeTV used an <a class="reference external" href="https://www.xilinx.com/products/silicon-devices/fpga/spartan-6.html">LX9</a>,
+which had about 9000 LUTs, and NeTV2 uses a <a class="reference external" href="https://www.xilinx.com/products/silicon-devices/fpga/artix-7.html">XC7A35T</a>
+that has about 35000 LUTs.</p>
+<p>FPGA LUTs are almost always <em>n</em>-inputs to 1-output. The ICE family of
+FPGAs from Lattice have 4-input LUTs. Xilinx parts tend to have 5-input or
+6-input LUTs which generally means they can do more logic in fewer LUTs.
+Comparing LUT count between FPGAs is a bit like comparing clock speed
+between different CPUs; not entirely accurate, but certainly a helpful
+rule of thumb.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/ice40-lut.png"><img alt="The ICE40 LUT4 is a basic 4-input 1-output LUT" src="_images/ice40-lut.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">The ICE40 LUT4 is a basic 4-input 1-output function table.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The basic building block of Fomu is the <code class="docutils literal notranslate"><span class="pre">SB_LUT4</span></code>. It
+has four 1-bit inputs and one 1-bit output. To program Fomu, we must define what
+each possible input 4-bit pattern will create on the output. To do this, we turn to
+a <a class="reference external" href="https://en.wikipedia.org/wiki/Truth_table">truth table</a>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>0</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>6</p></th>
+<th class="head"><p>7</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>9</p></th>
+<th class="head"><p>10</p></th>
+<th class="head"><p>11</p></th>
+<th class="head"><p>12</p></th>
+<th class="head"><p>13</p></th>
+<th class="head"><p>14</p></th>
+<th class="head"><p>15</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IO0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>IO1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>IO2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>IO3</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>O</p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+<td><p><em>?</em></p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, to create a LUT that acted as an AND gate, we would define
+<code class="docutils literal notranslate"><span class="pre">O</span></code> to be 0 for everything except the last column. Conversely, to create
+a NAND gate, we would define <code class="docutils literal notranslate"><span class="pre">O</span></code> to be 1 for everything except the last column.
+It is from this simple primitive that we create the building logic blocks of
+FPGA design.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/ice40-plb.png"><img alt="PLB Block Diagram (from iCE40 UltraPlus Family Data Sheet)" src="_images/ice40-plb.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">Programmable Logic Block (PLB), Block Diagram.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Modern FPGA devices are no longer composed of arrays of gates (i.e. LUTs) only.
+Typically, LUTs are grouped with flip-flop registers (DFF) and some carry logic, in
+so-called Programmable Logic Blocks (PLBs) or Configurable Logic Blocks (CLBs);
+depending on the vendor. These resources allow combining multiple LUTs for
+describing larger logical functions and for providing sequential behaviour.</p>
+<p>Furthermore, additional purpose-specific blocks are included in the devices:
+Block RAMs (BRAMs), Digital Signal Processing (DSP) blocks, high-performance serial
+transmitters/receivers, etc. Those so-called <em>hard</em> blocks allow better
+area and power usage than LUT-based components. Nevertheless, the behaviour
+of any of those <em>hard</em> blocks can be replicated using PLBs only. At the same time,
+custom behaviour can only be described through LUTs, because all <em>hard</em> blocks
+are programmable within the pre-fixed functionality only.</p>
+<section id="turning-code-into-gates">
+<span id="background-code-into-gates"></span><h3>Turning code into gates<a class="headerlink" href="#turning-code-into-gates" title="Permalink to this heading">¶</a></h3>
+<p>Configuring all the LUTs, carry logic and other <em>hard</em> blocks manually is
+hard and very challenging; so people have come up with abstract
+<a class="reference external" href="https://en.wikipedia.org/wiki/Hardware_description_language">Hardware Description Languages (HDLs)</a>,
+that allow us to describe the expected behaviour and/or structure. The
+two most common languages are Verilog and VHDL. However, a modern trend
+is to achieve hardware description by embedding a Domain Specific Language (DSL)
+inside an existing programming language, such as how Migen is embedded in Python,
+Clash is embedded in Haskell, or Chisel and SpinalHDL are embedded in Scala.</p>
+<p>Here is an example of a counter module with a registered output:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-VmVyaWxvZw==" aria-selected="true" class="sphinx-tabs-tab group-tab" id="tab-0-VmVyaWxvZw==" name="VmVyaWxvZw==" role="tab" tabindex="0">Verilog</button></div><div aria-labelledby="tab-0-VmVyaWxvZw==" class="sphinx-tabs-panel group-tab" id="panel-0-VmVyaWxvZw==" name="VmVyaWxvZw==" role="tabpanel" tabindex="0"><div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">input</span><span class="w"> </span><span class="n">C</span><span class="p">,</span>
+<span class="w">  </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">5</span><span class="p">]</span><span class="w"> </span><span class="n">Q</span>
+<span class="p">);</span>
+<span class="w">  </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">8</span><span class="p">]</span><span class="w"> </span><span class="n">counter</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">C</span><span class="p">)</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">C</span><span class="p">)</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">Q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">counter</span><span class="p">[</span><span class="mh">3</span><span class="p">]</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">counter</span><span class="p">[</span><span class="mh">5</span><span class="p">]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">counter</span><span class="o">&lt;&lt;</span><span class="mh">2</span><span class="p">;</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">endmodule</span>
+</pre></div>
+</div>
+</div></div>
+<p>We can run this HDL module through a synthesizer to turn it into
+LUT and DFF blocks, or we can turn it into a more familiar logic
+diagram:</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/verilog-synthesis.png"><img alt="A synthesis of the above logic into some gates" src="_images/verilog-synthesis.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">A synthesis of the above logic into basic blocks.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="turning-gates-into-a-bitstream">
+<h3>Turning gates into a bitstream<a class="headerlink" href="#turning-gates-into-a-bitstream" title="Permalink to this heading">¶</a></h3>
+<p>If we do decide to synthesize to PLBs, we will end up with
+a pile of LUTs and DFFs that need to be strung together somehow. This is done by
+a Place-and-Route (PnR) tool. This performs the job of assigning physical PLBs
+to each LUT and DFF that gets defined by the synthesizer; and then figuring out
+how to wire it all up.</p>
+<p>Once the PnR tool is done, it generates an abstract file that needs to be
+translated into a format that the hardware can recognize. This is done by a
+bitstream packing tool.</p>
+</section>
+<section id="loading-a-bitstream-into-a-device">
+<h3>Loading a bitstream into a device<a class="headerlink" href="#loading-a-bitstream-into-a-device" title="Permalink to this heading">¶</a></h3>
+<p>Finally, the bitstream needs to be loaded onto the device somehow. It can be
+done manually by toggling wires of the FPGAs programming interface. However,
+most FPGAs are volatile, which means the configuration is lost when
+unplugged. Therefore, most FPGA boards include some flash memory, which is
+typically programmed through SPI. Then, when the FPGA is plugged again, it loads
+the configuration from a predefined location in the flash.</p>
+</section>
+</section>
+<section id="about-the-ice40up5k">
+<h2>About the ICE40UP5K<a class="headerlink" href="#about-the-ice40up5k" title="Permalink to this heading">¶</a></h2>
+<p>We will use an ICE40UP5K for this workshop. This chip has a number of
+very nice features:</p>
+<ol class="arabic simple">
+<li><p>5280 4-input LUTs (LC)</p></li>
+<li><p>16 kilobytes BRAM</p></li>
+<li><p><strong>128 kilobytes “SPRAM”</strong></p></li>
+<li><p>1x Current-limited 3-channel LED driver</p></li>
+<li><p>2x I2C and 2x SPI interfaces</p></li>
+<li><p>8x 16-bit DSP units</p></li>
+<li><p><strong>Warmboot capability</strong></p></li>
+<li><p><strong>Open toolchain</strong></p></li>
+</ol>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/ice40-arch.png"><img alt="iCE40UP5K Device, Top View (from iCE40 UltraPlus Family Data Sheet)" src="_images/ice40-arch.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text">iCE40UP5K Device, Top View.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>BRAM is frequently used to store data such as buffers, CPU register files,
+and large arrays of data. This type of memory is frequently reused as RAM on
+many FPGAs. The ICE40UP5K is unusual in that it also has 128 kilobytes of
+Single Ported RAM that can be used as memory for a softcore (a term used for
+a CPU core running inside an FPGA, to differentiate it from a ‘hard’ -
+i.e. fixed chip - implementation). That means that, unlike other FPGAs,
+valuable block RAM isn’t taken up by system memory.</p>
+<p>Additionally, the ICE40 family of devices generally supports <em>warmboot</em>
+capability. This enables us to have multiple designs live on the same
+FPGA and tell the FPGA to swap between them.</p>
+<p>As always, this workshop wouldn’t be nearly as easy without the open
+source tools that enable us to port it to a lot of different platforms.</p>
+</section>
+<section id="about-fomu">
+<span id="background-about-fomu"></span><h2>About Fomu<a class="headerlink" href="#about-fomu" title="Permalink to this heading">¶</a></h2>
+<p>Fomu is an ICE40UP5K that fits in your USB port. It contains two
+megabytes of SPI flash memory, four edge buttons, and a three-color LED.</p>
+<p>Unlike most other ICE40 projects, Fomu implements its USB in a softcore.
+That means that the bitstream that runs on the FPGA must also provide
+the ability to communicate over USB. This uses up a lot of storage on
+this small FPGA, but it also enables us to have such a tiny form factor,
+and lets us do some really cool things with it.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/fomu-block-diagram.png"><img alt="Block diagram of Fomu" src="_images/fomu-block-diagram.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Block diagram of Fomu.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The ICE40UP5K at the heart of Fomu really controls everything, and this
+workshop is all about trying to unlock the power of this chip.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some figures in this section were extracted from the <a class="reference external" href="https://www.latticesemi.com/view_document?document_id=51968">iCE40 UltraPlus Family Data Sheet</a>.</p>
+</div>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Background</a><ul>
+<li><a class="reference internal" href="#about-fpgas">About FPGAs</a><ul>
+<li><a class="reference internal" href="#turning-code-into-gates">Turning code into gates</a></li>
+<li><a class="reference internal" href="#turning-gates-into-a-bitstream">Turning gates into a bitstream</a></li>
+<li><a class="reference internal" href="#loading-a-bitstream-into-a-device">Loading a bitstream into a device</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#about-the-ice40up5k">About the ICE40UP5K</a></li>
+<li><a class="reference internal" href="#about-fomu">About Fomu</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="requirements/drivers.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Required Drivers</div>
+         </div>
+     </a>
+     <a id="button-next" href="python.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Python on Fomu</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>

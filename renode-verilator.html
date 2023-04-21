@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>Renode Co-simulation using Verilator &#8212; FPGA Tomu (Fomu) Workshop  documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/session.css" />
+    <link rel="stylesheet" href="_static/notosanscjkjp.css" type="text/css" />
+    <link rel="stylesheet" href="_static/roboto.css" type="text/css" />
+    <link rel="stylesheet" href="_static/material-design-lite-1.3.0/material.blue-orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx_symbiflow_theme.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/sphinx_symbiflow_theme.js"></script>
+    <link rel="shortcut icon" href="_static/icon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bootloader" href="bootloader.html" />
+    <link rel="prev" title="Wishbone bridge between Renode and Fomu" href="renode-bridge.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active">Renode Co-simulation using Verilator</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="_sources/renode-verilator.rst.txt" rel="nofollow">
+<i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+          <a  class="mdl-navigation__link" href="index.html">
+                  <i class="material-icons navigation-link-icon">home</i>
+                  Workshop Home
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://fomu.im">
+                  <i class="material-icons navigation-link-icon">web</i>
+                  Website
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop">
+                  <i class="material-icons navigation-link-icon">code</i>
+                  GitHub
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://github.com/im-tomu/fomu-workshop/issues/new">
+                  <i class="material-icons navigation-link-icon">bug_report</i>
+                  Report Issue
+              </a>
+          
+              <a  class="mdl-navigation__link" href="https://j.mp/fomu-cs">
+                  <i class="material-icons navigation-link-icon">shopping_cart</i>
+                  Buy
+              </a>
+          <a  class="mdl-navigation__link" href="help.html">
+                  <i class="material-icons navigation-link-icon">live_help</i>
+                  Contact
+              </a>
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+<header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="index.html">
+              <img class="logo" src="_static/logo.png" alt="FPGA Tomu (Fomu) Workshop"/>
+          </a>
+      </span>
+    
+<div class="globaltoc">
+  <span class="mdl-layout-title toc">Table Of Contents</span>
+  
+  
+      
+      <nav class="mdl-navigation">
+          <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements/index.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="requirements/files.html">Required Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/software.html">Required Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/hardware.html">Required Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="requirements/drivers.html">Required Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python on Fomu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="riscv.html">Fomu as a CPU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hdl.html">Hardware Description Languages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="verilog.html">Verilog on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vhdl.html">VHDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixed-hdl.html">Mixed HDL on Fomu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migen.html">Migen and LiteX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icestudio.html">Fomu on IceStudio <em>Nightly</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="renode.html">Working with LiteX and (co-)simulation with Renode</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="renode-starting.html">Getting Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-zephyr.html">Running your own Zephyr binary on LiteX/VexRiscv in Renode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="renode-bridge.html">Wishbone bridge between Renode and Fomu</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Renode Co-simulation using Verilator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Getting Help</a></li>
+</ul>
+
+      </nav>
+  
+  </div>
+
+</header>
+
+    <div class="document">
+        <div class="page-content">
+        
+  <section id="renode-co-simulation-using-verilator">
+<h1>Renode Co-simulation using Verilator<a class="headerlink" href="#renode-co-simulation-using-verilator" title="Permalink to this heading">¶</a></h1>
+<p>While connecting Renode to a real FPGA gives you some interesting
+possibilities in testing and debugging your gateware together with your
+software, there is another usage scenario which is completely hardware
+independent - connecting functional simulation of the base system in
+Renode with HDL simulation of a part of the system that is under
+development.</p>
+<p>To this end, Renode provides an integration layer for Verilator. A
+typical setup with Renode + Verilator consists of several components:</p>
+<ul class="simple">
+<li><p>the ‘verilated’ HDL code itself (e.g. a UART peripheral),</p></li>
+<li><p>Verilator integration library, <a class="reference external" href="https://github.com/renode/renode/tree/master/src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary/src">provided as a plugin to
+Renode</a>,</p></li>
+<li><p>shim layer in C++ connecting the above.</p></li>
+</ul>
+<p>Currently Renode supports peripherals with the AXILite interface. Keep
+in mind that due to the abstract nature of bus operations in Renode, it
+doesn’t matter what kind of bus is used on the hardware you want to
+simulate.</p>
+<p>In the Renode tree you will find an example with all the elements
+already prepared. To run it, start Renode and type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">monitor</span><span class="p">)</span> <span class="n">include</span> <span class="nd">@scripts</span><span class="o">/</span><span class="n">single</span><span class="o">-</span><span class="n">node</span><span class="o">/</span><span class="n">riscv_verilated_uartlite</span><span class="o">.</span><span class="n">resc</span>
+<span class="p">(</span><span class="n">UARTLite</span><span class="p">)</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>This script loads a RISC-V-based system with a verilated UARTLite. You
+can verify it by calling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">UARTLite</span><span class="p">)</span> <span class="n">sysbus</span> <span class="n">WhatPeripheralIsAt</span> <span class="mh">0x70000000</span>
+<span class="n">Antmicro</span><span class="o">.</span><span class="n">Renode</span><span class="o">.</span><span class="n">Peripherals</span><span class="o">.</span><span class="n">Verilated</span><span class="o">.</span><span class="n">VerilatedUART</span>
+</pre></div>
+</div>
+<p>To inspect the communication with the UART, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">UARTLite</span><span class="p">)</span> <span class="n">sysbus</span> <span class="n">LogPeripheralAccess</span> <span class="n">uart</span>
+</pre></div>
+</div>
+<p>You will see every read and write to the peripheral displayed in the
+Renode log.</p>
+<p>Please note that, despite not being a Renode-native model, the UART is
+also capable of displaying an analyzer window. This is because Renode
+adds a special support for UART-type peripherals, allowing you not only
+to connect bus lines, but also the TX and RX UART lines, to the Renode
+infrastructure.</p>
+<p>The HDL and integration layer for this UART peripheral is available on
+<a class="reference external" href="https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite">Antmicro’s
+GitHub</a>.</p>
+<p>To compile it manually, you need to have <code class="docutils literal notranslate"><span class="pre">ZeroMQ</span></code> (<code class="docutils literal notranslate"><span class="pre">libzmq3-dev</span></code> on
+Debian-like systems) and <code class="docutils literal notranslate"><span class="pre">Verilator</span></code> installed in your system. You
+also need to provide a full path to the
+<code class="docutils literal notranslate"><span class="pre">src/Plugins/VerilatorPlugin/VerilatorIntegrationLibrary</span></code> directory as
+the <code class="docutils literal notranslate"><span class="pre">INTEGRATION_DIR</span></code> environment variable. This means that you need
+to have a copy of Renode sources to build a verilated peripheral.</p>
+<p>With this set up, simply run <code class="docutils literal notranslate"><span class="pre">make</span></code>.</p>
+<section id="integration-with-verilated-code">
+<h2>Integration with verilated code<a class="headerlink" href="#integration-with-verilated-code" title="Permalink to this heading">¶</a></h2>
+<p>Renode supports integration with Verilator via AXILite bus, but can be
+easily expanded to support other standards as well.</p>
+<p>We’ll briefly take a look on the integration layer implemented in
+<a class="reference external" href="https://github.com/antmicro/renode-verilator-integration/blob/master/samples/uartlite/sim_main.cpp">sim-main.cpp</a>.</p>
+<p>First, the user has to decide on the bus type and peripheral type. These
+are provided by the integration library:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;src/peripherals/uart.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;src/buses/axilite.h&quot;</span>
+</pre></div>
+</div>
+<p>A bus is a type declaring all the signals and how should they be handled
+on each transaction. These signals have to be connected to the signals
+in the HDL design:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">Init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">AxiLite</span><span class="o">*</span> <span class="n">bus</span> <span class="o">=</span> <span class="n">new</span> <span class="n">AxiLite</span><span class="p">();</span>
+
+    <span class="o">//=================================================</span>
+    <span class="o">//</span> <span class="n">Init</span> <span class="n">bus</span> <span class="n">signals</span>
+    <span class="o">//=================================================</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">clk</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">clk</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">rst</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">rst</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">awaddr</span> <span class="o">=</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">awaddr</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">awvalid</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">awvalid</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">awready</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">awready</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">wdata</span> <span class="o">=</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">long</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">wdata</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">wstrb</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">wstrb</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">wvalid</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">wvalid</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">wready</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">wready</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">bresp</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">bresp</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">bvalid</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">bvalid</span><span class="p">;</span>
+    <span class="n">bus</span><span class="o">-&gt;</span><span class="n">bready</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">bready</span><span class="p">;</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To handle the “external” communication, the user can either use the base
+<code class="docutils literal notranslate"><span class="pre">RenodeAgent</span></code> class of one of its derivatives: for example the
+<code class="docutils literal notranslate"><span class="pre">UART</span></code> type allows you to connect RX and TX signals:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Init</span> <span class="n">peripheral</span>
+<span class="o">//=================================================</span>
+<span class="n">uart</span> <span class="o">=</span> <span class="n">new</span> <span class="n">UART</span><span class="p">(</span><span class="n">bus</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">txd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">top</span><span class="o">-&gt;</span><span class="n">rxd</span><span class="p">,</span> <span class="n">prescaler</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For more details, see the <a class="reference external" href="https://github.com/antmicro/renode-verilator-integration/tree/master/samples/uartlite">verilated uartlite
+repository</a>.</p>
+</section>
+</section>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">Renode Co-simulation using Verilator</a><ul>
+<li><a class="reference internal" href="#integration-with-verilated-code">Integration with verilated code</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="renode-bridge.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L material-icons">arrow_back</i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Wishbone bridge between Renode and Fomu</div>
+         </div>
+     </a>
+     <a id="button-next" href="bootloader.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+        <i class="pagenation-arrow-R material-icons">arrow_forward</i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>Bootloader</div>
+        </div>
+     </a>
+</div>
+        <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">FPGA Tomu (Fomu) Workshop</div>
+    <div>
+      <ul>
+        
+
+        <!-- This is to still take up space when none of the links above are shown in the footer -->
+        <li style="visibility: hidden;">
+          a
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mdl-mini-footer__right-section">
+    <div>&copy; Copyright 2019, Tomu Project Authors.</div>
+    <div>Generated by <a href="http://sphinx.pocoo.org/">Sphinx</a>
+      5.3.0 using <a
+        href="https://github.com/SymbiFlow/sphinx_symbiflow_theme">sphinx_symbiflow_theme</a>.</div>
+  </div>
+</footer>
+        </main>
+    </div>
+  </body>
+</html>
