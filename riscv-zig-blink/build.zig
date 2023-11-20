@@ -21,15 +21,7 @@ pub fn build(b: *Builder) void {
         elf.setOutputDir(".");
     }
 
-    const binary = b.addSystemCommand(&[_][]const u8{
-        b.option([]const u8, "objcopy", "objcopy executable to use (defaults to riscv64-unknown-elf-objcopy)") orelse "riscv64-unknown-elf-objcopy",
-        "-I",
-        "elf32-littleriscv",
-        "-O",
-        "binary",
-    });
-    binary.addArtifactArg(elf);
-    binary.addArg("riscv-zig-blink.bin");
+    const binary = elf.installRaw("riscv-zig-blink.bin", .{ .dest_dir = .{ .custom = "../" } });
     b.default_step.dependOn(&binary.step);
 
     const run_cmd = b.addSystemCommand(&[_][]const u8{
@@ -37,6 +29,13 @@ pub fn build(b: *Builder) void {
         "-D",
         "riscv-zig-blink.bin",
     });
+
+    // Blinky example does not support USB, so when dfu-util uses libusb
+    // to reset FOMU after flashing, it is no longer visible.
+    // libusb returns LIBUSB_ERROR_NOT_FOUND (-5) and dfu-util recognizes
+    // it as an error and returns EX_IOERR (74).
+    run_cmd.expected_exit_code = 74;
+
     run_cmd.step.dependOn(&binary.step);
     const run_step = b.step("run", "Upload and run the app on your FOMU");
     run_step.dependOn(&run_cmd.step);
