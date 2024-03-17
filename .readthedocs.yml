@@ -12,5 +12,10 @@ sphinx:
 #formats:
 #- htmlzip
 
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "mambaforge-22.9"
+
 conda:
   environment: docs/environment.yml
