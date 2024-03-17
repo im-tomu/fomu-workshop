@@ -3,7 +3,7 @@ sphinx-autobuild
 
 # Better looking Sphinx theme
 # sphinx_materialdesign_theme
-git+http://github.com/SymbiFlow/sphinx_materialdesign_theme.git@master#egg=sphinx_symbiflow_theme
+git+http://github.com/f4pga/sphinx_f4pga_theme.git@main#egg=sphinx_symbiflow_theme
 
 # Support tabs for Linux / Mac / Windows
 sphinx_tabs
