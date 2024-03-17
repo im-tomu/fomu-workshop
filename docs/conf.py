@@ -38,6 +38,7 @@ author = 'Tomu Project Authors'
 # ones.
 extensions = [
 #    'sphinx.ext.intersphinx',
+    'sphinxcontrib.jquery',
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'sphinx.ext.extlinks',
