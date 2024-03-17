@@ -1,5 +1,6 @@
 sphinx>=4.5.0
 sphinx-autobuild
+sphinxcontrib-jquery
 
 # Better looking Sphinx theme
 # sphinx_materialdesign_theme
